@@ -1,5 +1,7 @@
 package com.insurance.data;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="customerPolicy")
-public class CustomerPolicy {
+public class CustomerPolicy implements Serializable{
 	
 	@Id
 	@Column(name="cid")

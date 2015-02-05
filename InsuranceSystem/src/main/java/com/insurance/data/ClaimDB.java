@@ -1,6 +1,8 @@
 package com.insurance.data;
 
+import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="claim")
-public class ClaimDB {
+public class ClaimDB implements Serializable{
 	
 	@Id
 	@Column(name="id")

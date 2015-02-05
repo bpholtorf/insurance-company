@@ -1,5 +1,7 @@
 package com.insurance.data;
 
-public class PolicyDB {
+import java.io.Serializable;
+
+public class PolicyDB implements Serializable{
 
 }
