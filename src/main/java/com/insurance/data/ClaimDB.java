@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="claim")
 public class ClaimDB {
+	//you sha bu tong
 	
 	@Id
 	@Column(name="id")
