@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.insurance.service.SecurityQuestionService;
 import com.insurance.service.StaffService;
+import com.insurance.service.AnswerService;
 
 
 @Controller
@@ -32,7 +33,7 @@ import com.insurance.service.StaffService;
 public class LoginController {
 	
    private static final String SESSION_USER = "user";
-	
+   private static final String SESSION_ID = "userId";
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
 	
@@ -40,6 +41,8 @@ public class LoginController {
 	private StaffService staffService;
 	@Autowired
 	private SecurityQuestionService securityQuestionService;
+	@Autowired
+	private AnswerService answerService;
 	
 //	@RequestMapping(value = "/login", method = RequestMethod.GET)
 //	public String getLoginPage(
@@ -61,8 +64,14 @@ public class LoginController {
 			
 			session.setAttribute(SESSION_USER, username);
 			model.addAttribute("user", username);
-			session.setAttribute("sid", sid);
+			session.setAttribute(SESSION_ID, sid);
+			String es=answerService.findSid(Integer.parseInt(sid));
+			if(es.equals("YES")){
+			 return	"redirect:/answer/init";
+			}else{
 			return "redirect:/question/viewAll";
+			}
+			
 
 		} else {
 			model.put("error", "true");

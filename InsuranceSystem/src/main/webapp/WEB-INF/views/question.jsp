@@ -217,14 +217,14 @@
 				  		<div class="custom-check goleft mt">
 				  		     <c:if test="${!empty listQuestions}">
 				  		     <c:url var="addAction" value="/answer/add" ></c:url>
-				  		     <form:form action="${addAction}" commandName="answer">
+				  		     <form:form  commandName="answer">
 				             <table id="todo" class="table table-hover custom-check" style="font-size: 13px;">
 				              <tbody>
 				              
 				                <c:forEach items="${listQuestions }" var="question">
 				                  <tr>
 				           			<td>
-				                        <span class="check"><input type="checkbox" class="checked" name="checkname"></span>
+				                        <span class="check"><input type="checkbox" class="checked" name="checkname" id=${question.questionId }></span>
 				                        <span class="task-title-sp">${question.question}</span>
 				                        
                                         <input type="text" class="form-control" style="display:none" name=${question.questionId }>
@@ -358,60 +358,47 @@
 function getSelectedChbox(frm) {
  // JavaScript & jQuery Course - http://coursesweb.net/javascript/
   var selchbox = [];        // array that will store the value of selected checkboxes
-  var num=[];
+ 
   // gets all the input tags in frm, and their number
   var inpfields = frm.getElementsByTagName('input');
   var nr_inpfields = inpfields.length;
-  var cot=0;
 
   // traverse the inpfields elements, and adds the value of selected (checked) checkbox in selchbox
   for(var i=0; i<nr_inpfields; i++) {
     if(inpfields[i].type == 'checkbox' && inpfields[i].checked == true) {
-    	num.push(i);
-    	cot=cot+1;
+    	var an=$(inpfields[i]).attr('id');
+    	console.log(an);
+    	selchbox.push(an);
     	
-    }else{
-    	selchbox.push(i);
+    } else{
+    	if(inpfields[i].value!='on' && inpfields[i].type=='text' && inpfields[i].value!=""){
+    	
     	selchbox.push(inpfields[i].value);
-    }
-  }
- 
-  var r=[];
-  var num_len=num.length;
-  for(var j=0;j<num_len;j++){
-
-	 if(j>0){
-		var tt=num[j]-cot+1; 
-		var t=num[j];
-		  var k1=t+1;
-		  r.push(tt);
-		 r.push(inpfields[k1].value);
-	 }else{
-		 var tt=num[j]+1;
-		 var t=num[j];
-		  var k1=t+1;
-		 r.push(tt);
-		 r.push(inpfields[k1].value);
-	 }
+    	}
+    } 
   }
 
-  return r;
+  return selchbox;
 }
 
 document.getElementById('tian').onclick = function(){
 	  var selchb = getSelectedChbox(this.form);     // gets the array returned by getSelectedChbox()
-	  //alert(selchb);
-	  var json = JSON.stringify(selchb);
+	 var con=selchb[0];
+	 console.log(selchb);
+	  for(var i=1;i<selchb.length;i++){
+		  var va=selchb[i];
+		  con=con+","+va;
+	  }
+	  console.log(con);
+	  dataToPost = "answers="+con;
 	  $.ajax({
-          url: "/answer/add",
+          url: "answer/add",
           type: "POST",
-          data: json,
-          cache: false,
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
+          data: dataToPost, 
           success: function (data) {
               
-          }
+          },
+	     dataType: "json",
       });
 };
 
