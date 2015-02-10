@@ -51,6 +51,7 @@ public class LoginController {
 //		model.put("error", error);
 //		return "login";
 //	}
+
 	
 	@RequestMapping(value = "/validate", method = RequestMethod.POST)
 	public String checkLogin(

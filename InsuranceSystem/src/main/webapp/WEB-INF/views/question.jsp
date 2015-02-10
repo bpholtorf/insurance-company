@@ -12,14 +12,14 @@
     <title>DASHGUM - Bootstrap Admin Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/InsuranceSystem/pages/assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
-    <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/InsuranceSystem/pages/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     
     <!-- Custom styles for this template -->
-    <link href="../assets/css/style.css" rel="stylesheet">
-    <link href="../assets/css/style-responsive.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/to-do.css">
+    <link href="/InsuranceSystem/pages/assets/css/style.css" rel="stylesheet">
+    <link href="/InsuranceSystem/pages/assets/css/style-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="/InsuranceSystem/pages/assets/css/to-do.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -33,7 +33,7 @@
 
   <body >
 
-  <section id="container" >
+  <section id="container" style="overflow:auto">
       <!-- **********************************************************************************************************************************************************
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
@@ -43,7 +43,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index.html" class="logo"><b>DASHGUM FREE</b></a>
+            <a href="index.html" class="logo"><b>Insurance Company</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -130,7 +130,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="assets/img/ui-zac.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="/InsuranceSystem/pages/assets/img/ui-zac.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Zac Snider</span>
                                     <span class="time">Just now</span>
@@ -142,7 +142,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="assets/img/ui-divya.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="/InsuranceSystem/pages/assets/img/ui-divya.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Divya Manian</span>
                                     <span class="time">40 mins.</span>
@@ -154,7 +154,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="assets/img/ui-danro.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="/InsuranceSystem/pages/assets/img/ui-danro.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Dan Rogers</span>
                                     <span class="time">2 hrs.</span>
@@ -166,7 +166,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="assets/img/ui-sherman.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="/InsuranceSystem/pages/assets/img/ui-sherman.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Dj Sherman</span>
                                     <span class="time">4 hrs.</span>
@@ -216,8 +216,8 @@
 	                 	</div>
 				  		<div class="custom-check goleft mt">
 				  		     <c:if test="${!empty listQuestions}">
-				  		     <c:url var="addAction" value="/answer/add" ></c:url>
-				  		     <form:form  commandName="answer">
+				  		    <c:url var="addAction" value="/answer/add" ></c:url>
+				  		     <form:form  action="answer/add" commandName="answer">
 				             <table id="todo" class="table table-hover custom-check" style="font-size: 13px;">
 				              <tbody>
 				              
@@ -267,19 +267,19 @@
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/jquery.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="../assets/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="../assets/js/jquery.scrollTo.min.js"></script>
-    <script src="../assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 
 
     <!--common script for all pages-->
-    <script src="../assets/js/common-scripts.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
 
     <!--script for this page-->
 	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>    
-    <script src="../assets/js/tasks.js" type="text/javascript"></script>
+    <script src="/InsuranceSystem/pages/assets/js/tasks.js" type="text/javascript"></script>
 
     <script>
       jQuery(document).ready(function() {
@@ -317,41 +317,14 @@
     	   $(inputSibling).css({
                'display':'none'
              });
+    	   $(inputSibling).val("");
        }
       });
       
   </script>
 
-<!-- <script type="text/javascript">
-	$(document).ready(
-			function() {
-				var i;
-				for (i=1; i <= 10; i++) {
-					$("#up" + i).live(
-							"change",
-							function() {
-								var questionId = i;
-								
-								var answer = document.getElementById(i).value;
-						      
-								dataToPost = "questionId=" + questionId + "&answer="
-										+ answer;
 
-								$.ajax({
-									type : "POST",
-									url : "answer/add",
-									data : dataToPost,
-									success : function() {
-
-									},
-									dataType : "json",
-								})
-							});
-				}
-
-			});
-</script> -->
-
+    <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
 
 <script type="text/javascript">
 // Returns an array with values of the selected (checked) checkboxes in "frm"
@@ -382,9 +355,14 @@ function getSelectedChbox(frm) {
 }
 
 document.getElementById('tian').onclick = function(){
-	  var selchb = getSelectedChbox(this.form);     // gets the array returned by getSelectedChbox()
-	 var con=selchb[0];
-	 console.log(selchb);
+	  var selchb = getSelectedChbox(this.form); // gets the array returned by getSelectedChbox()
+	 if(selchb.length!=6){
+		 bootbox.alert("Must Answer Three Questions", function() {
+			  //Example.show("Hello world callback");
+			});
+	 }else{ 
+	  var con=selchb[0];
+	 
 	  for(var i=1;i<selchb.length;i++){
 		  var va=selchb[i];
 		  con=con+","+va;
@@ -396,10 +374,12 @@ document.getElementById('tian').onclick = function(){
           type: "POST",
           data: dataToPost, 
           success: function (data) {
-              
+        	// $('html').html(data);
+        	  window.location.href="/InsuranceSystem/";
           },
-	     dataType: "json",
+	     dataType: "html",
       });
+	 }
 };
 
 </script>

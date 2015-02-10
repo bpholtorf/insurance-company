@@ -13,13 +13,13 @@
     <title>DASHGUM - Bootstrap Admin Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="resources/css/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/InsuranceSystem/pages/assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
-    <link href="resources/css/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/InsuranceSystem/pages/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
         
     <!-- Custom styles for this template -->
-    <link href="resources/css/assets/css/style.css" rel="stylesheet">
-    <link href="resources/css/assets/css/style-responsive.css" rel="stylesheet">
+    <link href="/InsuranceSystem/pages/assets/css/style.css" rel="stylesheet">
+    <link href="/InsuranceSystem/pages/assets/css/style-responsive.css" rel="stylesheet">
 
   
   <style type="text/css">
@@ -89,8 +89,8 @@
 	  </div>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="resources/css/assets/js/jquery.js"></script>
-    <script src="resources/css/assets/js/bootstrap.min.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/jquery.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/bootstrap.min.js"></script>
 
    
 
