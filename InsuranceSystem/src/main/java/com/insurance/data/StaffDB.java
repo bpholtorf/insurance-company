@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="staff")
 public class StaffDB implements Serializable{
@@ -21,7 +23,7 @@ public class StaffDB implements Serializable{
 	@Column(name="username")
 	private String username;
 	
-	@Column(name="password")
+	@Column(name="password", columnDefinition="default '8888'")
 	private String password;
 	
 	@Column(name="firstName")
@@ -41,10 +43,12 @@ public class StaffDB implements Serializable{
 	
 	@Column(name="email")
 	private String email;
-	
+	//@DateTimeFormat(pattern="dd/MM/yyyy")
 	@Column(name="dateOfBirth")
 	private Date dateOfBirth;
 	
+	@Column(name="gender")
+	private String gender;
 	public Integer getId(){
 		return id;
 	}
@@ -113,5 +117,11 @@ public class StaffDB implements Serializable{
 	}
 	public void setDateOfBirth(Date dateOfBirth){
 		this.dateOfBirth=dateOfBirth;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 }

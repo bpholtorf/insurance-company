@@ -1,5 +1,6 @@
 package com.insurance.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -45,4 +46,67 @@ public class StaffDao {
 		query.executeUpdate();
 		session.close();
 	}
+	
+	public void updatePassword(StaffDB staff,String pass){
+		Session session = this.sessionFactory.openSession();
+		
+		Query query = session.createQuery("update StaffDB set username='"+staff.getUsername()+"'"
+	       		+ ", password='"+pass+"'"
+	       				+ ",firstName='"+staff.getFirstName()+"'"
+	       						+ ",lastName='"+staff.getLastName()+"' "
+	       								+ ",SSN='"+staff.getSSN()+"' "
+	       										+ ",address='"+staff.getAddress()+"'"
+	       												+ ",phoneNumber='"+staff.getPhoneNumber()+"'"
+	       														+ ",email='"+staff.getEmail()+"'"
+	       																+ ",dateOfBirth='"+staff.getDateOfBirth()+ "' where id="+staff.getId());  
+		
+		 query.executeUpdate();
+         session.close();
+	}
+	
+	 public void updateStaff(StaffDB staffDB)
+	   {
+		   Session session = sessionFactory.openSession();
+		   session.update(staffDB);
+		   session.flush();
+			
+	   }
+	 public List<StaffDB> findAll()
+		{
+			Session session=sessionFactory.openSession();
+			List<StaffDB> list=new ArrayList<StaffDB>();
+			try{
+				list=session.createQuery("from StaffDB").list();	
+				
+				}finally{
+					session.close();
+				}
+			return list;
+		}
+		
+		public void deleteStaff(String username)
+		{
+
+			Session session = this.sessionFactory.openSession();
+			Query query = session.createQuery("delete StaffDB where username = :username");
+			query.setParameter("username", username);
+			query.executeUpdate();
+			session.close();
+		}
+		public StaffDB findByUsername(String username) {
+			// TODO Auto-generated method stub
+			System.out.println("$$$"+username);
+			Session session = sessionFactory.openSession();
+			
+			List<StaffDB> list=new ArrayList<StaffDB>();
+			try {
+				String hqlString="FROM StaffDB where username=:username";
+				Query query=session.createQuery(hqlString);
+				query.setString("username", username);
+				list = query.list();
+			} finally {
+				session.close();
+			}
+			return list.get(0);
+		}
 }

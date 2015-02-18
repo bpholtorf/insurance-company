@@ -49,6 +49,7 @@
 		            
 		            <label class="checkbox">
 		                <span class="pull-right">
+		                <!--  href="login.html#myModal"-->
 		                    <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
 		
 		                </span>
@@ -70,13 +71,15 @@
 		                          <h4 class="modal-title">Forgot Password ?</h4>
 		                      </div>
 		                      <div class="modal-body">
-		                          <p>Enter your e-mail address below to reset your password.</p>
-		                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+		                          <p>Enter your social security number below to reset your password.</p>
+		                          <input type="text" id="ssn" placeholder="SSN" autocomplete="off" class="form-control placeholder-no-fix">
 		
 		                      </div>
+		                      <label id="mess" style="color:red;display:none;padding-left:18px" >SSN does not exist.</label>
 		                      <div class="modal-footer">
+		                      
 		                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-		                          <button class="btn btn-theme" type="button">Submit</button>
+		                          <button class="btn btn-theme" id="reset" type="button">Submit</button>
 		                      </div>
 		                  </div>
 		              </div>
@@ -91,7 +94,40 @@
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="/InsuranceSystem/pages/assets/js/jquery.js"></script>
     <script src="/InsuranceSystem/pages/assets/js/bootstrap.min.js"></script>
+ <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
+<script type="text/javascript">
+      //custom select box
 
+     document.getElementById('reset').onclick = function() {
+    	 var ss=document.getElementById("ssn");
+    	 var s=ss.value;
+    	
+    	 dataToPost="ssn="+s;
+    	 $.ajax({
+
+             url: "resetPass",
+             type: "GET",
+             data: dataToPost, 
+             success: function (response) {
+            	 if(response=="true"){
+            	 window.location.href="/InsuranceSystem/resetPassword";     
+                 }else{
+                	 $(ss).val("");
+                	 var m=document.getElementById('mess');
+                	 $(m).css({
+                         'display':'block'
+                       });
+                	
+                 }
+             },
+   	     dataType: "html",
+         });
+     }
+
+
+    
+      
+  </script>
    
 
 

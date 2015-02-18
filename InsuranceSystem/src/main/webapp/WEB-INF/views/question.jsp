@@ -187,7 +187,7 @@
             </div>
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="login.html">Logout</a></li>
+                    <li><a class="logout" href="/InsuranceSystem">Logout</a></li>
             	</ul>
             </div>
         </header>
@@ -269,7 +269,7 @@
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="/InsuranceSystem/pages/assets/js/jquery.js"></script>
     <script src="/InsuranceSystem/pages/assets/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="../assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script class="include" type="text/javascript" src="/InsuranceSystem/pages/assets/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
     <script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 

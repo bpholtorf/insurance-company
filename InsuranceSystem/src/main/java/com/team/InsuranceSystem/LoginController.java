@@ -43,14 +43,6 @@ public class LoginController {
 	private SecurityQuestionService securityQuestionService;
 	@Autowired
 	private AnswerService answerService;
-	
-//	@RequestMapping(value = "/login", method = RequestMethod.GET)
-//	public String getLoginPage(
-//			@RequestParam(value = "error", required = false) boolean error,
-//			ModelMap model) {
-//		model.put("error", error);
-//		return "login";
-//	}
 
 	
 	@RequestMapping(value = "/validate", method = RequestMethod.POST)
@@ -78,6 +70,44 @@ public class LoginController {
 			model.put("error", "true");
 			return "login";
 		}
+	}
+	
+	@RequestMapping(value = "resetPass", method = RequestMethod.GET)
+	public @ResponseBody String reset(
+			@RequestParam(value = "ssn", required = true) String ssn,
+			ModelMap model) {
+		Boolean result=staffService.checkSSN(ssn);
+		System.out.print(result);
+		return result.toString();
+	}
+	
+	@RequestMapping(value="resetPassword")
+	public String re(ModelMap model){
+		return "resetPassword";
+	}
+	
+	@RequestMapping(value = "/reset", method = RequestMethod.POST)
+	public String resetPassword(
+			@RequestParam(value = "username", required = true) String username,
+			@RequestParam(value = "password", required = true) String password,
+			@RequestParam(value = "password1", required = true) String cpassword,
+			ModelMap model, HttpSession session) {
+		if(password.equals(cpassword)){
+			if(staffService.getStaffByUsername(username)!=null){
+			staffService.updatePassword(staffService.getStaffByUsername(username),password);
+			
+			return "login";
+			}else{
+				model.put("error1", "true");
+				return "resetPassword";
+			}
+			
+			
+		}else{
+			model.put("error", "true");
+			return "resetPassword";
+		}
+		
 	}
 	
 
