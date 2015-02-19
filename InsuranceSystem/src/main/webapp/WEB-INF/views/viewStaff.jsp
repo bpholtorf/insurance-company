@@ -195,7 +195,7 @@ form {
 					</a>
 						<ul class="sub">
 							<li class="active"><a href="<c:url value='/staff/viewAll' />">Staff List</a></li>
-							<li><a href="<c:url value='/staff/addStaffPage' />">Add Staff</a></li>
+							<li><a href="<c:url value='/requestAdd' />">Add Staff</a></li>
 
 						</ul></li>
 

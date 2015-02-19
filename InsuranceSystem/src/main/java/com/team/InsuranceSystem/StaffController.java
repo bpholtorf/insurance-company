@@ -17,9 +17,11 @@ public class StaffController {
   @RequestMapping(value="/staff/add",method=RequestMethod.POST)
   public String addStaff(@ModelAttribute("staffDB") StaffDB s)
   {
-	  staffService.addStaff(s); 
+	  System.out.println("&&&"+s.getPassword());
+	  s.setPassword("123");
+	 	  staffService.addStaff(s); 
      // return "redirect:/staffs";
-	  return " redirect:/staff/viewAll";
+	  return "redirect:/staff/viewAll";
   }
   @RequestMapping(value="/staff/viewAll",method=RequestMethod.GET)
   public String findAll(Model model)
