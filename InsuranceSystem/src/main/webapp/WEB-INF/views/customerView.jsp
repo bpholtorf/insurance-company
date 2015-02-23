@@ -216,7 +216,7 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
+                      <a  href="javascript:;" >
                           <i class="fa fa-desktop"></i>
                           <span>Staff</span>
                       </a>
@@ -228,13 +228,14 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a class="active" href="javascript:;" >
                           <i class="fa fa-cogs"></i>
                           <span>Customer</span>
                       </a>
                       <ul class="sub">
-							<li ><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
-							<li ><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
+							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
+							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
+							<li class="active"><a  href="<c:url value='/requestAddCustomer' />">View Customer</a></li>
                           
                       </ul>
                   </li>
@@ -273,65 +274,55 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Edit Staff Information</h3>
+          	<h3><i class="fa fa-angle-right"></i> View Customer Information</h3>
   
           	<!-- INPUT MESSAGES -->
           	<div class="row mt">
           		<div class="col-lg-12">
           			<div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Staff Information</h4>
-                  	      <c:url var="updateAction" value="/staff/update" ></c:url>
-                          <form:form action="${updateAction}" class="form-horizontal tasi-form" method="POST" modelAttribute="staff">
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Customer Information</h4>
+                  	      <c:url var="updateAction" value="/customer/update" ></c:url>
+                          <form:form action="${updateAction}" class="form-horizontal tasi-form" method="POST" modelAttribute="customer">
                               <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Username</label>
+                                  <label class="col-sm-2 control-label col-lg-2">Customer Id</label>
                                   <div class="col-lg-5">
-                                      <form:input type="text" class="form-control" path="username"/>
+                                      <form:input type="text"  readonly="true"  class="form-control" path="id"/>
                                   </div>
-                              </div>
-                                      <form:hidden path="id"/>
-                                      <form:hidden class="form-control" path="password"/>
-                                      <form:hidden path="gender"/>
-                            
+                              </div>                            
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">Name</label>
                                   <div class="col-lg-5 form-inline">
-                                      <form:input type="text" class="form-control" path="firstName" placeholder="First name"/>
-                                      <form:input type="text" class="form-control" path="lastName" placeholder="Last name" />
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">SSN</label>
-                                  <div class="col-lg-5">
-                                      <form:input type="text" class="form-control" path="SSN"/>
+                                      <form:input type="text" readonly="true" class="form-control" path="firstName" placeholder="First name"/>
+                                      <form:input type="text" readonly="true"  class="form-control" path="lastName" placeholder="Last name" />
                                   </div>
                               </div>
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">Address</label>
                                   <div class="col-lg-5">
-                                      <form:input type="text" class="form-control" path="address"/>
+                                      <form:input type="text" readonly="true"  class="form-control" path="address"/>
                                   </div>
                               </div>
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">Phone Number</label>
                                   <div class="col-lg-5">
-                                      <form:input type="text" class="form-control" path="phoneNumber"/>
+                                      <form:input type="text" readonly="true"  class="form-control" path="phoneNumber"/>
                                   </div>
                               </div>
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">Email</label>
                                   <div class="col-lg-5">
-                                      <form:input type="text" class="form-control" path="email"/>
+                                      <form:input  readonly="true"  type="text" class="form-control" path="email"/>
                                   </div>
                               </div>
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">Date of Birth</label>
                                   <div class="col-lg-5">
                                   <fmt:formatDate value="${staff.dateOfBirth}" type="date" pattern="MM/dd/yyyy" var="theFormattedDate" />
-                                      <form:input type="text" id="datepicker" class="form-control"  path="dateOfBirth" value="${theFormattedDate}"/>
+                                      <form:input  readonly="true"  type="text" id="datepicker" class="form-control"  path="dateOfBirth" value="${theFormattedDate}"/>
                                   </div>
                               </div>
-                              <div class="form-group">              
-                                  <button type="submit" class="btn btn-theme" style="left:300px;position:relative">Submit</button>            
+                              <div class="form-group">    
+							      <a class="btn btn-theme" style="left:300px;position:relative"  href="<c:url value='/customer/viewAll' />">Return</a>                  
                               </div><!-- /showback -->
                           </form:form>
           			</div><!-- /form-panel -->

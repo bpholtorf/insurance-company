@@ -49,6 +49,7 @@ public class StaffDB implements Serializable{
 	
 	@Column(name="gender")
 	private String gender;
+	
 	public Integer getId(){
 		return id;
 	}

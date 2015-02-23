@@ -224,8 +224,8 @@
                           <span>Customer</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="calendar.html">Customer List</a></li>
-                          <li><a  href="gallery.html">Add Customer</a></li>
+							<li ><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
+							<li ><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
                           
                       </ul>
                   </li>

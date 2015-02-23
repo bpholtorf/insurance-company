@@ -17,9 +17,12 @@ public class CustomerDB implements Serializable{
 	@Column(name="id")
 	@GeneratedValue
 	private Integer id;
+
+	@Column(name="firstName")
+	private String firstName;
 	
-	@Column(name="name")
-	private String name;
+	@Column(name="lastName")
+	private String lastName;
 	
 	@Column(name="address")
 	private String address;
@@ -41,6 +44,9 @@ public class CustomerDB implements Serializable{
 	
 	@Column(name="employerInfo")
 	private String employerInfo;
+	
+	@Column(name="gender")
+	private String gender;
 
 	public Integer getId(){
 		return id;
@@ -49,12 +55,20 @@ public class CustomerDB implements Serializable{
 		this.id=id;
 	}
 	
-	public String getName(){
-		return name;
+	public String getFirstName(){
+		return firstName;
 	}
-	public void setName(String name){
-		this.name=name;
+	public void setFirstName(String firstName){
+		this.firstName=firstName;
 	}
+	
+	public String getLastName(){
+		return lastName;
+	}
+	public void setLastName(String lastName){
+		this.lastName=lastName;
+	}
+	
 	
 	public String getAddress(){
 		return address;
@@ -103,5 +117,11 @@ public class CustomerDB implements Serializable{
 	}
 	public void setEmployerInfo(String employerInfo){
 		this.employerInfo=employerInfo;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 }

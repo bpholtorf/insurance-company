@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.insurance.data.StaffDB;
+import com.insurance.data.CustomerDB;
 
 /**
  * Handles requests for the application home page.
@@ -44,6 +45,13 @@ public class HomeController {
 	{
 		StaffDB company = new StaffDB(); 
 		return new ModelAndView("addStaff").addObject(company); 
+		
+	}
+	@RequestMapping(value="/requestAddCustomer",method=RequestMethod.GET)
+	public ModelAndView getAddCustomerJsp()
+	{
+		CustomerDB customer = new CustomerDB(); 
+		return new ModelAndView("addCustomer").addObject(customer); 
 		
 	}
 	
