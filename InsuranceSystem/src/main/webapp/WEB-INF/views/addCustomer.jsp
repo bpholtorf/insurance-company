@@ -256,10 +256,10 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Gender</label>
 									<div class="col-lg-5">
-										<form:radiobutton path="gender" id="optionsRadios2"
+										<form:radiobutton path="gender" id="optionsRadios2" 
 											value="male" /> Male 
 									    <form:radiobutton 
-											path="gender" id="optionsRadios1" value="female" checked="checked"/> Female
+											path="gender" id="optionsRadios1" value="female"/> Female
 									</div>
 								</div>
 								<div class="form-group">
@@ -288,6 +288,24 @@
 									<div class="col-lg-5">
 										<form:input class="form-control" id="datepicker"
 											path="dateOfBirth" type="text"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Annual Income</label>
+									<div class="col-lg-5">
+										<form:input type="number" class="form-control" path="incomeStatus" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Sponsor Name</label>
+									<div class="col-lg-5">
+										<form:input type="text" class="form-control" path="sponsorInfo" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Employer Name</label>
+									<div class="col-lg-5">
+										<form:input type="text" class="form-control" path="employerInfo" />
 									</div>
 								</div>
 								<div class="form-group">

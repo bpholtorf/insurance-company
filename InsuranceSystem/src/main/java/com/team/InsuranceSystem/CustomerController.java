@@ -46,7 +46,7 @@ public class CustomerController {
   public String viewCustomer(@PathVariable("id") Integer id, Model model)
   {
 	  model.addAttribute("customer",customerService.findById(id));
-	  return "customer";
+	  return "customerView";
 	  
   }
   @RequestMapping(value="/customer/update",method=RequestMethod.POST)

@@ -296,6 +296,15 @@
                                       <form:input type="text" readonly="true"  class="form-control" path="lastName" placeholder="Last name" />
                                   </div>
                               </div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Gender</label>
+									<div class="col-lg-5">
+										<form:radiobutton readonly="true" path="gender" id="optionsRadios2" 
+											value="male" /> Male 
+									    <form:radiobutton 
+											path="gender" readonly="true" id="optionsRadios1" value="female"/> Female
+									</div>
+								</div>
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">Address</label>
                                   <div class="col-lg-5">
@@ -321,6 +330,24 @@
                                       <form:input  readonly="true"  type="text" id="datepicker" class="form-control"  path="dateOfBirth" value="${theFormattedDate}"/>
                                   </div>
                               </div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Annual Income</label>
+									<div class="col-lg-5">
+										<form:input readonly="true"  type="number" class="form-control" path="incomeStatus" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Sponsor Name</label>
+									<div class="col-lg-5">
+										<form:input readonly="true"  type="text" class="form-control" path="sponsorInfo" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Employer Name</label>
+									<div class="col-lg-5">
+										<form:input readonly="true"  type="text" class="form-control" path="employerInfo" />
+									</div>
+								</div>
                               <div class="form-group">    
 							      <a class="btn btn-theme" style="left:300px;position:relative"  href="<c:url value='/customer/viewAll' />">Return</a>                  
                               </div><!-- /showback -->
