@@ -1,5 +1,8 @@
 package com.team.InsuranceSystem;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.insurance.data.CustomerDB;
 import com.insurance.service.CustomerService;
 
@@ -60,4 +64,22 @@ public class CustomerController {
   {
 	  return "addcustomer";
   }
+  
+  @ModelAttribute("incomeStatuses")
+  public Map<String,String> populateIncomeStatuses() {
+         Map<String,String> incomeStatuses = new LinkedHashMap<String,String>();
+         incomeStatuses.put("VS", "Less than 10000");
+         incomeStatuses.put("MC", "10000 - 19999");
+         incomeStatuses.put("AE", "20000 - 29999");
+         incomeStatuses.put("DS", "30000 - 39999");
+         incomeStatuses.put("DC", "40000 - 49999"); 
+         incomeStatuses.put("MC", "50000 - 59999");
+         incomeStatuses.put("AE", "60000 - 69999");
+         incomeStatuses.put("DS", "70000 - 79999");
+         incomeStatuses.put("DC", "80000 - 89999"); 
+         incomeStatuses.put("DC", "90000 - 99999");  
+         incomeStatuses.put("DC", "More than 100000");    
+         return incomeStatuses;
+     }
+  
 }
