@@ -1,5 +1,7 @@
 package com.team.InsuranceSystem;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,12 +33,12 @@ public class AnswerController {
 		return "answerQuestion";
 	}
 	@RequestMapping(value="answer/getQuestion",method = RequestMethod.GET)
-	public @ResponseBody QuestionAnswer getQuestion(HttpServletRequest request, 
+	public @ResponseBody List<QuestionAnswer> getQuestion(HttpServletRequest request, 
 			                                  HttpServletResponse response,
 			                                  HttpSession session) throws Exception
 	{
 		int sid=(Integer.parseInt(session.getAttribute(SESSION_ID).toString()));
-		System.out.println(answerService.findBysid(sid).getQuestion());
+		//System.out.println(answerService.findBysid(sid).getQuestion());
 		return answerService.findBysid(sid);
 	}
 }

@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -24,7 +25,13 @@
 <!-- Custom styles for this template -->
 <link href="/InsuranceSystem/pages/assets/css/style.css" rel="stylesheet">
 <link href="/InsuranceSystem/pages/assets/css/style-responsive.css" rel="stylesheet">
+ <style type="text/css">
+       .error{
+        color:#a94442;
+        padding-top:7px;
 
+       }
+    </style>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -196,8 +203,8 @@
 							class="fa fa-cogs"></i> <span>Customer</span>
 					</a>
 						<ul class="sub">
-							<li ><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
-							<li ><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
+							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
+							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
 
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
@@ -212,9 +219,7 @@
 							class="fa fa-book"></i> <span>Policy</span>
 					</a>
 						<ul class="sub">
-							<li><a href="blank.html">Blank Page</a></li>
-							<li><a href="login.html">Login</a></li>
-							<li><a href="lock_screen.html">Lock Screen</a></li>
+							<li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
 						</ul></li>
 
 					<li class="sub-menu"><a href="javascript:;"> <i
@@ -249,36 +254,41 @@
 								<i class="fa fa-angle-right"></i> Staff Information
 							</h4>
 							<c:url var="addAction" value="/staff/add"></c:url>
-							<form:form action="${addAction}"
+							<form:form action="${addAction}" 
 								class="form-horizontal tasi-form" method="POST"
 								modelAttribute="staffDB">
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Username</label>
 									<div class="col-lg-5">
 										<form:input type="text" class="form-control" path="username" />
+										<form:errors path="username" class="error"></form:errors>
 									</div>
 								</div>
-								<div class="form-group">
+								 <div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Password</label>
 									<div class="col-lg-5">
 										<form:input type="password" class="form-control"
 											path="password" />
+										<form:errors path="password" class="error"> </form:errors>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Confirm
 										Password</label>
 									<div class="col-lg-5">
-										<input type="password" class="form-control">
+										<input type="password" class="form-control" name="confirm-password">
+										<label class="error" style="display:none" id="errorMessage">Your passwords do not match!</label>
 									</div>
-								</div>
+								</div> 
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Name</label>
 									<div class="col-lg-5 form-inline">
 										<form:input type="text" class="form-control" path="firstName"
 											placeholder="First name" />
+									    <form:errors path="firstName" class="error"></form:errors>
 										<form:input type="text" class="form-control" path="lastName"
 											placeholder="Last name" />
+										<form:errors path="lastName" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
@@ -293,13 +303,15 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">SSN</label>
 									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="SSN" />
+										<form:input type="text" class="form-control" path="SSN"/>
+										<form:errors path="SSN" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Address</label>
 									<div class="col-lg-5">
 										<form:input type="text" class="form-control" path="address" />
+										<form:errors path="address" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
@@ -307,21 +319,28 @@
 										Number</label>
 									<div class="col-lg-5">
 										<form:input type="text" class="form-control"
-											path="phoneNumber" />
+											path="phoneNumber" data-validate="required,number"/>
+									    <form:errors path="phoneNumber" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Email</label>
 									<div class="col-lg-5">
 										<form:input type="text" class="form-control" path="email" />
+										<form:errors path="email" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Date of
 										Birth</label>
 									<div class="col-lg-5">
+									<fmt:formatDate value="${birthDate}" type="date"
+								pattern="MM/dd/yyyy" var="theFormattedDate" />
+						
 										<form:input class="form-control" id="datepicker"
-											path="dateOfBirth" type="text"/>
+											path="dateOfBirth" type="text" value="${theFormattedDate }"/>
+											<label class="error" style="display:none" id="errorMessage1" >Please input a date!</label>
+											<form:errors path="dateOfBirth" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
@@ -392,7 +411,7 @@
 	<script type="text/javascript"
 		src="/InsuranceSystem/pages/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 
-
+    <script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>
 
 
@@ -401,7 +420,11 @@
 
 		$(function() {
 			$("#datepicker").datepicker();
+			if($("#datepicker").val()=='')
+				$("#datepicker").val('02/24/2015');
+			
 		});
+		
 	</script>
 
 </body>

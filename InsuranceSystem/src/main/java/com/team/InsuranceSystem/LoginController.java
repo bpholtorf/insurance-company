@@ -27,6 +27,8 @@ import com.insurance.service.SecurityQuestionService;
 import com.insurance.service.StaffService;
 import com.insurance.service.AnswerService;
 
+import com.insurance.util.Cryption;
+
 
 @Controller
 
@@ -50,8 +52,11 @@ public class LoginController {
 			@RequestParam(value = "j_username", required = true) String username,
 			@RequestParam(value = "j_password", required = true) String password,
 			ModelMap model, HttpSession session) {
-
-		String sid = staffService.checkLogin(username, password);
+       
+		String pass=Cryption.encryptToMD5(password);
+		//staffService.updatePassword(staffService.getStaffByUsername(username),pass);
+		
+		String sid = staffService.checkLogin(username, pass);
 
 		if (sid != null) {
 			
@@ -94,7 +99,8 @@ public class LoginController {
 			ModelMap model, HttpSession session) {
 		if(password.equals(cpassword)){
 			if(staffService.getStaffByUsername(username)!=null){
-			staffService.updatePassword(staffService.getStaffByUsername(username),password);
+				String pass=Cryption.encryptToMD5(password);
+			staffService.updatePassword(staffService.getStaffByUsername(username),pass);
 			
 			return "login";
 			}else{

@@ -29,7 +29,9 @@
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
-
+   <bean id="usernameValidator" class="com.insurance.validator.UsernameValidator">
+    <property name="dataSource" ref="myDataSource"/>
+    </bean>
 
 	<!-- Hibernate Session Factory -->
 	<bean id="mySessionFactory"

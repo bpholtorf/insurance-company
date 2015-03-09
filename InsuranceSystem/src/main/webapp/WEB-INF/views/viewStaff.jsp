@@ -194,7 +194,8 @@ form {
 							<i class="fa fa-desktop"></i> <span>Staff</span>
 					</a>
 						<ul class="sub">
-							<li class="active"><a href="<c:url value='/staff/viewAll' />">Staff List</a></li>
+							<li class="active"><a
+								href="<c:url value='/staff/viewAll' />">Staff List</a></li>
 							<li><a href="<c:url value='/requestAdd' />">Add Staff</a></li>
 
 						</ul></li>
@@ -203,8 +204,10 @@ form {
 							class="fa fa-cogs"></i> <span>Customer</span>
 					</a>
 						<ul class="sub">
-							<li ><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
-							<li ><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
+							<li><a href="<c:url value='/customer/viewAll' />">Customer
+									List</a></li>
+							<li><a href="<c:url value='/requestAddCustomer' />">Add
+									Customer</a></li>
 
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
@@ -249,67 +252,100 @@ form {
 				<div class="row mt">
 					<div class="col-md-12">
 						<div class="content-panel">
-							<c:if test="${!empty staffs }">
-								<table class="table table-striped table-advance table-hover"
-									style="font-size: 13px">
-									<h4>
-										<i class="fa fa-angle-right"></i> Staff List
-										<div class="col-sm-3 col-md-3 pull-right" style="margin-top:-10px">
-											<form class="navbar-form" role="search">
-												<div class="input-group" style="margin-top:-15px">
-													<input type="text" class="form-control"
-														placeholder="Search" name="q">
-													<div class="input-group-btn">
-														<button class="btn btn-default" type="submit" style="padding:9">
-															<i class="glyphicon glyphicon-search"></i>
-														</button>
-													</div>
+
+							<table class="table table-striped table-advance table-hover"
+								style="font-size: 13px">
+								<h4>
+									<i class="fa fa-angle-right"></i> Staff List
+									<div class="col-sm-3 col-md-4 pull-right"
+										style="margin-top: -10px">
+										<form class="navbar-form" role="search" action="searchStaff">
+
+
+											<div class="input-group" style="margin-top: -15px">
+												<select class="form-control" id="sel1"
+													style="width: 40%; margin-right: 14px" name="type">
+													<c:choose>
+														<c:when test="${type == 'SSN'}">
+                          									<option>SSN</option>
+													        <option>Username</option>
+													        <option>Name</option>
+                                                        </c:when>
+														<c:when test="${type == 'Username'}">
+        													<option>SSN</option>
+													        <option selected="selected">Username</option>
+													        <option>Name</option>
+                                                        </c:when>
+														<c:otherwise>
+       													  <option>SSN</option>
+													      <option>Username</option>
+													       <option selected="selected">Name</option>
+                                                        </c:otherwise>
+													</c:choose>
+													
+												</select> <input type="text" class="form-control"
+													placeholder="Search" name="keyword" style="width: 55%"
+													value="${keyword }">
+												<div class="input-group-btn">
+													<button class="btn btn-default" type="submit"
+														style="padding: 9">
+														<i class="glyphicon glyphicon-search"></i>
+													</button>
 												</div>
-											</form>
-										</div>
-									</h4>
-									<hr>
-									<thead>
-										<tr>
-											<th>Username</th>
-											<th class="hidden-phone">Name</th>
-											<th>SSN</th>
-											<th>Sex</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${staffs }" var="staff">
+											</div>
+
+										</form>
+									</div>
+								</h4>
+								<hr>
+								<c:choose>
+									<c:when test="${!empty staffs }">
+										<thead>
 											<tr>
-												<td><a href="basic_table.html#">${staff.username }</a></td>
-												<td class="hidden-phone">${staff.firstName }
-													${staff.lastName }</td>
-												<td>${staff.SSN }</td>
-												<td><span class="label label-info label-mini">Female</span></td>
-												<td>
-													<form method="post" action="">
-														<button class="btn btn-success btn-xs" type="submit">
-															<i class="fa fa-check"></i>
-														</button>
-													</form>
-													<form method="post" action="edit/${staff.username }">
-														<button class="btn btn-primary btn-xs">
-															<i class="fa fa-pencil"></i>
-														</button>
-													</form>
-													<form method="post" action="delete/${staff.username }">
-														<button class="btn btn-danger btn-xs">
-															<i class="fa fa-trash-o "></i>
-														</button>
-													</form>
-												</td>
+												<th>Username</th>
+												<th class="hidden-phone">Name</th>
+												<th>SSN</th>
+												<th>Gender</th>
+												<th></th>
 											</tr>
-										</c:forEach>
+										</thead>
+										<tbody>
+											<c:forEach items="${staffs }" var="staff">
+												<tr>
+													<td><a href="basic_table.html#">${staff.username }</a></td>
+													<td class="hidden-phone">${staff.firstName }
+														${staff.lastName }</td>
+													<td>${staff.SSN }</td>
+													<td><span class="label label-info label-mini">${staff.gender }</span></td>
+													<td>
+														<form method="post" action="">
+															<button class="btn btn-success btn-xs" type="submit">
+																<i class="fa fa-check"></i>
+															</button>
+														</form>
+														<form method="post" action="edit/${staff.username }">
+															<button class="btn btn-primary btn-xs">
+																<i class="fa fa-pencil"></i>
+															</button>
+														</form>
+														<form method="post" action="delete/${staff.username }">
+															<button class="btn btn-danger btn-xs">
+																<i class="fa fa-trash-o "></i>
+															</button>
+														</form>
+													</td>
+												</tr>
+											</c:forEach>
 
 
-									</tbody>
-								</table>
-							</c:if>
+										</tbody>
+									</c:when>
+									<c:otherwise>
+							 no result found
+							</c:otherwise>
+								</c:choose>
+							</table>
+
 						</div>
 						<!-- /content-panel -->
 					</div>
@@ -324,7 +360,8 @@ form {
 
 		<!--main content end-->
 		<!--footer start-->
-		<footer class="site-footer">
+		<footer class="site-footer"
+			style="position: absolute; left: 210px; top: 800px; width: 1000px">
 			<div class="text-center">
 				2014 - Alvarez.is <a href="basic_table.html#" class="go-top"> <i
 					class="fa fa-angle-up"></i>
@@ -342,6 +379,7 @@ form {
 	<script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js"
 		type="text/javascript"></script>
+	<script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
 
 
 	<!--common script for all pages-->

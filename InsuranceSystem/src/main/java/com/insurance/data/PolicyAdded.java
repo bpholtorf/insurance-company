@@ -1,40 +1,29 @@
 package com.insurance.data;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="insurance_policy")
-public class PolicyDB implements Serializable{
-	@Id
-	@GeneratedValue
-	@Column(name="id")
+public class PolicyAdded {
+	
 	private int id;
-	
-	@Column(name="policyName")
 	private String policyName;
-	
-	@Column(name="policyNumber")
 	private String policyNumber;
-	
-	@Column(name="planType")
 	private String planType;
-	
-	@Column(name="payPeriod")
 	private int payPeriod;
-	
-	@Column(name="amount")
 	private Double amount;
-	
-	@Column(name="deductible")
 	private Double deductible;
-	
-	@Column(name="premiumPercent")
 	private Double premiumPercent;
+	private String check;
+	
+	public PolicyAdded(int id,String policyName,String policyNumber,String planType,int payPeriod,double amount,double deductible,double premiumPercent,String check){
+		super();
+		this.id=id;
+		this.policyName=policyName;
+		this.policyNumber=policyNumber;
+		this.planType=planType;
+		this.payPeriod=payPeriod;
+		this.amount=amount;
+		this.deductible=deductible;
+		this.premiumPercent=premiumPercent;
+		this.check=check;
+	}
 	
 	public int getId(){
 		return id;
@@ -90,6 +79,13 @@ public class PolicyDB implements Serializable{
 	}
 	public void setPremiumPercent(Double premiumPercent){
 		this.premiumPercent=premiumPercent;
+	}
+	
+	public String getCheck(){
+		return check;
+	}
+	public void setCheck(String check){
+		this.check=check;
 	}
 
 }

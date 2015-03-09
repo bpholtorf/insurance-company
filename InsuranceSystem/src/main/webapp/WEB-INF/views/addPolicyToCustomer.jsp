@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -10,13 +17,15 @@
     <title>DASHGUM - Bootstrap Admin Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/InsuranceSystem/pages/assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/InsuranceSystem/pages/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.css" />
         
     <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <link href="/InsuranceSystem/pages/assets/css/style.css" rel="stylesheet">
+    <link href="/InsuranceSystem/pages/assets/css/style-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -124,7 +133,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="assets/img/ui-zac.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="/InsuranceSystem/pages/assets/img/ui-zac.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Zac Snider</span>
                                     <span class="time">Just now</span>
@@ -136,7 +145,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="assets/img/ui-divya.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="/InsuranceSystem/pages/assets/img/ui-divya.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Divya Manian</span>
                                     <span class="time">40 mins.</span>
@@ -148,7 +157,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="assets/img/ui-danro.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="/InsuranceSystem/pages/assets/img/ui-danro.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Dan Rogers</span>
                                     <span class="time">2 hrs.</span>
@@ -160,7 +169,7 @@
                             </li>
                             <li>
                                 <a href="index.html#">
-                                    <span class="photo"><img alt="avatar" src="assets/img/ui-sherman.jpg"></span>
+                                    <span class="photo"><img alt="avatar" src="/InsuranceSystem/pages/assets/img/ui-sherman.jpg"></span>
                                     <span class="subject">
                                     <span class="from">Dj Sherman</span>
                                     <span class="time">4 hrs.</span>
@@ -191,12 +200,12 @@
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
       <!--sidebar start-->
-      <aside>
+     <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <p class="centered"><a href="profile.html"><img src="/InsuranceSystem/pages/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	 <h5 class="centered">${user }</h5>
                     
                   <li class="mt">
@@ -212,7 +221,7 @@
                           <span>Staff</span>
                       </a>
                       <ul class="sub">
-                          <li ><a href="/staff/viewAll">Staff List</a></li>
+                          <li ><a href="<c:url value='/staff/viewAll' />">Staff List</a></li>
                           <li><a  href="<c:url value='/requestAdd' />">Add Staff</a></li>
                           
                       </ul>
@@ -224,19 +233,12 @@
                           <span>Customer</span>
                       </a>
                       <ul class="sub">
-							<li class="active"><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
-							<li ><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
+							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
+							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
+							<li class="active"><a  href="<c:url value='/requestAddCustomer' />">Edit Customer</a></li>
                           
                       </ul>
                   </li>
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Insurance Policy</span>
-					</a>
-						<ul class="sub">
-							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
-							<li ><a href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
-
-						</ul></li>
                   <li class="sub-menu">
                       <a  href="javascript:;" >
                           <i class="fa fa-book"></i>
@@ -268,99 +270,80 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
-      <section id="main-content">
+     <section id="main-content">
           <section class="wrapper">
-          	
-	                  
-              <div class="row mt">
-                  <div class="col-md-12">
+          	<h3><i class="fa fa-angle-right"></i> Add Policy To Customer</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
                       <div class="content-panel">
-                          <table class="table table-striped table-advance table-hover">
-	                  	  	  <h4><i class="fa fa-angle-right"></i> Advanced Table</h4>
-	                  	  	  <hr>
+							<form action="searchPolicy" method="post"> 
+						<label id="cid" style="display:none" >${customer.id } </label>
+                       <div>Customer Name: ${customer.firstName } ${customer.lastName } </div>
+                       <div style="width: 20%; margin-left: 350px; margin-top:-17px;">Policy Name:
+                    <select class="form-control" id="sel1"
+													 name="policyName" style="margin-left:100px;margin-top:-28px">
+													      <option selected="selected"></option>  
+														  <c:forEach items="${policys }" var="policy">
+                          									<option value=${policy.policyName }>${policy.policyName }</option>
+													      </c:forEach>
+													     
+												</select>
+												<button class="btn btn-theme" id="submit" type="submit" style="margin-left:300px;margin-top:-34px">Submit</button>
+												</div>
+					</form> 
+                      <br>
+                      <c:if test="${!empty policyInfo }">
+                      <h4><i class="fa fa-angle-right"></i>Policy Information</h4>
+                          <section id="unseen">
+                            <table class="table table-bordered table-striped table-condensed">
                               <thead>
+                             
                               <tr>
-                                  <th><i class="fa fa-bullhorn"></i> Username</th>
-                                  <th class="hidden-phone"><i class="fa fa-question-circle"></i> Name</th>
-                                  <th><i class="fa fa-bookmark"></i> SSN</th>
-                                  <th><i class=" fa fa-edit"></i> Sex</th>
+                                  <th class="numeric">Policy Name</th>
+                                  <th class="numeric">Policy Number</th>
+                                  <th class="numeric">Plan Type</th>
+                                  <th class="numeric">Pay Period</th>
+                                  <th class="numeric">Amount</th>
+                                  <th class="numeric">Deductible</th>
+                                  <th class="numeric">Premium Percentage</th>
                                   <th></th>
                               </tr>
                               </thead>
                               <tbody>
+                               <c:forEach items="${policyInfo }" var="policyInfo" varStatus="loop">
+                                <form action="viewPolicys" method="post"> 
+                               <input id="pid" style="display:none" value="${policyInfo.id }" name="policyId"/>
                               <tr>
-                                  <td><a href="basic_table.html#">Company Ltd</a></td>
-                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                  <td>12000.00$ </td>
-                                  <td><span class="label label-info label-mini">Due</span></td>
-                                  <td>
-                                      <button class="btn btn-success btn-xs"><i class="fa fa-eye"></i></button>
-                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
+                                  <td class="numeric" >${policyInfo.policyName }</td>
+                                  <td class="numeric" ><a>${policyInfo.policyNumber }</a></td>
+                                  <td class="numeric" >${policyInfo.planType }</td>
+                                  <td class="numeric" >${policyInfo.payPeriod } months</td>
+                                  <td class="numeric" >${policyInfo.amount }</td>
+                                  <td class="numeric" >${policyInfo.deductible }</td>
+                                  <td class="numeric" >${policyInfo.premiumPercent }</td>
+                                  <c:choose>
+                                  <c:when test="${policyInfo.check == 'added' }">
+                                  <td><button class="btn btn-theme" type="button" style="font-size:12px;height:25px" id="addPolicy" disabled="disabled">Added</button></td>
+                                  </c:when>
+                                  <c:when test="${policyInfo.check == 'unadded' }">
+                                   <td><button class="btn btn-theme" type="submit" style="font-size:12px;height:25px" id="addPolicy">Add</button></td>
+                                  </c:when>
+                                  </c:choose>
                               </tr>
-                              <tr>
-                                  <td>
-                                      <a href="basic_table.html#">
-                                          Dashgum co
-                                      </a>
-                                  </td>
-                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                  <td>17900.00$ </td>
-                                  <td><span class="label label-warning label-mini">Due</span></td>
-                                  <td>
-                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <a href="basic_table.html#">
-                                          Another Co
-                                      </a>
-                                  </td>
-                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                  <td>14400.00$ </td>
-                                  <td><span class="label label-success label-mini">Paid</span></td>
-                                  <td>
-                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <a href="basic_table.html#">
-                                          Dashgum ext
-                                      </a>
-                                  </td>
-                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                  <td>22000.50$ </td>
-                                  <td><span class="label label-success label-mini">Paid</span></td>
-                                  <td>
-                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td><a href="basic_table.html#">Total Ltd</a></td>
-                                  <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                  <td>12120.00$ </td>
-                                  <td><span class="label label-warning label-mini">Due</span></td>
-                                  <td>
-                                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                                  </td>
-                              </tr>
+                             </form>
+                         </c:forEach>
+                  <c:if test="${error }">          
+		       <label style="color:red;display:none" id="mess">The customer has already added this insurance policy.</label>
+                 </c:if>
                               </tbody>
                           </table>
-                      </div><!-- /content-panel -->
-                  </div><!-- /col-md-12 -->
-              </div><!-- /row -->
-
+                          </section>
+                          </c:if>
+                  </div><!-- /content-panel -->
+               </div><!-- /col-lg-4 -->			
+		  	</div><!-- /row -->
+		  	
+		  	
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
 
@@ -369,7 +352,7 @@
       <footer class="site-footer">
           <div class="text-center">
               2014 - Alvarez.is
-              <a href="basic_table.html#" class="go-top">
+              <a href="form_component.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
@@ -378,26 +361,117 @@
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="assets/js/jquery.scrollTo.min.js"></script>
-    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="/InsuranceSystem/pages/assets/js/jquery.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="/InsuranceSystem/pages/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 
 
     <!--common script for all pages-->
-    <script src="assets/js/common-scripts.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
 
     <!--script for this page-->
-    
-  <script>
+    <script src="/InsuranceSystem/pages/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<!--custom switch-->
+	<script src="/InsuranceSystem/pages/assets/js/bootstrap-switch.js"></script>
+	
+	<!--custom tagsinput-->
+	<script src="/InsuranceSystem/pages/assets/js/jquery.tagsinput.js"></script>
+	
+	<!--custom checkbox & radio-->
+	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap.js"></script>
+	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/date.js"></script>
+
+	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
+	
+	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+	
+	
+	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>    
+	
+   <!--  <script type="text/javascript">
       //custom select box
+ $(document).ready(function() {
+				var i;
+				for (i = 0; i <= 1; i++) {
+					$("#a" + i).click(function() {
+								var pid=$("#pid").text();
+								var num=$("#num").text();
+						    	console.log(num);
+						    	 dataToPost="policyId="+pid;
+						    	 $.ajax({
+						             url: "check",
+						             type: "GET",
+						             data: dataToPost, 
+						             success: function (response) {
+						            	
+						            	 if(response=="true"){
+						            		 var m=document.getElementById('mess');
+						                	 $(m).css({
+						                         'display':'block'
+						                       });
+						            	 }else{
+						            		 console.log(response);
+						            		 addSuccess(pid);
+						            	 }
+						             },
+						   	     
+						         });  
+							});
+				
+				}
+			});
+      </script>  -->
+<!--  <script type="text/javascript"> -->
+      
+<!--  document.getElementById('addPolicy').onclick = function() {
 
-      $(function(){
-          $('select.styled').customSelect();
-      });
+    	var pid=$("#pid").text();
+    	console.log(pid);
+    	 dataToPost="policyId="+pid;
+    	 $.ajax({
+             url: "check",
+             type: "GET",
+             data: dataToPost, 
+             success: function (response) {
+            	
+            	 if(response=="true"){
+            		 var m=document.getElementById('mess');
+                	 $(m).css({
+                         'display':'block'
+                       });
+            	 }else{
+            		 console.log(response);
+            		 addSuccess(pid);
+            	 }
+             },
+   	     
+         });  
+    }; 
 
-  </script>
+    function addSuccess(pid){
+    	var cid=$("#cid").text();
+    	 dataToPost="policyId="+pid;
+    	 console.log(pid);
+    	 $.ajax({
+             url: "viewPolicys",
+             type: "GET",
+             data: dataToPost, 
+             success: function (response) {
+            	 window.location.href="/InsuranceSystem/customer/viewPolicys/{cid}";  
+
+             },
+             dataType: "html",
+         });  
+    };
+ -->
+    
+      
+
+    
 
   </body>
 </html>

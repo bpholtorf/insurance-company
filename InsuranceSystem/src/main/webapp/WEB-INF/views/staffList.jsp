@@ -243,9 +243,7 @@
                           <span>Policy</span>
                       </a>
                       <ul class="sub">
-                          <li ><a  href="blank.html">Blank Page</a></li>
-                          <li><a  href="login.html">Login</a></li>
-                          <li><a  href="lock_screen.html">Lock Screen</a></li>
+                          <li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
                       </ul>
                   </li>
                  
