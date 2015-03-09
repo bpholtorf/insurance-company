@@ -239,6 +239,14 @@
                           
                       </ul>
                   </li>
+					<li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-cogs"></i> <span>Insurance Policy</span>
+					</a>
+						<ul class="sub">
+							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
+							<li ><a href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
+
+						</ul></li>
                   <li class="sub-menu">
                       <a  href="javascript:;" >
                           <i class="fa fa-book"></i>
@@ -330,6 +338,12 @@
                                       <form:input  readonly="true"  type="text" id="datepicker" class="form-control"  path="dateOfBirth" value="${theFormattedDate}"/>
                                   </div>
                               </div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">SSN</label>
+									<div class="col-lg-5">
+										<form:input readonly="true" type="text" class="form-control" path="SSN" />
+									</div>
+								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Annual Income</label>
 									<div class="col-lg-5">

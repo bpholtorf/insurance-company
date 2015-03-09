@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.insurance.data.InsurancePolicyDB;
 import com.insurance.data.StaffDB;
 import com.insurance.data.CustomerDB;
 
@@ -52,6 +53,15 @@ public class HomeController {
 	{
 		CustomerDB customer = new CustomerDB(); 
 		return new ModelAndView("addCustomer").addObject(customer); 
+		
+	}
+	
+
+	@RequestMapping(value="/requestAddInsurancePolicy",method=RequestMethod.GET)
+	public ModelAndView getAddInsurancePolicyJsp()
+	{
+		InsurancePolicyDB insurancePolicy = new InsurancePolicyDB(); 
+		return new ModelAndView("addInsurancePolicy").addObject(insurancePolicy); 
 		
 	}
 	

@@ -47,6 +47,9 @@ public class CustomerDB implements Serializable{
 	
 	@Column(name="gender")
 	private String gender;
+	
+	@Column(name="SSN")
+	private String SSN;
 
 	public Integer getId(){
 		return id;
@@ -123,5 +126,11 @@ public class CustomerDB implements Serializable{
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	public String getSSN() {
+		return SSN;
+	}
+	public void setSSN(String SSN) {
+		this.SSN = SSN;
 	}
 }

@@ -200,6 +200,14 @@
 							<li class="active"><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
 
 						</ul></li>
+					<li class="sub-menu"><a  href="javascript:;"> <i
+							class="fa fa-cogs"></i> <span>Insurance Policy</span>
+					</a>
+						<ul class="sub">
+							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
+							<li ><a href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
+
+						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-book"></i> <span>Policy</span>
 					</a>
@@ -290,6 +298,12 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">SSN</label>
+									<div class="col-lg-5">
+										<form:input type="text" class="form-control" path="SSN" />
+									</div>
+								</div>
+								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Annual Income</label>
 									<div class="col-lg-5">
 										<form:select class="form-control" path="incomeStatus">
@@ -303,7 +317,7 @@
 											<option>70000 - 79999</option>
 											<option>80000 - 89999</option>
 											<option>90000 - 99999</option>
-											<option>More than 100000</option>
+											<option>More than 100000</option>    
 										</form:select>
 									</div>
 								</div>

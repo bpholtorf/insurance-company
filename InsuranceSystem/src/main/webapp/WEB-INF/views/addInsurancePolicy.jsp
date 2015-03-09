@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -11,23 +13,18 @@
 <title>DASHGUM - Bootstrap Admin Template</title>
 
 <!-- Bootstrap core CSS -->
-<link href="/InsuranceSystem/pages/assets/css/bootstrap.css"
-	rel="stylesheet">
+<link href="/InsuranceSystem/pages/assets/css/bootstrap.css" rel="stylesheet">
 <!--external css-->
-<link
-	href="/InsuranceSystem/pages/assets/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />
+<link href="/InsuranceSystem/pages/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	href="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/css/datepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.css" />
 
 <!-- Custom styles for this template -->
-<link href="/InsuranceSystem/pages/assets/css/style.css"
-	rel="stylesheet">
-<link href="/InsuranceSystem/pages/assets/css/style-responsive.css"
-	rel="stylesheet">
-<style>
-form {
-	display: inline;
-}
-</style>
+<link href="/InsuranceSystem/pages/assets/css/style.css" rel="stylesheet">
+<link href="/InsuranceSystem/pages/assets/css/style-responsive.css" rel="stylesheet">
+
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -37,7 +34,7 @@ form {
 
 <body>
 
-	<section id="container">
+	<section id="container" style="overflow:auto">
 		<!-- **********************************************************************************************************************************************************
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
@@ -129,31 +126,27 @@ form {
 								<p class="green">You have 5 new messages</p>
 							</li>
 							<li><a href="index.html#"> <span class="photo"><img
-										alt="avatar"
-										src="/InsuranceSystem/pages/assets/img/ui-zac.jpg"></span> <span
+										alt="avatar" src="/InsuranceSystem/pages/assets/img/ui-zac.jpg"></span> <span
 									class="subject"> <span class="from">Zac Snider</span> <span
 										class="time">Just now</span>
 								</span> <span class="message"> Hi mate, how is everything? </span>
 							</a></li>
 							<li><a href="index.html#"> <span class="photo"><img
-										alt="avatar"
-										src="/InsuranceSystem/pages/assets/img/ui-divya.jpg"></span> <span
+										alt="avatar" src="/InsuranceSystem/pages/assets/img/ui-divya.jpg"></span> <span
 									class="subject"> <span class="from">Divya Manian</span>
 										<span class="time">40 mins.</span>
 								</span> <span class="message"> Hi, I need your help with this. </span>
 							</a></li>
 							<li><a href="index.html#"> <span class="photo"><img
-										alt="avatar"
-										src="/InsuranceSystem/pages/assets/img/ui-danro.jpg"></span> <span
+										alt="avatar" src="/InsuranceSystem/pages/assets/img/ui-danro.jpg"></span> <span
 									class="subject"> <span class="from">Dan Rogers</span> <span
 										class="time">2 hrs.</span>
 								</span> <span class="message"> Love your new Dashboard. </span>
 							</a></li>
 							<li><a href="index.html#"> <span class="photo"><img
-										alt="avatar"
-										src="/InsuranceSystem/pages/assets/img/ui-sherman.jpg"></span>
-									<span class="subject"> <span class="from">Dj
-											Sherman</span> <span class="time">4 hrs.</span>
+										alt="avatar" src="/InsuranceSystem/pages/assets/img/ui-sherman.jpg"></span> <span
+									class="subject"> <span class="from">Dj Sherman</span> <span
+										class="time">4 hrs.</span>
 								</span> <span class="message"> Please, answer asap. </span>
 							</a></li>
 							<li><a href="index.html#">See all messages</a></li>
@@ -194,25 +187,16 @@ form {
 							<i class="fa fa-desktop"></i> <span>Staff</span>
 					</a>
 						<ul class="sub">
-							<li><a href="<c:url value='/staff/viewAll' />">Staff List</a></li>
-							<li><a href="<c:url value='/requestAdd' />">Add Staff</a></li>
+							<li ><a href="<c:url value='/staff/viewAll' />">Staff List</a></li>
+							<li ><a href="<c:url value='/requestAdd' />">Add Staff</a></li>
 
 						</ul></li>
-
 					<li class="sub-menu"><a class="active" href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Customer</span>
-					</a>
-						<ul class="sub">
-							<li  class="active"><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
-							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
-
-						</ul></li>
-					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-cogs"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
-							<li ><a href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
+							<li  class="active" ><a  href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
 
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
@@ -244,78 +228,84 @@ form {
 		<!--main content start-->
 		<section id="main-content">
 			<section class="wrapper">
+				<h3>
+					<i class="fa fa-angle-right"></i> Add an Insurance Policy
+				</h3>
 
-
+				<!-- INPUT MESSAGES -->
 				<div class="row mt">
-					<div class="col-md-12">
-						<div class="content-panel">
-							<c:if test="${!empty customers }">
-								<table class="table table-striped table-advance table-hover"
-									style="font-size: 13px">
-									<h4>
-										<i class="fa fa-angle-right"></i> Customer List
-										<div class="col-sm-3 col-md-3 pull-right" style="margin-top:-10px">
-											<form class="navbar-form" role="search">
-												<div class="input-group" style="margin-top:-15px">
-													<input type="text" class="form-control"
-														placeholder="Search" name="q">
-													<div class="input-group-btn">
-														<button class="btn btn-default" type="submit" style="padding:9">
-															<i class="glyphicon glyphicon-search"></i>
-														</button>
-													</div>
-												</div>
-											</form>
-										</div>
-									</h4>
-									<hr>
-									<thead>
-										<tr>
-											<th>Id</th>
-											<th class="hidden-phone">Name</th>
-											<th>Date of Birth</th>
-											<th>Sex</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${customers }" var="customer">
-											<tr>
-												<td><a href="basic_table.html#">${customer.id }</a></td>
-												<td class="hidden-phone">${customer.firstName }
-													${customer.lastName }</td>
-												<td>${customer.dateOfBirth }</td>
-												<td><span class="label label-info label-mini">${customer.gender }</span></td>
-												<td>
-													<form method="post" action="view/${customer.id }">
-														<button class="btn btn-success btn-xs">
-															<i class="fa fa-eye"></i>
-														</button>
-													</form>
-													<form method="post" action="edit/${customer.id }">
-														<button class="btn btn-primary btn-xs">
-															<i class="fa fa-pencil"></i>
-														</button>
-													</form>
-													<form method="post" action="delete/${customer.id }">
-														<button class="btn btn-danger btn-xs">
-															<i class="fa fa-trash-o "></i>
-														</button>
-													</form>
-												</td>
-											</tr>
-										</c:forEach>
-
-
-									</tbody>
-								</table>
-							</c:if>
+					<div class="col-lg-12">
+						<div class="form-panel">
+							<h4 class="mb">
+								<i class="fa fa-angle-right"></i> Insurance Policy Information
+							</h4>
+							<c:url var="addAction" value="/insurancePolicy/add"></c:url>
+							<form:form action="${addAction}"
+								class="form-horizontal tasi-form" method="POST"
+								modelAttribute="insurancePolicyDB">
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Policy Name</label>
+									<div class="col-lg-5 form-inline">
+										<form:input type="text" class="form-control" path="policyName"
+											placeholder="Policy Name" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Policy Number</label>
+									<div class="col-lg-5 form-inline">
+										<form:input type="text" class="form-control" path="policyNumber"
+											placeholder="Policy Number" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Plan Type</label>
+									<div class="col-lg-5">
+										<form:select class="form-control" path="planType">
+											<option>Individual</option>
+											<option>Family</option>
+										</form:select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Pay Period (in months)</label>
+									<div class="col-lg-5">
+										<form:select class="form-control" path="payPeriod">
+											<option>6</option>
+											<option>12</option>
+										</form:select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Premium Percantage</label>
+									<div class="col-lg-5">
+										<form:input type="number"  step="0.01" min="0" class="form-control" path="premiumPercent" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Deductible</label>
+									<div class="col-lg-5">
+										<form:input type="number"  min="0" class="form-control" path="deductible" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Max Annual Payout</label>
+									<div class="col-lg-5">
+										<form:input type="number" min="0" class="form-control" path="amount" />
+									</div>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-theme"
+										style="left: 300px; position: relative">Submit</button>
+								</div>
+								<!-- /showback -->
+							</form:form>
 						</div>
-						<!-- /content-panel -->
+						<!-- /form-panel -->
 					</div>
-					<!-- /col-md-12 -->
+					<!-- /col-lg-12 -->
 				</div>
 				<!-- /row -->
+
 
 			</section>
 			<! --/wrapper -->
@@ -326,8 +316,8 @@ form {
 		<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				2014 - Alvarez.is <a href="basic_table.html#" class="go-top"> <i
-					class="fa fa-angle-up"></i>
+				2014 - Alvarez.is <a href="form_component.html#" class="go-top">
+					<i class="fa fa-angle-up"></i>
 				</a>
 			</div>
 		</footer>
@@ -340,17 +330,44 @@ form {
 	<script class="include" type="text/javascript"
 		src="/InsuranceSystem/pages/assets/js/jquery.dcjqaccordion.2.7.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
-	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js"
-		type="text/javascript"></script>
+	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 
 
 	<!--common script for all pages-->
 	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
 
 	<!--script for this page-->
+	<script src="/InsuranceSystem/pages/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<!--custom switch-->
+	<script src="/InsuranceSystem/pages/assets/js/bootstrap-switch.js"></script>
+
+	<!--custom tagsinput-->
+	<script src="/InsuranceSystem/pages/assets/js/jquery.tagsinput.js"></script>
+
+	<!--custom checkbox & radio-->
+	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap.js"></script>
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/date.js"></script>
+
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+
+	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>
+
 
 	<script>
 		//custom select box
+
+		$(function() {
+			$("#datepicker").datepicker();
+		});
 	</script>
 
 </body>
