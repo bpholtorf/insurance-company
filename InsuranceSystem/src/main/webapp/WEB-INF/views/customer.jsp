@@ -245,9 +245,7 @@
                           <span>Policy</span>
                       </a>
                       <ul class="sub">
-                          <li ><a  href="blank.html">Blank Page</a></li>
-                          <li><a  href="login.html">Login</a></li>
-                          <li><a  href="lock_screen.html">Lock Screen</a></li>
+                          <li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
                       </ul>
                   </li>
                  
@@ -315,13 +313,13 @@
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">Phone Number</label>
                                   <div class="col-lg-5">
-                                      <form:input type="text" class="form-control" path="phoneNumber"/>
+                                      <form:input type="tel" class="form-control" path="phoneNumber"/>
                                   </div>
                               </div>
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">Email</label>
                                   <div class="col-lg-5">
-                                      <form:input type="text" class="form-control" path="email"/>
+                                      <form:input type="email" class="form-control" path="email"/>
                                   </div>
                               </div>
                               <div class="form-group">
@@ -334,7 +332,19 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Annual Income</label>
 									<div class="col-lg-5">
-										<form:input type="number" class="form-control" path="incomeStatus" />
+										<form:select class="form-control" path="incomeStatus">
+											<option>Less than 10000</option>
+											<option>10000 - 19999</option>
+											<option>20000 - 29999</option>
+											<option>30000 - 39999</option>
+											<option>40000 - 49999</option>
+											<option>50000 - 59999</option>
+											<option>60000 - 69999</option>
+											<option>70000 - 79999</option>
+											<option>80000 - 89999</option>
+											<option>90000 - 99999</option>
+											<option>More than 100000</option>
+										</form:select>
 									</div>
 								</div>
 								<div class="form-group">

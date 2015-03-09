@@ -1,4 +1,5 @@
 package com.insurance.service;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -20,22 +21,22 @@ public class AnswerService {
 		answerDao.addAnswer(answer);
 	}
 	
-	public QuestionAnswer findBysid(int sid)
+	public List<QuestionAnswer> findBysid(int sid)
 	{
 		List<AnswerDB> list=answerDao.findQuestionsBysid(sid);
-		
+		List<QuestionAnswer> list1=new ArrayList<QuestionAnswer>();
 		//generate random question
-		Random r = new Random();
-		int Low = 0;
-		int High = 2;
-		int R = r.nextInt((High-Low)+1) + Low;
-		AnswerDB answerDB=list.get(R);
+
+		for(int i=0;i<3;i++){
+		AnswerDB answerDB=list.get(i);
 		String answer=answerDB.getAnswer();
 		int qid=answerDB.getQid();
 		String question=securityQuestionDao.findByqid(qid).getQuestion();
 		System.out.println(new QuestionAnswer(question, answer).toString());
-		return new QuestionAnswer(question, answer);
-		
+		//return new QuestionAnswer(question, answer);
+		list1.add(new QuestionAnswer(question, answer));
+		}
+		return list1;
 	}
 	
 	public String findSid(int sid){

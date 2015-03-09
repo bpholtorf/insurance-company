@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.insurance.dao.StaffDao;
 import com.insurance.data.StaffDB;
+import com.insurance.data.StaffDB2;
 
 @Service
 public class StaffService {
@@ -86,5 +87,25 @@ public class StaffService {
 	public void updateStaff(StaffDB staff) {
 		// TODO Auto-generated method stub
 		staffDao.updateStaff(staff);
+	}
+	
+	public void updateStaff(StaffDB2 staff) {
+		// TODO Auto-generated method stub
+		staffDao.updateStaff(staff);
+	}
+
+	public List<StaffDB> searchBySSN(String keyword) {
+		// TODO Auto-generated method stub
+		return staffDao.searchBySSN(keyword);
+	}
+
+	public List<StaffDB> searchByName(String pattern) {
+		// TODO Auto-generated method stub
+		return staffDao.searchByName(pattern);
+	}
+
+	public List<StaffDB> searchByUsername(String pattern) {
+		// TODO Auto-generated method stub
+		return staffDao.searchByUsername(pattern);
 	}
 }

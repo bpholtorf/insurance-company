@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -25,7 +23,7 @@ import com.insurance.validator.Username;
 @Entity
 @Table(name="staff")
 
-public class StaffDB implements Serializable{
+public class StaffDB2 implements Serializable{
 
 	@Id
 	@Column(name="id")
@@ -33,28 +31,25 @@ public class StaffDB implements Serializable{
 	private Integer id;
 	
 	@Column(name="username",unique = true)
-	@NotEmpty(message="Please input the username")
-	@Username(message="Username already exsits",entity=StaffDB.class)
+	
 	private String username;
 	
 	@Column(name="password")
-	@NotEmpty(message="Please input the password")
-	@Password(message="6 to 20 characters string with at least one digit, one uppercase letter, one lowercase letter and one special symbol")
+	
 	private String password;
 	
 	
 	
 	@Column(name="firstName")
-	@NotEmpty(message="Please input the first name")
+	
 	private String firstName;
 	
 	@Column(name="lastName")
-	@NotEmpty(message="Please input the last name")
+	
 	private String lastName;
 	
 	@Column(name="SSN")
-	@NotEmpty(message="Please input the SSN")
-	@Pattern(regexp="\\d{9}",message="SSN should be 9 digits without space and dash")
+	
 	private String SSN;
 	
 	@Column(name="address")
@@ -63,7 +58,7 @@ public class StaffDB implements Serializable{
 	
 	@Column(name="phoneNumber")
 	@NotEmpty(message="Please input the phone number")
-	@Phone(message="Please input a correct phone number")
+	@Phone(message="Please input the correct phone number")
 	private String phoneNumber;
 	
 	@Column(name="email")
@@ -72,19 +67,17 @@ public class StaffDB implements Serializable{
 	private String email;
 	
 	@Column(name="dateOfBirth")
-	@Past(message="Please input a past date")
 	private Date dateOfBirth;
 	
 	@Column(name="gender")
 	private String gender;
-	
-	@Column(name="name")
-	private String name;
-	public String getName() {
-		return name;
+	@Column(name="able")
+	private int able;
+	public int getAble() {
+		return able;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setAble(int able) {
+		this.able = able;
 	}
 	public Integer getId(){
 		return id;

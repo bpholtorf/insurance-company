@@ -212,7 +212,8 @@ form {
 							class="fa fa-book"></i> <span>Policy</span>
 					</a>
 						<ul class="sub">
-							<li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
+							<li  class="active"><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
+							
 						</ul></li>
 
 					<li class="sub-menu"><a href="javascript:;"> <i
@@ -240,11 +241,11 @@ form {
 				<div class="row mt">
 					<div class="col-md-12">
 						<div class="content-panel">
-							<c:if test="${!empty customers }">
+							
 								<table class="table table-striped table-advance table-hover"
 									style="font-size: 13px">
 									<h4>
-										<i class="fa fa-angle-right"></i> Customer List
+										<i class="fa fa-angle-right"></i> Personal Policy List
 										<div class="col-sm-3 col-md-3 pull-right" style="margin-top:-10px">
 											<form class="navbar-form" role="search">
 												<div class="input-group" style="margin-top:-15px">
@@ -262,57 +263,44 @@ form {
 									<hr>
 									<thead>
 										<tr>
-											<th>Id</th>
-											<th class="hidden-phone">Name</th>
-											<th>Date of Birth</th>
-											<th>Sex</th>
+											<th>Participant Name</th>
+											<th >Policy Number</th>
+											<th>Date From</th>
+											<th>Date To</th>
+											<th>Premium</th>
+											<th>Amount Left</th>
+											<th>Deductible Left</th>
 											<th></th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${customers }" var="customer">
+										  <c:forEach items="${customerPolicys }" var="customerPolicys">
 											<tr>
-												<td><a href="basic_table.html#">${customer.id }</a></td>
-												<td class="hidden-phone">${customer.firstName }
-													${customer.lastName }</td>
-													<fmt:formatDate value="${customer.dateOfBirth}" type="date"
+												<td>${customer.firstName } ${customer.lastName }</td>
+												<td >${customerPolicys.policyNumber }</td>
+												<fmt:formatDate value="${customerPolicys.dateFrom }" type="date"
+								pattern="MM/dd/yyyy" var="theFormattedDate" />
+												<td >${theFormattedDate}</td>
+												<fmt:formatDate value="${customerPolicys.dateTo }" type="date"
 								pattern="MM/dd/yyyy" var="theFormattedDate" />
 												<td>${theFormattedDate }</td>
-												<td><span class="label label-info label-mini">${customer.gender }</span></td>
-												<td>
-													<form method="post" action="view/${customer.id }">
-														<button class="btn btn-success btn-xs">
-															<i class="fa fa-eye"></i>
-														</button>
-													</form>
-													<form method="post" action="edit/${customer.id }">
-														<button class="btn btn-primary btn-xs">
-															<i class="fa fa-pencil"></i>
-														</button>
-													</form>
-													<form method="post" action="delete/${customer.id }">
+												<td>${customerPolicys.premium }</td>
+												<td>${customerPolicys.amountLeft }</td>
+												<td>${customerPolicys.deductibleLeft }</td>	
+												<td><form method="post" action="">
 														<button class="btn btn-danger btn-xs">
 															<i class="fa fa-trash-o "></i>
 														</button>
 													</form>
-													<form method="post" action="addPolicy/${customer.id }">
-														<button class="btn btn-success btn-xs">
-															<i class="fa fa-eye"></i>
-														</button>
-													</form>
-													<form method="post" action="viewPolicys/${customer.id }">
-														<button class="btn btn-primary btn-xs">
-															<i class="fa fa-pencil"></i>
-														</button>
-													</form>
+													
 												</td>
 											</tr>
-										</c:forEach>
+										</c:forEach> 
 
 
 									</tbody>
 								</table>
-							</c:if>
+							
 						</div>
 						<!-- /content-panel -->
 					</div>

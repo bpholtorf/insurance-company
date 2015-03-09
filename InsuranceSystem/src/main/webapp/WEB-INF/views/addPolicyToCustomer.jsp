@@ -235,7 +235,7 @@
                       <ul class="sub">
 							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
 							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
-							<li class="active"><a  href="<c:url value='/requestAddCustomer' />">View Customer</a></li>
+							<li class="active"><a  href="<c:url value='/requestAddCustomer' />">Edit Customer</a></li>
                           
                       </ul>
                   </li>
@@ -270,94 +270,80 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
-      <section id="main-content">
+     <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> View Customer Information</h3>
-  
-          	<!-- INPUT MESSAGES -->
-          	<div class="row mt">
-          		<div class="col-lg-12">
-          			<div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Customer Information</h4>
-                  	      <c:url var="updateAction" value="/customer/update" ></c:url>
-                          <form:form action="${updateAction}" class="form-horizontal tasi-form" method="POST" modelAttribute="customer">
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Customer Id</label>
-                                  <div class="col-lg-5">
-                                      <form:input type="text"  readonly="true"  class="form-control" path="id"/>
-                                  </div>
-                              </div>                            
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Name</label>
-                                  <div class="col-lg-5 form-inline">
-                                      <form:input type="text" readonly="true" class="form-control" path="firstName" placeholder="First name"/>
-                                      <form:input type="text" readonly="true"  class="form-control" path="lastName" placeholder="Last name" />
-                                  </div>
-                              </div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Gender</label>
-									<div class="col-lg-5">
-										<form:radiobutton readonly="true" path="gender" id="optionsRadios2" 
-											value="male" /> Male 
-									    <form:radiobutton 
-											path="gender" readonly="true" id="optionsRadios1" value="female"/> Female
-									</div>
-								</div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Address</label>
-                                  <div class="col-lg-5">
-                                      <form:input type="text" readonly="true"  class="form-control" path="address"/>
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Phone Number</label>
-                                  <div class="col-lg-5">
-                                      <form:input type="text" readonly="true"  class="form-control" path="phoneNumber"/>
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Email</label>
-                                  <div class="col-lg-5">
-                                      <form:input  readonly="true"  type="text" class="form-control" path="email"/>
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Date of Birth</label>
-                                  <div class="col-lg-5">
-                                  <fmt:formatDate value="${staff.dateOfBirth}" type="date" pattern="MM/dd/yyyy" var="theFormattedDate" />
-                                      <form:input  readonly="true"  type="text" id="datepicker" class="form-control"  path="dateOfBirth" value="${theFormattedDate}"/>
-                                  </div>
-                              </div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Annual Income</label>
-									<div class="col-lg-5">
-										<form:input readonly="true"  type="number" class="form-control" path="incomeStatus" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Sponsor Name</label>
-									<div class="col-lg-5">
-										<form:input readonly="true"  type="text" class="form-control" path="sponsorInfo" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Employer Name</label>
-									<div class="col-lg-5">
-										<form:input readonly="true"  type="text" class="form-control" path="employerInfo" />
-									</div>
-								</div>
-                              <div class="form-group">    
-							      <a class="btn btn-theme" style="left:300px;position:relative"  href="<c:url value='/customer/viewAll' />">Return</a>                  
-                              </div><!-- /showback -->
-                          </form:form>
-          			</div><!-- /form-panel -->
-          		</div><!-- /col-lg-12 -->
-          	</div><!-- /row -->
-          	
-          	
-          	
-          	
-          	
+          	<h3><i class="fa fa-angle-right"></i> Add Policy To Customer</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
+                      <div class="content-panel">
+							<form action="searchPolicy" method="post"> 
+						<label id="cid" style="display:none" >${customer.id } </label>
+                       <div>Customer Name: ${customer.firstName } ${customer.lastName } </div>
+                       <div style="width: 20%; margin-left: 350px; margin-top:-17px;">Policy Name:
+                    <select class="form-control" id="sel1"
+													 name="policyName" style="margin-left:100px;margin-top:-28px">
+													      <option selected="selected"></option>  
+														  <c:forEach items="${policys }" var="policy">
+                          									<option value=${policy.policyName }>${policy.policyName }</option>
+													      </c:forEach>
+													     
+												</select>
+												<button class="btn btn-theme" id="submit" type="submit" style="margin-left:300px;margin-top:-34px">Submit</button>
+												</div>
+					</form> 
+                      <br>
+                      <c:if test="${!empty policyInfo }">
+                      <h4><i class="fa fa-angle-right"></i>Policy Information</h4>
+                          <section id="unseen">
+                            <table class="table table-bordered table-striped table-condensed">
+                              <thead>
+                             
+                              <tr>
+                                  <th class="numeric">Policy Name</th>
+                                  <th class="numeric">Policy Number</th>
+                                  <th class="numeric">Plan Type</th>
+                                  <th class="numeric">Pay Period</th>
+                                  <th class="numeric">Amount</th>
+                                  <th class="numeric">Deductible</th>
+                                  <th class="numeric">Premium Percentage</th>
+                                  <th></th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                               <c:forEach items="${policyInfo }" var="policyInfo" varStatus="loop">
+                                <form action="viewPolicys" method="post"> 
+                               <input id="pid" style="display:none" value="${policyInfo.id }" name="policyId"/>
+                              <tr>
+                                  <td class="numeric" >${policyInfo.policyName }</td>
+                                  <td class="numeric" ><a>${policyInfo.policyNumber }</a></td>
+                                  <td class="numeric" >${policyInfo.planType }</td>
+                                  <td class="numeric" >${policyInfo.payPeriod } months</td>
+                                  <td class="numeric" >${policyInfo.amount }</td>
+                                  <td class="numeric" >${policyInfo.deductible }</td>
+                                  <td class="numeric" >${policyInfo.premiumPercent }</td>
+                                  <c:choose>
+                                  <c:when test="${policyInfo.check == 'added' }">
+                                  <td><button class="btn btn-theme" type="button" style="font-size:12px;height:25px" id="addPolicy" disabled="disabled">Added</button></td>
+                                  </c:when>
+                                  <c:when test="${policyInfo.check == 'unadded' }">
+                                   <td><button class="btn btn-theme" type="submit" style="font-size:12px;height:25px" id="addPolicy">Add</button></td>
+                                  </c:when>
+                                  </c:choose>
+                              </tr>
+                             </form>
+                         </c:forEach>
+                  <c:if test="${error }">          
+		       <label style="color:red;display:none" id="mess">The customer has already added this insurance policy.</label>
+                 </c:if>
+                              </tbody>
+                          </table>
+                          </section>
+                          </c:if>
+                  </div><!-- /content-panel -->
+               </div><!-- /col-lg-4 -->			
+		  	</div><!-- /row -->
+		  	
+		  	
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
 
@@ -405,15 +391,87 @@
 	
 	
 	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>    
-    
-    
-  <script>
+	
+   <!--  <script type="text/javascript">
       //custom select box
-  
-     $(function(){
-     $("#datepicker").datepicker();
-      });
-  </script>
+ $(document).ready(function() {
+				var i;
+				for (i = 0; i <= 1; i++) {
+					$("#a" + i).click(function() {
+								var pid=$("#pid").text();
+								var num=$("#num").text();
+						    	console.log(num);
+						    	 dataToPost="policyId="+pid;
+						    	 $.ajax({
+						             url: "check",
+						             type: "GET",
+						             data: dataToPost, 
+						             success: function (response) {
+						            	
+						            	 if(response=="true"){
+						            		 var m=document.getElementById('mess');
+						                	 $(m).css({
+						                         'display':'block'
+						                       });
+						            	 }else{
+						            		 console.log(response);
+						            		 addSuccess(pid);
+						            	 }
+						             },
+						   	     
+						         });  
+							});
+				
+				}
+			});
+      </script>  -->
+<!--  <script type="text/javascript"> -->
+      
+<!--  document.getElementById('addPolicy').onclick = function() {
+
+    	var pid=$("#pid").text();
+    	console.log(pid);
+    	 dataToPost="policyId="+pid;
+    	 $.ajax({
+             url: "check",
+             type: "GET",
+             data: dataToPost, 
+             success: function (response) {
+            	
+            	 if(response=="true"){
+            		 var m=document.getElementById('mess');
+                	 $(m).css({
+                         'display':'block'
+                       });
+            	 }else{
+            		 console.log(response);
+            		 addSuccess(pid);
+            	 }
+             },
+   	     
+         });  
+    }; 
+
+    function addSuccess(pid){
+    	var cid=$("#cid").text();
+    	 dataToPost="policyId="+pid;
+    	 console.log(pid);
+    	 $.ajax({
+             url: "viewPolicys",
+             type: "GET",
+             data: dataToPost, 
+             success: function (response) {
+            	 window.location.href="/InsuranceSystem/customer/viewPolicys/{cid}";  
+
+             },
+             dataType: "html",
+         });  
+    };
+ -->
+    
+      
+
+    
 
   </body>
 </html>

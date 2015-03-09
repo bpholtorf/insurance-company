@@ -2,6 +2,7 @@ package com.team.InsuranceSystem;
 
 import javax.servlet.http.HttpSession;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.insurance.data.AnswerDB;
 import com.insurance.service.SecurityQuestionService;
 import com.insurance.service.AnswerService;
+
+import com.insurance.util.Cryption;
 
 @Controller
 public class SecurityQuestionController {
@@ -47,7 +50,7 @@ public class SecurityQuestionController {
 	  String userId = (String) session.getAttribute(SESSION_ID);
 	 String[] namesArr = tempStr.split(",");
 	 for(int i=0;i<namesArr.length;i=i+2){
-		 AnswerDB an=generateAnswer(Integer.parseInt(namesArr[i]),Integer.parseInt(userId),namesArr[i+1]);
+		 AnswerDB an=generateAnswer(Integer.parseInt(namesArr[i]),Integer.parseInt(userId),Cryption.encryptToMD5(namesArr[i+1].toUpperCase()));
 		 answerService.addAnswer(an);
 	 }
 	 
