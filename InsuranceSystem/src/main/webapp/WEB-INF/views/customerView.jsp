@@ -312,7 +312,7 @@
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">Phone Number</label>
                                   <div class="col-lg-5">
-                                      <form:input type="text" readonly="true"  class="form-control" path="phoneNumber"/>
+                                      <form:input type="tel" readonly="true"  class="form-control" path="phoneNumber"/>
                                   </div>
                               </div>
                               <div class="form-group">
@@ -331,7 +331,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Annual Income</label>
 									<div class="col-lg-5">
-										<form:input readonly="true"  type="number" class="form-control" path="incomeStatus" />
+										<form:input readonly="true"  type="text" class="form-control" path="incomeStatus" />
 									</div>
 								</div>
 								<div class="form-group">
