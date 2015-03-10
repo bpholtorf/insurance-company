@@ -263,7 +263,8 @@ form {
 									<hr>
 									<thead>
 										<tr>
-											<th>Participant Id</th>
+											<th>Customer Id</th>
+											<th>Participant Name</th>
 											<th >Policy Number</th>
 											<th>Date From</th>
 											<th>Date To</th>
@@ -277,6 +278,7 @@ form {
 										  <c:forEach items="${allPolicys }" var="customerPolicys">
 											<tr>
 												<td>${customerPolicys.cid }</td>
+												<td>${customerPolicys.cname }</td>
 												<td >${customerPolicys.policyNumber }</td>
 												<fmt:formatDate value="${customerPolicys.dateFrom }" type="date"
 								pattern="MM/dd/yyyy" var="theFormattedDate" />

@@ -284,7 +284,7 @@
 													 name="policyName" style="margin-left:100px;margin-top:-28px">
 													      <option selected="selected"></option>  
 														  <c:forEach items="${policys }" var="policy">
-                          									<option value=${policy.policyName }>${policy.policyName }</option>
+                          									<option value="${policy.policyName}">${policy.policyName}</option>
 													      </c:forEach>
 													     
 												</select>

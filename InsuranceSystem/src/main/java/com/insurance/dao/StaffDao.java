@@ -36,11 +36,11 @@ public class StaffDao {
 		Session session = this.sessionFactory.openSession();
 		SimpleDateFormat dt=new SimpleDateFormat("yyyy-mm-dd");
 		String date=dt.format(staff.getDateOfBirth());
-		Query query=session.createSQLQuery("insert into Staff(username,password,firstName,lastName,SSN,address,phoneNumber,email,gender,dateOfBirth) value('"+
+		Query query=session.createSQLQuery("insert into Staff(username,password,firstName,lastName,SSN,address,phoneNumber,email,gender,dateOfBirth,name) value('"+
 		                                  staff.getUsername()+"','"+staff.getPassword()+"','"+
 				                        staff.getFirstName()+"','"+staff.getLastName()+"','"+
 		                                  staff.getSSN()+"','"+staff.getAddress()+"','"+staff.getPhoneNumber()+"','"+
-				                        staff.getEmail()+"','"+staff.getGender()+"','"+date+"')");
+				                        staff.getEmail()+"','"+staff.getGender()+"','"+date+"','"+staff.getName()+"')");
 		query.executeUpdate();
 		
 

@@ -1,36 +1,36 @@
 package com.insurance.data;
 
-import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.Date;
 
-@Entity
-@Table(name="customerPolicy")
-public class CustomerPolicy implements Serializable{
+
+
+
+public class CustomerPolicy {
 	
-	@Id
-	@Column(name="cid")
-	private Integer cid;
-	
-	@Id
-	@Column(name="pid")
-	private Integer pid;
-	
-	@Column(name="coverage")
-	private Double coverage;
-	
-	@Column(name="premium")
+	private int cid;	
+	private int pid;
+	private String policyNumber;
 	private Double premium;
-	
-	@Column(name="payPeriod")
-	private Integer payPeriod;
-	
-	@Column(name="amountLeft")
+	private Double deductibleLeft;
 	private Double amountLeft;
+	private Date dateFrom;
+	private Date dateTo;
+	private String cname;
+	
+	public CustomerPolicy(int cid,int pid,String policyNumber,double premium,double deductibleLeft,double amountLeft,Date dateFrom,Date dateTo,String cname){
+		super();
+		this.cid=cid;
+		this.pid=pid;
+		this.policyNumber=policyNumber;
+		this.premium=premium;
+		this.deductibleLeft=deductibleLeft;
+		this.amountLeft=amountLeft;
+		this.dateFrom=dateFrom;
+		this.dateTo=dateTo;
+		this.cname=cname;
+		
+	}
 	
 	public int getCid(){
 		return cid;
@@ -39,18 +39,18 @@ public class CustomerPolicy implements Serializable{
 		this.cid=cid;
 	}
 	
-	public Integer getPid(){
+	public int getPid(){
 		return pid;
 	}
-	public void setPid(Integer pid){
+	public void setPid(int pid){
 		this.pid=pid;
 	}
 	
-	public Double getCoverage(){
-		return coverage;
+	public String getPolicyNumber(){
+		return policyNumber;
 	}
-	public void setCoverage(Double coverage){
-		this.coverage=coverage;
+	public void setPolicyNumber(String policyNumber){
+		this.policyNumber=policyNumber;
 	}
 	
 	public Double getPremium(){
@@ -60,18 +60,39 @@ public class CustomerPolicy implements Serializable{
 		this.premium=premium;
 	}
 	
-	public Integer getPayPeriod(){
-		return payPeriod;
+	public Double getDeductibleLeft(){
+		return deductibleLeft;
 	}
-	public void setPayPeriod(Integer payPeriod){
-		this.payPeriod=payPeriod;
+	public void setDeductibleLeft(Double deductibleLeft){
+		this.deductibleLeft=deductibleLeft;
 	}
 	
-	public Double gerAmountLeft(){
+	public Double getAmountLeft(){
 		return amountLeft;
 	}
 	public void setAmountLeft(Double amountLeft){
 		this.amountLeft=amountLeft;
+	}
+	
+	public Date getDateFrom(){
+		return dateFrom;
+	}
+	public void setDateFrom(Date dateFrom){
+		this.dateFrom=dateFrom;
+	}
+	
+	public Date getDateTo(){
+		return dateTo;
+	}
+	public void setDateTo(Date dateTo){
+		this.dateTo=dateTo;
+	}
+	
+	public String getCname(){
+		return cname;
+	}
+	public void setCname(String cname){
+		this.cname=cname;
 	}
 	
 }

@@ -342,6 +342,12 @@
 										<form:input type="text" class="form-control" path="deductible" />
 									</div>
 								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">Max Annual Payout</label>
+									<div class="col-lg-5">
+										<form:input type="text" class="form-control" path="amount" />
+									</div>
+								</div>
                               <div class="form-group">              
                                   <button type="submit" class="btn btn-theme" style="left:300px;position:relative">Submit</button>            
                               </div><!-- /showback -->

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.insurance.data.CustomerDB;
+import com.insurance.data.CustomerPolicy;
 import com.insurance.data.PolicyAdded;
 import com.insurance.data.PolicyDB;
 import com.insurance.data.PolicyToCustomerDB;
@@ -59,6 +60,7 @@ public class PocilyToCustomerController {
 	  int cid=(Integer.parseInt(session.getAttribute(CUSTOMER_ID).toString()));
 	  
 	  List<PolicyDB> list=policyService.getPolicyByName(policyName);
+	  System.out.println(policyName+"*********"+list.size());
 	  List<PolicyAdded> list1=new ArrayList<PolicyAdded>();
 	  for(int i=0;i<list.size();i++){
 		  int pid=list.get(i).getId();
@@ -138,12 +140,43 @@ public class PocilyToCustomerController {
 	 
 	  String income=customerService.findById(cid).getIncomeStatus();
 	  double percent=policyService.getPolicyById(pid).getPremiumPercent();
-	  double premium=10000*percent;
+	  double premium=0;
 	  double amountL=policyService.getPolicyById(pid).getAmount();
 	  double deductible=policyService.getPolicyById(pid).getDeductible();
-//	  if(income.equals("less than 10000")){
-//		  
-//	  }
+	  if(income.equals("less than 10000")){
+		  premium=percent*10000;
+	  }
+	  if(income.equals("10000 - 19999")){
+		  premium=percent*15000;
+	  }
+	  if(income.equals("20000 - 29999")){
+		  premium=percent*25000;
+	  }
+	  if(income.equals("30000 - 39999")){
+		  premium=percent*35000;
+	  }
+	  if(income.equals("40000 - 49999")){
+		  premium=percent*45000;
+	  }
+	  if(income.equals("50000 - 59999")){
+		  premium=percent*55000;
+	  }
+	  if(income.equals("60000 - 69999")){
+		  premium=percent*65000;
+	  }
+	  if(income.equals("70000 - 79999")){
+		  premium=percent*75000;
+	  }
+	  if(income.equals("80000 - 89999")){
+		  premium=percent*85000;
+	  }
+	  if(income.equals("90000 - 100000")){
+		  premium=percent*95000;
+	  }
+	  if(income.equals("More than 100000")){
+		  premium=percent*100000;
+	  }
+	  
 	  PolicyToCustomerDB pc=generatePocilyCustomer(cid,pid,policyNum,premium,amountL,deductible,dateFrom1,dateTo1);
 	  pcService.addPolicyToCustomer(pc);
 	  model.addAttribute("customer",customerService.findById(cid));
@@ -165,10 +198,27 @@ public class PocilyToCustomerController {
   public String viewAllPolicys(Model model,HttpSession session)
   {
 //	  model.addAttribute("customer",customerService.findById(id));
-	  model.addAttribute("allPolicys",pcService.getAll());
+	  List<PolicyToCustomerDB> list=pcService.getAll();
+	  List<CustomerPolicy> list1=new ArrayList<CustomerPolicy>();
+	  for(int i=0;i<list.size();i++){
+		  int cid=list.get(i).getCid();
+		  CustomerPolicy p=new CustomerPolicy(cid,list.get(i).getPid(),
+				      list.get(i).getPolicyNumber(),
+					  list.get(i).getPremium(),
+					  list.get(i).getAmountLeft(),
+					  list.get(i).getDeductibleLeft(),
+					  list.get(i).getDateFrom(),
+					  list.get(i).getDateTo(),
+					  customerService.getCustomerById(cid).getFirstName()+" "+customerService.getCustomerById(cid).getLastName());
+			  list1.add(p);
+			  
+		  }
+	  model.addAttribute("allPolicys",list1);
 	  return "viewAllPolicys";
 	  
   }
+  
+  
  
 }
 

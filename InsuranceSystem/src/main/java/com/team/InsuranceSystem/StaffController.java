@@ -34,8 +34,9 @@ public class StaffController {
 	}
 	  String password=s.getPassword();
 	  s.setPassword(Cryption.encryptToMD5(password));
-      s.setName(s.getFirstName()+" "+s.getLastName());
 	 
+      s.setName(s.getFirstName()+" "+s.getLastName());
+      System.out.println(s.toString());
 
 	 	  staffService.addStaff(s); 
      // return "redirect:/staffs";
@@ -48,7 +49,15 @@ public class StaffController {
   {
 	  List<StaffDB> result=new ArrayList<StaffDB>();
 	  
-	  
+	  if (keyword.equals("")) {
+		  System.out.println("keyword is empty");
+		  model.addAttribute("type", type);
+		  model.addAttribute("keyword",keyword);
+		  result=staffService.findAll();
+		  System.out.println();
+		  model.addAttribute("staffs",result);
+		  return "viewStaff";
+	  }
 			  
 	  if (type.equals("SSN")) {
 		  result=staffService.searchBySSN(keyword);
