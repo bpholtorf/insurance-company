@@ -1,17 +1,25 @@
 package com.team.InsuranceSystem;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.insurance.data.CustomerDB;
 import com.insurance.data.InsurancePolicyDB;
+import com.insurance.data.StaffDB;
 import com.insurance.service.InsurancePolicyService;
 
 @Controller
@@ -19,11 +27,14 @@ public class InsurancePolicyController {
   @Autowired
   private InsurancePolicyService insurancePolicyService;
   @RequestMapping(value="/insurancePolicy/add",method=RequestMethod.POST)
-  public String addInsurancePolicy(@ModelAttribute("InsurancePolicyDB") InsurancePolicyDB c)
+  public String addInsurancePolicy(@Valid InsurancePolicyDB i,BindingResult result, Model model )
   {
-	 insurancePolicyService.addInsurancePolicy(c); 
-     // return "redirect:/InsurancePolicys";
-	  return "redirect:/insurancePolicy/viewAll";
+	  if (result.hasErrors()) {
+		return "addInsurancePolicy";
+	  }
+	  
+	 insurancePolicyService.addInsurancePolicy(i);
+	 return "redirect:/insurancePolicy/viewAll";
   }
   @RequestMapping(value="/insurancePolicy/viewAll",method=RequestMethod.GET)
   public String findAll(Model model)
@@ -53,13 +64,18 @@ public class InsurancePolicyController {
 	  return "InsurancePolicyView";
 	  
   }
-  @RequestMapping(value="/insurancePolicy/update",method=RequestMethod.POST)
-  public String updateInsurancePolicy(@ModelAttribute("insurancePolicy") InsurancePolicyDB insurancePolicy)
+  @RequestMapping(value="/insurancePolicy/update/{id}",method=RequestMethod.POST)
+  public String updateInsurancePolicy(@Valid InsurancePolicyDB i,BindingResult result, Model model, @PathVariable("id") Integer id )
   {
-	  this.insurancePolicyService.updateInsurancePolicy(insurancePolicy);
+	  if (result.hasErrors()) {
+		  model.addAttribute("insurancePolicy",insurancePolicyService.findById(id));
+		  return "addInsurancePolicy";
+	  }
+	  
+	  this.insurancePolicyService.updateInsurancePolicy(i);
 	  return "redirect:/insurancePolicy/viewAll";
   }
-  @RequestMapping(value="/InsurancePolicy/addInsurancePolicyPage",method=RequestMethod.POST)
+  @RequestMapping(value="/insurancePolicy/addInsurancePolicyPage",method=RequestMethod.POST)
   public String InsurancePolicyPage()
   {
 	  return "addInsurancePolicy";
@@ -80,5 +96,42 @@ public class InsurancePolicyController {
          payPeriods.put(12, "12"); 
          return payPeriods;
      }
+  
+
+  @RequestMapping(value="/insurancePolicy/searchInsurancePolicy",method=RequestMethod.GET)
+  public String searchInsurancePolicy(@RequestParam("type") String type,
+		                    @RequestParam("keyword") String keyword,
+		                    Model model)
+  {
+	  List<InsurancePolicyDB> result=new ArrayList<InsurancePolicyDB>();
+	  
+	  if (keyword.equals("")) {
+		  System.out.println("keyword is empty");
+		  model.addAttribute("type", type);
+		  model.addAttribute("keyword",keyword);
+		  result=insurancePolicyService.findAll();
+		  System.out.println();
+		  model.addAttribute("insurancePolicys",result);
+		  return "viewInsurancePolicy";
+	  }
+			  
+	  if (type.equals("Policy Number")) {
+		  result=insurancePolicyService.searchByNumber(keyword);
+	  }
+	  else if(type.equals("Policy Name")){
+		  String pattern="%";
+	    for (int i = 0; i < keyword.length(); i++) {
+			pattern=pattern+keyword.charAt(i)+"%";
+			
+		}
+	    pattern=pattern+"%";
+	    result=insurancePolicyService.searchByName(pattern);
+	  }
+	  
+	  model.addAttribute("type", type);
+	  model.addAttribute("keyword",keyword);
+	  model.addAttribute("insurancePolicys",result);
+	  return "viewInsurancePolicy";
+  }
   
 }

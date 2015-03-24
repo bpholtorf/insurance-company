@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.insurance.data.CustomerDB;
+import com.insurance.data.StaffDB;
 
 @Repository
 public class CustomerDao {
@@ -98,5 +99,36 @@ public class CustomerDao {
 				session.close();
 			}
 			return list.get(0);
+		}
+		
+
+		public List<CustomerDB> searchBySSN(String keyword) {
+			Session session = sessionFactory.openSession();
+
+			List<CustomerDB> list = new ArrayList<CustomerDB>();
+			try {
+				String hqlString = "FROM CustomerDB where SSN=:SSN";
+				Query query = session.createQuery(hqlString);
+				query.setString("SSN", keyword);
+				list = query.list();
+				return list;
+			} finally {
+				session.close();
+			}
+		}
+
+		public List<CustomerDB> searchByName(String pattern) {
+			Session session = sessionFactory.openSession();
+
+			List<CustomerDB> list = new ArrayList<CustomerDB>();
+			try {
+				String hqlString = "FROM CustomerDB where lastName like :name or firstName like :name";
+				Query query = session.createQuery(hqlString);
+				query.setString("name", pattern);
+				list = query.list();
+				return list;
+			} finally {
+				session.close();
+			}
 		}
 }

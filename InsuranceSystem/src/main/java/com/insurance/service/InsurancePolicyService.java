@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.insurance.dao.InsurancePolicyDao;
 import com.insurance.data.InsurancePolicyDB;
+import com.insurance.data.StaffDB;
 
 @Service
 public class InsurancePolicyService {
@@ -49,5 +50,15 @@ public class InsurancePolicyService {
 	public void updateInsurancePolicy(InsurancePolicyDB insurancePolicy) {
 		// TODO Auto-generated method stub
 		InsurancePolicyDao.updateInsurancePolicy(insurancePolicy);
+	}
+	
+
+
+	public List<InsurancePolicyDB> searchByNumber(String keyword) {
+		return InsurancePolicyDao.searchByNumber(keyword);
+	}
+
+	public List<InsurancePolicyDB> searchByName(String pattern) {
+		return InsurancePolicyDao.searchByName(pattern);
 	}
 }

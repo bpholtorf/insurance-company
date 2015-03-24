@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 @Entity
 @Table(name="insurance_policy")
 public class InsurancePolicyDB implements Serializable{
@@ -19,24 +22,29 @@ public class InsurancePolicyDB implements Serializable{
 	private Integer id;
 
 	@Column(name="policyName")
+	@NotEmpty(message="Please input the policy name")
 	private String policyName;
 	
 	@Column(name="planType")
 	private String planType;
 	
 	@Column(name="premiumPercent")
+	@NotNull(message="Please input the premium percent")
 	private Double premiumPercent;
 	
 	@Column(name="deductible")
+	@NotNull(message="Please input the deductible")
 	private Double deductible;
 	
 	@Column(name="policyNumber")
+	@NotEmpty(message="Please input the policy number")
 	private String policyNumber;
 	
 	@Column(name="payPeriod")
 	private Integer payPeriod;
 	
 	@Column(name="amount")
+	@NotNull(message="Please input the max annual payout")
 	private Double amount;
 	
 	

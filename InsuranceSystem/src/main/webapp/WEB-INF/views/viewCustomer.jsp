@@ -201,7 +201,7 @@ form {
 						</ul></li>
 
 					<li class="sub-menu"><a class="active" href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Customer</span>
+							class="fa fa-user"></i> <span>Customer</span>
 					</a>
 						<ul class="sub">
 							<li  class="active"><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
@@ -209,7 +209,7 @@ form {
 
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Insurance Policy</span>
+							class="fa fa-bars"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
@@ -248,101 +248,111 @@ form {
 				<div class="row mt">
 					<div class="col-md-12">
 						<div class="content-panel">
-							<c:if test="${!empty customers }">
-								<table class="table table-striped table-advance table-hover"
-									style="font-size: 13px">
-									<h4>
-										<i class="fa fa-angle-right"></i> Customer List
-										<div class="col-sm-3 col-md-3 pull-right" style="margin-top:-10px">
-											<form class="navbar-form" role="search">
-												<div class="input-group" style="margin-top:-15px">
-													<input type="text" class="form-control"
-														placeholder="Search" name="q">
-													<div class="input-group-btn">
-														<button class="btn btn-default" type="submit" style="padding:9">
-															<i class="glyphicon glyphicon-search"></i>
-														</button>
-													</div>
+							<table class="table table-striped table-advance table-hover" style="font-size: 13px">
+								<h4>
+									<i class="fa fa-angle-right"></i> Customer List
+									<div class="col-sm-3 col-md-4 pull-right" style="margin-top: -10px">
+											<form class="navbar-form" role="search" action="searchCustomer">
+											
+												<div class="input-group" style="margin-top: -15px">
+												<select class="form-control" id="sel1" style="width: 40%; margin-right: 14px" name="type">
+													<c:choose>
+															<c:when test="${type == 'SSN'}">
+	                          									<option>SSN</option>
+														        <option>Name</option>
+	                                                        </c:when>
+															<c:otherwise>
+	       													  <option>SSN</option>
+														       <option selected="selected">Name</option>
+	                                                        </c:otherwise>
+														</c:choose>
+													
+												</select> <input type="text" class="form-control"
+													placeholder="Search" name="keyword" style="width: 55%"
+													value="${keyword }">
+												<div class="input-group-btn">
+													<button class="btn btn-default" type="submit"
+														style="padding: 9">
+														<i class="glyphicon glyphicon-search"></i>
+													</button>
 												</div>
-											</form>
+											</div>
+
+										</form>
 										</div>
 									</h4>
 									<hr>
-									<thead>
-										<tr>
-											<th>Id</th>
-											<th class="hidden-phone">Name</th>
-											<th>Date of Birth</th>
-											<th>Sex</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${customers }" var="customer">
-											<tr>
-												<td><a href="basic_table.html#">${customer.id }</a></td>
-												<td class="hidden-phone">${customer.firstName }
-													${customer.lastName }</td>
-													<fmt:formatDate value="${customer.dateOfBirth}" type="date"
-								pattern="MM/dd/yyyy" var="theFormattedDate" />
-												<td>${theFormattedDate }</td>
-												<td><span class="label label-info label-mini">${customer.gender }</span></td>
-												<td>
-													<form method="post" action="view/${customer.id }">
-														<button class="btn btn-success btn-xs">
-															<i class="fa fa-eye"></i>
-														</button>
-													</form>
-													<form method="post" action="edit/${customer.id }">
-														<button class="btn btn-primary btn-xs">
-															<i class="fa fa-pencil"></i>
-														</button>
-													</form>
-													<form method="post" action="delete/${customer.id }">
-														<button class="btn btn-danger btn-xs">
-															<i class="fa fa-trash-o "></i>
-														</button>
-													</form>
-													<form method="post" action="addPolicy/${customer.id }">
-														<button class="btn btn-success btn-xs">
-															<i class="fa fa-eye"></i>
-														</button>
-													</form>
-													<form method="post" action="viewPolicys/${customer.id }">
-														<button class="btn btn-primary btn-xs">
-															<i class="fa fa-pencil"></i>
-														</button>
-													</form>
-												</td>
-											</tr>
-										</c:forEach>
-
-
-									</tbody>
+									<c:choose>
+										<c:when test="${!empty customers }">
+											<thead>
+												<tr>
+													<th>Id</th>
+													<th>Name</th>
+													<th>Date of Birth</th>
+													<th>Sex</th>
+													<th>SSN</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach items="${customers }" var="customer">
+													<tr>
+														<td>${customer.id }</td>
+														<td>${customer.firstName }
+															${customer.lastName }</td>
+															<fmt:formatDate value="${customer.dateOfBirth}" type="date"
+																pattern="MM/dd/yyyy" var="theFormattedDate" />
+														<td>${theFormattedDate }</td>
+														<td><span class="label label-info label-mini">${customer.gender }</span></td>
+														<td>${customer.SSN }</span></td>
+														<td>
+															<form method="post" action="view/${customer.id }">
+																<button class="btn btn-success btn-xs" title="View Customer">
+																	<i class="fa fa-eye"></i>
+																</button>
+															</form>
+															<form method="post" action="edit/${customer.id }">
+																<button class="btn btn-primary btn-xs" title="Edit Customer">
+																	<i class="fa fa-pencil"></i>
+																</button>
+															</form>
+															<form method="post" action="delete/${customer.id }">
+																<button class="btn btn-danger btn-xs" title="Delete Customer" onclick="return confirm('Are you sure you want to continue?')">
+																	<i class="fa fa-trash-o "></i>
+																</button>
+															</form>
+															<form method="post" action="addPolicy/${customer.id }">
+																<button class="btn btn-info btn-xs" title="Add Policy to Customer">
+																	<i class="fa fa-plus"></i>
+																</button>
+															</form>
+															<form method="post" action="viewPolicys/${customer.id }">
+																<button class="btn btn-info btn-xs" title="View Customer's Policies">
+																	<i class="fa fa-eye"></i>
+																</button>
+															</form>
+														</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</c:when>
+										<c:otherwise>
+										 no result found
+										</c:otherwise>
+									</c:choose>
 								</table>
-							</c:if>
+							</div>
+							<!-- /content-panel -->
 						</div>
-						<!-- /content-panel -->
+						<!-- /col-md-12 -->
 					</div>
-					<!-- /col-md-12 -->
-				</div>
-				<!-- /row -->
-
+					<!-- /row -->
 			</section>
 			<! --/wrapper -->
 		</section>
 		<!-- /MAIN CONTENT -->
 
 		<!--main content end-->
-		<!--footer start-->
-		<footer class="site-footer" style="position:absolute;left:210px;top:800px;width:1000px">
-			<div class="text-center">
-				2014 - Alvarez.is <a href="basic_table.html#" class="go-top"> <i
-					class="fa fa-angle-up"></i>
-				</a>
-			</div>
-		</footer>
-		<!--footer end-->
 	</section>
 
 	<!-- js placed at the end of the document so the pages load faster -->

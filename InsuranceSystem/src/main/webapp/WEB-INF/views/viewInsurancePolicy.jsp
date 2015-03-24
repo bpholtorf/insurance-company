@@ -200,7 +200,7 @@ form {
 						</ul></li>
 
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Customer</span>
+							class="fa fa-user"></i> <span>Customer</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
@@ -208,7 +208,7 @@ form {
 
 						</ul></li>
 					<li class="sub-menu"><a class="active" href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Insurance Policy</span>
+							class="fa fa-bars"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
 							<li class="active"><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
@@ -249,66 +249,84 @@ form {
 				<div class="row mt">
 					<div class="col-md-12">
 						<div class="content-panel">
-							<c:if test="${!empty insurancePolicys }">
-								<table class="table table-striped table-advance table-hover"
-									style="font-size: 13px">
-									<h4>
-										<i class="fa fa-angle-right"></i> Insurance Policy List
-										<div class="col-sm-3 col-md-3 pull-right" style="margin-top:-10px">
-											<form class="navbar-form" role="search">
-												<div class="input-group" style="margin-top:-15px">
-													<input type="text" class="form-control"
-														placeholder="Search" name="q">
-													<div class="input-group-btn">
-														<button class="btn btn-default" type="submit" style="padding:9">
-															<i class="glyphicon glyphicon-search"></i>
-														</button>
-													</div>
+							<table class="table table-striped table-advance table-hover" style="font-size: 13px">
+								<h4>
+									<i class="fa fa-angle-right"></i> Insurance Policy List
+									<div class="col-sm-3 col-md-4 pull-right" style="margin-top:-10px">
+										<form class="navbar-form" role="search" action="searchInsurancePolicy">
+											
+												<div class="input-group" style="margin-top: -15px">
+												<select class="form-control" id="sel1" style="width: 40%; margin-right: 14px" name="type">
+													<c:choose>
+															<c:when test="${type == 'Policy Name'}">
+	                          									<option>Policy Name</option>
+														        <option>Policy Number</option>
+	                                                        </c:when>
+															<c:otherwise>
+	       													  <option>Policy Name</option>
+														      <option selected="selected">Policy Number</option>
+	                                                        </c:otherwise>
+														</c:choose>
+													
+												</select> <input type="text" class="form-control"
+													placeholder="Search" name="keyword" style="width: 55%"
+													value="${keyword }">
+												<div class="input-group-btn">
+													<button class="btn btn-default" type="submit"
+														style="padding: 9">
+														<i class="glyphicon glyphicon-search"></i>
+													</button>
 												</div>
-											</form>
-										</div>
-									</h4>
-									<hr>
-									<thead>
-										<tr>
-											<th>Id</th>
-											<th>Policy Name</th>
-											<th>Policy Number</th>
-											<th>Pay Period</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach items="${insurancePolicys }" var="insurancePolicy">
+											</div>
+
+										</form>
+									</div>
+								</h4>
+								<hr>
+									<c:choose>
+										<c:when test="${!empty insurancePolicys }">
+										<thead>
 											<tr>
-												<td><a href="basic_table.html#">${insurancePolicy.id }</a></td>
-												<td>${insurancePolicy.policyName } </td>
-												<td>${insurancePolicy.policyNumber }</td>
-												<td>${insurancePolicy.payPeriod}</td>
-												<td>
-													<form method="post" action="view/${insurancePolicy.id }">
-														<button class="btn btn-success btn-xs">
-															<i class="fa fa-eye"></i>
-														</button>
-													</form>
-													<form method="post" action="edit/${insurancePolicy.id }">
-														<button class="btn btn-primary btn-xs">
-															<i class="fa fa-pencil"></i>
-														</button>
-													</form>
-													<form method="post" action="delete/${insurancePolicy.id }">
-														<button class="btn btn-danger btn-xs">
-															<i class="fa fa-trash-o "></i>
-														</button>
-													</form>
-												</td>
+												<th>Id</th>
+												<th>Policy Name</th>
+												<th>Policy Number</th>
+												<th>Pay Period</th>
+												<th></th>
 											</tr>
-										</c:forEach>
-
-
-									</tbody>
+										</thead>
+										<tbody>
+											<c:forEach items="${insurancePolicys }" var="insurancePolicy">
+												<tr>
+													<td><a href="basic_table.html#">${insurancePolicy.id }</a></td>
+													<td>${insurancePolicy.policyName } </td>
+													<td>${insurancePolicy.policyNumber }</td>
+													<td>${insurancePolicy.payPeriod}</td>
+													<td>
+														<form method="post" action="view/${insurancePolicy.id }">
+															<button class="btn btn-success btn-xs" title="View Policy">
+																<i class="fa fa-eye"></i>
+															</button>
+														</form>
+														<form method="post" action="edit/${insurancePolicy.id }">
+															<button class="btn btn-primary btn-xs" title="Edit Policy">
+																<i class="fa fa-pencil"></i>
+															</button>
+														</form>
+														<form method="post" action="delete/${insurancePolicy.id }">
+															<button class="btn btn-danger btn-xs" title="Delete Policy"  onclick="return confirm('Are you sure you want to continue?')">
+																<i class="fa fa-trash-o "></i>
+															</button>
+														</form>
+													</td>
+												</tr>
+												</c:forEach>
+											</tbody>
+										</c:when>
+										<c:otherwise>
+										 no result found
+										</c:otherwise>
+									</c:choose>
 								</table>
-							</c:if>
 						</div>
 						<!-- /content-panel -->
 					</div>
@@ -322,15 +340,6 @@ form {
 		<!-- /MAIN CONTENT -->
 
 		<!--main content end-->
-		<!--footer start-->
-		<footer class="site-footer">
-			<div class="text-center">
-				2014 - Alvarez.is <a href="basic_table.html#" class="go-top"> <i
-					class="fa fa-angle-up"></i>
-				</a>
-			</div>
-		</footer>
-		<!--footer end-->
 	</section>
 
 	<!-- js placed at the end of the document so the pages load faster -->

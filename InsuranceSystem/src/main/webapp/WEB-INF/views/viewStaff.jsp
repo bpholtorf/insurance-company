@@ -201,7 +201,7 @@ form {
 						</ul></li>
 
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Customer</span>
+							class="fa fa-user"></i> <span>Customer</span>
 					</a>
 						<ul class="sub">
 							<li><a href="<c:url value='/customer/viewAll' />">Customer
@@ -211,7 +211,7 @@ form {
 
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Insurance Policy</span>
+							class="fa fa-bars"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
@@ -320,7 +320,7 @@ form {
 													<td>
 														<form method="post" action="">
 															<button class="btn btn-success btn-xs" type="submit">
-																<i class="fa fa-check"></i>
+																<i class="fa fa-eye"></i>
 															</button>
 														</form>
 														<form method="post" action="edit/${staff.username }">

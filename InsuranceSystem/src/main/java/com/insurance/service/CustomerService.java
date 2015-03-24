@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.insurance.dao.CustomerDao;
 import com.insurance.data.CustomerDB;
+import com.insurance.data.StaffDB;
 
 @Service
 public class CustomerService {
@@ -47,7 +48,14 @@ public class CustomerService {
 	}
 
 	public void updateCustomer(CustomerDB customer) {
-		// TODO Auto-generated method stub
 		CustomerDao.updateCustomer(customer);
+	}
+
+	public List<CustomerDB> searchBySSN(String keyword) {
+		return CustomerDao.searchBySSN(keyword);
+	}
+
+	public List<CustomerDB> searchByName(String pattern) {
+		return CustomerDao.searchByName(pattern);
 	}
 }

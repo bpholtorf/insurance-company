@@ -201,11 +201,20 @@ form {
 						</ul></li>
 
 					<li class="sub-menu"><a  href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Customer</span>
+							class="fa fa-user"></i> <span>Customer</span>
 					</a>
 						<ul class="sub">
 							<li  ><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
 							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
+
+						</ul></li>
+						
+					<li class="sub-menu"><a class="active" href="javascript:;"> <i
+							class="fa fa-bars"></i> <span>Insurance Policy</span>
+					</a>
+						<ul class="sub">
+							<li class="active"><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
+							<li ><a href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
 
 						</ul></li>
 					<li class="sub-menu"><a class="active" href="javascript:;"> <i

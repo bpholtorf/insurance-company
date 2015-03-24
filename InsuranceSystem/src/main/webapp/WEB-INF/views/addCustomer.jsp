@@ -193,7 +193,7 @@
 						</ul></li>
 
 					<li class="sub-menu"><a class="active" href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Customer</span>
+							class="fa fa-user"></i> <span>Customer</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
@@ -201,7 +201,7 @@
 
 						</ul></li>
 					<li class="sub-menu"><a  href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Insurance Policy</span>
+							class="fa fa-bars"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
@@ -253,58 +253,60 @@
 								class="form-horizontal tasi-form" method="POST"
 								modelAttribute="customerDB">
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Name</label>
+									<label class="col-sm-2 control-label col-lg-2">*Name</label>
 									<div class="col-lg-5 form-inline">
-										<form:input type="text" class="form-control" path="firstName"
-											placeholder="First name" />
-										<form:input type="text" class="form-control" path="lastName"
-											placeholder="Last name" />
+										<form:input type="text" class="form-control" path="firstName" placeholder="First name" />
+										<form:errors path="firstName" class="error"></form:errors>
+										<br>
+										<form:input type="text" class="form-control" path="lastName" placeholder="Last name" />
+										<form:errors path="lastName" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Gender</label>
+									<label class="col-sm-2 control-label col-lg-2">*Sex</label>
 									<div class="col-lg-5">
-										<form:radiobutton path="gender" id="optionsRadios2" 
-											value="male" /> Male 
-									    <form:radiobutton 
-											path="gender" id="optionsRadios1" value="female"/> Female
+										<form:radiobutton path="gender" id="optionsRadios2" value="male" checked="checked" /> Male 
+									    <form:radiobutton path="gender" id="optionsRadios1" value="female"/> Female
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Address</label>
+									<label class="col-sm-2 control-label col-lg-2">*Address</label>
 									<div class="col-lg-5">
 										<form:input type="text" class="form-control" path="address" />
+										<form:errors path="lastName" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Phone
+									<label class="col-sm-2 control-label col-lg-2">*Phone
 										Number</label>
 									<div class="col-lg-5">
-										<form:input type="tel" class="form-control" path="phoneNumber" />
+										<form:input type="tel" class="form-control" path="phoneNumber" data-validate="required,number" />
+										<form:errors path="phoneNumber" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Email</label>
+									<label class="col-sm-2 control-label col-lg-2">*Email</label>
 									<div class="col-lg-5">
 										<form:input type="email" class="form-control" path="email" />
+										<form:errors path="email" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Date of
-										Birth</label>
+									<label class="col-sm-2 control-label col-lg-2">*Date of Birth</label>
 									<div class="col-lg-5">
-										<form:input class="form-control" id="datepicker"
-											path="dateOfBirth" type="text"/>
+										<form:input class="form-control" id="datepicker" path="dateOfBirth" type="text"/>
+										<form:errors path="dateOfBirth" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">SSN</label>
+									<label class="col-sm-2 control-label col-lg-2">*SSN</label>
 									<div class="col-lg-5">
 										<form:input type="text" class="form-control" path="SSN" />
+										<form:errors path="SSN" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Annual Income</label>
+									<label class="col-sm-2 control-label col-lg-2">*Annual Income</label>
 									<div class="col-lg-5">
 										<form:select class="form-control" path="incomeStatus">
 											<option>Less than 10000</option>
@@ -356,15 +358,6 @@
 		<!-- /MAIN CONTENT -->
 
 		<!--main content end-->
-		<!--footer start-->
-		<footer class="site-footer">
-			<div class="text-center">
-				2014 - Alvarez.is <a href="form_component.html#" class="go-top">
-					<i class="fa fa-angle-up"></i>
-				</a>
-			</div>
-		</footer>
-		<!--footer end-->
 	</section>
 
 	<!-- js placed at the end of the document so the pages load faster -->
@@ -402,6 +395,7 @@
 		src="/InsuranceSystem/pages/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 
 
+    <script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>
 
 
@@ -410,6 +404,9 @@
 
 		$(function() {
 			$("#datepicker").datepicker();
+			if($("#datepicker").val()=='')
+				$("#datepicker").val('02/24/2015');
+			
 		});
 	</script>
 

@@ -191,8 +191,17 @@
 							<li ><a href="<c:url value='/requestAdd' />">Add Staff</a></li>
 
 						</ul></li>
+						
+					<li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-user"></i> <span>Customer</span>
+					</a>
+						<ul class="sub">
+							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
+							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
+
+						</ul></li>
 					<li class="sub-menu"><a class="active" href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Insurance Policy</span>
+							class="fa fa-bars"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
@@ -244,21 +253,21 @@
 								class="form-horizontal tasi-form" method="POST"
 								modelAttribute="insurancePolicyDB">
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Policy Name</label>
+									<label class="col-sm-2 control-label col-lg-2">*Policy Name</label>
 									<div class="col-lg-5 form-inline">
-										<form:input type="text" class="form-control" path="policyName"
-											placeholder="Policy Name" />
+										<form:input type="text" class="form-control" path="policyName" placeholder="Policy Name" />
+										<form:errors path="policyName" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Policy Number</label>
+									<label class="col-sm-2 control-label col-lg-2">*Policy Number</label>
 									<div class="col-lg-5 form-inline">
-										<form:input type="text" class="form-control" path="policyNumber"
-											placeholder="Policy Number" />
+										<form:input type="text" class="form-control" path="policyNumber" placeholder="Policy Number" />
+										<form:errors path="policyNumber" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Plan Type</label>
+									<label class="col-sm-2 control-label col-lg-2">*Plan Type</label>
 									<div class="col-lg-5">
 										<form:select class="form-control" path="planType">
 											<option>Individual</option>
@@ -267,7 +276,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Pay Period (in months)</label>
+									<label class="col-sm-2 control-label col-lg-2">*Pay Period (in months)</label>
 									<div class="col-lg-5">
 										<form:select class="form-control" path="payPeriod">
 											<option>6</option>
@@ -276,21 +285,24 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Premium Percantage</label>
+									<label class="col-sm-2 control-label col-lg-2">*Premium Percantage</label>
 									<div class="col-lg-5">
 										<form:input type="number"  step="0.01" min="0" class="form-control" path="premiumPercent" />
+										<form:errors path="premiumPercent" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Deductible</label>
+									<label class="col-sm-2 control-label col-lg-2">*Deductible</label>
 									<div class="col-lg-5">
 										<form:input type="number"  min="0" class="form-control" path="deductible" />
+										<form:errors path="deductible" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Max Annual Payout</label>
+									<label class="col-sm-2 control-label col-lg-2">*Max Annual Payout</label>
 									<div class="col-lg-5">
 										<form:input type="number" min="0" class="form-control" path="amount" />
+										<form:errors path="amount" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
@@ -313,15 +325,6 @@
 		<!-- /MAIN CONTENT -->
 
 		<!--main content end-->
-		<!--footer start-->
-		<footer class="site-footer">
-			<div class="text-center">
-				2014 - Alvarez.is <a href="form_component.html#" class="go-top">
-					<i class="fa fa-angle-up"></i>
-				</a>
-			</div>
-		</footer>
-		<!--footer end-->
 	</section>
 
 	<!-- js placed at the end of the document so the pages load faster -->
@@ -359,6 +362,7 @@
 		src="/InsuranceSystem/pages/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 
 
+    <script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>
 
 
@@ -367,6 +371,9 @@
 
 		$(function() {
 			$("#datepicker").datepicker();
+			if($("#datepicker").val()=='')
+				$("#datepicker").val('02/24/2015');
+			
 		});
 	</script>
 

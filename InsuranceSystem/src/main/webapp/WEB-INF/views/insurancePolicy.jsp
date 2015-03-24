@@ -229,7 +229,7 @@
 
                   <li class="sub-menu">
                       <a href="javascript:;" >
-                          <i class="fa fa-cogs"></i>
+                          <i class="fa fa-user"></i>
                           <span>Customer</span>
                       </a>
                       <ul class="sub">
@@ -241,7 +241,7 @@
                   </li>
 					<li class="sub-menu">
 					<a class="active" href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Insurance Policy</span>
+							class="fa fa-bars"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
@@ -291,7 +291,7 @@
           		<div class="col-lg-12">
           			<div class="form-panel">
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> Insurance Policy Information</h4>
-                  	      <c:url var="updateAction" value="/insurancePolicy/update" ></c:url>
+                  	      <c:url var="updateAction" value="/insurancePolicy/update/${insurancePolicy.id}" ></c:url>
                           <form:form action="${updateAction}" class="form-horizontal tasi-form" method="POST" modelAttribute="insurancePolicy">
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">Insurance Policy Id</label>
@@ -301,7 +301,7 @@
                                       <form:hidden path="id"/>
                               </div>                     
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Policy Name</label>
+									<label class="col-sm-2 control-label col-lg-2">*Policy Name</label>
 									<div class="col-lg-5 form-inline">
 										<form:input type="text" class="form-control" path="policyName"
 											placeholder="Policy Name" />
@@ -315,7 +315,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Plan Type</label>
+									<label class="col-sm-2 control-label col-lg-2">*Plan Type</label>
 									<div class="col-lg-5">
 										<form:select class="form-control" path="planType">
 							                <form:options items="${planTypes}"/>
@@ -323,7 +323,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Pay Period (in months)</label>
+									<label class="col-sm-2 control-label col-lg-2">*Pay Period (in months)</label>
 									<div class="col-lg-5">
 										<form:select class="form-control" path="payPeriod">
 							                <form:options items="${payPeriods}"/>
@@ -331,19 +331,19 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Premium</label>
+									<label class="col-sm-2 control-label col-lg-2">*Premium</label>
 									<div class="col-lg-5">
 										<form:input type="text" class="form-control" path="premiumPercent" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Deductible</label>
+									<label class="col-sm-2 control-label col-lg-2">*Deductible</label>
 									<div class="col-lg-5">
 										<form:input type="text" class="form-control" path="deductible" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Max Annual Payout</label>
+									<label class="col-sm-2 control-label col-lg-2">*Max Annual Payout</label>
 									<div class="col-lg-5">
 										<form:input type="text" class="form-control" path="amount" />
 									</div>

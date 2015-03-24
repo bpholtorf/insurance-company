@@ -2240,4 +2240,9 @@ label {
     min-height: 900px;
 }
 
+.error{
+ color:#a94442;
+ padding-top:7px;
+
+}
 

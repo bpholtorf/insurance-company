@@ -8,6 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.insurance.validator.Phone;
+import com.insurance.validator.Username;
 
 @Entity
 @Table(name="customer")
@@ -19,21 +27,29 @@ public class CustomerDB implements Serializable{
 	private Integer id;
 
 	@Column(name="firstName")
+	@NotEmpty(message="Please input the first name")
 	private String firstName;
 	
 	@Column(name="lastName")
+	@NotEmpty(message="Please input the last name")
 	private String lastName;
 	
 	@Column(name="address")
+	@NotEmpty(message="Please input the address")
 	private String address;
 	
 	@Column(name="phoneNumber")
+	@NotEmpty(message="Please input the phone number")
+	@Phone(message="Please input the correct phone number")
 	private String phoneNumber;
 	
 	@Column(name="email")
+	@NotEmpty(message="Please input the email")
+	@Email(message="Please input the correct email")
 	private String email;
 	
 	@Column(name="dateOfBirth")
+	@Past(message="Please input a past date")
 	private Date dateOfBirth;
 	
 	@Column(name="incomeStatus")
@@ -48,7 +64,9 @@ public class CustomerDB implements Serializable{
 	@Column(name="gender")
 	private String gender;
 	
-	@Column(name="SSN")
+	@Column(name="SSN", unique = true)
+	@NotEmpty(message="Please input the SSN")
+	@Pattern(regexp="\\d{9}",message="SSN should be 9 digits without space and dash")
 	private String SSN;
 
 	public Integer getId(){

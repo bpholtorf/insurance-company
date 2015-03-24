@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.insurance.data.InsurancePolicyDB;
+import com.insurance.data.StaffDB;
 
 @Repository
 public class InsurancePolicyDao {
@@ -83,5 +84,35 @@ public class InsurancePolicyDao {
 				session.close();
 			}
 			return list.get(0);
+		}
+		
+		public List<InsurancePolicyDB> searchByNumber(String keyword) {
+			Session session = sessionFactory.openSession();
+
+			List<InsurancePolicyDB> list = new ArrayList<InsurancePolicyDB>();
+			try {
+				String hqlString = "FROM InsurancePolicyDB where policyNumber= :policyNumber";
+				Query query = session.createQuery(hqlString);
+				query.setString("policyNumber", keyword);
+				list = query.list();
+				return list;
+			} finally {
+				session.close();
+			}
+		}
+
+		public List<InsurancePolicyDB> searchByName(String pattern) {
+			Session session = sessionFactory.openSession();
+
+			List<InsurancePolicyDB> list = new ArrayList<InsurancePolicyDB>();
+			try {
+				String hqlString = "FROM InsurancePolicyDB where policyName like :policyName";
+				Query query = session.createQuery(hqlString);
+				query.setString("policyName", pattern);
+				list = query.list();
+				return list;
+			} finally {
+				session.close();
+			}
 		}
 }
