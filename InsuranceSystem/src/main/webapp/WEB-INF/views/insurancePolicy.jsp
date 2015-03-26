@@ -337,15 +337,15 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Deductible</label>
+									<label class="col-sm-2 control-label col-lg-2">*Max Pharmacy Payout</label>
 									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="deductible" />
+										<form:input type="number"  min="0" class="form-control" path="pAmount" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Max Annual Payout</label>
+									<label class="col-sm-2 control-label col-lg-2">*Max Hospital Payout</label>
 									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="amount" />
+										<form:input type="number" min="0" class="form-control" path="hAmount" />
 									</div>
 								</div>
                               <div class="form-group">              
