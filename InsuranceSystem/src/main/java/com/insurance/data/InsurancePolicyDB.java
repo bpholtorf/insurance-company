@@ -32,9 +32,9 @@ public class InsurancePolicyDB implements Serializable{
 	@NotNull(message="Please input the premium percent")
 	private Double premiumPercent;
 	
-	@Column(name="deductible")
-	@NotNull(message="Please input the deductible")
-	private Double deductible;
+	@Column(name="hamount")
+	@NotNull(message="Please input the max hospital amount")
+	private Double hamount;
 	
 	@Column(name="policyNumber")
 	@NotEmpty(message="Please input the policy number")
@@ -43,9 +43,9 @@ public class InsurancePolicyDB implements Serializable{
 	@Column(name="payPeriod")
 	private Integer payPeriod;
 	
-	@Column(name="amount")
-	@NotNull(message="Please input the max annual payout")
-	private Double amount;
+	@Column(name="pamount")
+	@NotNull(message="Please input the max pharmacy amount")
+	private Double pamount;
 	
 	
 	public Integer getId() {
@@ -80,12 +80,12 @@ public class InsurancePolicyDB implements Serializable{
 		this.premiumPercent = premiumPercent;
 	}
 
-	public Double getDeductible() {
-		return deductible;
+	public Double getHamount() {
+		return hamount;
 	}
 
-	public void setDeductible(Double deductible) {
-		this.deductible = deductible;
+	public void setHamount(Double hamount) {
+		this.hamount = hamount;
 	}
 
 	public String getPolicyNumber() {
@@ -104,12 +104,12 @@ public class InsurancePolicyDB implements Serializable{
 		this.payPeriod = payPeriod;
 	}
 
-	public Double getAmount() {
-		return amount;
+	public Double getPamount() {
+		return pamount;
 	}
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
+	public void setPamount(Double pamount) {
+		this.pamount = pamount;
 	}
 
 

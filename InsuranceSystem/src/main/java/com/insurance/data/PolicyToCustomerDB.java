@@ -26,11 +26,11 @@ public class PolicyToCustomerDB implements Serializable{
 	@Column(name="premium")
 	private double premium;
 	
-	@Column(name="amountLeft")
-	private double amountLeft;
+	@Column(name="pamountLeft")
+	private double pamountLeft;
 	
-	@Column(name="deductibleLeft")
-	private double deductibleLeft;
+	@Column(name="hamountLeft")
+	private double hamountLeft;
 	
 	@Column(name="dateFrom")
 	private Date dateFrom;
@@ -66,18 +66,18 @@ public class PolicyToCustomerDB implements Serializable{
 		this.premium=premium;
 	}
 	
-	public double getAmountLeft(){
-		return amountLeft;
+	public double getPamountLeft(){
+		return pamountLeft;
 	}
-	public void setAmountLeft(double amountLeft){
-		this.amountLeft=amountLeft;
+	public void setPamountLeft(double pamountLeft){
+		this.pamountLeft=pamountLeft;
 	}
 	
-	public double getDeductibleLeft(){
-		return deductibleLeft;
+	public double getHamountLeft(){
+		return hamountLeft;
 	}
-	public void setDeductableLeft(double deductibleLeft){
-		this.deductibleLeft=deductibleLeft;
+	public void setHamountLeft(double hamountLeft){
+		this.hamountLeft=hamountLeft;
 	}
 	
 	public Date getDateFrom(){

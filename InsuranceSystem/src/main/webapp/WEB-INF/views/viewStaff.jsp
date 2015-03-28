@@ -219,12 +219,10 @@ form {
 
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-book"></i> <span>Policy</span>
+							class="fa fa-book"></i> <span>Customer Policy</span>
 					</a>
 						<ul class="sub">
-							<li><a href="blank.html">Blank Page</a></li>
-							<li><a href="login.html">Login</a></li>
-							<li><a href="lock_screen.html">Lock Screen</a></li>
+							<li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
 						</ul></li>
 
 					<li class="sub-menu"><a href="javascript:;"> <i
@@ -286,6 +284,7 @@ form {
 												</select> <input type="text" class="form-control"
 													placeholder="Search" name="keyword" style="width: 55%"
 													value="${keyword }">
+													
 												<div class="input-group-btn">
 													<button class="btn btn-default" type="submit"
 														style="padding: 9">
@@ -329,9 +328,10 @@ form {
 															</button>
 														</form>
 														<form method="post" action="delete/${staff.username }">
-															<button class="btn btn-danger btn-xs">
-																<i class="fa fa-trash-o "></i>
-															</button>
+															<!--  <button class="btn btn-danger btn-xs" >
+																
+															</button>-->
+															<a href="delete/${staff.username }" id="confirm" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
 														</form>
 													</td>
 												</tr>
@@ -384,11 +384,20 @@ form {
 
 	<!--common script for all pages-->
 	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
-
+    <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
 	<!--script for this page-->
 
 	<script>
-		//custom select box
+	$("a[class='btn btn-danger btn-xs']").click(function(e) {
+	    e.preventDefault();
+	    var location = $(this).attr('href');
+	    
+	    bootbox.confirm("Are you sure?", function(result) {
+	    	if(result)
+	    	window.location.replace(location);
+	    	}); 
+	});      
+
 	</script>
 
 </body>

@@ -216,12 +216,10 @@ form {
 
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-book"></i> <span>Policy</span>
+							class="fa fa-book"></i> <span>Customer Policy</span>
 					</a>
 						<ul class="sub">
-							<li><a href="blank.html">Blank Page</a></li>
-							<li><a href="login.html">Login</a></li>
-							<li><a href="lock_screen.html">Lock Screen</a></li>
+							<li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
 						</ul></li>
 
 					<li class="sub-menu"><a href="javascript:;"> <i
@@ -340,6 +338,18 @@ form {
 		<!-- /MAIN CONTENT -->
 
 		<!--main content end-->
+
+		<!--footer start-->
+		<footer class="site-footer"
+			style="position: absolute; left: 210px; top: 800px; width: 1000px">
+			<div class="text-center">
+				2014 - Alvarez.is <a href="basic_table.html#" class="go-top"> <i
+					class="fa fa-angle-up"></i>
+				</a>
+			</div>
+		</footer>
+		<!--footer end-->
+
 	</section>
 
 	<!-- js placed at the end of the document so the pages load faster -->

@@ -1,6 +1,9 @@
 package com.insurance.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -125,6 +128,22 @@ public class CustomerDao {
 				String hqlString = "FROM CustomerDB where lastName like :name or firstName like :name";
 				Query query = session.createQuery(hqlString);
 				query.setString("name", pattern);
+				list = query.list();
+				return list;
+			} finally {
+				session.close();
+			}
+		}
+
+		public List<CustomerDB> searchByDateofBirth(String keyword) throws ParseException  {
+			// TODO Auto-generated method stub
+			Session session = sessionFactory.openSession();
+			
+			List<CustomerDB> list = new ArrayList<CustomerDB>();
+			try {
+				String hqlString = "FROM CustomerDB where dateofBirth=:DateofBirth";
+				Query query = session.createQuery(hqlString);
+				query.setString("DateofBirth", keyword);
 				list = query.list();
 				return list;
 			} finally {

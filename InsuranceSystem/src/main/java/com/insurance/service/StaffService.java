@@ -32,7 +32,7 @@ public class StaffService {
 		for (int i = 0; i < list.size(); i++) {
 			StaffDB staff = list.get(i);
 			if (staff.getUsername().equals(username)
-					&& staff.getPassword().equals(password)) {
+					&& staff.getPassword().equals(password) && staff.getAble()==1) {
 				return staff.getId().toString();
 			}
 		}
@@ -76,7 +76,7 @@ public class StaffService {
 	}
 	public void deleteStaff(String username)
 	{
-		staffDao.deleteStaff(username);
+		staffDao.deleteStaff1(username);
 	}
 
 	public StaffDB findByUsername(String username) {

@@ -26,8 +26,10 @@ import com.insurance.data.CustomerDB;
 import com.insurance.data.CustomerPolicy;
 import com.insurance.data.PolicyAdded;
 import com.insurance.data.PolicyDB;
+import com.insurance.data.PolicyFamilyDB;
 import com.insurance.data.PolicyToCustomerDB;
 import com.insurance.service.CustomerService;
+import com.insurance.service.PolicyFamilyService;
 import com.insurance.service.PolicyService;
 import com.insurance.service.PolicyToCustomerService;
 
@@ -42,6 +44,8 @@ public class PocilyToCustomerController {
   private PolicyService policyService;
   @Autowired
   private PolicyToCustomerService pcService;
+  @Autowired
+  private PolicyFamilyService pfService;
 
   @RequestMapping("/customer/addPolicy/{id}")
   public String viewCustomer(@PathVariable("id") Integer id, Model model,HttpSession session)
@@ -69,8 +73,8 @@ public class PocilyToCustomerController {
 					  list.get(i).getPolicyNumber(),
 					  list.get(i).getPlanType(),
 					  list.get(i).getPayPeriod(),
-					  list.get(i).getAmount(),
-					  list.get(i).getDeductible(),
+					  list.get(i).getPamount(),
+					  list.get(i).getHamount(),
 					  list.get(i).getPremiumPercent(), 
 					  "added");
 			  list1.add(p);
@@ -80,8 +84,8 @@ public class PocilyToCustomerController {
 					  list.get(i).getPolicyNumber(),
 					  list.get(i).getPlanType(),
 					  list.get(i).getPayPeriod(),
-					  list.get(i).getAmount(),
-					  list.get(i).getDeductible(),
+					  list.get(i).getPamount(),
+					  list.get(i).getHamount(),
 					  list.get(i).getPremiumPercent(), 
 					  "unadded");
 			  list1.add(p1);
@@ -97,26 +101,55 @@ public class PocilyToCustomerController {
 	  
   }
   
-  private PolicyToCustomerDB generatePocilyCustomer(int cid,int pid,String policyNumber,double premium,double amountLeft,double deductibleLeft,Date dateFrom,Date dateTo){
+  private PolicyToCustomerDB generatePocilyCustomer(int cid,int pid,String policyNumber,double premium,double pamountLeft,double hamountLeft,Date dateFrom,Date dateTo){
 	  PolicyToCustomerDB pcDB=new PolicyToCustomerDB();
 	  pcDB.setCid(cid);
 	  pcDB.setPid(pid);
 	  pcDB.setPolicyNumber(policyNumber);
 	  pcDB.setPremium(premium);
-	  pcDB.setAmountLeft(amountLeft);
-	  pcDB.setDeductableLeft(deductibleLeft);
+	  pcDB.setPamountLeft(pamountLeft);
+	  pcDB.setHamountLeft(hamountLeft);
 	  pcDB.setDateFrom(dateFrom);
 	  pcDB.setDateTo(dateTo);
 	  return pcDB;
   }
   
- 
+ private PolicyFamilyDB generateMember(int cid,int pid,String memberName){
+	 PolicyFamilyDB pfDB=new PolicyFamilyDB();
+	 pfDB.setCid(cid);
+	 pfDB.setPid(pid);
+	 pfDB.setMemberName(memberName);
+	 return pfDB;
+ }
   
-  @RequestMapping(value="/customer/addPolicy/viewPolicys",method=RequestMethod.POST)
-  public String addPolicyToCustomer(@RequestParam(value="policyId",required=true) String policyId,
+  @RequestMapping(value="/customer/addPolicy/viewPolicys",method=RequestMethod.GET)
+  public String addPolicyToCustomer(@RequestParam("policyId") String policyId,
+		  @RequestParam("name1") String name1,
+		  @RequestParam("name2") String name2,
+		  @RequestParam("name3") String name3,
+		  @RequestParam("name4") String name4,
 		  ModelMap model,HttpSession session) throws ParseException{
+	  System.out.println(name1+"**"+name2+"**"+name3+"**"+name4);
 	  int cid=(Integer.parseInt(session.getAttribute(CUSTOMER_ID).toString()));
 	  int pid=Integer.parseInt(policyId);
+	  
+	  if(!name1.isEmpty()){
+		  PolicyFamilyDB mem1=generateMember(cid,pid,name1);
+		  pfService.addMember(mem1);
+	  }
+	  if(!name2.isEmpty()){
+		  PolicyFamilyDB mem2=generateMember(cid,pid,name2);
+		  pfService.addMember(mem2);
+	  }
+	  if(!name3.isEmpty()){
+		  PolicyFamilyDB mem3=generateMember(cid,pid,name3);
+		  pfService.addMember(mem3);
+	  }
+	  if(!name4.isEmpty()){
+		  PolicyFamilyDB mem4=generateMember(cid,pid,name4);
+		  pfService.addMember(mem4);
+	  }
+	  
 	  int period=policyService.getPolicyById(pid).getPayPeriod();
 	  String policyNum=policyService.getPolicyById(pid).getPolicyNumber();
 	  
@@ -141,8 +174,8 @@ public class PocilyToCustomerController {
 	  String income=customerService.findById(cid).getIncomeStatus();
 	  double percent=policyService.getPolicyById(pid).getPremiumPercent();
 	  double premium=0;
-	  double amountL=policyService.getPolicyById(pid).getAmount();
-	  double deductible=policyService.getPolicyById(pid).getDeductible();
+	  double pAmount=policyService.getPolicyById(pid).getPamount();
+	  double hAmount=policyService.getPolicyById(pid).getHamount();
 	  if(income.equals("less than 10000")){
 		  premium=percent*10000;
 	  }
@@ -177,11 +210,12 @@ public class PocilyToCustomerController {
 		  premium=percent*100000;
 	  }
 	  
-	  PolicyToCustomerDB pc=generatePocilyCustomer(cid,pid,policyNum,premium,amountL,deductible,dateFrom1,dateTo1);
+	  PolicyToCustomerDB pc=generatePocilyCustomer(cid,pid,policyNum,premium,pAmount,hAmount,dateFrom1,dateTo1);
 	  pcService.addPolicyToCustomer(pc);
 	  model.addAttribute("customer",customerService.findById(cid));
 	  model.addAttribute("customerPolicys",pcService.getOneAll(cid));
-	  return "viewPolicys";
+	  model.addAttribute("cc",cid);
+	  return "redirect:/customer/viewPolicys/{cc}";
 	 
 	  
   }
@@ -197,7 +231,7 @@ public class PocilyToCustomerController {
   @RequestMapping("/customer/viewAllPolicys")
   public String viewAllPolicys(Model model,HttpSession session)
   {
-//	  model.addAttribute("customer",customerService.findById(id));
+
 	  List<PolicyToCustomerDB> list=pcService.getAll();
 	  List<CustomerPolicy> list1=new ArrayList<CustomerPolicy>();
 	  for(int i=0;i<list.size();i++){
@@ -205,11 +239,11 @@ public class PocilyToCustomerController {
 		  CustomerPolicy p=new CustomerPolicy(cid,list.get(i).getPid(),
 				      list.get(i).getPolicyNumber(),
 					  list.get(i).getPremium(),
-					  list.get(i).getAmountLeft(),
-					  list.get(i).getDeductibleLeft(),
+					  list.get(i).getPamountLeft(),
+					  list.get(i).getHamountLeft(),
 					  list.get(i).getDateFrom(),
 					  list.get(i).getDateTo(),
-					  customerService.getCustomerById(cid).getFirstName()+" "+customerService.getCustomerById(cid).getLastName());
+					  customerService.getCustomerById(cid).getFirstName()+" "+customerService.getCustomerById(cid).getLastName(),customerService.getCustomerById(cid).getSSN());
 			  list1.add(p);
 			  
 		  }
@@ -218,7 +252,67 @@ public class PocilyToCustomerController {
 	  
   }
   
+  @RequestMapping(value="/customer/searchPolicy",method=RequestMethod.GET)
+  public String searchPolicy(@RequestParam("keyword") String keyword,
+		                    Model model){
+List<CustomerPolicy> result=new ArrayList<CustomerPolicy>();
+List<PolicyToCustomerDB> list=pcService.getAll();
+	  if (keyword.equals("")) {
+		  model.addAttribute("keyword",keyword);
+		  
+		  for(int i=0;i<list.size();i++){
+			  int cid=list.get(i).getCid();
+			  CustomerPolicy p=new CustomerPolicy(cid,list.get(i).getPid(),
+					      list.get(i).getPolicyNumber(),
+						  list.get(i).getPremium(),
+						  list.get(i).getPamountLeft(),
+						  list.get(i).getHamountLeft(),
+						  list.get(i).getDateFrom(),
+						  list.get(i).getDateTo(),
+						  customerService.getCustomerById(cid).getFirstName()+" "+customerService.getCustomerById(cid).getLastName(),customerService.getCustomerById(cid).getSSN());
+				  result.add(p);
+				  
+			  }
+		 
+	  }else{
+		  
+		  for(int i=0;i<list.size();i++){
+			  int cid=list.get(i).getCid();
+			  if(customerService.getCustomerById(cid).getSSN().equals(keyword)){
+			  CustomerPolicy p=new CustomerPolicy(cid,list.get(i).getPid(),
+					      list.get(i).getPolicyNumber(),
+						  list.get(i).getPremium(),
+						  list.get(i).getPamountLeft(),
+						  list.get(i).getHamountLeft(),
+						  list.get(i).getDateFrom(),
+						  list.get(i).getDateTo(),
+						  customerService.getCustomerById(cid).getFirstName()+" "+customerService.getCustomerById(cid).getLastName(),customerService.getCustomerById(cid).getSSN());
+				  result.add(p);
+			  }  
+			  }
+		  
+		  model.addAttribute("keyword",keyword);
+	  }
+	  model.addAttribute("allPolicys",result);
+	  
+	  return "viewAllPolicys";
+  }
   
+  @RequestMapping(value="/customer/viewPolicys/delete",method=RequestMethod.GET)
+  public String deletePolicy(@RequestParam("pid") String pid,
+		  @RequestParam("cid") String cid,Model model)
+  {
+	  if(pcService.getOneAll(Integer.parseInt(cid)).size()==1){
+		  customerService.deleteCustomer(Integer.parseInt(cid));
+		  pcService.deletePolicyToCustomer(Integer.parseInt(pid), Integer.parseInt(cid));
+		  model.addAttribute("customerPolicys",pcService.getOneAll(Integer.parseInt(cid)));
+	  }else{
+	  pcService.deletePolicyToCustomer(Integer.parseInt(pid), Integer.parseInt(cid));
+	  model.addAttribute("customerPolicys",pcService.getOneAll(Integer.parseInt(cid)));
+	  model.addAttribute("customer",customerService.findById(Integer.parseInt(cid)));
+	  }
+	  return "viewPolicys";
+  }
  
 }
 

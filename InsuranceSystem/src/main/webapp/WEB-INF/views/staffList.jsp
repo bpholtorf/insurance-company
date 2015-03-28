@@ -240,7 +240,7 @@
                   <li class="sub-menu">
                       <a  href="javascript:;" >
                           <i class="fa fa-book"></i>
-                          <span>Policy</span>
+                          <span>Customer Policy</span>
                       </a>
                       <ul class="sub">
                           <li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
@@ -366,7 +366,8 @@
 
       <!--main content end-->
       <!--footer start-->
-      <footer class="site-footer">
+      <footer class="site-footer"
+			style="position: absolute; left: 210px; top: 800px; width: 1000px">
           <div class="text-center">
               2014 - Alvarez.is
               <a href="basic_table.html#" class="go-top">

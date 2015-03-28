@@ -208,23 +208,31 @@ form {
 							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
 
 						</ul></li>
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-book"></i> <span>Policy</span>
+						<li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-bars"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
-							<li  class="active"><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
+							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
+							<li ><a href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
+
+						</ul></li>
+					<li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-book"></i> <span>Customer Policy</span>
+					</a>
+						<ul class="sub">
+							<li  ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
 							
 						</ul></li>
 
 					
-					<li class="sub-menu"><a class="active" href="javascript:;"> <i
+					<%--  <li class="sub-menu"><a  href="javascript:;"> <i
 							class="fa fa-bars"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
-							<li class="active"><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
+							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
 							<li ><a href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
 
-						</ul></li>
+						</ul></li> --%>
 						
 					<li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-th"></i> <span>Insurance</span>
@@ -232,7 +240,7 @@ form {
 						<ul class="sub">
 							<li><a href="basic_table.html">Basic Table</a></li>
 							<li><a href="responsive_table.html">Responsive Table</a></li>
-						</ul></li>
+						</ul></li> 
 
 				</ul>
 				<!-- sidebar menu end-->
@@ -257,7 +265,7 @@ form {
 									<h4>
 										<i class="fa fa-angle-right"></i> Personal Policy List
 										<div class="col-sm-3 col-md-3 pull-right" style="margin-top:-10px">
-											<form class="navbar-form" role="search">
+											<!-- <form class="navbar-form" role="search">
 												<div class="input-group" style="margin-top:-15px">
 													<input type="text" class="form-control"
 														placeholder="Search" name="q">
@@ -267,10 +275,12 @@ form {
 														</button>
 													</div>
 												</div>
-											</form>
+											</form> -->
 										</div>
 									</h4>
 									<hr>
+									<c:choose>
+										<c:when test="${!empty customerPolicys }">
 									<thead>
 										<tr>
 											<th>Participant Name</th>
@@ -278,8 +288,8 @@ form {
 											<th>Date From</th>
 											<th>Date To</th>
 											<th>Premium</th>
-											<th>Amount Left</th>
-											<th>Deductible Left</th>
+											<th>PharmacyAmount Left</th>
+											<th>HostipalAmount Left</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -295,20 +305,21 @@ form {
 								pattern="MM/dd/yyyy" var="theFormattedDate" />
 												<td>${theFormattedDate }</td>
 												<td>${customerPolicys.premium }</td>
-												<td>${customerPolicys.amountLeft }</td>
-												<td>${customerPolicys.deductibleLeft }</td>	
-												<td><form method="post" action="">
-														<button class="btn btn-danger btn-xs">
-															<i class="fa fa-trash-o "></i>
-														</button>
+												<td>${customerPolicys.pamountLeft }</td> 
+												<td>${customerPolicys.hamountLeft }</td>	
+												<td><form method="post" action="delete?pid=${customerPolicys.pid }&cid=${customer.id }">
+														<a href="delete?pid=${customerPolicys.pid }&cid=${customer.id}" id="confirm" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
 													</form>
 													
 												</td>
 											</tr>
 										</c:forEach> 
-
-
 									</tbody>
+									</c:when>
+										<c:otherwise>
+										 no result found
+										</c:otherwise>
+									</c:choose>
 								</table>
 							
 						</div>
@@ -343,7 +354,7 @@ form {
 	<script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js"
 		type="text/javascript"></script>
-
+ <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
 
 	<!--common script for all pages-->
 	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
@@ -352,6 +363,16 @@ form {
 
 	<script>
 		//custom select box
+		$("a[class='btn btn-danger btn-xs']").click(function(e) {
+	    e.preventDefault();
+	    var location = $(this).attr('href');
+	    
+	    bootbox.confirm("Are you sure?", function(result) {
+	    	if(result)
+	    	window.location.replace(location);
+	    	}); 
+	});      
+
 	</script>
 
 </body>

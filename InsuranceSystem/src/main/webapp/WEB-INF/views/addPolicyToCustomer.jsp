@@ -233,14 +233,15 @@
                           <span>Customer</span>
                       </a>
                       <ul class="sub">
-							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
+							<li class="active"><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
 							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
-							<li class="active"><a  href="<c:url value='/requestAddCustomer' />">Edit Customer</a></li>
                           
                       </ul>
                   </li>
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-bars"></i> <span>Insurance Policy</span>
+
+                  <li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-cogs"></i> <span>Insurance Policy</span>
+
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
@@ -250,7 +251,7 @@
                   <li class="sub-menu">
                       <a  href="javascript:;" >
                           <i class="fa fa-book"></i>
-                          <span>Policy</span>
+                          <span>Customer Policy</span>
                       </a>
                       <ul class="sub">
                           <li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
@@ -296,7 +297,7 @@
 													      </c:forEach>
 													     
 												</select>
-												<button class="btn btn-theme" id="submit" type="submit" style="margin-left:300px;margin-top:-34px">Submit</button>
+												<button class="btn btn-theme" id="submit" type="submit" style="margin-left:320px;margin-top:-34px">Submit</button>
 												</div>
 					</form> 
                       <br>
@@ -311,10 +312,10 @@
                                   <th class="numeric">Policy Number</th>
                                   <th class="numeric">Plan Type</th>
                                   <th class="numeric">Pay Period</th>
-                                  <th class="numeric">Amount</th>
-                                  <th class="numeric">Deductible</th>
+                                  <th class="numeric">Pharmacy Amount</th>
+                                  <th class="numeric">Hostipal Amount</th>
                                   <th class="numeric">Premium Percentage</th>
-                                  <th></th>
+                                  <th class="numeric">Status</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -326,15 +327,18 @@
                                   <td class="numeric" ><a>${policyInfo.policyNumber }</a></td>
                                   <td class="numeric" >${policyInfo.planType }</td>
                                   <td class="numeric" >${policyInfo.payPeriod } months</td>
-                                  <td class="numeric" >${policyInfo.amount }</td>
-                                  <td class="numeric" >${policyInfo.deductible }</td>
+                                  <td class="numeric" >${policyInfo.pamount }</td>
+                                  <td class="numeric" >${policyInfo.hamount }</td>
                                   <td class="numeric" >${policyInfo.premiumPercent }</td>
                                   <c:choose>
                                   <c:when test="${policyInfo.check == 'added' }">
-                                  <td><button class="btn btn-theme" type="button" style="font-size:12px;height:25px" id="addPolicy" disabled="disabled">Added</button></td>
+                                  <td><button class="btn btn-theme"  type="button" style="font-size:12px;height:25px" id="addPolicy" disabled="disabled">Added</button></td>
                                   </c:when>
-                                  <c:when test="${policyInfo.check == 'unadded' }">
-                                   <td><button class="btn btn-theme" type="submit" style="font-size:12px;height:25px" id="addPolicy">Add</button></td>
+                                  <c:when test="${policyInfo.check == 'unadded'  && policyInfo.planType=='Individual' }">
+                                   <td><a href="viewPolicys?policyId=${policyInfo.id }&name1=&name2=&name3=&name4=" class="btn btn-info"  style="font-size:12px;height:25px" id="addPolicy">Add</a></td>
+                                  </c:when>
+                                   <c:when test="${policyInfo.check == 'unadded'  && policyInfo.planType=='Family' }">
+                                   <td><a href="viewPolicys" class="btn btn-theme"  style="font-size:12px;height:25px" id="addPolicy">Add</a></td>
                                   </c:when>
                                   </c:choose>
                               </tr>
@@ -357,7 +361,8 @@
 
       <!--main content end-->
       <!--footer start-->
-      <footer class="site-footer">
+      <footer class="site-footer"
+			style="position: absolute; left: 210px; top: 800px; width: 1000px">
           <div class="text-center">
               2014 - Alvarez.is
               <a href="form_component.html#" class="go-top">
@@ -367,8 +372,8 @@
       </footer>
       <!--footer end-->
   </section>
-
-    <!-- js placed at the end of the document so the pages load faster -->
+<!-- 
+    js placed at the end of the document so the pages load faster
     <script src="/InsuranceSystem/pages/assets/js/jquery.js"></script>
     <script src="/InsuranceSystem/pages/assets/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="/InsuranceSystem/pages/assets/js/jquery.dcjqaccordion.2.7.js"></script>
@@ -376,19 +381,19 @@
     <script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 
 
-    <!--common script for all pages-->
+    common script for all pages
     <script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
 
-    <!--script for this page-->
+    script for this page
     <script src="/InsuranceSystem/pages/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
 
-	<!--custom switch-->
+	custom switch
 	<script src="/InsuranceSystem/pages/assets/js/bootstrap-switch.js"></script>
 	
-	<!--custom tagsinput-->
+	custom tagsinput
 	<script src="/InsuranceSystem/pages/assets/js/jquery.tagsinput.js"></script>
 	
-	<!--custom checkbox & radio-->
+	custom checkbox & radio
 	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap.js"></script>
 	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/date.js"></script>
@@ -400,83 +405,74 @@
 	
 	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>    
 	
-   <!--  <script type="text/javascript">
-      //custom select box
- $(document).ready(function() {
-				var i;
-				for (i = 0; i <= 1; i++) {
-					$("#a" + i).click(function() {
-								var pid=$("#pid").text();
-								var num=$("#num").text();
-						    	console.log(num);
-						    	 dataToPost="policyId="+pid;
-						    	 $.ajax({
-						             url: "check",
-						             type: "GET",
-						             data: dataToPost, 
-						             success: function (response) {
-						            	
-						            	 if(response=="true"){
-						            		 var m=document.getElementById('mess');
-						                	 $(m).css({
-						                         'display':'block'
-						                       });
-						            	 }else{
-						            		 console.log(response);
-						            		 addSuccess(pid);
-						            	 }
-						             },
-						   	     
-						         });  
-							});
-				
-				}
-			});
-      </script>  -->
-<!--  <script type="text/javascript"> -->
-      
-<!--  document.getElementById('addPolicy').onclick = function() {
+     <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script> -->
+	<!--script for this page-->
 
-    	var pid=$("#pid").text();
-    	console.log(pid);
-    	 dataToPost="policyId="+pid;
-    	 $.ajax({
-             url: "check",
-             type: "GET",
-             data: dataToPost, 
-             success: function (response) {
-            	
-            	 if(response=="true"){
-            		 var m=document.getElementById('mess');
-                	 $(m).css({
-                         'display':'block'
-                       });
-            	 }else{
-            		 console.log(response);
-            		 addSuccess(pid);
-            	 }
-             },
-   	     
-         });  
-    }; 
+<!-- js placed at the end of the document so the pages load faster -->
+	<script src="/InsuranceSystem/pages/assets/js/jquery.js"></script>
+	<script src="/InsuranceSystem/pages/assets/js/bootstrap.min.js"></script>
+	<script class="include" type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+	<script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
+	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js"
+		type="text/javascript"></script>
+	<script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
 
-    function addSuccess(pid){
-    	var cid=$("#cid").text();
-    	 dataToPost="policyId="+pid;
-    	 console.log(pid);
-    	 $.ajax({
-             url: "viewPolicys",
-             type: "GET",
-             data: dataToPost, 
-             success: function (response) {
-            	 window.location.href="/InsuranceSystem/customer/viewPolicys/{cid}";  
 
-             },
-             dataType: "html",
-         });  
-    };
- -->
-    
+	<!--common script for all pages-->
+	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
+	<!--script for this page-->
+
+
+	<script>
+	$("a[class='btn btn-theme']").click(function(e) {
+	    e.preventDefault();
+	    var location = $(this).attr('href');
+	    
+	     bootbox.dialog({
+            title: "Input Family Members Name.",
+            message: '<div class="row">  ' +
+                '<div class="col-md-12"> ' +
+                '<form class="form-horizontal"> ' +
+                '<div class="form-group"> ' +
+                '<label class="col-md-4 control-label" for="name">Member Name</label> ' +
+                '<input id="name1" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px"> ' +
+                '<br>'+
+                '<label class="col-md-4 control-label" for="name">Member Name</label> ' +
+                '<input id="name2" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px"> ' +
+                '<br>'+
+                '<label class="col-md-4 control-label" for="name">Member Name</label> ' +
+                '<input id="name3" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px"> ' +
+                '<br>'+
+                '<label class="col-md-4 control-label" for="name">Member Name</label> ' +
+                '<input id="name4" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px"> ' +
+                '</div> ' +
+                '</form> </div>  </div>',
+            buttons: {
+                success: {
+                    label: "Save",
+                    className: "btn-success",
+                    callback: function () {
+                        var name1 = $('#name1').val();
+                        var name2 = $('#name2').val();
+                        var name3 = $('#name3').val();
+                        var name4 = $('#name4').val();
+                        var pid=$('#pid').val();
+                       
+                        var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4;
+                        window.location.replace(location1);
+                       
+                    }
+                }
+            }
+        });
+           
+	});      
+	   
+ 
+	
+	</script>
       
 
     

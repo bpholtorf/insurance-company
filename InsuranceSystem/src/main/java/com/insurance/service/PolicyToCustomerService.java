@@ -45,5 +45,9 @@ public class PolicyToCustomerService {
 		}
 		return list1;
 	}
+	
+	public void deletePolicyToCustomer(int pid,int cid){
+		pcDao.deletePolicyToCustomer(pid, cid);
+	}
 
 }

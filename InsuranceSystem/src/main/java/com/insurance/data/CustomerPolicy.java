@@ -12,23 +12,25 @@ public class CustomerPolicy {
 	private int pid;
 	private String policyNumber;
 	private Double premium;
-	private Double deductibleLeft;
-	private Double amountLeft;
+	private Double hamountLeft;
+	private Double pamountLeft;
 	private Date dateFrom;
 	private Date dateTo;
 	private String cname;
+	private String SSN;
 	
-	public CustomerPolicy(int cid,int pid,String policyNumber,double premium,double deductibleLeft,double amountLeft,Date dateFrom,Date dateTo,String cname){
+	public CustomerPolicy(int cid,int pid,String policyNumber,double premium,double pamountLeft,double hamountLeft,Date dateFrom,Date dateTo,String cname,String SSN){
 		super();
 		this.cid=cid;
 		this.pid=pid;
 		this.policyNumber=policyNumber;
 		this.premium=premium;
-		this.deductibleLeft=deductibleLeft;
-		this.amountLeft=amountLeft;
+		this.hamountLeft=hamountLeft;
+		this.pamountLeft=pamountLeft;
 		this.dateFrom=dateFrom;
 		this.dateTo=dateTo;
 		this.cname=cname;
+		this.SSN=SSN;
 		
 	}
 	
@@ -60,18 +62,18 @@ public class CustomerPolicy {
 		this.premium=premium;
 	}
 	
-	public Double getDeductibleLeft(){
-		return deductibleLeft;
+	public Double getHamountLeft(){
+		return hamountLeft;
 	}
-	public void setDeductibleLeft(Double deductibleLeft){
-		this.deductibleLeft=deductibleLeft;
+	public void setHamountLeft(Double hAmountLeft){
+		this.hamountLeft=hAmountLeft;
 	}
 	
-	public Double getAmountLeft(){
-		return amountLeft;
+	public Double getPamountLeft(){
+		return pamountLeft;
 	}
-	public void setAmountLeft(Double amountLeft){
-		this.amountLeft=amountLeft;
+	public void setPamountLeft(Double pamountLeft){
+		this.pamountLeft=pamountLeft;
 	}
 	
 	public Date getDateFrom(){
@@ -93,6 +95,13 @@ public class CustomerPolicy {
 	}
 	public void setCname(String cname){
 		this.cname=cname;
+	}
+	
+	public String getSSN(){
+		return SSN;
+	}
+	public void setSSN(String SSN){
+		this.SSN=SSN;
 	}
 	
 }

@@ -27,11 +27,11 @@ public class PolicyDB implements Serializable{
 	@Column(name="payPeriod")
 	private int payPeriod;
 	
-	@Column(name="amount")
-	private Double amount;
+	@Column(name="pamount")
+	private Double pamount;
 	
-	@Column(name="deductible")
-	private Double deductible;
+	@Column(name="hamount")
+	private Double hamount;
 	
 	@Column(name="premiumPercent")
 	private Double premiumPercent;
@@ -71,18 +71,18 @@ public class PolicyDB implements Serializable{
 		this.payPeriod=payPeriod;
 	}
 	
-	public Double getAmount(){
-		return amount;
+	public Double getPamount(){
+		return pamount;
 	}
-	public void setAmount(Double amount){
-		this.amount=amount;
+	public void setPamount(Double pamount){
+		this.pamount=pamount;
 	}
 	
-	public Double getDeductible(){
-		return deductible;
+	public Double getHamount(){
+		return hamount;
 	}
-	public void setDeductible(Double deductible){
-		this.deductible=deductible;
+	public void setHamount(Double hamount){
+		this.hamount=hamount;
 	}
 	
 	public Double getPremiumPercent(){

@@ -11,6 +11,14 @@
 
 <title>DASHGUM - Bootstrap Admin Template</title>
 
+
+<!--external css-->
+<link href="/InsuranceSystem/pages/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	href="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/css/datepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.css" />
+
 <!-- Bootstrap core CSS -->
 <link href="/InsuranceSystem/pages/assets/css/bootstrap.css"
 	rel="stylesheet">
@@ -204,7 +212,7 @@ form {
 							class="fa fa-user"></i> <span>Customer</span>
 					</a>
 						<ul class="sub">
-							<li  class="active"><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
+							<li  class="active"><a  href="<c:url value='/customer/viewAll' />">Customer List</a></li>
 							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
 
 						</ul></li>
@@ -217,7 +225,7 @@ form {
 
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-book"></i> <span>Policy</span>
+							class="fa fa-book"></i> <span>Customer Policy</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
@@ -255,21 +263,59 @@ form {
 											<form class="navbar-form" role="search" action="searchCustomer">
 											
 												<div class="input-group" style="margin-top: -15px">
-												<select class="form-control" id="sel1" style="width: 40%; margin-right: 14px" name="type">
+												<select class="form-control" id="sel1" style="width: 40%; margin-right: 14px" name="type" onchange="myFunction()">
 													<c:choose>
-															<c:when test="${type == 'SSN'}">
+															<c:when test="${type == 'Date of Birth'}">
 	                          									<option>SSN</option>
-														        <option>Name</option>
+														       <option>Name</option>
+														       <option selected="selected">Date of Birth</option>
+	                                                        </c:when>
+	                                                        <c:when test="${type == 'Name'}">
+	                          									<option>SSN</option>
+														        <option selected="selected">Name</option>
+														        <option>Date of Birth</option>
 	                                                        </c:when>
 															<c:otherwise>
-	       													  <option>SSN</option>
-														       <option selected="selected">Name</option>
+	       													  <option selected="selected">SSN</option>
+														       <option>Name</option>
+														       <option >Date of Birth</option> 
 	                                                        </c:otherwise>
 														</c:choose>
-													
-												</select> <input type="text" class="form-control"
-													placeholder="Search" name="keyword" style="width: 55%"
-													value="${keyword }">
+												</select>
+												<c:choose>
+												
+												<c:when test="${empty keyword1 && empty keyword}">
+												<input id="1" type="text" class="form-control"
+													placeholder="Search" name="keyword" style="width: 55%;display:block"
+													value="${keyword }" />
+													<fmt:formatDate  value="${keyword1 }" type="date" 
+								pattern="MM/dd/yyyy" var="theFormattedDate" />
+										<input class="form-control" id="datepicker"
+											 name="keyword" style="width: 55%;display:none"
+													value="${theFormattedDate}" type="text"  disabled/> 
+												</c:when>
+												
+												<c:when test="${empty keyword1 && not empty keyword}">	
+												<input id="1" type="text" class="form-control"
+													placeholder="Search" name="keyword" style="width: 55%;display:block"
+													value="${keyword }" />
+												<fmt:formatDate  value="${keyword1 }" type="date" 
+								pattern="MM/dd/yyyy" var="theFormattedDate" />
+										<input class="form-control" id="datepicker"
+											 name="keyword" style="width: 55%;display:none"
+													value="${theFormattedDate}" type="text" disabled/> 	
+													</c:when>
+												<c:when test="${empty keyword && not empty keyword1}">
+												<input id="1" type="text" class="form-control"
+													placeholder="Search" name="keyword" style="width: 55%;display:none"
+													value="${keyword }" />		
+												 <fmt:formatDate  value="${keyword1 }" type="date" 
+								pattern="MM/dd/yyyy" var="theFormattedDate" />
+										<input class="form-control" id="datepicker"
+											 name="keyword" style="width: 55%;display:block"
+													value="${theFormattedDate}" type="text" /> 
+												</c:when>
+												</c:choose>	
 												<div class="input-group-btn">
 													<button class="btn btn-default" type="submit"
 														style="padding: 9">
@@ -364,14 +410,68 @@ form {
 	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js"
 		type="text/javascript"></script>
 
-
-	<!--common script for all pages-->
+<!--common script for all pages-->
 	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
 
 	<!--script for this page-->
+	<script src="/InsuranceSystem/pages/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<!--custom switch-->
+	<script src="/InsuranceSystem/pages/assets/js/bootstrap-switch.js"></script>
+
+	<!--custom tagsinput-->
+	<script src="/InsuranceSystem/pages/assets/js/jquery.tagsinput.js"></script>
+
+	<!--custom checkbox & radio-->
+	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap.js"></script>
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/date.js"></script>
+
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+ <script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
+	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>
+
+
+	
 
 	<script>
 		//custom select box
+function myFunction(){
+	$("#1").val("");
+	$("#datepicker").val("");
+			if($("#sel1").val()=='Date of Birth'){
+				$("#datepicker").datepicker();
+				$("#1").css({
+                    'display':'none'
+                });
+				$("#1").prop('disabled',true);
+			$("#datepicker").css({
+                'display':'block'
+            });
+			$("#datepicker").prop('disabled',false);
+			}
+			else{
+				$("#datepicker").prop('disabled',true);
+				$("#1").css({
+                    'display':'block'
+                });
+				$("#1").prop('disabled',false);
+			$("#datepicker").css({
+                'display':'none'
+            });
+			
+			
+			}
+			
+		}
+		
 	</script>
 
 </body>

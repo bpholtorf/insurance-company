@@ -216,7 +216,7 @@
 
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-book"></i> <span>Policy</span>
+							class="fa fa-book"></i> <span>Customer Policy</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
@@ -251,7 +251,8 @@
 					<div class="col-lg-12">
 						<div class="form-panel">
 							<h4 class="mb">
-								<i class="fa fa-angle-right"></i> Staff Information
+								<i class="fa fa-angle-right"></i> Staff Information 
+								<label style="font-size: 14px; color: #a94442">(All fields are required)</label>
 							</h4>
 							<c:url var="addAction" value="/staff/add"></c:url>
 							<form:form action="${addAction}" 
@@ -303,7 +304,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">SSN</label>
 									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="SSN"/>
+										<form:input type="text" class="form-control" path="SSN" placeholder="000000000"/>
 										<form:errors path="SSN" class="error"></form:errors>
 									</div>
 								</div>
@@ -319,14 +320,14 @@
 										Number</label>
 									<div class="col-lg-5">
 										<form:input type="text" class="form-control"
-											path="phoneNumber" data-validate="required,number"/>
+											path="phoneNumber" data-validate="required,number" placeholder="0000000000"/>
 									    <form:errors path="phoneNumber" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Email</label>
 									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="email" />
+										<form:input type="text" class="form-control" path="email" placeholder="contact@example.com"/>
 										<form:errors path="email" class="error"></form:errors>
 									</div>
 								</div>

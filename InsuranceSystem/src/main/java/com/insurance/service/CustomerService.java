@@ -1,5 +1,7 @@
 package com.insurance.service;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,9 @@ public class CustomerService {
 
 	public List<CustomerDB> searchBySSN(String keyword) {
 		return CustomerDao.searchBySSN(keyword);
+	}
+	public List<CustomerDB> searchByDateofBirth(String keyword) throws ParseException {
+		return CustomerDao.searchByDateofBirth(keyword);
 	}
 
 	public List<CustomerDB> searchByName(String pattern) {

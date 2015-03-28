@@ -7,20 +7,20 @@ public class PolicyAdded {
 	private String policyNumber;
 	private String planType;
 	private int payPeriod;
-	private Double amount;
-	private Double deductible;
+	private Double pamount;
+	private Double hamount;
 	private Double premiumPercent;
 	private String check;
 	
-	public PolicyAdded(int id,String policyName,String policyNumber,String planType,int payPeriod,double amount,double deductible,double premiumPercent,String check){
+	public PolicyAdded(int id,String policyName,String policyNumber,String planType,int payPeriod,double pamount,double hamount,double premiumPercent,String check){
 		super();
 		this.id=id;
 		this.policyName=policyName;
 		this.policyNumber=policyNumber;
 		this.planType=planType;
 		this.payPeriod=payPeriod;
-		this.amount=amount;
-		this.deductible=deductible;
+		this.pamount=pamount;
+		this.hamount=hamount;
 		this.premiumPercent=premiumPercent;
 		this.check=check;
 	}
@@ -60,18 +60,18 @@ public class PolicyAdded {
 		this.payPeriod=payPeriod;
 	}
 	
-	public Double getAmount(){
-		return amount;
+	public Double getPamount(){
+		return pamount;
 	}
-	public void setAmount(Double amount){
-		this.amount=amount;
+	public void setPamount(Double pamount){
+		this.pamount=pamount;
 	}
 	
-	public Double getDeductible(){
-		return deductible;
+	public Double getHamount(){
+		return hamount;
 	}
-	public void setDeductible(Double deductible){
-		this.deductible=deductible;
+	public void setHamount(Double hamount){
+		this.hamount=hamount;
 	}
 	
 	public Double getPremiumPercent(){

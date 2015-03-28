@@ -46,11 +46,11 @@ public class StaffDao {
 
 		session.close();
 	}
-	public void deleteStaff(Integer id){
+	public void deleteStaff1(String username ){
 		Session session = this.sessionFactory.openSession();
-		Query query = session.createQuery("update StaffDB set able=: able where id = :id");
+		Query query = session.createQuery("update StaffDB set able= :able where username = :username");
 		query.setParameter("able", 0);
-		query.setParameter("id", id);
+		query.setParameter("username", username);
 		query.executeUpdate();
 		session.close();
 	}

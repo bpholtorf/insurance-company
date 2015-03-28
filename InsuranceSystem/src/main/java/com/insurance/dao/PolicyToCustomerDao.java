@@ -40,5 +40,14 @@ public class PolicyToCustomerDao {
 		session.close();
 	}
 	
+	public void deletePolicyToCustomer(int pid,int cid){
+		Session session = this.sessionFactory.openSession();
+		Query query = session.createQuery("delete PolicyToCustomerDB where pid = :pid AND cid= :cid");
+		query.setParameter("pid", pid);
+		query.setParameter("cid", cid);
+		query.executeUpdate();
+		session.close();
+	}
+	
 
 }

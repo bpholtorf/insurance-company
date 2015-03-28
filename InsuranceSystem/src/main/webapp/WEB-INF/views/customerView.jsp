@@ -250,7 +250,7 @@
                   <li class="sub-menu">
                       <a  href="javascript:;" >
                           <i class="fa fa-book"></i>
-                          <span>Policy</span>
+                          <span>Customer Policy</span>
                       </a>
                       <ul class="sub">
                           <li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>

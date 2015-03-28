@@ -21,8 +21,7 @@
     <!--external css-->
     <link href="/InsuranceSystem/pages/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/css/datepicker.css" />
-    <link rel="stylesheet" type="text/css" href="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.css" />
-        
+    
     <!-- Custom styles for this template -->
     <link href="/InsuranceSystem/pages/assets/css/style.css" rel="stylesheet">
     <link href="/InsuranceSystem/pages/assets/css/style-responsive.css" rel="stylesheet">
@@ -228,31 +227,29 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-user"></i>
+                      <a class="active" href="javascript:;" >
+                          <i class="fa fa-cogs"></i>
                           <span>Customer</span>
                       </a>
                       <ul class="sub">
 							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
 							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
-							<li><a  href="<c:url value='/requestAddCustomer' />">Edit Customer</a></li>
+							<li class="active"><a  href="<c:url value='/requestAddCustomer' />">Edit Customer</a></li>
                           
                       </ul>
                   </li>
-					<li class="sub-menu">
-					<a class="active" href="javascript:;"> <i
-							class="fa fa-bars"></i> <span>Insurance Policy</span>
+                  <li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-cogs"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
 							<li ><a href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
-							<li class="active" ><a href="<c:url value='/requestAddInsurancePolicy' />">Edit Insurance Policy</a></li>
 
 						</ul></li>
                   <li class="sub-menu">
                       <a  href="javascript:;" >
                           <i class="fa fa-book"></i>
-                          <span>Customer Policy</span>
+                          <span>Policy</span>
                       </a>
                       <ul class="sub">
                           <li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
@@ -265,9 +262,9 @@
                           <span>Insurance</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="basic_table.html">Basic Table</a></li>
-                          <li><a  href="responsive_table.html">Responsive Table</a></li>
-                      </ul>
+							<li><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
+							<li><a href="responsive_table.html">Responsive Table</a></li>
+						</ul>
                   </li>
 
               </ul>
@@ -280,90 +277,67 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
-      <section id="main-content">
+     <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Edit Insurance Policy</h3>
-  
-          	<!-- INPUT MESSAGES -->
-          	<div class="row mt">
-          		<div class="col-lg-12">
-          			<div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Insurance Policy Information</h4>
-                  	      <c:url var="updateAction" value="/insurancePolicy/update/${insurancePolicy.id}" ></c:url>
-                          <form:form action="${updateAction}" class="form-horizontal tasi-form" method="POST" modelAttribute="insurancePolicy">
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Insurance Policy Id</label>
-                                  <div class="col-lg-5">
-                                      <form:input type="text"  readonly="true"  class="form-control" path="id"/>
-                                  </div>
-                                      <form:hidden path="id"/>
-                              </div>                     
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Policy Name</label>
-									<div class="col-lg-5 form-inline">
-										<form:input type="text" class="form-control" path="policyName"
-											placeholder="Policy Name" />
+          	<h3><i class="fa fa-angle-right"></i> Add Claim From Customer</h3>
+		  		<div class="row mt">
+			  		<div class="col-lg-12">
+                      <div class="content-panel">
+							          
+                       <div class="form-group">
+                       <label class="col-sm-2 control-label col-lg-2" style="width:11%;font-size:15px;margin-top:6px">Customer ID</label>
+									<div class="col-lg-3">
+										<input type="text" class="form-control" name="cid" id="cid" />
 									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Policy Number</label>
-									<div class="col-lg-5 form-inline">
-										<form:input type="text" class="form-control" path="policyNumber"
-											placeholder="Policy Number" />
+									<button class="btn btn-theme" onclick="searchCustomer();">Submit</button>
 									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Plan Type</label>
-									<div class="col-lg-5">
-										<form:select class="form-control" path="planType">
-							                <form:options items="${planTypes}"/>
-										</form:select>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Pay Period (in months)</label>
-									<div class="col-lg-5">
-										<form:select class="form-control" path="payPeriod">
-							                <form:options items="${payPeriods}"/>
-										</form:select>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Premium</label>
-									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="premiumPercent" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Max Hospital Amount</label>
-									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="hAmount" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Max Pharmacy Amount</label>
-									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="pAmount" />
-									</div>
-								</div>
-                              <div class="form-group">              
-                                  <button type="submit" class="btn btn-theme" style="left:300px;position:relative">Submit</button>            
-                              </div><!-- /showback -->
-                          </form:form>
-          			</div><!-- /form-panel -->
-          		</div><!-- /col-lg-12 -->
-          	</div><!-- /row -->
-          	
-          	
-          	
-          	
-          	
+					
+                      
+                     
+                  </div><!-- /content-panel -->
+               
+               <div class=" content-panel " id="customerInfo" style="display:none"> 
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Name:</td>
+                        <td id="name">Programming</td>          
+                        <td>SSN:</td>
+                        <td id="ssn">06/23/2013</td>
+                      </tr>
+                      <tr>
+                        <td >Date of Birth:</td>
+                        <td id="dateOfBirth">01/24/1988</td>
+                        <td >Gender</td>
+                        <td id="gender">Male</td>
+                      </tr>
+                      <tr>
+                        <td>Home Address:</td>
+                        <td id="address">Metro Manila,Philippines</td>
+                     
+                        <td>Email:</td>
+                        <td id="email"><a href="mailto:info@support.com">info@support.com</a></td>
+                      </tr>
+                      <tr>
+                        <td>Phone Number:</td>
+                        <td id="phoneNumber">123-4567-890</td>                                                  
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+                  <a class="btn btn-primary" style="margin-left:280px" onclick="searchPolicy();">Add Claim</a>
+                  </div>
+                  </div><!-- /col-lg-4 -->			
+		  	</div><!-- /row -->
+		  	
+		  	
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
 
       <!--main content end-->
       <!--footer start-->
-      <footer class="site-footer">
+      <footer class="site-footer"
+			style="position: absolute; left: 210px; top: 800px; width: 1000px">
           <div class="text-center">
               2014 - Alvarez.is
               <a href="form_component.html#" class="go-top">
@@ -397,23 +371,52 @@
 	<!--custom checkbox & radio-->
 	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap.js"></script>
 	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/date.js"></script>
-
-	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
+	
 	
 	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 	
 	
 	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>    
+	
+   
+<script type="text/javascript"> 
+      
+
+
+    function searchCustomer(){
+    	 
+    	 var cid=$("#id").val();
+    	 $.ajax({
+    		 type:"get",
+    	     url:"/InsuranceSystem/customer/findById",
+    	     data:'cid='+$("#cid").val(),
+    	     success:function(response){
+    	    	 
+    	    	 console.log(response);
+    	    	 $('#name').html(response.firstName+' '+response.lastName);
+    	    	 $('#ssn').html(response.ssn);
+    	    	 $('#dateOfBirth').html(response.dateOfBirth);
+    	    	 $('#gender').html(response.gender);
+    	    	 $('#address').html(response.address);
+    	    	 $('#email').html(response.email);
+    	    	 $('#phoneNumber').html(response.phoneNumber);
+    	    	 $("#customerInfo").css("display", "block");
+    	    	 
+    	     },
+    	     error: function(jqXHR, textStatus, errorThrown) {
+    	    	 
+    	    	  console.log('####'+textStatus, errorThrown);
+    	    	}
+    	 });
+    	 
+    };
+    function searchPolicy(){
+    	window.location.href="/InsuranceSystem/claim/searchPolicies/"+$("#cid").val();
+    };
     
+ </script>     
+
     
-  <script>
-      //custom select box
-  
-     $(function(){
-     $("#datepicker").datepicker();
-      });
-  </script>
 
   </body>
 </html>

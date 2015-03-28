@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.insurance.validator.Password;
 import com.insurance.validator.Phone;
 import com.insurance.validator.Username;
-
+import com.insurance.validator.SSN;
 
 
 
@@ -55,6 +55,7 @@ public class StaffDB implements Serializable{
 	@Column(name="SSN")
 	@NotEmpty(message="Please input the SSN")
 	@Pattern(regexp="\\d{9}",message="SSN should be 9 digits without space and dash")
+	@SSN(message="SSN already exsits",entity=SSN.class)
 	private String SSN;
 	
 	@Column(name="address")
@@ -77,6 +78,9 @@ public class StaffDB implements Serializable{
 	
 	@Column(name="gender")
 	private String gender;
+	
+	@Column(name="able")
+	private int able;
 	
 	@Column(name="name")
 	private String name;
@@ -160,6 +164,13 @@ public class StaffDB implements Serializable{
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	
+	public int getAble(){
+		return able;
+	}
+	public void setAble(int able){
+		this.able=able;
 	}
 	
 }
