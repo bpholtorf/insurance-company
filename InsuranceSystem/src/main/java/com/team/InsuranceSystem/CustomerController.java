@@ -18,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.insurance.data.CustomerDB;
-import com.insurance.data.StaffDB;
 import com.insurance.service.CustomerService;
-import com.insurance.util.Cryption;
 
 @Controller
 public class CustomerController {
@@ -34,7 +32,10 @@ public class CustomerController {
 		return "addCustomer";
 	  }
 
-	  customerService.addCustomer(c); 
+	  if(!customerService.addCustomer(c)){
+		  return "addCustomer";
+	  }
+
 	  return "redirect:/customer/viewAll";
   }
   @RequestMapping(value="/customer/viewAll",method=RequestMethod.GET)

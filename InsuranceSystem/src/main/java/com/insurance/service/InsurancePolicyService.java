@@ -52,6 +52,10 @@ public class InsurancePolicyService {
 		InsurancePolicyDao.updateInsurancePolicy(insurancePolicy);
 	}
 	
+	public List<InsurancePolicyDB> checkPolicyID(String name) {
+		return InsurancePolicyDao.checkPolicyID(name);
+	}
+	
 
 
 	public List<InsurancePolicyDB> searchByNumber(String keyword) {

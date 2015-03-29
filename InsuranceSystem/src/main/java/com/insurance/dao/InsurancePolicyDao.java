@@ -86,6 +86,7 @@ public class InsurancePolicyDao {
 			return list.get(0);
 		}
 		
+		
 		public List<InsurancePolicyDB> searchByNumber(String keyword) {
 			Session session = sessionFactory.openSession();
 
@@ -94,6 +95,21 @@ public class InsurancePolicyDao {
 				String hqlString = "FROM InsurancePolicyDB where policyNumber= :policyNumber";
 				Query query = session.createQuery(hqlString);
 				query.setString("policyNumber", keyword);
+				list = query.list();
+				return list;
+			} finally {
+				session.close();
+			}
+		}
+		
+		public List<InsurancePolicyDB> checkPolicyID(String name) {
+			Session session = sessionFactory.openSession();
+
+			List<InsurancePolicyDB> list = new ArrayList<InsurancePolicyDB>();
+			try {
+				String hqlString = "FROM InsurancePolicyDB where policyName = :policyName";
+				Query query = session.createQuery(hqlString);
+				query.setString("policyName", name);
 				list = query.list();
 				return list;
 			} finally {

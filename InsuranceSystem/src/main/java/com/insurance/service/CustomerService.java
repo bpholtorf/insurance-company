@@ -34,9 +34,9 @@ public class CustomerService {
 	{
 		return CustomerDao.findAll();
 	}
-	public void addCustomer(CustomerDB CustomerDB)
+	public boolean addCustomer(CustomerDB CustomerDB)
 	{
-		CustomerDao.addCustomer(CustomerDB);
+		return CustomerDao.addCustomer(CustomerDB);
 	}
 	public void deleteCustomer(Integer id)
 	{

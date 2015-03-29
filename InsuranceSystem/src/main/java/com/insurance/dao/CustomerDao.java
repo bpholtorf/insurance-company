@@ -31,13 +31,27 @@ public class CustomerDao {
 		return list;
 	}
 	
-	public void addCustomer(CustomerDB Customer){
-		Session session = this.sessionFactory.openSession();
-		Transaction transaction = session.getTransaction();
-		transaction.begin();
-		session.save(Customer);
-		transaction.commit();
-		session.close();
+	private boolean isUniqueSSN(String ssn){
+		List<CustomerDB> customers = listCustomer();
+		for(CustomerDB c : customers){
+			if(c.getSSN().equals(ssn)){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean addCustomer(CustomerDB Customer){
+		if(isUniqueSSN(Customer.getSSN())){
+			Session session = this.sessionFactory.openSession();
+			Transaction transaction = session.getTransaction();
+			transaction.begin();
+			session.save(Customer);
+			transaction.commit();
+			session.close();
+			return true;
+		}
+		return false;
 	}
 	
 	public void deleteCustomer(Integer id){
