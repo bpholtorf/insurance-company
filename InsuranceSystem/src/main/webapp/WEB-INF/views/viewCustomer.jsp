@@ -12,6 +12,15 @@
 <title>DASHGUM - Bootstrap Admin Template</title>
 
 <!-- Bootstrap core CSS -->
+<link href="/InsuranceSystem/pages/assets/css/bootstrap.css" rel="stylesheet">
+<!--external css-->
+<link href="/InsuranceSystem/pages/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	href="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/css/datepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.css" />
+
+<!-- Bootstrap core CSS -->
 <link href="/InsuranceSystem/pages/assets/css/bootstrap.css"
 	rel="stylesheet">
 <!--external css-->
@@ -275,7 +284,7 @@ form {
 														</c:choose>
 												</select>
 												<c:choose>
-												<c:when test="${empty keyword1 && empty keyword}">
+												<c:when test="${empty keyword1 && empty keyword}"> 
 												<input id="1" type="text" class="form-control"
 													placeholder="Search" name="keyword" style="width: 55%;display:block"
 													value="${keyword }" />
@@ -286,7 +295,7 @@ form {
 													value="${theFormattedDate}" type="text"  disabled/> 
 												</c:when>
 												
-												<c:when test="${empty keyword1 && not empty keyword}">	
+												 <c:when test="${empty keyword1 && not empty keyword}">	
 												<input id="1" type="text" class="form-control"
 													placeholder="Search" name="keyword" style="width: 55%;display:block"
 													value="${keyword }" />
@@ -306,7 +315,7 @@ form {
 											 name="keyword" style="width: 55%;display:block"
 													value="${theFormattedDate}" type="text" /> 
 												</c:when>
-												</c:choose>	
+												</c:choose>	 
 												<div class="input-group-btn">
 													<button class="btn btn-default" type="submit"
 														style="padding: 9">
@@ -403,13 +412,40 @@ form {
 		type="text/javascript"></script>
 	<script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
 
+<!--custom checkbox & radio-->
+	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap.js"></script>
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/date.js"></script>
+
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+    <script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
+	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>
+
 
 	<!--common script for all pages-->
-	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
+
     <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
 	<!--script for this page-->
 
 
+<!--common script for all pages-->
+	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
+
+	<!--script for this page-->
+	<script src="/InsuranceSystem/pages/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<!--custom switch-->
+	<script src="/InsuranceSystem/pages/assets/js/bootstrap-switch.js"></script>
+
+	<!--custom tagsinput-->
+	<script src="/InsuranceSystem/pages/assets/js/jquery.tagsinput.js"></script>
 	<script>
 
 	$("a[class='btn btn-danger btn-xs']").click(function(e) {
@@ -426,15 +462,17 @@ function myFunction(){
 	$("#1").val("");
 	$("#datepicker").val("");
 			if($("#sel1").val()=='Date of Birth'){
+				console.log($("#sel1").val());
+				$("#datepicker").css({
+	                'display':'block'
+	            });
+				$("#datepicker").prop('disabled',false);
 				$("#datepicker").datepicker();
 				$("#1").css({
                     'display':'none'
                 });
 				$("#1").prop('disabled',true);
-			$("#datepicker").css({
-                'display':'block'
-            });
-			$("#datepicker").prop('disabled',false);
+			
 			}
 			else{
 				$("#datepicker").prop('disabled',true);

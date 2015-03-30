@@ -35,11 +35,11 @@ public class InsurancePolicyDB implements Serializable{
 	private Double premiumPercent;
 	
 
-<<<<<<< Updated upstream
+
 	@Column(name="pamount")
 	@NotNull(message="Please input the max pharmacy coverage")
 	private Double pamount;
-=======
+
 	@Column(name="hamount")
 	@NotNull(message="Please input the max hospital amount")
 	private Double hamount;
@@ -47,7 +47,7 @@ public class InsurancePolicyDB implements Serializable{
 	@Column(name="pAmount")
 	@NotNull(message="Please input the max pharmacy coverage")
 	private Double pAmount;
->>>>>>> Stashed changes
+
 
 	
 	@Column(name="policyNumber")
@@ -58,21 +58,12 @@ public class InsurancePolicyDB implements Serializable{
 	@Column(name="payPeriod")
 	private Integer payPeriod;
 	
-<<<<<<< Updated upstream
-	@Column(name="hamount")
-	@NotNull(message="Please input the max hospital coverage")
-	private Double hamount;
-=======
-
-	@Column(name="pamount")
-	@NotNull(message="Please input the max pharmacy amount")
-	private Double pamount;
 
 	@Column(name="hAmount")
 	@NotNull(message="Please input the max hospital coverage")
 	private Double hAmount;
 
->>>>>>> Stashed changes
+
 	
 	
 	public Integer getId() {
@@ -107,18 +98,14 @@ public class InsurancePolicyDB implements Serializable{
 		this.premiumPercent = premiumPercent;
 	}
 
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 	public Double getHamount() {
 		return hamount;
 	}
 
 	public void setHamount(Double hamount) {
 		this.hamount = hamount;
-<<<<<<< Updated upstream
-=======
+
 	}
 
 	public Double getpAmount() {
@@ -128,7 +115,6 @@ public class InsurancePolicyDB implements Serializable{
 	public void setpAmount(Double pAmount) {
 		this.pAmount = pAmount;
 
->>>>>>> Stashed changes
 	}
 
 	public String getPolicyNumber() {
@@ -147,18 +133,14 @@ public class InsurancePolicyDB implements Serializable{
 		this.payPeriod = payPeriod;
 	}
 
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 	public Double getPamount() {
 		return pamount;
 	}
 
 	public void setPamount(Double pamount) {
 		this.pamount = pamount;
-<<<<<<< Updated upstream
-=======
+
 	}
 
 	public Double gethAmount() {
@@ -168,7 +150,6 @@ public class InsurancePolicyDB implements Serializable{
 	public void sethAmount(Double hAmount) {
 		this.hAmount = hAmount;
 
->>>>>>> Stashed changes
 	}
 
 
