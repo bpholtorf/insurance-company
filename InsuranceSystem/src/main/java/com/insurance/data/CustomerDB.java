@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.insurance.validator.Phone;
-import com.insurance.validator.SSNCustomer;
+import com.insurance.validator.Username;
 
 @Entity
 @Table(name="customer")
@@ -64,10 +64,9 @@ public class CustomerDB implements Serializable{
 	@Column(name="gender")
 	private String gender;
 	
-	@Column(name="SSN")
+	@Column(name="SSN", unique = true)
 	@NotEmpty(message="Please input the SSN")
 	@Pattern(regexp="\\d{9}",message="SSN should be 9 digits without space and dash")
-	@SSNCustomer(message="SSN already exsits",entity=SSNCustomer.class)
 	private String SSN;
 
 	public Integer getId(){

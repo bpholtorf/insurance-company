@@ -15,7 +15,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.insurance.data.CustomerDB;
 import com.insurance.data.StaffDB;
@@ -53,11 +51,9 @@ public class CustomerController {
 	 return "viewCustomer";
   }
   @RequestMapping("/customer/delete/{id}")
-  public String deleteCustomer(@PathVariable("id") Integer id, ModelMap map)
+  public String deleteCustomer(@PathVariable("id") Integer id)
   {
-	  if(!customerService.deleteCustomer(id)){
-		  map.addAttribute("errorMsg","Cannot delete a customer that has an insurance policy."); 
-	  }
+	  customerService.deleteCustomer(id);
 	  return "redirect:/customer/viewAll";
   }
   @RequestMapping("/customer/edit/{id}")
@@ -110,7 +106,7 @@ public class CustomerController {
 		  model.addAttribute("keyword",keyword);
 	  }else if (type.equals("Date of Birth")) {
 		  SimpleDateFormat dt=new SimpleDateFormat("MM/dd/yyyy");
-		  SimpleDateFormat dt1=new SimpleDateFormat("yyyy-MM-dd");
+		  SimpleDateFormat dt1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date=dt.parse(keyword);
 			String date1=dt1.format(date);	
 		 

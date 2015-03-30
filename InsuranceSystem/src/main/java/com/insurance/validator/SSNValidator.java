@@ -33,8 +33,7 @@ public class SSNValidator implements ConstraintValidator<SSN, String>{
 		String sqlString="SELECT * FROM Staff where SSN="+"'"+value+"'";
 		Connection conn=null;
 		try {
-			System.out.println(dataSource);
-			System.out.println("SSN:" + value);
+			System.out.print(dataSource);
 			conn=dataSource.getConnection();
 			PreparedStatement ps=conn.prepareStatement(sqlString);
 			ResultSet rs=ps.executeQuery();
