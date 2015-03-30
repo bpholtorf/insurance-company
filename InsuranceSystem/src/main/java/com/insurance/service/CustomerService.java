@@ -40,9 +40,9 @@ public class CustomerService {
 	{
 		CustomerDao.addCustomer(CustomerDB);
 	}
-	public void deleteCustomer(Integer id)
+	public boolean deleteCustomer(Integer id)
 	{
-		CustomerDao.deleteCustomer(id);
+		return CustomerDao.deleteCustomer(id);
 	}
 
 	public CustomerDB findById(Integer id) {

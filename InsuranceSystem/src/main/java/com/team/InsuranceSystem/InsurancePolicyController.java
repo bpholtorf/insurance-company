@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,9 +45,11 @@ public class InsurancePolicyController {
 	 return "viewInsurancePolicy";
   }
   @RequestMapping("/insurancePolicy/delete/{id}")
-  public String deleteInsurancePolicy(@PathVariable("id") Integer id)
+  public String deleteInsurancePolicy(@PathVariable("id") Integer id, ModelMap map)
   {
-	  insurancePolicyService.deleteInsurancePolicy(id);
+	  if(!insurancePolicyService.deleteInsurancePolicy(id)){
+		  map.addAttribute("errMessage","Cannot delete an insurance policy that is held by a customer.");
+	  }
 	  return "redirect:/insurancePolicy/viewAll";
   }
   @RequestMapping("/insurancePolicy/edit/{id}")
@@ -69,7 +72,7 @@ public class InsurancePolicyController {
   {
 	  if (result.hasErrors()) {
 		  model.addAttribute("insurancePolicy",insurancePolicyService.findById(id));
-		  return "addInsurancePolicy";
+		  return "insurancePolicy";
 	  }
 	  
 	  this.insurancePolicyService.updateInsurancePolicy(i);

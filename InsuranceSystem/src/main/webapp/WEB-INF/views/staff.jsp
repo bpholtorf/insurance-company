@@ -308,7 +308,7 @@
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">SSN</label>
                                   <div class="col-lg-5">
-                                      <form:input type="text" class="form-control" path="SSN"/>
+                                      <form:input type="text" class="form-control" path="SSN" readonly="true"/>
                                   </div>
                               </div>
                               <div class="form-group">

@@ -311,8 +311,8 @@ form {
 															</button>
 														</form>
 														<form method="post" action="delete/${insurancePolicy.id }">
-															<button class="btn btn-danger btn-xs" title="Delete Policy"  onclick="return confirm('Are you sure you want to continue?')">
-																<i class="fa fa-trash-o "></i>
+															<a href="delete/${insurancePolicy.id }" title="Delete Staff" id="confirm" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+														</form>
 															</button>
 														</form>
 													</td>
@@ -339,16 +339,6 @@ form {
 
 		<!--main content end-->
 
-		<!--footer start-->
-		<footer class="site-footer"
-			style="position: absolute; left: 210px; top: 800px; width: 1000px">
-			<div class="text-center">
-				2014 - Alvarez.is <a href="basic_table.html#" class="go-top"> <i
-					class="fa fa-angle-up"></i>
-				</a>
-			</div>
-		</footer>
-		<!--footer end-->
 
 	</section>
 
@@ -360,15 +350,25 @@ form {
 	<script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js"
 		type="text/javascript"></script>
+	<script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
 
 
 	<!--common script for all pages-->
 	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
-
+    <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
 	<!--script for this page-->
 
+
 	<script>
-		//custom select box
+	$("a[class='btn btn-danger btn-xs']").click(function(e) {
+	    e.preventDefault();
+	    var location = $(this).attr('href');
+	    
+	    bootbox.confirm("Are you sure?", function(result) {
+	    	if(result)
+	    	window.location.replace(location);
+	    	}); 
+	});    
 	</script>
 
 </body>

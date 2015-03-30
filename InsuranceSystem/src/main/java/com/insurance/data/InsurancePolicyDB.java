@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.insurance.validator.PolicyNumber;
+
 @Entity
 @Table(name="insurance_policy")
 public class InsurancePolicyDB implements Serializable{
@@ -32,32 +34,23 @@ public class InsurancePolicyDB implements Serializable{
 	@NotNull(message="Please input the premium percent")
 	private Double premiumPercent;
 	
-<<<<<<< HEAD
-	@Column(name="hamount")
-	@NotNull(message="Please input the max hospital amount")
-	private Double hamount;
-=======
-	@Column(name="pAmount")
+
+	@Column(name="pamount")
 	@NotNull(message="Please input the max pharmacy coverage")
-	private Double pAmount;
->>>>>>> origin/master
+	private Double pamount;
+
 	
 	@Column(name="policyNumber")
 	@NotEmpty(message="Please input the policy number")
+	@PolicyNumber(message="Policy number already exsits",entity=PolicyNumber.class)
 	private String policyNumber;
 	
 	@Column(name="payPeriod")
 	private Integer payPeriod;
 	
-<<<<<<< HEAD
-	@Column(name="pamount")
-	@NotNull(message="Please input the max pharmacy amount")
-	private Double pamount;
-=======
-	@Column(name="hAmount")
+	@Column(name="hamount")
 	@NotNull(message="Please input the max hospital coverage")
-	private Double hAmount;
->>>>>>> origin/master
+	private Double hamount;
 	
 	
 	public Integer getId() {
@@ -92,21 +85,12 @@ public class InsurancePolicyDB implements Serializable{
 		this.premiumPercent = premiumPercent;
 	}
 
-<<<<<<< HEAD
 	public Double getHamount() {
 		return hamount;
 	}
 
 	public void setHamount(Double hamount) {
 		this.hamount = hamount;
-=======
-	public Double getpAmount() {
-		return pAmount;
-	}
-
-	public void setpAmount(Double pAmount) {
-		this.pAmount = pAmount;
->>>>>>> origin/master
 	}
 
 	public String getPolicyNumber() {
@@ -125,21 +109,12 @@ public class InsurancePolicyDB implements Serializable{
 		this.payPeriod = payPeriod;
 	}
 
-<<<<<<< HEAD
 	public Double getPamount() {
 		return pamount;
 	}
 
 	public void setPamount(Double pamount) {
 		this.pamount = pamount;
-=======
-	public Double gethAmount() {
-		return hAmount;
-	}
-
-	public void sethAmount(Double hAmount) {
-		this.hAmount = hAmount;
->>>>>>> origin/master
 	}
 
 
