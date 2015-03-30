@@ -1,6 +1,5 @@
 package com.insurance.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.insurance.data.InsurancePolicyDB;
-import com.insurance.data.PolicyToCustomerDB;
 import com.insurance.data.StaffDB;
 
 @Repository
@@ -33,41 +31,21 @@ public class InsurancePolicyDao {
 		return list;
 	}
 	
-	public void addInsurancePolicy(InsurancePolicyDB insurancePolicy){
+	public void addInsurancePolicy(InsurancePolicyDB InsurancePolicy){
 		Session session = this.sessionFactory.openSession();
-		Query query=session.createSQLQuery("insert into insurance_policy(planType, policyName, premiumPercent, policyNumber, payPeriod, pamount, hamount) value('"+
-				                        insurancePolicy.getPlanType()+"','"+insurancePolicy.getPolicyName()+"','"+
-		                                  insurancePolicy.getPremiumPercent()+"','"+insurancePolicy.getPolicyNumber()+"','"+insurancePolicy.getPayPeriod()+"','"+
-				                        insurancePolicy.getPamount()+"','"+insurancePolicy.getHamount()+"')");
-		query.executeUpdate();
+		Transaction transaction = session.getTransaction();
+		transaction.begin();
+		session.save(InsurancePolicy);
+		transaction.commit();
 		session.close();
 	}
 	
-	public boolean deleteInsurancePolicy(Integer id){
-		if(!checkForCustomer(id)){
-			Session session = this.sessionFactory.openSession();
-			Query query = session.createQuery("delete InsurancePolicyDB where id = :id");
-			query.setParameter("id", id);
-			query.executeUpdate();
-			session.close();
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean checkForCustomer(Integer pid) {
-		Session session = sessionFactory.openSession();
-
-		List<PolicyToCustomerDB> list = new ArrayList<PolicyToCustomerDB>();
-		try {
-			String hqlString = "FROM PolicyToCustomerDB where pid=:pid";
-			Query query = session.createQuery(hqlString);
-			query.setInteger("pid", pid);
-			list = query.list();
-		} finally {
-			session.close();
-		}
-		return list.size() > 0;
+	public void deleteInsurancePolicy(Integer id){
+		Session session = this.sessionFactory.openSession();
+		Query query = session.createQuery("delete InsurancePolicyDB where id = :id");
+		query.setParameter("id", id);
+		query.executeUpdate();
+		session.close();
 	}
 	
 	 public void updateInsurancePolicy(InsurancePolicyDB InsurancePolicyDB)

@@ -11,6 +11,14 @@
 
 <title>DASHGUM - Bootstrap Admin Template</title>
 
+
+<!--external css-->
+<link href="/InsuranceSystem/pages/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	href="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/css/datepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.css" />
+
 <!-- Bootstrap core CSS -->
 <link href="/InsuranceSystem/pages/assets/css/bootstrap.css"
 	rel="stylesheet">
@@ -275,6 +283,7 @@ form {
 														</c:choose>
 												</select>
 												<c:choose>
+												
 												<c:when test="${empty keyword1 && empty keyword}">
 												<input id="1" type="text" class="form-control"
 													placeholder="Search" name="keyword" style="width: 55%;display:block"
@@ -354,7 +363,9 @@ form {
 																</button>
 															</form>
 															<form method="post" action="delete/${customer.id }">
-																<a href="delete/${customer.id }" id="confirm" title="Delete Customer" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+																<button class="btn btn-danger btn-xs" title="Delete Customer" onclick="return confirm('Are you sure you want to continue?')">
+																	<i class="fa fa-trash-o "></i>
+																</button>
 															</form>
 															<form method="post" action="addPolicy/${customer.id }">
 																<button class="btn btn-info btn-xs" title="Add Policy to Customer">
@@ -376,9 +387,6 @@ form {
 										</c:otherwise>
 									</c:choose>
 								</table>
-									<!--<div class="text-center bg-danger">
-										<label>Cannot delete a customer with an insurance policy.</label>
-									</div>-->
 							</div>
 							<!-- /content-panel -->
 						</div>
@@ -401,26 +409,39 @@ form {
 	<script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js"
 		type="text/javascript"></script>
-	<script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
 
-
-	<!--common script for all pages-->
+<!--common script for all pages-->
 	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
-    <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
-	<!--script for this page-->
 
+	<!--script for this page-->
+	<script src="/InsuranceSystem/pages/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<!--custom switch-->
+	<script src="/InsuranceSystem/pages/assets/js/bootstrap-switch.js"></script>
+
+	<!--custom tagsinput-->
+	<script src="/InsuranceSystem/pages/assets/js/jquery.tagsinput.js"></script>
+
+	<!--custom checkbox & radio-->
+	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap.js"></script>
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/date.js"></script>
+
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+	<script type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+
+ <script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
+	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>
+
+
+	
 
 	<script>
-
-	$("a[class='btn btn-danger btn-xs']").click(function(e) {
-	    e.preventDefault();
-	    var location = $(this).attr('href');
-	    
-	    bootbox.confirm("Are you sure?", function(result) {
-	    	if(result)
-	    		window.location.replace(location);
-	    	}); 
-	});      
 		//custom select box
 function myFunction(){
 	$("#1").val("");

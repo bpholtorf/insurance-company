@@ -278,14 +278,14 @@
 									<label class="col-sm-2 control-label col-lg-2">*Phone
 										Number</label>
 									<div class="col-lg-5">
-										<form:input type="tel" class="form-control" path="phoneNumber" data-validate="required,number"  placeholder="000000000"  />
+										<form:input type="tel" class="form-control" path="phoneNumber" data-validate="required,number" />
 										<form:errors path="phoneNumber" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">*Email</label>
 									<div class="col-lg-5">
-										<form:input type="email" class="form-control" path="email" placeholder="contact@example.com" />
+										<form:input type="email" class="form-control" path="email" />
 										<form:errors path="email" class="error"></form:errors>
 									</div>
 								</div>
@@ -299,7 +299,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">*SSN</label>
 									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="SSN" placeholder="000000000" />
+										<form:input type="text" class="form-control" path="SSN" />
 										<form:errors path="SSN" class="error"></form:errors>
 									</div>
 								</div>

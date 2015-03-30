@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -329,7 +328,10 @@ form {
 															</button>
 														</form>
 														<form method="post" action="delete/${staff.username }">
-															<a href="delete/${staff.username }" title="Delete Staff" id="confirm" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
+															<!--  <button class="btn btn-danger btn-xs" >
+																
+															</button>-->
+															<a href="delete/${staff.username }" id="confirm" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a>
 														</form>
 													</td>
 												</tr>

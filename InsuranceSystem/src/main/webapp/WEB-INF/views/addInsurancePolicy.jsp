@@ -303,17 +303,31 @@
 									</div>
 								</div>
 								<div class="form-group">
+<<<<<<< HEAD
+									<label class="col-sm-2 control-label col-lg-2">*Max Hostipal Amount</label>
+									<div class="col-lg-5">
+										<form:input type="number"  min="0" class="form-control" path="hamount" />
+										<form:errors path="hamount" class="error"></form:errors>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">*Max Pharmacy Amount</label>
+									<div class="col-lg-5">
+										<form:input type="number" min="0" class="form-control" path="pamount" />
+										<form:errors path="pamount" class="error"></form:errors>
+=======
 									<label class="col-sm-2 control-label col-lg-2">*Max Pharmacy Payout</label>
 									<div class="col-lg-5">
-										<form:input type="number"  min="0" class="form-control" path="pamount" />
-										<form:errors path="pamount" class="error"></form:errors>
+										<form:input type="number"  min="0" class="form-control" path="pAmount" />
+										<form:errors path="pAmount" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">*Max Hospital Payout</label>
 									<div class="col-lg-5">
-										<form:input type="number" min="0" class="form-control" path="hamount" />
-										<form:errors path="hamount" class="error"></form:errors>
+										<form:input type="number" min="0" class="form-control" path="hAmount" />
+										<form:errors path="hAmount" class="error"></form:errors>
+>>>>>>> origin/master
 									</div>
 								</div>
 								<div class="form-group">
