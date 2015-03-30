@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class SSNValidator implements ConstraintValidator<SSN, String>{
+public class PolicyNumberValidator implements ConstraintValidator<PolicyNumber, String>{
     
 	@Autowired
 	private DataSource dataSource;
@@ -23,26 +23,23 @@ public class SSNValidator implements ConstraintValidator<SSN, String>{
 	}
 
 	@Override
-	public void initialize(SSN constraintAnnotation) {
+	public void initialize(PolicyNumber constraintAnnotation) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		String sqlString="SELECT * FROM Staff where SSN="+"'"+value+"'";
+		String sqlString="SELECT * FROM Insurance_Policy where PolicyNumber="+"'"+value+"'";
 		Connection conn=null;
 		try {
 			System.out.println(dataSource);
-			System.out.println("SSN:" + value);
 			conn=dataSource.getConnection();
 			PreparedStatement ps=conn.prepareStatement(sqlString);
 			ResultSet rs=ps.executeQuery();
 			if (rs.next()) {
-				
 				return false;
 			}
-			
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception

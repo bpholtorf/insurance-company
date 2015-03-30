@@ -38,9 +38,9 @@ public class InsurancePolicyService {
 	{
 		InsurancePolicyDao.addInsurancePolicy(insurancePolicyDB);
 	}
-	public void deleteInsurancePolicy(Integer id)
+	public boolean deleteInsurancePolicy(Integer id)
 	{
-		InsurancePolicyDao.deleteInsurancePolicy(id);
+		return InsurancePolicyDao.deleteInsurancePolicy(id);
 	}
 
 	public InsurancePolicyDB findById(Integer id) {

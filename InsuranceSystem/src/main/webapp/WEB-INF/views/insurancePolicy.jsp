@@ -335,27 +335,15 @@
 									</div>
 								</div>
 								<div class="form-group">
-<<<<<<< HEAD
-									<label class="col-sm-2 control-label col-lg-2">*Max Hospital Amount</label>
-									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="hAmount" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Max Pharmacy Amount</label>
-									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="pAmount" />
-=======
 									<label class="col-sm-2 control-label col-lg-2">*Max Pharmacy Payout</label>
 									<div class="col-lg-5">
-										<form:input type="number"  min="0" class="form-control" path="pAmount" />
+										<form:input type="number"  min="0" class="form-control" path="pamount" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">*Max Hospital Payout</label>
 									<div class="col-lg-5">
-										<form:input type="number" min="0" class="form-control" path="hAmount" />
->>>>>>> origin/master
+										<form:input type="number" min="0" class="form-control" path="hamount" />
 									</div>
 								</div>
                               <div class="form-group">              

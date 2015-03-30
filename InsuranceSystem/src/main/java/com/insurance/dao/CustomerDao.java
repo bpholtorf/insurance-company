@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.insurance.data.CustomerDB;
-import com.insurance.data.StaffDB;
+import com.insurance.data.PolicyToCustomerDB;
 
 @Repository
 public class CustomerDao {
@@ -34,21 +34,29 @@ public class CustomerDao {
 		return list;
 	}
 	
-	public void addCustomer(CustomerDB Customer){
+	public void addCustomer(CustomerDB customer) {
 		Session session = this.sessionFactory.openSession();
-		Transaction transaction = session.getTransaction();
-		transaction.begin();
-		session.save(Customer);
-		transaction.commit();
+		SimpleDateFormat dt=new SimpleDateFormat("yyyy-MM-dd");
+		String date=dt.format(customer.getDateOfBirth());
+		Query query=session.createSQLQuery("insert into Customer(firstName,lastName,SSN,address,phoneNumber,email,gender,dateOfBirth,incomeStatus, employerInfo, sponsorInfo) value('"+
+				                        customer.getFirstName()+"','"+customer.getLastName()+"','"+
+		                                  customer.getSSN()+"','"+customer.getAddress()+"','"+customer.getPhoneNumber()+"','"+
+				                        customer.getEmail()+"','"+customer.getGender()+"','"+date+"','"+customer.getIncomeStatus()+
+				                        customer.getEmployerInfo()+"','"+ customer.getSponsorInfo()+"','"+"')");
+		query.executeUpdate();
 		session.close();
 	}
 	
-	public void deleteCustomer(Integer id){
-		Session session = this.sessionFactory.openSession();
-		Query query = session.createQuery("delete CustomerDB where id = :id");
-		query.setParameter("id", id);
-		query.executeUpdate();
-		session.close();
+	public boolean deleteCustomer(Integer id){
+		if(!checkForPolicy(id)){
+			Session session = this.sessionFactory.openSession();
+			Query query = session.createQuery("delete CustomerDB where id = :id");
+			query.setParameter("id", id);
+			query.executeUpdate();
+			session.close();
+			return true;
+		}
+		return false;
 	}
 	
 	public void updatePassword(CustomerDB Customer,String pass){
@@ -118,6 +126,22 @@ public class CustomerDao {
 			} finally {
 				session.close();
 			}
+		}
+		
+
+		public boolean checkForPolicy(Integer cid) {
+			Session session = sessionFactory.openSession();
+
+			List<PolicyToCustomerDB> list = new ArrayList<PolicyToCustomerDB>();
+			try {
+				String hqlString = "FROM PolicyToCustomerDB where cid=:cid";
+				Query query = session.createQuery(hqlString);
+				query.setInteger("cid", cid);
+				list = query.list();
+			} finally {
+				session.close();
+			}
+			return list.size() > 0;
 		}
 
 		public List<CustomerDB> searchByName(String pattern) {
