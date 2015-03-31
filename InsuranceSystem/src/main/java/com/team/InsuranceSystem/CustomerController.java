@@ -97,13 +97,26 @@ public class CustomerController {
 	  List<CustomerDB> result=new ArrayList<CustomerDB>();
 	  
 	  if (keyword.equals("")) {
+		  if (type.equals("Date of Birth") ) {
+			  model.addAttribute("type", type);  
+			  model.addAttribute("keyword",keyword);
+			  System.out.println("**************");
+				Date date=new Date();
+			  model.addAttribute("keyword1",date);
+			  result=customerService.findAll();
+			  model.addAttribute("customers",result);
+			  return "viewCustomer";
+		  }else{
 		  System.out.println("keyword is empty");
-		  model.addAttribute("type", type);
+		  model.addAttribute("type", type);  
 		  model.addAttribute("keyword",keyword);
+		  model.addAttribute("keyword1",keyword);
 		  result=customerService.findAll();
 		  model.addAttribute("customers",result);
 		  return "viewCustomer";
-	  }
+		  }
+	  }else{
+
 			  
 	  if (type.equals("SSN")) {
 		  result=customerService.searchBySSN(keyword);
@@ -112,10 +125,11 @@ public class CustomerController {
 		  SimpleDateFormat dt=new SimpleDateFormat("MM/dd/yyyy");
 		  SimpleDateFormat dt1=new SimpleDateFormat("yyyy-MM-dd");
 			Date date=dt.parse(keyword);
-			String date1=dt1.format(date);	
+			String date1=dt1.format(date)+" 00:00:00";	
 		 
 		  result=customerService.searchByDateofBirth(date1);
-		  System.out.println(result.size());
+		  
+		  System.out.println(date1+"*****"+result.size());
 		  model.addAttribute("keyword1",date);
 	  }
 	  else if(type.equals("Name")){
@@ -128,7 +142,7 @@ public class CustomerController {
 	    result=customerService.searchByName(pattern);
 	    model.addAttribute("keyword",keyword);
 	  }
-	  
+	  }
 	  model.addAttribute("type", type);  
 	  model.addAttribute("customers",result);
 	  return "viewCustomer";

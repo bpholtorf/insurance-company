@@ -143,7 +143,7 @@ public class StaffDao {
 		public void updateStaff(StaffDB2 staff) {
 			// TODO Auto-generated method stub
 			Session session = this.sessionFactory.openSession();
-			SimpleDateFormat dt=new SimpleDateFormat("yyyy-mm-dd");
+			SimpleDateFormat dt=new SimpleDateFormat("yyyy-MM-dd");
 			String date=dt.format(staff.getDateOfBirth());
 			Query query = session.createQuery("update StaffDB2 set username='"+staff.getUsername()+"'"
 		       		+ ", password='"+staff.getPassword()+"'"

@@ -40,9 +40,15 @@ public class SSNCustomerValidator implements ConstraintValidator<SSNCustomer, St
 			ResultSet rs=ps.executeQuery();
 			if (rs.next()) {
 				System.out.println("False");
+				rs.close();
+				ps.close();
+				conn.close();
 				return false;
 			}
 			System.out.println("True");
+			rs.close();
+			ps.close();
+			conn.close();
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception

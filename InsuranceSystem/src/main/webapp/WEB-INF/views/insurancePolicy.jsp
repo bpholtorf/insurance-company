@@ -207,13 +207,7 @@
               
               	  <p class="centered"><a href="profile.html"><img src="/InsuranceSystem/pages/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	 <h5 class="centered">${user }</h5>
-                    
-                  <li class="mt">
-                      <a href="index.html">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
-                      </a>
-                  </li>
+
 
                   <li class="sub-menu">
                       <a  href="javascript:;" >
@@ -259,16 +253,13 @@
                       </ul>
                   </li>
                  
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-th"></i>
-                          <span>Insurance</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="basic_table.html">Basic Table</a></li>
-                          <li><a  href="responsive_table.html">Responsive Table</a></li>
-                      </ul>
-                  </li>
+                 <li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-th"></i> <span>Claim</span>
+					</a>
+						<ul class="sub">
+							<li><a href="">Add Claim</a></li>
+							<li><a href="">Search Claim</a></li>
+						</ul></li>
 
               </ul>
               <!-- sidebar menu end-->

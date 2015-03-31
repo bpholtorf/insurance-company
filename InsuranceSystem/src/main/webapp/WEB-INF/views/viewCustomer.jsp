@@ -20,9 +20,9 @@
 <link rel="stylesheet" type="text/css"
 	href="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.css" />
 
-<!-- Bootstrap core CSS -->
-<link href="/InsuranceSystem/pages/assets/css/bootstrap.css"
-	rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="/InsuranceSystem/pages/assets/css/style.css" rel="stylesheet">
+<link href="/InsuranceSystem/pages/assets/css/style-responsive.css" rel="stylesheet">
 <!--external css-->
 <link
 	href="/InsuranceSystem/pages/assets/font-awesome/css/font-awesome.css"
@@ -196,10 +196,6 @@ form {
 					</p>
 					<h5 class="centered">${user }</h5>
 
-					<li class="mt"><a href="index.html"> <i
-							class="fa fa-dashboard"></i> <span>Dashboard</span>
-					</a></li>
-
 					<li class="sub-menu"><a  href="javascript:;">
 							<i class="fa fa-desktop"></i> <span>Staff</span>
 					</a>
@@ -233,11 +229,11 @@ form {
 						</ul></li>
 
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>Insurance</span>
+							class="fa fa-th"></i> <span>Claim</span>
 					</a>
 						<ul class="sub">
-							<li><a href="basic_table.html">Basic Table</a></li>
-							<li><a href="responsive_table.html">Responsive Table</a></li>
+							<li><a href="">Add Claim</a></li>
+							<li><a href="">Search Claim</a></li>
 						</ul></li>
 
 				</ul>
@@ -308,7 +304,7 @@ form {
 												<c:when test="${empty keyword && not empty keyword1}">
 												<input id="1" type="text" class="form-control"
 													placeholder="Search" name="keyword" style="width: 55%;display:none"
-													value="${keyword }" />		
+													value="${keyword }" disabled/>		
 												 <fmt:formatDate  value="${keyword1 }" type="date" 
 								pattern="MM/dd/yyyy" var="theFormattedDate" />
 										<input class="form-control" id="datepicker"
@@ -401,18 +397,28 @@ form {
 
 		<!--main content end-->
 	</section>
-
-	<!-- js placed at the end of the document so the pages load faster -->
+<!-- js placed at the end of the document so the pages load faster -->
 	<script src="/InsuranceSystem/pages/assets/js/jquery.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/bootstrap.min.js"></script>
 	<script class="include" type="text/javascript"
 		src="/InsuranceSystem/pages/assets/js/jquery.dcjqaccordion.2.7.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
-	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js"
-		type="text/javascript"></script>
-	<script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
+	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 
-<!--custom checkbox & radio-->
+
+	<!--common script for all pages-->
+	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
+
+	<!--script for this page-->
+	<script src="/InsuranceSystem/pages/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<!--custom switch-->
+	<script src="/InsuranceSystem/pages/assets/js/bootstrap-switch.js"></script>
+
+	<!--custom tagsinput-->
+	<script src="/InsuranceSystem/pages/assets/js/jquery.tagsinput.js"></script>
+
+	<!--custom checkbox & radio-->
 	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap.js"></script>
 	<script type="text/javascript"
 		src="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
@@ -427,25 +433,8 @@ form {
 
     <script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>
-
-
-	<!--common script for all pages-->
-
-    <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
-	<!--script for this page-->
-
-
-<!--common script for all pages-->
-	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
-
-	<!--script for this page-->
-	<script src="/InsuranceSystem/pages/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
-
-	<!--custom switch-->
-	<script src="/InsuranceSystem/pages/assets/js/bootstrap-switch.js"></script>
-
-	<!--custom tagsinput-->
-	<script src="/InsuranceSystem/pages/assets/js/jquery.tagsinput.js"></script>
+	<script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
+	
 	<script>
 
 	$("a[class='btn btn-danger btn-xs']").click(function(e) {
@@ -489,6 +478,11 @@ function myFunction(){
 			
 		}
 		
+$(function() {
+	$("#datepicker").datepicker();
+	
+	
+});
 	</script>
 
 </body>

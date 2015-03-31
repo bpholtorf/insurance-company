@@ -167,9 +167,6 @@
 					</p>
 					<h5 class="centered">${user }</h5>
 
-					<li class="mt"><a href="index.html"> <i
-							class="fa fa-dashboard"></i> <span>Dashboard</span>
-					</a></li>
 
 					<li class="sub-menu"><a class="active" href="javascript:;">
 							<i class="fa fa-desktop"></i> <span>Staff</span>
@@ -207,11 +204,11 @@
 						</ul></li>
 
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>Insurance</span>
+							class="fa fa-th"></i> <span>Claim</span>
 					</a>
 						<ul class="sub">
-							<li><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
-							<li><a href="responsive_table.html">Responsive Table</a></li>
+							<li><a href="">Add Claim</a></li>
+							<li><a href="">Search Claim</a></li>
 						</ul></li>
 
 				</ul>

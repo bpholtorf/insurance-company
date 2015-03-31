@@ -186,10 +186,7 @@
 					</p>
 					<h5 class="centered">${user }</h5>
 
-					<li class="mt"><a href="index.html"> <i
-							class="fa fa-dashboard"></i> <span>Dashboard</span>
-					</a></li>
-
+			
 					<li class="sub-menu"><a class="active" href="javascript:;">
 							<i class="fa fa-desktop"></i> <span>Staff</span>
 					</a>
@@ -222,12 +219,12 @@
 							<li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
 						</ul></li>
 
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>Insurance</span>
+					  <li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-th"></i> <span>Claim</span>
 					</a>
 						<ul class="sub">
-							<li><a href="basic_table.html">Basic Table</a></li>
-							<li><a href="responsive_table.html">Responsive Table</a></li>
+							<li><a href="">Add Claim</a></li>
+							<li><a href="">Search Claim</a></li>
 						</ul></li>
 
 				</ul>
@@ -255,9 +252,9 @@
 								<label style="font-size: 14px; color: #a94442">(All fields are required)</label>
 							</h4>
 							<c:url var="addAction" value="/staff/add"></c:url>
-							<form:form action="${addAction}" 
+							<form:form action="${addAction}" name="myForm"
 								class="form-horizontal tasi-form" method="POST"
-								modelAttribute="staffDB">
+								modelAttribute="staffDB" onsubmit="return validatePassword()">
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Username</label>
 									<div class="col-lg-5">
@@ -425,6 +422,19 @@
 				$("#datepicker").val('02/24/2015');
 			
 		});
+		function validatePassword(){
+			var password=document.forms["myForm"]["password"].value;
+			var comfirm=document.forms["myForm"]["confirm-password"].value;
+			console.log(password+"&&&"+comfirm);
+			if(password!=comfirm)
+			{
+				console.log("false");
+				$("#errorMessage").css("display","inline");
+			    return false;
+				}
+				
+		}
+		
 		
 	</script>
 

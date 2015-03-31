@@ -33,10 +33,15 @@ public class UsernameValidator implements ConstraintValidator<Username, String> 
 			PreparedStatement ps=conn.prepareStatement(sqlString);
 			ResultSet rs=ps.executeQuery();
 			if (rs.next()) {
-				
+				rs.close();
+				ps.close();
+				conn.close();
 				return false;
 			}
 			
+			rs.close();
+			ps.close();
+			conn.close();
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception

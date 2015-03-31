@@ -176,7 +176,7 @@ public class PocilyToCustomerController {
 	  double premium=0;
 	  double pAmount=policyService.getPolicyById(pid).getPamount();
 	  double hAmount=policyService.getPolicyById(pid).getHamount();
-	  if(income.equals("less than 10000")){
+	  if(income.equals("Less than 10000")){
 		  premium=percent*10000;
 	  }
 	  if(income.equals("10000 - 19999")){
@@ -303,7 +303,8 @@ List<PolicyToCustomerDB> list=pcService.getAll();
 		  @RequestParam("cid") String cid,Model model)
   {
 	  if(pcService.getOneAll(Integer.parseInt(cid)).size()==1){
-		  customerService.deleteCustomer(Integer.parseInt(cid));
+		  System.out.println("*********");
+		  customerService.deleteCustomer1(Integer.parseInt(cid));
 		  pcService.deletePolicyToCustomer(Integer.parseInt(pid), Integer.parseInt(cid));
 		  model.addAttribute("customerPolicys",pcService.getOneAll(Integer.parseInt(cid)));
 	  }else{

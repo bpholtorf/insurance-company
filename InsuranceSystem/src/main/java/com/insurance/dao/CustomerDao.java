@@ -59,6 +59,17 @@ public class CustomerDao {
 		return false;
 	}
 	
+	public boolean deleteCustomer1(Integer id){
+		
+			Session session = this.sessionFactory.openSession();
+			Query query = session.createQuery("delete CustomerDB where id = :id");
+			query.setParameter("id", id);
+			query.executeUpdate();
+			session.close();
+			return true;
+		
+	}
+	
 	public void updatePassword(CustomerDB Customer,String pass){
 		Session session = this.sessionFactory.openSession();
 		

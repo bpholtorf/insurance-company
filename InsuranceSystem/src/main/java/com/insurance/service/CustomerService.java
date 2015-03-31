@@ -45,6 +45,12 @@ public class CustomerService {
 		return CustomerDao.deleteCustomer(id);
 	}
 
+	public boolean deleteCustomer1(Integer id)
+	{
+		return CustomerDao.deleteCustomer1(id);
+	}
+
+	
 	public CustomerDB findById(Integer id) {
 		return CustomerDao.findById(id);
 	}

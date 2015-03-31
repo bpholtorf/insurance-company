@@ -187,9 +187,6 @@ form {
 					</p>
 					<h5 class="centered">${user }</h5>
 
-					<li class="mt"><a href="index.html"> <i
-							class="fa fa-dashboard"></i> <span>Dashboard</span>
-					</a></li>
 
 					<li class="sub-menu"><a class="active" href="javascript:;">
 							<i class="fa fa-desktop"></i> <span>Staff</span>
@@ -227,11 +224,11 @@ form {
 						</ul></li>
 
 					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>Insurance</span>
+							class="fa fa-th"></i> <span>Claim</span>
 					</a>
 						<ul class="sub">
-							<li><a href="basic_table.html">Basic Table</a></li>
-							<li><a href="responsive_table.html">Responsive Table</a></li>
+							<li><a href="">Add Claim</a></li>
+							<li><a href="">Search Claim</a></li>
 						</ul></li>
 
 				</ul>
@@ -318,11 +315,7 @@ form {
 													<td>${staff.SSN }</td>
 													<td><span class="label label-info label-mini">${staff.gender }</span></td>
 													<td>
-														<form method="post" action="">
-															<button class="btn btn-success btn-xs" type="submit">
-																<i class="fa fa-eye"></i>
-															</button>
-														</form>
+											
 														<form method="post" action="edit/${staff.username }">
 															<button class="btn btn-primary btn-xs">
 																<i class="fa fa-pencil"></i>

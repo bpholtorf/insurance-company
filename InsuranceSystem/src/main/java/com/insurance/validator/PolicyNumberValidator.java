@@ -38,8 +38,14 @@ public class PolicyNumberValidator implements ConstraintValidator<PolicyNumber, 
 			PreparedStatement ps=conn.prepareStatement(sqlString);
 			ResultSet rs=ps.executeQuery();
 			if (rs.next()) {
+				rs.close();
+				ps.close();
+				conn.close();
 				return false;
 			}
+			rs.close();
+			ps.close();
+			conn.close();
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
