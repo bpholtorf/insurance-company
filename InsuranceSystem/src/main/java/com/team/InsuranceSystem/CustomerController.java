@@ -125,7 +125,7 @@ public class CustomerController {
 		  SimpleDateFormat dt=new SimpleDateFormat("MM/dd/yyyy");
 		  SimpleDateFormat dt1=new SimpleDateFormat("yyyy-MM-dd");
 			Date date=dt.parse(keyword);
-			String date1=dt1.format(date)+" 00:00:00";	
+			String date1=dt1.format(date);	
 		 
 		  result=customerService.searchByDateofBirth(date1);
 		  

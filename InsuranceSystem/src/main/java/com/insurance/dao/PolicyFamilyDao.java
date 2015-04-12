@@ -2,6 +2,7 @@ package com.insurance.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -35,6 +36,17 @@ public class PolicyFamilyDao {
 		transaction.commit();
 		session.close();
 	}
+	
+	public void deleteMembers(int pid,int cid){
+		Session session = this.sessionFactory.openSession();
+		Query query = session.createQuery("delete PolicyFamilyDB where pid = :pid AND cid= :cid");
+		query.setParameter("pid", pid);
+		query.setParameter("cid", cid);
+		query.executeUpdate();
+		session.close();
+	}
+	
+
 	
 
 }

@@ -26,6 +26,9 @@ public class PolicyFamilyDB implements Serializable{
 	@Column(name="memberName")
 	private String memberName;
 	
+	@Column(name="memberSSN")
+	private String memberSSN;
+	
 	public int getId(){
 		return id;
 	}
@@ -52,5 +55,12 @@ public class PolicyFamilyDB implements Serializable{
 	}
 	public void setMemberName(String memberName){
 		this.memberName=memberName;
+	}
+	
+	public String getMemberSSN(){
+		return memberSSN;
+	}
+	public void setMemberSSN(String memberSSN){
+		this.memberSSN=memberSSN;
 	}
 }

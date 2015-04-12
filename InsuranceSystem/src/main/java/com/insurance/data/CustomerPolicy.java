@@ -11,6 +11,7 @@ public class CustomerPolicy {
 	private int cid;	
 	private int pid;
 	private String policyNumber;
+	private String planType;
 	private Double premium;
 	private Double hamountLeft;
 	private Double pamountLeft;
@@ -19,11 +20,12 @@ public class CustomerPolicy {
 	private String cname;
 	private String SSN;
 	
-	public CustomerPolicy(int cid,int pid,String policyNumber,double premium,double pamountLeft,double hamountLeft,Date dateFrom,Date dateTo,String cname,String SSN){
+	public CustomerPolicy(int cid,int pid,String policyNumber,String planType,double premium,double pamountLeft,double hamountLeft,Date dateFrom,Date dateTo,String cname,String SSN){
 		super();
 		this.cid=cid;
 		this.pid=pid;
 		this.policyNumber=policyNumber;
+		this.planType=planType;
 		this.premium=premium;
 		this.hamountLeft=hamountLeft;
 		this.pamountLeft=pamountLeft;
@@ -53,6 +55,13 @@ public class CustomerPolicy {
 	}
 	public void setPolicyNumber(String policyNumber){
 		this.policyNumber=policyNumber;
+	}
+	
+	public String getPlanType(){
+		return planType;
+	}
+	public void setPlanType(String planType){
+		this.planType=planType;
 	}
 	
 	public Double getPremium(){

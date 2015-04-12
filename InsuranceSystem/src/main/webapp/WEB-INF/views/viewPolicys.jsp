@@ -282,6 +282,7 @@ form {
 										<tr>
 											<th>Participant Name</th>
 											<th >Policy Number</th>
+											<th >Policy Type</th>
 											<th>Date From</th>
 											<th>Date To</th>
 											<th>Premium</th>
@@ -293,8 +294,18 @@ form {
 									<tbody>
 										  <c:forEach items="${customerPolicys }" var="customerPolicys">
 											<tr>
-												<td>${customer.firstName } ${customer.lastName }</td>
+											    <input class="cid" value="${customer.id }" style="display:none">
+											    <input class="pid" value="${customerPolicys.pid }" style="display:none">
+												<td >${customer.firstName } ${customer.lastName }</td>
 												<td >${customerPolicys.policyNumber }</td>
+												<c:choose>
+												<c:when test="${customerPolicys.planType == 'Family'}">
+												<td><a href="getFamilyMembers?pid=${customerPolicys.pid }&cid=${customer.id}" class="family"  id="addPolicy">${customerPolicys.planType}</a></td>
+												</c:when>
+												<c:otherwise >
+												<td >${customerPolicys.planType }</td>
+												</c:otherwise>
+												</c:choose>
 												<fmt:formatDate value="${customerPolicys.dateFrom }" type="date"
 								pattern="MM/dd/yyyy" var="theFormattedDate" />
 												<td >${theFormattedDate}</td>
@@ -371,6 +382,90 @@ form {
 	});      
 
 	</script>
+	
+	<script>
+	$("a[class='family']").click(function(e) {
+	    e.preventDefault();
+	    var location = $(this).attr('href');
 
+	    $.ajax({
+            url: location,
+            type: "GET",
+            success: function(response) {
+            	var n1='';
+            	var n2='';
+            	var n3='';
+            	var n4='';
+            	if(response.length==2){
+            		n1=response[1];
+            	}
+            	if(response.length==3){
+            		n1=response[1];
+            		n2=response[2];
+
+            	}
+            	if(response.length==4){
+            		n1=response[1];
+            		n2=response[2];
+            		n3=response[3];
+            		
+            	}
+            	if(response.length==5){
+            		n1=response[1];
+            		n2=response[2];
+            		n3=response[3];
+            		n4=response[4];
+            	}
+            	
+	     bootbox.dialog({
+	    	
+            title: "Family Members Name.",
+            message:function(){
+           var con='';
+           if(n2!=''){
+        	   con='<label class="col-md-4 control-label" for="name">Member Name</label> ' +
+               '<input id="name2" name="name" type="text"  class="form-control input-md" style="width:150px;" disabled=true value='+n2+'> ';
+           
+           if(n3!=''){
+            	 con=con+'<label class="col-md-4 control-label" for="name">Member Name</label> ' +
+                 '<input id="name3" name="name" type="text"  class="form-control input-md" style="width:150px;" disabled=true value='+n3+'> ' +
+                 '<br>';
+
+                 if(n4!=''){
+                	 con=con+'<label class="col-md-4 control-label" for="name">Member Name</label> ' +
+                     '<input id="name4" name="name" type="text"  class="form-control input-md" style="width:150px;" disabled=true value='+n4+'> ' +
+                     '<br>';
+        	   
+           }
+        }
+}
+          
+            return	'<div class="row">  ' +
+                        '<div class="col-md-12"> ' +
+                        '<form class="form-horizontal"> ' +
+                        '<div class="form-group"> ' +
+                        '<label class="col-md-4 control-label" for="name">Member Name</label> ' +
+                        '<input id="name1" name="name" type="text"  class="form-control input-md" style="width:150px" disabled=true value='+n1+'> ' +
+                        '<br>'+
+                        con+
+                        '</div> ' +
+                        '</form> </div>  </div>';
+                        
+            },
+            buttons: {
+                success: {
+                    label: "Close",
+                    className: "btn-success",
+                    callback: function () {
+                        
+                    }
+                }
+            }
+        });
+      }
+	    });
+           
+	});      
+ </script>
 </body>
 </html>

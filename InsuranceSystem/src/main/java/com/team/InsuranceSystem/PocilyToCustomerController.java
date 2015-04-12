@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -114,11 +115,12 @@ public class PocilyToCustomerController {
 	  return pcDB;
   }
   
- private PolicyFamilyDB generateMember(int cid,int pid,String memberName){
+ private PolicyFamilyDB generateMember(int cid,int pid,String memberName,String memberSSN){
 	 PolicyFamilyDB pfDB=new PolicyFamilyDB();
 	 pfDB.setCid(cid);
 	 pfDB.setPid(pid);
 	 pfDB.setMemberName(memberName);
+	 pfDB.setMemberSSN(memberSSN);
 	 return pfDB;
  }
   
@@ -128,25 +130,29 @@ public class PocilyToCustomerController {
 		  @RequestParam("name2") String name2,
 		  @RequestParam("name3") String name3,
 		  @RequestParam("name4") String name4,
+		  @RequestParam("ssn1") String ssn1,
+		  @RequestParam("ssn2") String ssn2,
+		  @RequestParam("ssn3") String ssn3,
+		  @RequestParam("ssn4") String ssn4,
 		  ModelMap model,HttpSession session) throws ParseException{
 	  System.out.println(name1+"**"+name2+"**"+name3+"**"+name4);
 	  int cid=(Integer.parseInt(session.getAttribute(CUSTOMER_ID).toString()));
 	  int pid=Integer.parseInt(policyId);
 	  
-	  if(!name1.isEmpty()){
-		  PolicyFamilyDB mem1=generateMember(cid,pid,name1);
+	  if(!name1.isEmpty() && !ssn1.isEmpty()){
+		  PolicyFamilyDB mem1=generateMember(cid,pid,name1,ssn1);
 		  pfService.addMember(mem1);
 	  }
-	  if(!name2.isEmpty()){
-		  PolicyFamilyDB mem2=generateMember(cid,pid,name2);
+	  if(!name2.isEmpty() && !ssn2.isEmpty()){
+		  PolicyFamilyDB mem2=generateMember(cid,pid,name2,ssn2);
 		  pfService.addMember(mem2);
 	  }
-	  if(!name3.isEmpty()){
-		  PolicyFamilyDB mem3=generateMember(cid,pid,name3);
+	  if(!name3.isEmpty() && !ssn3.isEmpty()){
+		  PolicyFamilyDB mem3=generateMember(cid,pid,name3,ssn3);
 		  pfService.addMember(mem3);
 	  }
-	  if(!name4.isEmpty()){
-		  PolicyFamilyDB mem4=generateMember(cid,pid,name4);
+	  if(!name4.isEmpty() && !ssn4.isEmpty()){
+		  PolicyFamilyDB mem4=generateMember(cid,pid,name4,ssn4);
 		  pfService.addMember(mem4);
 	  }
 	  
@@ -224,7 +230,25 @@ public class PocilyToCustomerController {
   public String viewCustomerPolicys(@PathVariable("id") Integer id, Model model,HttpSession session)
   {
 	  model.addAttribute("customer",customerService.findById(id));
-	  model.addAttribute("customerPolicys",pcService.getOneAll(id));
+	  List<PolicyToCustomerDB> list=pcService.getAll();
+	  List<CustomerPolicy> list1=new ArrayList<CustomerPolicy>();
+	  for(int i=0;i<list.size();i++){
+		  int cid=list.get(i).getCid();
+		  CustomerPolicy p=new CustomerPolicy(cid,list.get(i).getPid(),
+				      list.get(i).getPolicyNumber(),
+	                  policyService.getPolicyById(list.get(i).getPid()).getPlanType(),
+					  list.get(i).getPremium(),
+					  list.get(i).getPamountLeft(),
+					  list.get(i).getHamountLeft(),
+					  list.get(i).getDateFrom(),
+					  list.get(i).getDateTo(),
+					  customerService.getCustomerById(cid).getFirstName()+" "+customerService.getCustomerById(cid).getLastName(),customerService.getCustomerById(cid).getSSN());
+			  list1.add(p);
+			  
+		  }
+	  
+	  model.addAttribute("customerPolicys",list1);
+	  
 	  return "viewPolicys";
 	  
   }
@@ -238,6 +262,7 @@ public class PocilyToCustomerController {
 		  int cid=list.get(i).getCid();
 		  CustomerPolicy p=new CustomerPolicy(cid,list.get(i).getPid(),
 				      list.get(i).getPolicyNumber(),
+	                  policyService.getPolicyById(list.get(i).getPid()).getPlanType(),
 					  list.get(i).getPremium(),
 					  list.get(i).getPamountLeft(),
 					  list.get(i).getHamountLeft(),
@@ -264,6 +289,7 @@ List<PolicyToCustomerDB> list=pcService.getAll();
 			  int cid=list.get(i).getCid();
 			  CustomerPolicy p=new CustomerPolicy(cid,list.get(i).getPid(),
 					      list.get(i).getPolicyNumber(),
+					      policyService.getPolicyById(list.get(i).getPid()).getPlanType(),
 						  list.get(i).getPremium(),
 						  list.get(i).getPamountLeft(),
 						  list.get(i).getHamountLeft(),
@@ -281,6 +307,7 @@ List<PolicyToCustomerDB> list=pcService.getAll();
 			  if(customerService.getCustomerById(cid).getSSN().equals(keyword)){
 			  CustomerPolicy p=new CustomerPolicy(cid,list.get(i).getPid(),
 					      list.get(i).getPolicyNumber(),
+					      policyService.getPolicyById(list.get(i).getPid()).getPlanType(),
 						  list.get(i).getPremium(),
 						  list.get(i).getPamountLeft(),
 						  list.get(i).getHamountLeft(),
@@ -303,17 +330,61 @@ List<PolicyToCustomerDB> list=pcService.getAll();
 		  @RequestParam("cid") String cid,Model model)
   {
 	  if(pcService.getOneAll(Integer.parseInt(cid)).size()==1){
+		 if(policyService.getPolicyById(Integer.parseInt(pid)).getPlanType().equals("Family")){
+			 pfService.deleteMembers(Integer.parseInt(cid), Integer.parseInt(pid));
+		 }
 		  System.out.println("*********");
 		  customerService.deleteCustomer1(Integer.parseInt(cid));
 		  pcService.deletePolicyToCustomer(Integer.parseInt(pid), Integer.parseInt(cid));
+		  
 		  model.addAttribute("customerPolicys",pcService.getOneAll(Integer.parseInt(cid)));
 	  }else{
+		  if(policyService.getPolicyById(Integer.parseInt(pid)).getPlanType().equals("Family")){
+				 pfService.deleteMembers(Integer.parseInt(cid), Integer.parseInt(pid));
+			 }
 	  pcService.deletePolicyToCustomer(Integer.parseInt(pid), Integer.parseInt(cid));
-	  model.addAttribute("customerPolicys",pcService.getOneAll(Integer.parseInt(cid)));
+	  
+	  //model.addAttribute("customerPolicys",pcService.getOneAll(Integer.parseInt(cid)));
+	  List<PolicyToCustomerDB> list=pcService.getOneAll(Integer.parseInt(cid));
+	  List<CustomerPolicy> list1=new ArrayList<CustomerPolicy>();
+	  for(int i=0;i<list.size();i++){
+		  CustomerPolicy p=new CustomerPolicy(Integer.parseInt(cid),list.get(i).getPid(),
+				      list.get(i).getPolicyNumber(),
+	                  policyService.getPolicyById(list.get(i).getPid()).getPlanType(),
+					  list.get(i).getPremium(),
+					  list.get(i).getPamountLeft(),
+					  list.get(i).getHamountLeft(),
+					  list.get(i).getDateFrom(),
+					  list.get(i).getDateTo(),
+					  customerService.getCustomerById(Integer.parseInt(cid)).getFirstName()+" "+customerService.getCustomerById(Integer.parseInt(cid)).getLastName(),customerService.getCustomerById(Integer.parseInt(cid)).getSSN());
+			  list1.add(p);
+			  
+		  }
+	  model.addAttribute("customerPolicys",list1);
 	  model.addAttribute("customer",customerService.findById(Integer.parseInt(cid)));
 	  }
+	  
+	 
 	  return "viewPolicys";
   }
+  
+  @RequestMapping(value="/customer/viewPolicys/getFamilyMembers",method=RequestMethod.GET)
+  public @ResponseBody String[] getFamilyMember(@RequestParam("pid") String pid,
+		  @RequestParam("cid") String cid,Model model,HttpServletRequest request, 
+          HttpServletResponse response,
+          HttpSession session)
+  {
+	  System.out.println(cid+pid);
+	  String names = null;
+	  List<PolicyFamilyDB> list=pfService.getMembersForOne(Integer.parseInt(cid), Integer.parseInt(pid));
+	  for(int i=0;i<list.size();i++){
+		  names=names+"&"+list.get(i).getMemberName();
+	  }
+	  String[] arr=names.split("&");
+	  System.out.println(arr.length);
+	  return arr;
+  }
+  
  
 }
 

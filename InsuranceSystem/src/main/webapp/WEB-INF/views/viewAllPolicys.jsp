@@ -277,6 +277,7 @@ form {
 											<th>Customer SSN</th>
 											<th>Participant Name</th>
 											<th >Policy Number</th>
+											<th >Policy Type</th>
 											<th>Date From</th>
 											<th>Date To</th>
 											<th>Premium</th>
@@ -291,6 +292,7 @@ form {
 												<td>${customerPolicys.SSN }</td>
 												<td>${customerPolicys.cname }</td>
 												<td >${customerPolicys.policyNumber }</td>
+												<td >${customerPolicys.planType }</td>
 												<fmt:formatDate value="${customerPolicys.dateFrom }" type="date"
 								pattern="MM/dd/yyyy" var="theFormattedDate" />
 												<td >${theFormattedDate}</td>

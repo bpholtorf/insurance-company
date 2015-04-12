@@ -46,8 +46,29 @@ public class PolicyToCustomerService {
 		return list1;
 	}
 	
+	public PolicyToCustomerDB getOnePolicy(int pid,int cid){
+		List<PolicyToCustomerDB> list=pcDao.listPolicyToCustomer();
+
+		for(int i=0;i<list.size();i++){
+			PolicyToCustomerDB pc=list.get(i);
+			if(pc.getCid()==cid && pc.getPid()==pid){
+				return pc;
+			}
+			
+		}
+		return null;
+	}
+	
 	public void deletePolicyToCustomer(int pid,int cid){
 		pcDao.deletePolicyToCustomer(pid, cid);
 	}
+	public PolicyToCustomerDB getById(int pid,int cid)
+	   {
+		   return pcDao.getById(pid,cid);
+	   }
 
+	 public void updateAmountLeft(PolicyToCustomerDB pDb)
+	   {
+		   pcDao.updateAmountLeft(pDb);
+	   }
 }

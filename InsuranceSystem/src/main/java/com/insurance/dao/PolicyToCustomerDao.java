@@ -48,6 +48,31 @@ public class PolicyToCustomerDao {
 		query.executeUpdate();
 		session.close();
 	}
+public PolicyToCustomerDB getById(int pid, int cid) {
+		
+		Session session=this.sessionFactory.openSession();
+		List<PolicyToCustomerDB> list;
+		try{
+		Query query=session.createQuery("from PolicyToCustomerDB where pid= :pid and cid= :cid");
+		query.setParameter("pid", pid);
+		query.setParameter("cid", cid);
+		list=query.list();
+		}
+		finally{
+			session.close();
+		}
+	    return list.get(0);
+		
+				
+	}
+
+public void updateAmountLeft(PolicyToCustomerDB pDb) {
+	  Session session = sessionFactory.openSession();
+	   session.update(pDb);
+	   session.flush();
+	   session.close();
+	   
 	
+}
 
 }

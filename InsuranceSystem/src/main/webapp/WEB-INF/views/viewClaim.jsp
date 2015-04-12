@@ -1,11 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -20,8 +14,6 @@
     <link href="/InsuranceSystem/pages/assets/css/bootstrap.css" rel="stylesheet">
     <!--external css-->
     <link href="/InsuranceSystem/pages/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/css/datepicker.css" />
-    <link rel="stylesheet" type="text/css" href="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.css" />
         
     <!-- Custom styles for this template -->
     <link href="/InsuranceSystem/pages/assets/css/style.css" rel="stylesheet">
@@ -190,7 +182,7 @@
             </div>
             <div class="top-menu">
             	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="/InsuranceSystem">Logout</a></li>
+                    <li><a class="logout" href="login.html">Logout</a></li>
             	</ul>
             </div>
         </header>
@@ -200,14 +192,20 @@
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
       <!--sidebar start-->
-     <aside>
+       <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
               	  <p class="centered"><a href="profile.html"><img src="/InsuranceSystem/pages/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	 <h5 class="centered">${user }</h5>
-
+                    
+                  <li class="mt">
+                      <a href="index.html">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  </li>
 
                   <li class="sub-menu">
                       <a  href="javascript:;" >
@@ -222,19 +220,19 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
-                          <i class="fa fa-user"></i>
+                      <a  href="javascript:;" >
+                          <i class="fa fa-cogs"></i>
                           <span>Customer</span>
                       </a>
                       <ul class="sub">
 							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
 							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
-							<li class="active"><a  href="<c:url value='/requestAddCustomer' />">View Customer</a></li>
+							<li><a  href="<c:url value='/requestAddCustomer' />">Edit Customer</a></li>
                           
                       </ul>
                   </li>
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-bars"></i> <span>Insurance Policy</span>
+                  <li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-cogs"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
@@ -244,26 +242,29 @@
                   <li class="sub-menu">
                       <a  href="javascript:;" >
                           <i class="fa fa-book"></i>
-                          <span>Customer Policy</span>
+                          <span>Policy</span>
                       </a>
                       <ul class="sub">
                           <li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
                       </ul>
                   </li>
                  
-                 <li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>Claim</span>
-					</a>
-						<ul class="sub">
-							<li><a href="">Add Claim</a></li>
-							<li><a href="">Search Claim</a></li>
-						</ul></li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" class="active">
+                          <i class="fa fa-th"></i>
+                          <span>Insurance</span>
+                      </a>
+                      <ul class="sub">
+							<li><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
+							<li class="active"><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+						</ul>
+                  </li>
 
               </ul>
               <!-- sidebar menu end-->
           </div>
       </aside>
-      <!--sidebar end-->
+    <!--sidebar end-->
       
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
@@ -271,107 +272,128 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> View Customer Information</h3>
-  
-          	<!-- INPUT MESSAGES -->
-          	<div class="row mt">
-          		<div class="col-lg-12">
-          			<div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Customer Information</h4>
-                  	      <c:url var="updateAction" value="/customer/update" ></c:url>
-                          <form:form action="${updateAction}" class="form-horizontal tasi-form" method="POST" modelAttribute="customer">
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Customer Id</label>
-                                  <div class="col-lg-5">
-                                      <form:input type="text"  readonly="true"  class="form-control" path="id"/>
-                                  </div>
-                              </div>                            
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Name</label>
-                                  <div class="col-lg-5 form-inline">
-                                      <form:input type="text" readonly="true" class="form-control" path="firstName" placeholder="First name"/>
-                                      <form:input type="text" readonly="true"  class="form-control" path="lastName" placeholder="Last name" />
-                                  </div>
-                              </div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Gender</label>
-									<div class="col-lg-5">
-										<form:radiobutton readonly="true" path="gender" id="optionsRadios2" 
-											value="male" /> Male 
-									    <form:radiobutton 
-											path="gender" readonly="true" id="optionsRadios1" value="female"/> Female
-									</div>
-								</div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Address</label>
-                                  <div class="col-lg-5">
-                                      <form:input type="text" readonly="true"  class="form-control" path="address"/>
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Phone Number</label>
-                                  <div class="col-lg-5">
-                                      <form:input type="tel" readonly="true"  class="form-control" path="phoneNumber"/>
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Email</label>
-                                  <div class="col-lg-5">
-                                      <form:input  readonly="true"  type="text" class="form-control" path="email"/>
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Date of Birth</label>
-                                  <div class="col-lg-5">
-                                  <fmt:formatDate value="${customer.dateOfBirth}" type="date" pattern="MM/dd/yyyy" var="theFormattedDate" />
-                                      <form:input  readonly="true"  type="text" id="datepicker" class="form-control"  path="dateOfBirth" value="${theFormattedDate}"/>
-                                  </div>
-                              </div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">SSN</label>
-									<div class="col-lg-5">
-										<form:input readonly="true" type="text" class="form-control" path="SSN" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Annual Income</label>
-									<div class="col-lg-5">
-										<form:input readonly="true"  type="text" class="form-control" path="incomeStatus" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Sponsor Name</label>
-									<div class="col-lg-5">
-										<form:input readonly="true"  type="text" class="form-control" path="sponsorInfo" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Employer Name</label>
-									<div class="col-lg-5">
-										<form:input readonly="true"  type="text" class="form-control" path="employerInfo" />
-									</div>
-								</div>
-                              <div class="form-group">    
-							      <a class="btn btn-theme" style="left:300px;position:relative"  href="<c:url value='/customer/viewAll' />">Return</a>                  
-                              </div><!-- /showback -->
-                          </form:form>
-          			</div><!-- /form-panel -->
-          		</div><!-- /col-lg-12 -->
-          	</div><!-- /row -->
           	
-          	
-          	
-          	
-          	
+	           <h3><i class="fa fa-angle-right"></i> Insurance Claim List
+	               <div class="col-sm-3 col-md-4 pull-right"
+                    style="margin-top: -10px">
+                    <form class="navbar-form" role="search" action="searchClaim" onsubmit="return checkKeyword()">
+
+
+                      <div class="input-group" style="">
+                        <input type="text" class="form-control"
+                          placeholder="Search" name="keyword" placeholder="Input SSN(000000000)" value="${keyword }">
+                          
+                        <div class="input-group-btn">
+                          <button class="btn btn-default" type="submit"
+                            style="padding: 9">
+                            <i class="glyphicon glyphicon-search"></i>
+                          </button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+	           </h3>
+              <div class="row mt">
+                  <div class="col-md-12">
+                      <div class="content-panel">
+                          <table class="table table-striped table-advance table-hover">
+	                  	  	  <h4><i class="fa fa-angle-right"></i>Pharmacy Claims</h4>
+	                  	  	  <hr>
+	                  	  	  <c:choose>
+	                  	  	  <c:when test="${!empty pharClaims }">
+                              <thead>
+                              <tr>
+                                  <th>Claim Number</th>
+                                  <th class="hidden-phone">Insurred Date</th>
+                                  <th>SSN</th>
+                                  <th>Total Charge</th>
+                                  <th>Total Coverage</th>   
+                                  <th></th>                         
+                              </tr>
+                              </thead>
+                              <tbody>  
+                              <c:forEach items="${pharClaims}" var="pc">                                                                                                                     
+                              <tr>
+                                  <td>${pc.claimNumber }</td>
+                                  <td class="hidden-phone">${pc.date }</td>
+                                  <td>${pc.ssn } </td>
+                                  <td>${pc.totalCharge }</td>
+                                  <td>${pc.totalCoverage }</td>
+                                  <td>
+                                  <form action="view/${pc.billNumber }" method="post">
+                                      <button type="submit" class="btn btn-success btn-xs">View</button>
+                                  </form>                              
+                                  </td>
+                              </tr>
+                              </c:forEach>
+                              </tbody>
+                             </c:when>
+                             
+                              <c:otherwise>
+							 No result found for Pharmacy Insurance Claims
+							</c:otherwise>
+							 </c:choose> 
+                          </table>
+                      </div><!-- /content-panel -->
+                  </div><!-- /col-md-12 -->
+              </div><!-- /row -->
+
+              <div class="row mt">
+                  <div class="col-md-12">
+                      <div class="content-panel">
+                          <table class="table table-striped table-advance table-hover">
+                            <h4><i class="fa fa-angle-right"></i>Hospital Claims</h4>
+                            <hr>
+                            <c:choose>
+                            <c:when test="${!empty hosClaims }">
+                              <thead>
+                              
+                              <tr>
+                                  <th>Claim Number</th>
+                                  <th class="hidden-phone">Insured Date</th>
+                                  <th>SSN</th>
+                                  <th>Total Charge</th>
+                                  <th>Total Coverage</th>   
+                                  <th></th>                         
+                              </tr>
+                              </thead>
+                              <tbody>  
+                              <c:forEach items="${hosClaims}" var="hc">                                                                                                                    
+                              <tr>
+                                  <td>${hc.claimNumber }</td>
+                                  <td class="hidden-phone">${hc.date }</td>
+                                  <td>${hc.ssn } </td>
+                                  <td>${hc.totalCharge }</td>
+                                  <td>${hc.totalCharge }</td>
+                                  <td>
+                                    
+                                      <form action="view/${hc.billNumber }" method="post">
+                                      <button type="submit" class="btn btn-success btn-xs">View</button>
+                                  </form>      
+                                  </td>
+                              </tr>
+                              </c:forEach> 
+                              </tbody>
+                              </c:when>
+                              <c:otherwise>
+							 No result found for Hospital Insurance Claims
+							</c:otherwise>
+                              </c:choose>
+                          </table>
+                      </div><!-- /content-panel -->
+                  </div><!-- /col-md-12 -->
+              </div><!-- /row -->
+
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
 
       <!--main content end-->
       <!--footer start-->
-      <footer class="site-footer">
+      <footer class="site-footer" style="position: absolute; left: 210px; top: 800px; width: 1000px">
           <div class="text-center">
               2014 - Alvarez.is
-              <a href="form_component.html#" class="go-top">
+              <a href="basic_table.html#" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
@@ -389,35 +411,33 @@
 
     <!--common script for all pages-->
     <script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
-
+    <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
     <!--script for this page-->
-    <script src="/InsuranceSystem/pages/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
-
-	<!--custom switch-->
-	<script src="/InsuranceSystem/pages/assets/js/bootstrap-switch.js"></script>
-	
-	<!--custom tagsinput-->
-	<script src="/InsuranceSystem/pages/assets/js/jquery.tagsinput.js"></script>
-	
-	<!--custom checkbox & radio-->
-	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap.js"></script>
-	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/date.js"></script>
-
-	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
-	
-	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-	
-	
-	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>    
-    
     
   <script>
       //custom select box
-  
-     $(function(){
-     $("#datepicker").datepicker();
-      });
+
+      
+      function checkKeyword(){
+    	  var keyword=$("input[name='keyword']").val();
+    	  if(keyword.length === 9 &&!isNaN(keyword))
+    	   {
+    		  console.log('true');
+    		
+    		  return true;
+    		  
+    	   }
+    	  else
+    		  {
+    		  console.log('false');
+    		  bootbox.alert("Please a valid SSN!", function() {
+     			 
+  			});
+    		  return false;
+    		  }
+    	  
+      }
+
   </script>
 
   </body>

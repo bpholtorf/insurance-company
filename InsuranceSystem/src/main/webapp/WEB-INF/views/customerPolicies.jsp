@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -155,40 +155,46 @@
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
 		<!--sidebar start-->
-		<aside>
-			<div id="sidebar" class="nav-collapse ">
-				<!-- sidebar menu start-->
-				<ul class="sidebar-menu" id="nav-accordion">
+		 <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+              
+              	  <p class="centered"><a href="profile.html"><img src="/InsuranceSystem/pages/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	 <h5 class="centered">${user }</h5>
+                    
+                  <li class="mt">
+                      <a href="index.html">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  </li>
 
-					<p class="centered">
-						<a href="profile.html"><img
-							src="/InsuranceSystem/pages/assets/img/ui-sam.jpg"
-							class="img-circle" width="60"></a>
-					</p>
-					<h5 class="centered">${user }</h5>
+                  <li class="sub-menu">
+                      <a  href="javascript:;" >
+                          <i class="fa fa-desktop"></i>
+                          <span>Staff</span>
+                      </a>
+                      <ul class="sub">
+                          <li ><a href="<c:url value='/staff/viewAll' />">Staff List</a></li>
+                          <li><a  href="<c:url value='/requestAdd' />">Add Staff</a></li>
+                          
+                      </ul>
+                  </li>
 
-
-					<li class="sub-menu"><a class="active" href="javascript:;">
-							<i class="fa fa-desktop"></i> <span>Staff</span>
-					</a>
-						<ul class="sub">
-							<li class="active"><a
-								href="<c:url value='/staff/viewAll' />">Staff List</a></li>
-							<li><a href="<c:url value='/requestAdd' />">Add Staff</a></li>
-
-						</ul></li>
-
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-cogs"></i> <span>Customer</span>
-					</a>
-						<ul class="sub">
-							<li><a href="<c:url value='/customer/viewAll' />">Customer
-									List</a></li>
-							<li><a href="<c:url value='/requestAddCustomer' />">Add
-									Customer</a></li>
-
-						</ul></li>
-					<li class="sub-menu"><a href="javascript:;"> <i
+                  <li class="sub-menu">
+                      <a  href="javascript:;" >
+                          <i class="fa fa-cogs"></i>
+                          <span>Customer</span>
+                      </a>
+                      <ul class="sub">
+							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
+							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
+							<li><a  href="<c:url value='/requestAddCustomer' />">Edit Customer</a></li>
+                          
+                      </ul>
+                  </li>
+                  <li class="sub-menu"><a href="javascript:;"> <i
 							class="fa fa-cogs"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
@@ -196,25 +202,31 @@
 							<li ><a href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
 
 						</ul></li>
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-book"></i> <span>Policy</span>
-					</a>
-						<ul class="sub">
-							<li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
-						</ul></li>
+                  <li class="sub-menu">
+                      <a  href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>Policy</span>
+                      </a>
+                      <ul class="sub">
+                          <li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
+                      </ul>
+                  </li>
+                 
+                  <li class="sub-menu">
+                      <a href="javascript:;" class="active">
+                          <i class="fa fa-th"></i>
+                          <span>Insurance</span>
+                      </a>
+                      <ul class="sub">
+							<li class="active"><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
+							<li ><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+						</ul>
+                  </li>
 
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>Claim</span>
-					</a>
-						<ul class="sub">
-							<li><a href="">Add Claim</a></li>
-							<li><a href="">Search Claim</a></li>
-						</ul></li>
-
-				</ul>
-				<!-- sidebar menu end-->
-			</div>
-		</aside>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
 		<!--sidebar end-->
 
 		<!-- **********************************************************************************************************************************************************
@@ -225,19 +237,21 @@
 <section id="main-content">
           <section class="wrapper">
           	<h3><i class="fa fa-angle-right"></i> Customer SSN</h3>
-				
+          	<c:url var="updateAction" value="/claim/addClaim" ></c:url>
+				<form action="${updateAction }" method="GET">
+				<input type="hidden" name="cid" value="${cid }">
 				 <c:forEach items="${policy }" var="policy">
 				 <div class="row">
 	                  <div class="col-md-12 mt">
 	                  	  <div class="content-panel">
 	                  	      
-	                  	  	  <h4 class="accordion" id="accordion2"><input type="checkbox" value="">
-	                  	  	  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne"> 
+	                  	  	  <h4 class="accordion" id="accordion2"><input type="checkbox" value="${policy.pid}" name="pid">
+	                  	  	  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseOne"> 
 	                  	  	  ${policy.policyNumber}
 	                  	  	  </a>
 	                  	  	  </h4>
 	                  	  	  <hr>
-		                     <table class="table" id="collapseOne" class="accordion-body collapse in">
+		                     <table class="table" id="collapseOne" class="accordion-body collapse">
                     <tbody>
                       <tr>
                         <td >Policy Number:</td>
@@ -252,11 +266,11 @@
                         <td >${policy.premium }</td>
                       </tr>
                       <tr>
-                        <td >Amount Left:</td>
-                        <td >${policy.amountLeft }</td>
+                        <td >Pharmacy Amount Left:</td>
+                        <td >${policy.pamountLeft }</td>
                      
-                        <td >Deductible Left:</td>
-                        <td >${policy.deductibleLeft }</td>
+                        <td >Hosipital Amount Left:</td>
+                        <td >${policy.hamountLeft }</td>
                       </tr>
                       
                      
@@ -266,7 +280,8 @@
 	                  </div><!-- /col-md-12 -->
 	                  </div>
                   </c:forEach>
-	                  <a class="btn btn-primary" style="margin-left:460px; margin-top:20px" onclick="searchPolicy();">Next</a>
+	                  <button class="btn btn-primary" style="margin-left:460px; margin-top:20px" type="submit">Next</button>
+	                  </form>
 		</section><! --/wrapper -->
       </section><!-- /MAIN CONTENT -->
       <script src="/InsuranceSystem/pages/assets/js/jquery.js"></script>
@@ -276,7 +291,6 @@
 	<script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js"
 		type="text/javascript"></script>
-	<script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
 
 
 	<!--common script for all pages-->
@@ -294,6 +308,7 @@
 			
 		
 	});
+ 
 	</script>
 </body>
 </html>

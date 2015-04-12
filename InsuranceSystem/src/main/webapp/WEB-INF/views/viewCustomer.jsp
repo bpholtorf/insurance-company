@@ -11,6 +11,7 @@
 
 <title>DASHGUM - Bootstrap Admin Template</title>
 
+
 <!-- Bootstrap core CSS -->
 <link href="/InsuranceSystem/pages/assets/css/bootstrap.css" rel="stylesheet">
 <!--external css-->
@@ -397,7 +398,9 @@ form {
 
 		<!--main content end-->
 	</section>
-<!-- js placed at the end of the document so the pages load faster -->
+
+
+	<!-- js placed at the end of the document so the pages load faster -->
 	<script src="/InsuranceSystem/pages/assets/js/jquery.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/bootstrap.min.js"></script>
 	<script class="include" type="text/javascript"
@@ -416,10 +419,10 @@ form {
 	<script src="/InsuranceSystem/pages/assets/js/bootstrap-switch.js"></script>
 
 	<!--custom tagsinput-->
-	<script src="/InsuranceSystem/pages/assets/js/jquery.tagsinput.js"></script>
+	 <script src="/InsuranceSystem/pages/assets/js/jquery.tagsinput.js"></script>
 
 	<!--custom checkbox & radio-->
-	<script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap.js"></script>
+	<!-- <script type="text/javascript" src="/InsuranceSystem/pages/assets/js/bootstrap.js"></script> -->
 	<script type="text/javascript"
 		src="/InsuranceSystem/pages/assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 	<script type="text/javascript"
@@ -428,12 +431,18 @@ form {
 	<script type="text/javascript"
 		src="/InsuranceSystem/pages/assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-	<script type="text/javascript"
+	 <script type="text/javascript"
 		src="/InsuranceSystem/pages/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 
     <script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>
-	<script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
+
+
+	<!--common script for all pages-->
+	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
+	<!--script for this page-->
+	
 	
 	<script>
 
@@ -478,7 +487,7 @@ function myFunction(){
 			
 		}
 		
-$(function() {
+ $(function() {
 	$("#datepicker").datepicker();
 	
 	
