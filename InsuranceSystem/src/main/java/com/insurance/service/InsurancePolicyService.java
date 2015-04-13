@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.insurance.dao.InsurancePolicyDao;
+import com.insurance.data.CustomerDB;
 import com.insurance.data.InsurancePolicyDB;
 import com.insurance.data.StaffDB;
 
@@ -60,5 +61,9 @@ public class InsurancePolicyService {
 
 	public List<InsurancePolicyDB> searchByName(String pattern) {
 		return InsurancePolicyDao.searchByName(pattern);
+	}
+
+	public InsurancePolicyDB findByPolicyNumber(String policyNumber) {
+		return InsurancePolicyDao.findByPolicyNumber(policyNumber);
 	}
 }

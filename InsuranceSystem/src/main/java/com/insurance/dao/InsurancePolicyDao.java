@@ -1,19 +1,16 @@
 package com.insurance.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.insurance.data.InsurancePolicyDB;
 import com.insurance.data.PolicyToCustomerDB;
-import com.insurance.data.StaffDB;
 
 @Repository
 public class InsurancePolicyDao {
@@ -101,6 +98,21 @@ public class InsurancePolicyDao {
 				String hqlString="FROM InsurancePolicyDB where id=:id";
 				Query query=session.createQuery(hqlString);
 				query.setInteger("id", id);
+				list = query.list();
+			} finally {
+				session.close();
+			}
+			return list.get(0);
+		}
+		
+		public InsurancePolicyDB findByPolicyNumber(String policyNumber) {
+			Session session = sessionFactory.openSession();
+			
+			List<InsurancePolicyDB> list=new ArrayList<InsurancePolicyDB>();
+			try {
+				String hqlString="FROM InsurancePolicyDB where policyNumber=:policyNumber";
+				Query query=session.createQuery(hqlString);
+				query.setString("policyNumber", policyNumber);
 				list = query.list();
 			} finally {
 				session.close();

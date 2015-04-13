@@ -6,9 +6,14 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.insurance.data.PolicyCoverage;
+import com.insurance.data.PolicyCoverageDB;
+import com.insurance.data.PolicyToCustomerDB;
+
 
 @Repository
 public class PolicyCoverageDao {
@@ -36,5 +41,35 @@ public class PolicyCoverageDao {
 			session.close();
 		}
 		return !(list.size()==0);
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<PolicyCoverageDB> listPolicyCoverage(){
+		Session session = sessionFactory.openSession();
+		List<PolicyCoverageDB> list;
+		try {
+			list = session.createQuery("from PolicyCoverageDB").list();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
+	public void deletePolicyCoverage(int pid,String itemName){
+		Session session = this.sessionFactory.openSession();
+		Query query = session.createQuery("delete PolicyCoverageDB where pid = :pid AND itemName = :itemName");
+		query.setParameter("pid", pid);
+		query.setParameter("itemName", itemName);
+		query.executeUpdate();
+		session.close();
+	}
+
+	public void addPolicyCoverage(int pid, String itemName) {
+		Session session = this.sessionFactory.openSession();
+		Query query = session.createSQLQuery("insert into policy_coverage(pid, itemName) value('" + pid + "','" + itemName + "')");
+		query.executeUpdate();
+		session.close();
+		
 	}
 }

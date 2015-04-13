@@ -33,9 +33,10 @@ public class InsurancePolicyController {
 	  if (result.hasErrors()) {
 		return "addInsurancePolicy";
 	  }
-	  
-	 insurancePolicyService.addInsurancePolicy(i);
-	 return "redirect:/insurancePolicy/viewAll";
+		 insurancePolicyService.addInsurancePolicy(i);
+		 int id =  insurancePolicyService.findByPolicyNumber(i.getPolicyNumber()).getId();
+		 model.addAttribute("id",id);
+		 return "redirect:/insurancePolicy/viewCoverages/{id}";
   }
   @RequestMapping(value="/insurancePolicy/viewAll",method=RequestMethod.GET)
   public String findAll(Model model)

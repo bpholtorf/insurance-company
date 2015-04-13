@@ -312,6 +312,11 @@ form {
 														</form>
 															</button>
 														</form>
+														<form method="post" action="viewCoverages/${insurancePolicy.id }">
+															<button class="btn btn-info btn-xs" title="Edit Insurance Coverages">
+																<i class="fa fa-edit"></i>
+															</button>
+														</form>
 													</td>
 												</tr>
 												</c:forEach>
