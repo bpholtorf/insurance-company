@@ -275,7 +275,7 @@
           		<div class="col-lg-12">
           			<div class="form-panel">
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> Customer Information</h4>
-                  	      <c:url var="updateAction" value="/customer/update/${customer.id }" ></c:url>
+                  	      <c:url var="updateAction" value="/customer/update" ></c:url>
                           <form:form action="${updateAction}" class="form-horizontal tasi-form" method="POST" modelAttribute="customer">
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">Customer Id</label>

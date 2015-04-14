@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.insurance.dao.InsurancePolicyDao;
 import com.insurance.data.CustomerDB;
 import com.insurance.data.InsurancePolicyDB;
+import com.insurance.data.InsurancePolicyDB2;
 import com.insurance.data.StaffDB;
 
 @Service
@@ -35,9 +36,9 @@ public class InsurancePolicyService {
 	{
 		return InsurancePolicyDao.findAll();
 	}
-	public void addInsurancePolicy(InsurancePolicyDB insurancePolicyDB)
+	public String addInsurancePolicy(InsurancePolicyDB insurancePolicyDB)
 	{
-		InsurancePolicyDao.addInsurancePolicy(insurancePolicyDB);
+		return InsurancePolicyDao.addInsurancePolicy(insurancePolicyDB);
 	}
 	public boolean deleteInsurancePolicy(Integer id)
 	{
@@ -48,7 +49,7 @@ public class InsurancePolicyService {
 		return InsurancePolicyDao.findById(id);
 	}
 
-	public void updateInsurancePolicy(InsurancePolicyDB insurancePolicy) {
+	public void updateInsurancePolicy(InsurancePolicyDB2 insurancePolicy) {
 		// TODO Auto-generated method stub
 		InsurancePolicyDao.updateInsurancePolicy(insurancePolicy);
 	}

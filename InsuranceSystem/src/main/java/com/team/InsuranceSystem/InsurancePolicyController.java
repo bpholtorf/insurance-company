@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.insurance.data.CustomerDB;
 import com.insurance.data.InsurancePolicyDB;
+import com.insurance.data.InsurancePolicyDB2;
 import com.insurance.data.StaffDB;
 import com.insurance.service.InsurancePolicyService;
 
@@ -31,25 +32,36 @@ public class InsurancePolicyController {
   public String addInsurancePolicy(@Valid InsurancePolicyDB i,BindingResult result, Model model )
   {
 	  if (result.hasErrors()) {
+		System.out.println(result.getAllErrors());
 		return "addInsurancePolicy";
 	  }
-		 insurancePolicyService.addInsurancePolicy(i);
-		 int id =  insurancePolicyService.findByPolicyNumber(i.getPolicyNumber()).getId();
-		 model.addAttribute("id",id);
-		 return "redirect:/insurancePolicy/viewCoverages/{id}";
+	 String policyNumber = insurancePolicyService.addInsurancePolicy(i);
+	 int id =  insurancePolicyService.findByPolicyNumber(policyNumber).getId();
+	 model.addAttribute("id",id);
+	 return "redirect:/insurancePolicy/viewCoverages/{id}";
   }
+  
   @RequestMapping(value="/insurancePolicy/viewAll",method=RequestMethod.GET)
   public String findAll(Model model)
   {
-	  
 	  model.addAttribute("insurancePolicys", insurancePolicyService.findAll());
 	 return "viewInsurancePolicy";
   }
+  
+  @RequestMapping(value="/insurancePolicy/{errMessage}",method=RequestMethod.GET)
+  public String findAllError(Model model, @PathVariable("errMessage") String error)
+  {
+	  model.addAttribute("insurancePolicys", insurancePolicyService.findAll());
+	  model.addAttribute("errMessage", error);
+	 return "viewInsurancePolicy";
+  }
+  
   @RequestMapping("/insurancePolicy/delete/{id}")
-  public String deleteInsurancePolicy(@PathVariable("id") Integer id, ModelMap map)
+  public String deleteInsurancePolicy(@PathVariable("id") Integer id, Model model)
   {
 	  if(!insurancePolicyService.deleteInsurancePolicy(id)){
-		  map.addAttribute("errMessage","Cannot delete an insurance policy that is held by a customer.");
+		  model.addAttribute("errMessage","ViewAll-Error");
+		  return "redirect:/insurancePolicy/{errMessage}";
 	  }
 	  return "redirect:/insurancePolicy/viewAll";
   }
@@ -65,18 +77,19 @@ public class InsurancePolicyController {
   public String viewInsurancePolicy(@PathVariable("id") Integer id, Model model)
   {
 	  model.addAttribute("insurancePolicy",insurancePolicyService.findById(id));
-	  return "InsurancePolicyView";
+	  return "insurancePolicyView";
 	  
   }
-  @RequestMapping(value="/insurancePolicy/update/{id}",method=RequestMethod.POST)
-  public String updateInsurancePolicy(@Valid InsurancePolicyDB i,BindingResult result, Model model, @PathVariable("id") Integer id )
+  @RequestMapping(value="/insurancePolicy/update",method=RequestMethod.POST)
+  public String updateInsurancePolicy(@Valid InsurancePolicyDB2 insurancePolicy,BindingResult result, Model model )
   {
 	  if (result.hasErrors()) {
-		  model.addAttribute("insurancePolicy",insurancePolicyService.findById(id));
+		  System.out.println(result.getAllErrors());
+		  model.addAttribute("insurancePolicy",insurancePolicy);
 		  return "insurancePolicy";
 	  }
 	  
-	  this.insurancePolicyService.updateInsurancePolicy(i);
+	  this.insurancePolicyService.updateInsurancePolicy(insurancePolicy);
 	  return "redirect:/insurancePolicy/viewAll";
   }
   @RequestMapping(value="/insurancePolicy/addInsurancePolicyPage",method=RequestMethod.POST)
@@ -90,6 +103,7 @@ public class InsurancePolicyController {
          Map<String,String> planTypes = new LinkedHashMap<String,String>();
          planTypes.put("Individual", "Individual");
          planTypes.put("Family", "Family"); 
+         planTypes.put("Employee-Sponsored", "Employee-Sponsored"); 
          return planTypes;
      }
   
@@ -118,18 +132,19 @@ public class InsurancePolicyController {
 		  model.addAttribute("insurancePolicys",result);
 		  return "viewInsurancePolicy";
 	  }
-			  
-	  if (type.equals("Policy Number")) {
-		  result=insurancePolicyService.searchByNumber(keyword);
-	  }
-	  else if(type.equals("Policy Name")){
-		  String pattern="%";
+
+	  	String pattern="%";
 	    for (int i = 0; i < keyword.length(); i++) {
 			pattern=pattern+keyword.charAt(i)+"%";
 			
 		}
 	    pattern=pattern+"%";
-	    result=insurancePolicyService.searchByName(pattern);
+			  
+	  if (type.equals("Policy Number")) {
+		  result=insurancePolicyService.searchByNumber(pattern);
+	  }
+	  else if(type.equals("Policy Name")){
+		  result=insurancePolicyService.searchByName(pattern);
 	  }
 	  
 	  model.addAttribute("type", type);

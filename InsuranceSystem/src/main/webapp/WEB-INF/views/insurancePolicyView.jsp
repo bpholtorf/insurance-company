@@ -314,7 +314,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">*Pay Period (in months)</label>
 									<div class="col-lg-5">
-										<form:select class="form-control" path="payPeriod">
+										<form:select class="form-control" path="payPeriod"  readonly="true">
 							                <form:options items="${payPeriods}"/>
 										</form:select>
 									</div>
@@ -322,23 +322,23 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">*Premium</label>
 									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="premiumPercent" />
+										<form:input type="text" class="form-control" path="premiumPercent"  readonly="true" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">*Max Pharmacy Payout</label>
 									<div class="col-lg-5">
-										<form:input type="number"  min="0" class="form-control" path="pamount" />
+										<form:input type="number"  min="0" class="form-control" path="pamount"  readonly="true" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">*Max Hospital Payout</label>
 									<div class="col-lg-5">
-										<form:input type="number" min="0" class="form-control" path="hamount" />
+										<form:input type="number" min="0" class="form-control" path="hamount"  readonly="true" />
 									</div>
 								</div>
-                              <div class="form-group">              
-                                  <button type="submit" class="btn btn-theme" style="left:300px;position:relative">Submit</button>            
+                              <div class="form-group">    
+							      <a class="btn btn-theme" style="left:300px;position:relative"  href="<c:url value='/insurancePolicy/viewAll' />">Return</a>                  
                               </div><!-- /showback -->
                           </form:form>
           			</div><!-- /form-panel -->

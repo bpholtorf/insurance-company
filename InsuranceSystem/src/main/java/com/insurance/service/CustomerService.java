@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.insurance.dao.CustomerDao;
 import com.insurance.data.CustomerDB;
+import com.insurance.data.CustomerDB2;
 import com.insurance.data.StaffDB;
 
 @Service
@@ -55,7 +56,7 @@ public class CustomerService {
 		return CustomerDao.findById(id);
 	}
 
-	public void updateCustomer(CustomerDB customer) {
+	public void updateCustomer(CustomerDB2 customer) {
 		CustomerDao.updateCustomer(customer);
 	}
 

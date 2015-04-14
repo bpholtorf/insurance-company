@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.insurance.data.CustomerDB;
+import com.insurance.data.CustomerDB2;
 import com.insurance.data.PolicyToCustomerDB;
 
 @Repository
@@ -86,10 +87,10 @@ public class CustomerDao {
          session.close();
 	}
 	
-	 public void updateCustomer(CustomerDB CustomerDB)
+	 public void updateCustomer(CustomerDB2 customer)
 	   {
 		   Session session = sessionFactory.openSession();
-		   session.update(CustomerDB);
+		   session.update(customer);
 		   session.flush();
 			
 	   }
