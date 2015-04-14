@@ -16,7 +16,7 @@ import com.insurance.validator.PolicyNumber;
 
 @Entity
 @Table(name="insurance_policy")
-public class InsurancePolicyDB implements Serializable{
+public class InsurancePolicyDB2 implements Serializable{
 	
 	@Id
 	@Column(name="id")
@@ -35,6 +35,7 @@ public class InsurancePolicyDB implements Serializable{
 	private Double premiumPercent;
 	
 
+
 	@Column(name="pamount")
 	@NotNull(message="Please input the max pharmacy coverage")
 	private Double pamount;
@@ -42,6 +43,8 @@ public class InsurancePolicyDB implements Serializable{
 	@Column(name="hamount")
 	@NotNull(message="Please input the max hospital amount")
 	private Double hamount;
+
+
 	
 	@Column(name="policyNumber")
 	private String policyNumber;

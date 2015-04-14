@@ -207,7 +207,7 @@
               
               	  <p class="centered"><a href="profile.html"><img src="/InsuranceSystem/pages/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	 <h5 class="centered">${user }</h5>
-                    
+
 
                   <li class="sub-menu">
                       <a  href="javascript:;" >
@@ -222,42 +222,44 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
+                      <a href="javascript:;" >
                           <i class="fa fa-user"></i>
                           <span>Customer</span>
                       </a>
                       <ul class="sub">
 							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
 							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
-							<li class="active"><a  href="<c:url value='/requestAddCustomer' />">Edit Customer</a></li>
+							<li><a  href="<c:url value='/requestAddCustomer' />">Edit Customer</a></li>
                           
                       </ul>
                   </li>
-					<li class="sub-menu"><a href="javascript:;"> <i
+					<li class="sub-menu">
+					<a class="active" href="javascript:;"> <i
 							class="fa fa-bars"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
 							<li ><a href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
+							<li class="active" ><a href="<c:url value='/requestAddInsurancePolicy' />">Edit Insurance Policy</a></li>
 
 						</ul></li>
-                 	<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-book"></i> <span>Customer Policy</span>
-					</a>
-						<ul class="sub">
-							<li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
-						</ul></li>
-
-					<li class="sub-menu">
-                      <a href="javascript:;" >
+                  <li class="sub-menu">
+                      <a  href="javascript:;" >
                           <i class="fa fa-book"></i>
-                          <span>Insurance Claim</span>
+                          <span>Customer Policy</span>
                       </a>
                       <ul class="sub">
-							<li ><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
-							<li><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
-						</ul>
+                          <li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
+                      </ul>
                   </li>
+                 
+                 <li class="sub-menu"><a href="javascript:;"> <i
+							class="fa fa-th"></i> <span>Claim</span>
+					</a>
+						<ul class="sub">
+							<li><a href="">Add Claim</a></li>
+							<li><a href="">Search Claim</a></li>
+						</ul></li>
 
               </ul>
               <!-- sidebar menu end-->
@@ -271,96 +273,72 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Edit Customer Information</h3>
+          	<h3><i class="fa fa-angle-right"></i> Edit Insurance Policy</h3>
   
           	<!-- INPUT MESSAGES -->
           	<div class="row mt">
           		<div class="col-lg-12">
           			<div class="form-panel">
-                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Customer Information</h4>
-                  	      <c:url var="updateAction" value="/customer/update" ></c:url>
-                          <form:form action="${updateAction}" class="form-horizontal tasi-form" method="POST" modelAttribute="customer">
+                  	  <h4 class="mb"><i class="fa fa-angle-right"></i> Insurance Policy Information</h4>
+                  	      <c:url var="updateAction" value="/insurancePolicy/update" ></c:url>
+                          <form:form action="${updateAction}" class="form-horizontal tasi-form" method="POST" modelAttribute="insurancePolicy">
                               <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">Customer Id</label>
+                                  <label class="col-sm-2 control-label col-lg-2">Insurance Policy Id</label>
                                   <div class="col-lg-5">
                                       <form:input type="text"  readonly="true"  class="form-control" path="id"/>
                                   </div>
                                       <form:hidden path="id"/>
-                              </div>                            
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">*Name</label>
-                                  <div class="col-lg-5 form-inline">
-                                      <form:input type="text" class="form-control" path="firstName" placeholder="First name"/>
-										<form:errors path="firstName" class="error"></form:errors>
-										<br>
-                                      <form:input type="text" class="form-control" path="lastName" placeholder="Last name" />
-										<form:errors path="firstName" class="error"></form:errors>
-                                  </div>
-                              </div>
+                              </div>                     
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Sex</label>
-									<div class="col-lg-5">
-										<form:radiobutton path="gender" id="optionsRadios2" value="male" /> Male 
-									    <form:radiobutton path="gender" id="optionsRadios1" value="female"/> Female
-									</div>
-								</div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">*Address</label>
-                                  <div class="col-lg-5">
-                                      <form:input type="text" class="form-control" path="address"/>
-										<form:errors path="address" class="error"></form:errors>
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">*Phone Number</label>
-                                  <div class="col-lg-5">
-                                      <form:input type="tel" class="form-control" path="phoneNumber"  placeholder="0000000000" />
-										<form:errors path="phoneNumber" class="error"></form:errors>
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">*Email</label>
-                                  <div class="col-lg-5">
-                                      <form:input type="email" class="form-control" path="email"  placeholder="contact@test.com" />
-										<form:errors path="email" class="error"></form:errors>
-                                  </div>
-                              </div>
-                              <div class="form-group">
-                                  <label class="col-sm-2 control-label col-lg-2">*Date of Birth</label>
-                                  <div class="col-lg-5">
-                                  <fmt:formatDate value="${customer.dateOfBirth}" type="date" pattern="MM/dd/yyyy" var="theFormattedDate" />
-                                      <form:input  readonly="true"  type="text" id="datepicker" class="form-control"  path="dateOfBirth" value="${theFormattedDate}"/>
-                                  </div>
-                              </div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*SSN</label>
-									<div class="col-lg-5">
-										<form:input readonly="true" type="text" class="form-control" path="SSN" placeholder="000000000" />
-										<form:errors path="SSN" class="error"></form:errors>
+									<label class="col-sm-2 control-label col-lg-2">*Policy Name</label>
+									<div class="col-lg-5 form-inline">
+										<form:input type="text" class="form-control" path="policyName" readonly="true"
+											placeholder="Policy Name" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Annual Income</label>
+									<label class="col-sm-2 control-label col-lg-2">Policy Number</label>
+									<div class="col-lg-5 form-inline">
+										<form:input type="text" class="form-control" path="policyNumber" readonly="true"
+											placeholder="Policy Number" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">*Plan Type</label>
 									<div class="col-lg-5">
-										<form:select class="form-control" path="incomeStatus">
-							                <form:options items="${incomeStatuses}"/>
+										<form:select class="form-control" path="planType"  readonly="true">
+							                <form:options items="${planTypes}"/>
 										</form:select>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Sponsor Name</label>
+									<label class="col-sm-2 control-label col-lg-2">*Pay Period (in months)</label>
 									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="sponsorInfo" />
+										<form:select class="form-control" path="payPeriod"  readonly="true">
+							                <form:options items="${payPeriods}"/>
+										</form:select>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Employer Name</label>
+									<label class="col-sm-2 control-label col-lg-2">*Premium</label>
 									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="employerInfo" />
+										<form:input type="text" class="form-control" path="premiumPercent"  readonly="true" />
 									</div>
 								</div>
-                              <div class="form-group">              
-                                  <button type="submit" class="btn btn-theme" style="left:300px;position:relative">Submit</button>            
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">*Max Pharmacy Payout</label>
+									<div class="col-lg-5">
+										<form:input type="number"  min="0" class="form-control" path="pamount"  readonly="true" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">*Max Hospital Payout</label>
+									<div class="col-lg-5">
+										<form:input type="number" min="0" class="form-control" path="hamount"  readonly="true" />
+									</div>
+								</div>
+                              <div class="form-group">    
+							      <a class="btn btn-theme" style="left:300px;position:relative"  href="<c:url value='/insurancePolicy/viewAll' />">Return</a>                  
                               </div><!-- /showback -->
                           </form:form>
           			</div><!-- /form-panel -->

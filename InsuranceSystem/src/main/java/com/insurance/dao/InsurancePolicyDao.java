@@ -1,6 +1,7 @@
 package com.insurance.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.insurance.data.InsurancePolicyDB;
+import com.insurance.data.InsurancePolicyDB2;
 import com.insurance.data.PolicyToCustomerDB;
 
 @Repository
@@ -30,14 +32,26 @@ public class InsurancePolicyDao {
 		return list;
 	}
 	
-	public void addInsurancePolicy(InsurancePolicyDB insurancePolicy){
+	public String addInsurancePolicy(InsurancePolicyDB insurancePolicy){
+		int timestamp = (int) (new Date().getTime()/1000);
+		String post = insurancePolicy.getPlanType();
+		if(post.equals("Family") || post.equals("Individual")){
+			post = post.substring(0, 3);
+		} else if(post.equals("Employee-Sponsored Family")){
+			post = "Emp-Fam";
+		}else if(post.equals("Employee-Sponsored Individual")){
+			post = "Emp-Ind";
+		}
+		String pre = insurancePolicy.getPolicyName().substring(0, 3);
+		String policyNumber = pre + timestamp + post;
 		Session session = this.sessionFactory.openSession();
 		Query query=session.createSQLQuery("insert into insurance_policy(planType, policyName, premiumPercent, policyNumber, payPeriod, pamount, hamount) value('"+
 				                        insurancePolicy.getPlanType()+"','"+insurancePolicy.getPolicyName()+"','"+
-		                                  insurancePolicy.getPremiumPercent()+"','"+insurancePolicy.getPolicyNumber()+"','"+insurancePolicy.getPayPeriod()+"','"+
+		                                  insurancePolicy.getPremiumPercent()+"','"+policyNumber+"','"+insurancePolicy.getPayPeriod()+"','"+
 				                        insurancePolicy.getPamount()+"','"+insurancePolicy.getHamount()+"')");
 		query.executeUpdate();
 		session.close();
+		return policyNumber;
 	}
 	
 	public boolean deleteInsurancePolicy(Integer id){
@@ -67,10 +81,10 @@ public class InsurancePolicyDao {
 		return list.size() > 0;
 	}
 	
-	 public void updateInsurancePolicy(InsurancePolicyDB InsurancePolicyDB)
+	 public void updateInsurancePolicy(InsurancePolicyDB2 insurancePolicy)
 	   {
 		   Session session = sessionFactory.openSession();
-		   session.update(InsurancePolicyDB);
+		   session.update(insurancePolicy);
 		   session.flush();
 			
 	   }
@@ -125,7 +139,7 @@ public class InsurancePolicyDao {
 
 			List<InsurancePolicyDB> list = new ArrayList<InsurancePolicyDB>();
 			try {
-				String hqlString = "FROM InsurancePolicyDB where policyNumber= :policyNumber";
+				String hqlString = "FROM InsurancePolicyDB where policyNumber like :policyNumber";
 				Query query = session.createQuery(hqlString);
 				query.setString("policyNumber", keyword);
 				list = query.list();

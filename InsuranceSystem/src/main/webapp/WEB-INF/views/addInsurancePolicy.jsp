@@ -270,18 +270,13 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Policy Number</label>
-									<div class="col-lg-5 form-inline">
-										<form:input type="text" class="form-control" path="policyNumber" placeholder="Policy Number" />
-										<form:errors path="policyNumber" class="error"></form:errors>
-									</div>
-								</div>
-								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">*Plan Type</label>
 									<div class="col-lg-5">
 										<form:select class="form-control" path="planType">
 											<option>Individual</option>
 											<option>Family</option>
+											<option>Employee-Sponsored Family</option>
+											<option>Employee-Sponsored Individual</option>
 										</form:select>
 									</div>
 								</div>

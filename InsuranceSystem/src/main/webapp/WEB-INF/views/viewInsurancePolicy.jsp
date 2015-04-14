@@ -27,6 +27,14 @@
 form {
 	display: inline;
 }
+
+.errLabel{
+	text-align: center;
+	background-color: #A94442;
+	color: white;
+	float:right;
+	width: 100%;
+}
 </style>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -288,16 +296,25 @@ form {
 												<th>Id</th>
 												<th>Policy Name</th>
 												<th>Policy Number</th>
+												<th>Policy Type</th>
 												<th>Pay Period</th>
 												<th></th>
 											</tr>
 										</thead>
 										<tbody>
+											<c:choose>
+												<c:when test="${!empty errMessage }">
+													<tr>
+														<label class="errLabel">Cannot Delete an insurance policy that is held by a customer.</label>
+													</tr>
+												</c:when>
+											</c:choose>
 											<c:forEach items="${insurancePolicys }" var="insurancePolicy">
 												<tr>
 													<td><a href="basic_table.html#">${insurancePolicy.id }</a></td>
 													<td>${insurancePolicy.policyName } </td>
 													<td>${insurancePolicy.policyNumber }</td>
+													<td>${insurancePolicy.planType }</td>
 													<td>${insurancePolicy.payPeriod}</td>
 													<td>
 														<form method="post" action="view/${insurancePolicy.id }">

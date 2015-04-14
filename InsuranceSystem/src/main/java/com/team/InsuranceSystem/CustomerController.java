@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.insurance.data.CustomerDB;
+import com.insurance.data.CustomerDB2;
 import com.insurance.data.StaffDB;
 import com.insurance.service.CustomerService;
 import com.insurance.util.Cryption;
@@ -75,16 +76,16 @@ public class CustomerController {
 	  return "customerView";
 	  
   }
-  @RequestMapping(value="/customer/update/{id}",method=RequestMethod.POST)
-  public String updateCustomer(@Valid CustomerDB c,BindingResult result, Model model, @PathVariable("id") Integer id )
+  @RequestMapping(value="/customer/update",method=RequestMethod.POST)
+  public String updateCustomer(@Valid CustomerDB2 customer,BindingResult result, Model model )
   {
 	  if (result.hasErrors()) {
-		  model.addAttribute("birthDate", c.getDateOfBirth());
-		model.addAttribute("customer",customerService.findById(id));
-		return "customer";
+		  System.out.println(result.getAllErrors());
+		  model.addAttribute("customer",customer);
+		  return "customer";
 	  }
   
-	  this.customerService.updateCustomer(c);
+	  this.customerService.updateCustomer(customer);
 	  return "redirect:/customer/viewAll";
   }
   

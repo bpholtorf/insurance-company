@@ -283,7 +283,7 @@
           		<div class="col-lg-12">
           			<div class="form-panel">
                   	  <h4 class="mb"><i class="fa fa-angle-right"></i> Insurance Policy Information</h4>
-                  	      <c:url var="updateAction" value="/insurancePolicy/update/${insurancePolicy.id}" ></c:url>
+                  	      <c:url var="updateAction" value="/insurancePolicy/update" ></c:url>
                           <form:form action="${updateAction}" class="form-horizontal tasi-form" method="POST" modelAttribute="insurancePolicy">
                               <div class="form-group">
                                   <label class="col-sm-2 control-label col-lg-2">Insurance Policy Id</label>
@@ -295,21 +295,21 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">*Policy Name</label>
 									<div class="col-lg-5 form-inline">
-										<form:input type="text" class="form-control" path="policyName"
+										<form:input type="text" class="form-control" path="policyName" readonly="true"
 											placeholder="Policy Name" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">Policy Number</label>
 									<div class="col-lg-5 form-inline">
-										<form:input type="text" class="form-control" path="policyNumber"
+										<form:input type="text" class="form-control" path="policyNumber" readonly="true"
 											placeholder="Policy Number" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">*Plan Type</label>
 									<div class="col-lg-5">
-										<form:select class="form-control" path="planType">
+										<form:select class="form-control" path="planType"  readonly="true">
 							                <form:options items="${planTypes}"/>
 										</form:select>
 									</div>
