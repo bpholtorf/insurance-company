@@ -253,14 +253,16 @@
                       </ul>
                   </li>
                  
-                 <li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>Claim</span>
-					</a>
-						<ul class="sub">
-							<li><a href="">Add Claim</a></li>
-							<li><a href="">Search Claim</a></li>
-						</ul></li>
-
+                <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>Insurance Claim</span>
+                      </a>
+                      <ul class="sub">
+							<li ><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
+							<li><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+						</ul>
+                  </li>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -327,7 +329,7 @@
                                   <td><button class="btn btn-theme"  type="button" style="font-size:12px;height:25px" id="addPolicy" disabled="disabled">Added</button></td>
                                   </c:when>
                                   <c:when test="${policyInfo.check == 'unadded'  && policyInfo.planType=='Individual' }">
-                                   <td><a href="viewPolicys?policyId=${policyInfo.id }&name1=&name2=&name3=&name4=" class="btn btn-info"  style="font-size:12px;height:25px" id="addPolicy">Add</a></td>
+                                   <td><a href="viewPolicys?policyId=${policyInfo.id }&name1=&name2=&name3=&name4=&ssn1=&ssn2=&ssn3=&ssn4=" class="btn btn-info"  style="font-size:12px;height:25px" id="addPolicy">Add</a></td>
                                   </c:when>
                                    <c:when test="${policyInfo.check == 'unadded'  && policyInfo.planType=='Family' }">
                                    <td><a href="viewPolicys" class="btn btn-theme"  style="font-size:12px;height:25px" id="addPolicy">Add</a></td>
@@ -432,18 +434,18 @@
                 '<label class="col-md-4 control-label" for="name">Member SSN</label> ' +
                 '<br>'+
                 '<input id="name1" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px;position:absolute;top:30px;left:15px"> ' +
-                '<input id="ssn1" name="name" type="text" placeholder="SSN" class="form-control input-md" style="width:150px;position:absolute;top:30px;left:215px"> ' +
+                '<input id="ssn1" name="ssn1" type="text" placeholder="eg:000000000" class="form-control input-md" style="width:150px;position:absolute;top:30px;left:215px"> ' +
                 '<br>'+
                 '<input id="name2" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px;position:absolute;top:70px;left:15px"> ' +
-                '<input id="ssn2" name="name" type="text" placeholder="SSN" class="form-control input-md" style="width:150px;position:absolute;top:70px;left:215px"> ' +
+                '<input id="ssn2" name="name" type="text" placeholder="eg:000000000" class="form-control input-md" style="width:150px;position:absolute;top:70px;left:215px"> ' +
                 '<br>'+
                 '<input id="name3" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px;position:absolute;top:110px;left:15px"> ' +
-                '<input id="ssn3" name="name" type="text" placeholder="SSN" class="form-control input-md" style="width:150px;position:absolute;top:110px;left:215px"> ' +
+                '<input id="ssn3" name="name" type="text" placeholder="eg:000000000" class="form-control input-md" style="width:150px;position:absolute;top:110px;left:215px"> ' +
                 '<br>'+
                 '<input id="name4" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px;position:absolute;top:150px;left:15px"> ' +
-                '<input id="ssn4" name="name" type="text" placeholder="SSN" class="form-control input-md" style="width:150px;position:absolute;top:150px;left:215px"> ' +
+                '<input id="ssn4" name="name" type="text" placeholder="eg:000000000" class="form-control input-md" style="width:150px;position:absolute;top:150px;left:215px"> ' +
                 '<br>'+
-                '<label id="aa" style="color: red;visibility: hidden;">Please Input at least one name</label> ' +
+                '<label id="aa" style="color: red;visibility: hidden;">Please input at least one name and SSN</label> ' +
                 '</div> ' +
                 '</form> </div>  </div>',
             buttons: {
@@ -461,25 +463,43 @@
                         var ssn4=$('#ssn4').val();
                         var pid=$('#pid').val();
                         if(name1=='' && name2=='' && name3=='' && name4=='' && ssn1=='' && ssn2=='' && ssn3=='' && ssn4==''){
-                        	console.log("*******");
                         	showName(location);
                         }else if((name1=='' && ssn1!='') || (name1!='' && ssn1=='')){
-                        	console.log("*******");
                         	showName(location);
                         }else if((name2=='' && ssn2!='') || (name2!='' && ssn2=='')){
-                        	console.log("*******");
                         	showName(location);
                         }else if((name3=='' && ssn3!='') || (name3!='' && ssn3=='')){
-                        	console.log("*******");
                         	showName(location);
-                        }
-                        else if((name4=='' && ssn4!='') || (name4!='' && ssn4=='')){
-                        	console.log("*******");
+                        }else if((name4=='' && ssn4!='') || (name4!='' && ssn4=='')){
                         	showName(location);
+                        }else if(!ssn1.length === 9 || isNaN(ssn1)){
+                        	correctSSN(location);
+                        	
+                        }else if(!ssn2.length === 9 || isNaN(ssn2)){
+                        	correctSSN(location);
+                        }else if(!ssn3.length === 9 || isNaN(ssn3)){
+                        	correctSSN(location);
+                        }else if(!ssn4.length === 9 || isNaN(ssn4)){
+                        	correctSSN(location);
                         }
                         else{
-                        var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ss4="+ssn4;
-                        window.location.replace(location1);
+                        	
+                        	 if((ssn1!='') && (ssn1.length === 9 && !isNaN(ssn1))){
+                        		 var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ssn4="+ssn4;
+                                 window.location.replace(location1);
+                            	
+                            } if((ssn2!='') && (ssn2.length === 9 || !isNaN(ssn2))){
+                            	var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ssn4="+ssn4;
+                                window.location.replace(location1);
+                            } if((ssn3!='') && (ssn3.length === 9 || !isNaN(ssn3))){
+                            	var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ssn4="+ssn4;
+                                window.location.replace(location1);
+                            } if((ssn4!='') && (ssn4.length === 9 || !isNaN(ssn4))){
+                            	var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ssn4="+ssn4;
+                                window.location.replace(location1);
+                            }else{
+                        correctSSN(location);
+                            }
                         }
                     }
                 }
@@ -502,61 +522,146 @@
             '<label class="col-md-4 control-label" for="name">Member SSN</label> ' +
             '<br>'+
             '<input id="name1" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px;position:absolute;top:30px;left:15px"> ' +
-            '<input id="ssn1" name="name" type="text" placeholder="SSN" class="form-control input-md" style="width:150px;position:absolute;top:30px;left:215px"> ' +
+            '<input id="ssn1" name="name" type="text" placeholder="eg:000000000" class="form-control input-md" style="width:150px;position:absolute;top:30px;left:215px"> ' +
             '<br>'+
             '<input id="name2" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px;position:absolute;top:70px;left:15px"> ' +
-            '<input id="ssn2" name="name" type="text" placeholder="SSN" class="form-control input-md" style="width:150px;position:absolute;top:70px;left:215px"> ' +
+            '<input id="ssn2" name="name" type="text" placeholder="eg:000000000" class="form-control input-md" style="width:150px;position:absolute;top:70px;left:215px"> ' +
             '<br>'+
             '<input id="name3" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px;position:absolute;top:110px;left:15px"> ' +
-            '<input id="ssn3" name="name" type="text" placeholder="SSN" class="form-control input-md" style="width:150px;position:absolute;top:110px;left:215px"> ' +
+            '<input id="ssn3" name="name" type="text" placeholder="eg:000000000" class="form-control input-md" style="width:150px;position:absolute;top:110px;left:215px"> ' +
             '<br>'+
             '<input id="name4" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px;position:absolute;top:150px;left:15px"> ' +
-            '<input id="ssn4" name="name" type="text" placeholder="SSN" class="form-control input-md" style="width:150px;position:absolute;top:150px;left:215px"> ' +
+            '<input id="ssn4" name="name" type="text" placeholder="eg:000000000" class="form-control input-md" style="width:150px;position:absolute;top:150px;left:215px"> ' +
             '<br>'+
-            '<label id="aa" style="color: red;padding-left:15px;padding-top:100px">Please Input at least one name and corresponding ssn</label> ' +
+            '<label id="aa" style="color: red;padding-left:15px;padding-top:100px">Please input at least one name and corresponding ssn</label> ' +
                 '</div> ' +
                 '</form> </div>  </div>',
-            buttons: {
-                success: {
-                    label: "Save",
-                    className: "btn-success",
-                    callback: function () {
-                        var name1 = $('#name1').val();
-                        var name2 = $('#name2').val();
-                        var name3 = $('#name3').val();
-                        var name4 = $('#name4').val();
-                        var ssn1=$('#ssn1').val();
-                        var ssn2=$('#ssn2').val();
-                        var ssn3=$('#ssn3').val();
-                        var ssn4=$('#ssn4').val();
-                        var pid=$('#pid').val();
-                        if(name1=='' && name2=='' && name3=='' && name4=='' && ssn1=='' && ssn2=='' && ssn3=='' && ssn4==''){
-                        	console.log("*******");
-                        	showName(location);
-                        }else if((name1=='' && ssn1!='') || (name1!='' && ssn1=='')){
-                        	console.log("*******");
-                        	showName(location);
-                        }else if((name2=='' && ssn2!='') || (name2!='' && ssn2=='')){
-                        	console.log("*******");
-                        	showName(location);
-                        }else if((name3=='' && ssn3!='') || (name3!='' && ssn3=='')){
-                        	console.log("*******");
-                        	showName(location);
-                        }
-                        else if((name4=='' && ssn4!='') || (name4!='' && ssn4=='')){
-                        	console.log("*******");
-                        	showName(location);
-                        }else{
-                        var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ss4="+ssn4;
-                        window.location.replace(location1);
+                buttons: {
+                    success: {
+                        label: "Save",
+                        className: "btn-success",
+                        callback: function () {
+                            var name1 = $('#name1').val();
+                            var name2 = $('#name2').val();
+                            var name3 = $('#name3').val();
+                            var name4 = $('#name4').val();
+                            var ssn1=$('#ssn1').val();
+                            var ssn2=$('#ssn2').val();
+                            var ssn3=$('#ssn3').val();
+                            var ssn4=$('#ssn4').val();
+                            var pid=$('#pid').val();
+                            if(name1=='' && name2=='' && name3=='' && name4=='' && ssn1=='' && ssn2=='' && ssn3=='' && ssn4==''){
+                            	showName(location);
+                            }else if((name1=='' && ssn1!='') || (name1!='' && ssn1=='')){
+                            	showName(location);
+                            }else if((name2=='' && ssn2!='') || (name2!='' && ssn2=='')){
+                            	showName(location);
+                            }else if((name3=='' && ssn3!='') || (name3!='' && ssn3=='')){
+                            	showName(location);
+                            }
+                            else if((name4=='' && ssn4!='') || (name4!='' && ssn4=='')){
+                            	showName(location);
+                            } else{
+                            	
+                           	 if((ssn1!='') && (ssn1.length === 9 && !isNaN(ssn1))){
+                           		 var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ssn4="+ssn4;
+                                    window.location.replace(location1);
+                               	
+                               } if((ssn2!='') && (ssn2.length === 9 || !isNaN(ssn2))){
+                               	var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ssn4="+ssn4;
+                                   window.location.replace(location1);
+                               } if((ssn3!='') && (ssn3.length === 9 || !isNaN(ssn3))){
+                               	var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ssn4="+ssn4;
+                                   window.location.replace(location1);
+                               } if((ssn4!='') && (ssn4.length === 9 || !isNaN(ssn4))){
+                               	var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ssn4="+ssn4;
+                                   window.location.replace(location1);
+                               }else{
+                           correctSSN(location);
+                               }
+                          }
                         }
                     }
                 }
-            }
-        });
+            });
+     	}
+	function correctSSN(loc){
+		
+		 var location = loc;
+		    
+	     bootbox.dialog({
+           title: "Input Family Members Name.",
+           message: '<div class="row">  ' +
+           '<div class="col-md-12"> ' +
+           '<form class="form-horizontal"> ' +
+           '<div class="form-group" style="height:180px"> ' +
+           '<label class="col-md-4 control-label" for="name">Member Name</label> ' +
+           '<label class="col-md-4 control-label" for="name">Member SSN</label> ' +
+           '<br>'+
+           '<input id="name1" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px;position:absolute;top:30px;left:15px"> ' +
+           '<input id="ssn1" name="name" type="text" placeholder="eg:000000000" class="form-control input-md" style="width:150px;position:absolute;top:30px;left:215px"> ' +
+           '<br>'+
+           '<input id="name2" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px;position:absolute;top:70px;left:15px"> ' +
+           '<input id="ssn2" name="name" type="text" placeholder="eg:000000000" class="form-control input-md" style="width:150px;position:absolute;top:70px;left:215px"> ' +
+           '<br>'+
+           '<input id="name3" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px;position:absolute;top:110px;left:15px"> ' +
+           '<input id="ssn3" name="name" type="text" placeholder="eg:000000000" class="form-control input-md" style="width:150px;position:absolute;top:110px;left:215px"> ' +
+           '<br>'+
+           '<input id="name4" name="name" type="text" placeholder="Name" class="form-control input-md" style="width:150px;position:absolute;top:150px;left:15px"> ' +
+           '<input id="ssn4" name="name" type="text" placeholder="eg:000000000" class="form-control input-md" style="width:150px;position:absolute;top:150px;left:215px"> ' +
+           '<br>'+
+           '<label id="aa" style="color: red;padding-left:15px;padding-top:100px">Please Input valid SSN</label> ' +
+               '</div> ' +
+               '</form> </div>  </div>',
+           buttons: {
+               success: {
+                   label: "Save",
+                   className: "btn-success",
+                   callback: function () {
+                       var name1 = $('#name1').val();
+                       var name2 = $('#name2').val();
+                       var name3 = $('#name3').val();
+                       var name4 = $('#name4').val();
+                       var ssn1=$('#ssn1').val();
+                       var ssn2=$('#ssn2').val();
+                       var ssn3=$('#ssn3').val();
+                       var ssn4=$('#ssn4').val();
+                       var pid=$('#pid').val();
+                       if(name1=='' && name2=='' && name3=='' && name4=='' && ssn1=='' && ssn2=='' && ssn3=='' && ssn4==''){
+                       	showName(location);
+                       }else if((name1=='' && ssn1!='') || (name1!='' && ssn1=='')){
+                       	showName(location);
+                       }else if((name2=='' && ssn2!='') || (name2!='' && ssn2=='')){
+                       	showName(location);
+                       }else if((name3=='' && ssn3!='') || (name3!='' && ssn3=='')){
+                       	showName(location);
+                       }
+                       else if((name4=='' && ssn4!='') || (name4!='' && ssn4=='')){
+                       	showName(location);
+                       } else{
+                       	
+                      	 if((ssn1!='') && (ssn1.length === 9 && !isNaN(ssn1))){
+                      		 var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ssn4="+ssn4;
+                               window.location.replace(location1);
+                          	
+                          } if((ssn2!='') && (ssn2.length === 9 || !isNaN(ssn2))){
+                          	var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ssn4="+ssn4;
+                              window.location.replace(location1);
+                          } if((ssn3!='') && (ssn3.length === 9 || !isNaN(ssn3))){
+                          	var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ssn4="+ssn4;
+                              window.location.replace(location1);
+                          } if((ssn4!='') && (ssn4.length === 9 || !isNaN(ssn4))){
+                          	var location1=location+"?"+"policyId="+pid+"&name1="+name1+"&name2="+name2+"&name3="+name3+"&name4="+name4+"&ssn1="+ssn1+"&ssn2="+ssn2+"&ssn3="+ssn3+"&ssn4="+ssn4;
+                              window.location.replace(location1);
+                          }else{
+                      correctSSN(location);
+                          }
+                     }
+                   }
+               }
+           }
+       });
 	}
- 
-	
 	</script>
       
 

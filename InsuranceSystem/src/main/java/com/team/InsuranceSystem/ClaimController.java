@@ -1,10 +1,8 @@
 package com.team.InsuranceSystem;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.View;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.insurance.data.BillHeaderDB;
+import com.insurance.data.CustomerDB;
 import com.insurance.data.HosBillDB;
 import com.insurance.data.HosBillInfoDB;
 import com.insurance.data.PharBillDB;
@@ -25,6 +24,7 @@ import com.insurance.service.BillService;
 import com.insurance.service.DrugCoverageService;
 import com.insurance.service.CustomerService;
 import com.insurance.service.HosCoverageService;
+import com.insurance.service.PolicyService;
 import com.insurance.service.PolicyToCustomerService;
 
 @Controller
@@ -41,6 +41,8 @@ public class ClaimController {
 	private DrugCoverageService covService;
 	@Autowired
 	private HosCoverageService hosCovService;
+	@Autowired 
+	private PolicyService pService;
 	@RequestMapping("/requestAddClaim")
 	public String returnPage() {
 		return "addClaim";
@@ -52,6 +54,7 @@ public class ClaimController {
 		List<PolicyToCustomerDB> policies = pc.getOneAll(cid);
 		model.addAttribute("policy", policies);
 		model.addAttribute("cid", cid);
+		model.addAttribute("ssn", ssn);
 		return "customerPolicies";
 	}
 	@RequestMapping("/claim/searchClaim")
@@ -75,8 +78,12 @@ public class ClaimController {
 	{
 		BillHeaderDB billHeader=bService.findBillDB(billNumber);
 		String billType=billHeader.getBillType();
+		int ssn=billHeader.getSsn();
+		CustomerDB c=cService.searchBySSN(ssn+"").get(0);
+		model.addAttribute("cus", c);
 		if (billType.equals(BillType.pharmacy.toString())) {
 			model.addAttribute("bill", bService.findBillByBillNum(billNumber));
+			System.out.println(bService.findBillByBillNum(billNumber).getTotalCoverage());
 			return "claim";
 		}
 		else {
@@ -101,6 +108,7 @@ public class ClaimController {
 	public String generateClaimResult(@RequestParam("bNumber") String bNumber,
 			@RequestParam("cid") int cid, @RequestParam("pid") int pid, Model model) {
 		model.addAttribute("cus",cService.getCustomerById(cid));
+		model.addAttribute("policy",pService.getPolicyById(pid) );
 		BillHeaderDB billDB=bService.findBillDB(bNumber);
 		
 		if (billDB.getBillType().equals(BillType.pharmacy.toString())) {
@@ -108,7 +116,9 @@ public class ClaimController {
 			PolicyToCustomerDB db2=pc.getById(pid, cid);
 			model.addAttribute("cusPo",db2);
 			return "claimReport";
+			
 		}
+		
 		else {
 			model.addAttribute("bill",hosClaim(billDB,bNumber,cid,pid));
 			PolicyToCustomerDB db2=pc.getById(pid, cid);
@@ -173,8 +183,7 @@ public class ClaimController {
 		pc.updateAmountLeft(db2);
 		billDB.setTotalCoverage(totalCoverage);
 		billDB.setCustomerPay(billDB.getTotalCharge()-totalCoverage);
-		String uniqueID = UUID.randomUUID().toString();
-		billDB.setClaimNumber(uniqueID);
+		billDB.setClaimNumber(System.currentTimeMillis()+"");
 		billDB.setStatus(1);
 		bService.update(billDB);
 		db.setTotalCoverage(totalCoverage);
@@ -236,9 +245,9 @@ public class ClaimController {
 		db2.setTotalCoverage(totalCoverAmount);
 		db2.setCustomerPay(db2.getTotalCharge()-totalCoverAmount);
 		billDB.setCustomerPay(db2.getCustomerPay());
-		String uniqueID = UUID.randomUUID().toString();
-		db2.setClaimNumber(uniqueID);
-		billDB.setClaimNumber(uniqueID);
+		
+		db2.setClaimNumber(System.currentTimeMillis()+"");
+		billDB.setClaimNumber(System.currentTimeMillis()+"");
 		billDB.setStatus(1);
 		billDB.setTotalCoverage(totalCoverAmount);
 		bService.update(billDB);

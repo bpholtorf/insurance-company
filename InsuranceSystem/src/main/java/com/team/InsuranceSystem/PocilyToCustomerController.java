@@ -182,44 +182,46 @@ public class PocilyToCustomerController {
 	  double premium=0;
 	  double pAmount=policyService.getPolicyById(pid).getPamount();
 	  double hAmount=policyService.getPolicyById(pid).getHamount();
+	  int pp=period/12;
 	  if(income.equals("Less than 10000")){
-		  premium=percent*10000;
+		  premium=percent*10000*pp;
 	  }
 	  if(income.equals("10000 - 19999")){
-		  premium=percent*15000;
+		  premium=percent*15000*pp;
 	  }
 	  if(income.equals("20000 - 29999")){
-		  premium=percent*25000;
+		  premium=percent*25000*pp;
 	  }
 	  if(income.equals("30000 - 39999")){
-		  premium=percent*35000;
+		  premium=percent*35000*pp;
 	  }
 	  if(income.equals("40000 - 49999")){
-		  premium=percent*45000;
+		  premium=percent*45000*pp;
 	  }
 	  if(income.equals("50000 - 59999")){
-		  premium=percent*55000;
+		  premium=percent*55000*pp;
 	  }
 	  if(income.equals("60000 - 69999")){
-		  premium=percent*65000;
+		  premium=percent*65000*pp;
 	  }
 	  if(income.equals("70000 - 79999")){
-		  premium=percent*75000;
+		  premium=percent*75000*pp;
 	  }
 	  if(income.equals("80000 - 89999")){
-		  premium=percent*85000;
+		  premium=percent*85000*pp;
 	  }
 	  if(income.equals("90000 - 100000")){
-		  premium=percent*95000;
+		  premium=percent*95000*pp;
 	  }
 	  if(income.equals("More than 100000")){
-		  premium=percent*100000;
+		  premium=percent*100000*pp;
 	  }
 	  
 	  PolicyToCustomerDB pc=generatePocilyCustomer(cid,pid,policyNum,premium,pAmount,hAmount,dateFrom1,dateTo1);
 	  pcService.addPolicyToCustomer(pc);
 	  model.addAttribute("customer",customerService.findById(cid));
 	  model.addAttribute("customerPolicys",pcService.getOneAll(cid));
+	  System.out.println(pcService.getOneAll(cid).size()+"***************");
 	  model.addAttribute("cc",cid);
 	  return "redirect:/customer/viewPolicys/{cc}";
 	 
@@ -230,7 +232,7 @@ public class PocilyToCustomerController {
   public String viewCustomerPolicys(@PathVariable("id") Integer id, Model model,HttpSession session)
   {
 	  model.addAttribute("customer",customerService.findById(id));
-	  List<PolicyToCustomerDB> list=pcService.getAll();
+	  List<PolicyToCustomerDB> list=pcService.getOneAll(id);
 	  List<CustomerPolicy> list1=new ArrayList<CustomerPolicy>();
 	  for(int i=0;i<list.size();i++){
 		  int cid=list.get(i).getCid();

@@ -225,13 +225,16 @@ form {
 							
 						</ul></li>
 
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>Claim</span>
-					</a>
-						<ul class="sub">
-							<li><a href="">Add Claim</a></li>
-							<li><a href="">Search Claim</a></li>
-						</ul></li>
+					 <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>Insurance Claim</span>
+                      </a>
+                      <ul class="sub">
+							<li ><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
+							<li><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+						</ul>
+                  </li>
 
 				</ul>
 				<!-- sidebar menu end-->
@@ -256,7 +259,7 @@ form {
 									<h4>
 										<i class="fa fa-angle-right"></i> Customer Policys List
 										<div class="col-sm-3 col-md-3 pull-right" style="margin-top:-10px">
-											<form class="navbar-form" role="search" action="searchPolicy">
+											<form class="navbar-form" role="search" action="searchPolicy" onsubmit="return checkKeyword()">
 												<div class="input-group" style="margin-top:-15px">
 													<input type="text" class="form-control"
 														placeholder="Customer SSN" name="keyword" value="${keyword }">
@@ -359,7 +362,26 @@ form {
 	<!--script for this page-->
 
 	<script>
-		//custom select box
+	 function checkKeyword(){
+   	  var keyword=$("input[name='keyword']").val();
+   	  if(keyword.length === 9 &&!isNaN(keyword))
+   	   {
+   		  console.log('true');
+   		
+   		  return true;
+   		  
+   	   }
+   	  else
+   		  {
+   		  console.log('false');
+   		  bootbox.alert("Please input a valid SSN!", function() {
+    			 
+ 			});
+   		  return false;
+   		  }
+   	  
+     }
+
 	</script>
 
 </body>

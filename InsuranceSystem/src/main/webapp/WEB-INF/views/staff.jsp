@@ -225,13 +225,16 @@
 							<li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
 						</ul></li>
 
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>Claim</span>
-					</a>
-						<ul class="sub">
-							<li><a href="">Add Claim</a></li>
-							<li><a href="">Search Claim</a></li>
-						</ul></li>
+					<li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>Insurance Claim</span>
+                      </a>
+                      <ul class="sub">
+							<li ><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
+							<li><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+						</ul>
+                  </li>
 
 		</ul>
 		<!-- sidebar menu end-->

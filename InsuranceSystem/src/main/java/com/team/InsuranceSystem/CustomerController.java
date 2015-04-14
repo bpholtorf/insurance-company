@@ -176,4 +176,20 @@ public class CustomerController {
 	  
 	  return cDB;
   }
+  @RequestMapping("/customer/findBySSN")
+  public @ResponseBody CustomerDB findCustomerBySSN(HttpServletRequest request,
+		                                           HttpServletResponse response)
+  {
+	 
+	  String ssn=request.getParameter("ssn");
+	  CustomerDB cDB=new CustomerDB();
+	  System.out.println("customerController"+ssn);
+	  List<CustomerDB> cDBs=customerService.searchBySSN(ssn);
+	  if(cDBs.size()!=0)
+	  {
+		  cDB=customerService.searchBySSN(ssn).get(0);	  	  
+	  }
+	  
+	  return cDB;
+  }
 }

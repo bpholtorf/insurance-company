@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -215,7 +216,7 @@
                   <li class="sub-menu">
                       <a href="javascript:;" class="active">
                           <i class="fa fa-th"></i>
-                          <span>Insurance</span>
+                          <span>Insurance Claim</span>
                       </a>
                       <ul class="sub">
 							<li class="active"><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
@@ -236,7 +237,7 @@
 
 <section id="main-content">
           <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> Customer SSN</h3>
+          	<h3><i class="fa fa-angle-right"></i> Customer SSN: ${ssn }</h3>
           	<c:url var="updateAction" value="/claim/addClaim" ></c:url>
 				<form action="${updateAction }" method="GET">
 				<input type="hidden" name="cid" value="${cid }">
@@ -245,7 +246,7 @@
 	                  <div class="col-md-12 mt">
 	                  	  <div class="content-panel">
 	                  	      
-	                  	  	  <h4 class="accordion" id="accordion2"><input type="checkbox" value="${policy.pid}" name="pid">
+	                  	  	  <h4 class="accordion" id="accordion2"><input type="radio" value="${policy.pid}" name="pid">
 	                  	  	  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" data-target="#collapseOne"> 
 	                  	  	  ${policy.policyNumber}
 	                  	  	  </a>
@@ -255,13 +256,17 @@
                     <tbody>
                       <tr>
                         <td >Policy Number:</td>
-                        <td >Programming</td>          
+                        <td >${policy.policyNumber}</td>          
                         <td >Date From:</td>
-                        <td >${policy.dateFrom }</td>
+                        <fmt:formatDate value="${policy.dateFrom }" type="date"
+								pattern="MM/dd/yyyy" var="theFormattedDate" />
+                        <td >${theFormattedDate}</td>
                       </tr>
                       <tr>
                         <td >Date To:</td>
-                        <td >${policy.dateTo }</td>
+                         <fmt:formatDate value="${policy.dateTo }" type="date"
+								pattern="MM/dd/yyyy" var="theFormattedDate2" />
+                        <td >${theFormattedDate2}</td>
                         <td >Premium:</td>
                         <td >${policy.premium }</td>
                       </tr>
@@ -301,6 +306,13 @@
 	<script>
 	$( document ).ready(function() {
 	    $("td").css("border-top","0px");
+	   
+	   	 var radioInput=$("input[type='radio']");
+	   	 if(radioInput.size()>0)
+	     {
+	   		radioInput.first().prop('checked',true); 
+	   	 }
+	   
 	});
 	$(':checkbox').change(function(){
 		$(':checkbox').prop('checked',false);

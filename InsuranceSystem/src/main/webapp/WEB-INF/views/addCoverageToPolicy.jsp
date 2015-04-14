@@ -207,13 +207,7 @@
               
               	  <p class="centered"><a href="profile.html"><img src="/InsuranceSystem/pages/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	 <h5 class="centered">${user }</h5>
-                    
-                  <li class="mt">
-                      <a href="index.html">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
-                      </a>
-                  </li>
+
 
                   <li class="sub-menu">
                       <a  href="javascript:;" >
@@ -261,14 +255,15 @@
                  
                   <li class="sub-menu">
                       <a href="javascript:;" >
-                          <i class="fa fa-th"></i>
-                          <span>Insurance</span>
+                          <i class="fa fa-book"></i>
+                          <span>Insurance Claim</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="basic_table.html">Basic Table</a></li>
-                          <li><a  href="responsive_table.html">Responsive Table</a></li>
-                      </ul>
+							<li ><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
+							<li><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+						</ul>
                   </li>
+
 
               </ul>
               <!-- sidebar menu end-->
@@ -303,6 +298,7 @@
                                   <th class="numeric">Policy Type</th>
                                   <th class="numeric">Deductible</th>
                                   <th class="numeric">Operator Title</th>
+                                  <th></th>
                               </tr>
                               </thead>
                               <tbody>

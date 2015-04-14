@@ -213,13 +213,16 @@
 							<li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
 						</ul></li>
 
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>Claim</span>
-					</a>
-						<ul class="sub">
-							<li><a href="">Add Claim</a></li>
-							<li><a href="">Search Claim</a></li>
-						</ul></li>
+					<li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>Insurance Claim</span>
+                      </a>
+                      <ul class="sub">
+							<li ><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
+							<li><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+						</ul>
+                  </li>
 
 				</ul>
 				<!-- sidebar menu end-->
@@ -276,7 +279,7 @@
 									<label class="col-sm-2 control-label col-lg-2">*Phone
 										Number</label>
 									<div class="col-lg-5">
-										<form:input type="tel" class="form-control" path="phoneNumber" data-validate="required,number"  placeholder="000000000"  />
+										<form:input type="tel" class="form-control" path="phoneNumber" data-validate="required,number"  placeholder="0000000000"  />
 										<form:errors path="phoneNumber" class="error"></form:errors>
 									</div>
 								</div>

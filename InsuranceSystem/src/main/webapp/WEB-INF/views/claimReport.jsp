@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,8 +147,8 @@
         <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
-        <!--sidebar start-->
-          <aside>
+      <!--sidebar start-->
+		  <aside>
           <div id="sidebar"  class="nav-collapse ">
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
@@ -155,12 +156,7 @@
               	  <p class="centered"><a href="profile.html"><img src="/InsuranceSystem/pages/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	 <h5 class="centered">${user }</h5>
                     
-                  <li class="mt">
-                      <a href="index.html">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
-                      </a>
-                  </li>
+               
 
                   <li class="sub-menu">
                       <a  href="javascript:;" >
@@ -175,14 +171,14 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a  href="javascript:;" >
+                      <a href="javascript:;" >
                           <i class="fa fa-cogs"></i>
                           <span>Customer</span>
                       </a>
                       <ul class="sub">
 							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
 							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
-							<li ><a  href="<c:url value='/requestAddCustomer' />">Edit Customer</a></li>
+							<li><a  href="<c:url value='/requestAddCustomer' />">Edit Customer</a></li>
                           
                       </ul>
                   </li>
@@ -219,7 +215,7 @@
               <!-- sidebar menu end-->
           </div>
       </aside>
-        <!--sidebar end-->
+		<!--sidebar end-->
 
         <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
@@ -240,24 +236,27 @@
             </div>
             <hr>
             <div class="row">               
-                <div class="col-xs-12 col-md-5 col-lg-3">
+                <div class="col-xs-12 col-md-5 col-lg-4">
                     <div class="panel panel-default height">
                         <div class="panel-heading">Claim Information</div>
                         <div class="panel-body">
-                            <strong>Claim ID:</strong> ${bill.billNumber}<br>
-                            <strong>Insured:</strong> ${cus.firstName } ${cus.lastName }<br>
+                            <strong>Claim ID:</strong> ${bill.claimNumber}<br>
+                            <strong>Insured Name:</strong> ${cus.firstName } ${cus.lastName }<br>
                             <strong>Insured ID:</strong> ${cus.id }<br>
                             <strong>SSN:</strong> ${cus.SSN }<br>
-                            <strong>Incurred:</strong> ${bill.date}<br>
+                              <fmt:formatDate value="${bill.date}" type="date"
+								pattern="MM/dd/yyyy" var="theFormattedDate" />
+                            <strong>Incurred Date:</strong> ${theFormattedDate}<br>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-5 col-lg-3">
+                <div class="col-xs-12 col-md-5 col-lg-4">
                     <div class="panel panel-default height">
                         <div class="panel-heading">Policy Information</div>
                         <div class="panel-body">
-                            <strong>Policy Name:</strong> No<br>
-                            <strong>Policy Number</strong> ${cusPo.policyNumber }<br>
+                            <strong>Policy Name:</strong> ${policy.policyName}<br>
+                            <strong>Policy Number:</strong> ${policy.policyNumber }<br>
+                            <strong>Policy Type:</strong> ${policy.planType}<br>
                             <strong>Pharmacy Amount Left:</strong> ${cusPo.pamountLeft }<br>
                             <strong>Hospital Amount Left:</strong> ${cusPo.hamountLeft }<br>
                             
@@ -333,6 +332,9 @@
             </div>
         </div> 
     </div>
+    <div>
+      <a class="btn btn-primary" style="margin-left:280px" onclick="sendReport();">Send Report to Pharmacy</a>
+    </div>
 </div>
 </section>
 </section>
@@ -367,6 +369,54 @@
 <!-- Simple Invoice - END -->
 
 </div>
+<!-- js placed at the end of the document so the pages load faster -->
+	<script src="/InsuranceSystem/pages/assets/js/jquery.js"></script>
+	<script src="/InsuranceSystem/pages/assets/js/bootstrap.min.js"></script>
+	<script class="include" type="text/javascript"
+		src="/InsuranceSystem/pages/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+	<script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
+	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js"
+		type="text/javascript"></script>
 
+
+	<!--common script for all pages-->
+	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
+
+	<!--script for this page-->
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script src="/InsuranceSystem/pages/assets/js/tasks.js"
+		type="text/javascript"></script>
+   <script type="text/javascript">
+    function sendReport()
+    {
+    	//var data=;
+    	var data=JSON.stringify(eval('('+'${dataJson}'+')'));
+    	console.log(typeof(data));
+        console.log(data);
+        var myEscapedJSONString = data.replace(/\\n/g, "\\n")
+        .replace(/\\'/g, "\\'")
+        .replace(/\\"/g, '\\"')
+        .replace(/\\&/g, "\\&")
+        .replace(/\\r/g, "\\r")
+        .replace(/\\t/g, "\\t")
+        .replace(/\\b/g, "\\b")
+        .replace(/\\f/g, "\\f");
+        var jsonOb=JSON.parse(data);
+          	$.ajax({
+    		  type: 'POST',
+    		  url: "http://172.31.199.107:8080/Pharmacy/interface/bill",
+    		  data: myEscapedJSONString,
+    		  
+    		  success: function(response){
+    			  
+    		  },
+    		  error: function(jqXHR, textStatus, errorThrown) {
+     	    	 
+    	    	  console.log('####'+textStatus, errorThrown);
+    	    	}
+    		  
+    		});
+    }
+   </script>
 </body>
 </html>

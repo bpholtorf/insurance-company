@@ -76,6 +76,7 @@ public class PharBillDB{
 		this.customerPay=customerPay;
 		this.billType=billType;
 		this.totalCharge=totalCharge;
+		this.totalCoverage=totalCoverage;
 	}
 	
 	public double getPreCoverage() {

@@ -12,16 +12,18 @@ public class DrugCoverageDB {
 	@Id
 	@Column(name = "drug_id")
 	
-	private int drugId;
+	private String drugId;
 	
 	@Column(name = "drug_name_commercial")
 	private String drugName;
 
-	public int getDrugId() {
+	
+
+	public String getDrugId() {
 		return drugId;
 	}
 
-	public void setDrugId(int drugId) {
+	public void setDrugId(String drugId) {
 		this.drugId = drugId;
 	}
 

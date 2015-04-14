@@ -24,16 +24,7 @@
 <!-- Custom styles for this template -->
 <link href="/InsuranceSystem/pages/assets/css/style.css" rel="stylesheet">
 <link href="/InsuranceSystem/pages/assets/css/style-responsive.css" rel="stylesheet">
-<!--external css-->
-<link
-	href="/InsuranceSystem/pages/assets/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />
 
-<!-- Custom styles for this template -->
-<link href="/InsuranceSystem/pages/assets/css/style.css"
-	rel="stylesheet">
-<link href="/InsuranceSystem/pages/assets/css/style-responsive.css"
-	rel="stylesheet">
 <style>
 form {
 	display: inline;
@@ -229,14 +220,16 @@ form {
 							<li ><a href="<c:url value='/customer/viewAllPolicys' />">Customer Policys List</a></li>
 						</ul></li>
 
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>Claim</span>
-					</a>
-						<ul class="sub">
-							<li><a href="">Add Claim</a></li>
-							<li><a href="">Search Claim</a></li>
-						</ul></li>
-
+					<li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>Insurance Claim</span>
+                      </a>
+                      <ul class="sub">
+							<li ><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
+							<li><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+						</ul>
+                  </li>
 				</ul>
 				<!-- sidebar menu end-->
 			</div>
@@ -258,7 +251,7 @@ form {
 								<h4>
 									<i class="fa fa-angle-right"></i> Customer List
 									<div class="col-sm-3 col-md-4 pull-right" style="margin-top: -10px">
-											<form class="navbar-form" role="search" action="searchCustomer">
+											<form class="navbar-form" role="search" action="searchCustomer" onsubmit="return checkKeyword()">
 											
 												<div class="input-group" style="margin-top: -15px">
 												<select class="form-control" id="sel1" style="width: 40%; margin-right: 14px" name="type" onchange="myFunction()">
@@ -407,10 +400,12 @@ form {
 		src="/InsuranceSystem/pages/assets/js/jquery.dcjqaccordion.2.7.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
 	<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-
+     <script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
 
 	<!--common script for all pages-->
 	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
+    <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
+	<!--script for this page-->
 
 	<!--script for this page-->
 	<script src="/InsuranceSystem/pages/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
@@ -434,14 +429,11 @@ form {
 	 <script type="text/javascript"
 		src="/InsuranceSystem/pages/assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 
-    <script src="/InsuranceSystem/pages/assets/js/validate.js"></script>
+   
 	<script src="/InsuranceSystem/pages/assets/js/form-component.js"></script>
 
 
-	<!--common script for all pages-->
-	<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
-    <script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
-	<!--script for this page-->
+	
 	
 	
 	<script>
@@ -492,6 +484,28 @@ function myFunction(){
 	
 	
 });
+ 
+ function checkKeyword(){
+	  var keyword=$("input[name='keyword']").val();
+	  if($("#sel1").val()=='SSN'){
+	  if(keyword.length === 9 &&!isNaN(keyword))
+	   {
+		  console.log('true');
+		
+		  return true;
+		  
+	   }
+	  else
+		  {
+		  console.log('false');
+		  bootbox.alert("Please input a valid SSN!", function() {
+			 
+			});
+		  return false;
+		  }
+	  }
+	  
+ }
 	</script>
 
 </body>

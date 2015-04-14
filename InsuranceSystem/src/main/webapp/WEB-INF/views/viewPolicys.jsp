@@ -222,22 +222,17 @@ form {
 						</ul></li>
 
 					
-					<%--  <li class="sub-menu"><a  href="javascript:;"> <i
-							class="fa fa-bars"></i> <span>Insurance Policy</span>
-					</a>
-						<ul class="sub">
-							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
-							<li ><a href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
-
-						</ul></li> --%>
-						
-					<li class="sub-menu"><a href="javascript:;"> <i
-							class="fa fa-th"></i> <span>Claim</span>
-					</a>
-						<ul class="sub">
-							<li><a href="">Add Claim</a></li>
-							<li><a href="">Search Claim</a></li>
-						</ul></li>
+				
+					<li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-book"></i>
+                          <span>Insurance Claim</span>
+                      </a>
+                      <ul class="sub">
+							<li ><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
+							<li><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+						</ul>
+                  </li>
 
 				</ul>
 				<!-- sidebar menu end-->
@@ -419,7 +414,7 @@ form {
             	
 	     bootbox.dialog({
 	    	
-            title: "Family Members Name.",
+            title: "Family Member Names.",
             message:function(){
            var con='';
            if(n2!=''){

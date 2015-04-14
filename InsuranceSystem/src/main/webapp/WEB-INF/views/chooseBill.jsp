@@ -190,12 +190,7 @@
               	  <p class="centered"><a href="profile.html"><img src="/InsuranceSystem/pages/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	 <h5 class="centered">${user }</h5>
                     
-                  <li class="mt">
-                      <a href="index.html">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
-                      </a>
-                  </li>
+                
 
                   <li class="sub-menu">
                       <a  href="javascript:;" >
@@ -286,8 +281,11 @@
 												<tr id="aa">
 													<td class="panel-heading" style="border-top:0px"><span class="check" ><input
 															type="radio" value="${bill.billNumber}"
-															class="checked" name="bNumber"></span> <a href="">${bill.billNumber }</a>
-														<span>Date:${bill.date }</span> <span
+															class="checked" name="bNumber"></span><span style="margin-right:30px"> Bill ID: ${bill.billNumber }</span>
+														<fmt:formatDate value="${bill.date}" type="date"
+							                         	pattern="MM/dd/yyyy" var="theFormattedDate" />
+                      
+														<span>Date:${theFormattedDate }</span> <span
 														class="pull-right clickable panel-collapsed"><i
 															class="glyphicon glyphicon-chevron-down"></i></span></td>
 												</tr>
@@ -299,9 +297,9 @@
 
 																<thead>
 																	<tr>
-																		<th>NDC</th>
-																		<th>Type</th>
 																		<th>Drug Name</th>
+																		<th>Drug Type</th>
+																		
 																		<th>QTY</th>
 																		<th>Charge</th>
 																	</tr>
@@ -309,14 +307,19 @@
 																<tbody>
 																	<c:forEach items="${bill.infoDBs }" var="billInfo">
 																		<tr>
-																			<td>${billInfo.drugId }</td>
-																			<td>${billInfo.type }</td>
 																			<td>${billInfo.name }</td>
+																			<td>${billInfo.type }</td>
+																			
 																			<td>${billInfo.quantity }</td>
 																			<td>${billInfo.totalCharge }</td>
 																		</tr>
 																	</c:forEach>
-
+                                                                      <tr>
+                                                                           <td class="highrow"></td>
+                                                                           <td class="highrow"></td>
+                                                                           <td class="highrow">Total</td>
+                                                                           <td class="highrow">${bill.totalCharge }</td>
+                                                                      </tr>
 
 																</tbody>
 
@@ -357,7 +360,7 @@
 					<!-- SIMPLE TO DO LIST -->
 					<div class="row mt">
 						<div class="col-md-12">
-							<div class="white-panel">
+							<div class="white-panel" style="color:#280909">
 
 								<div class="custom-check goleft mt">
 									<table id="todo" class="table custom-check">
@@ -368,8 +371,11 @@
 												<tr id="aa">
 													<td class="panel-heading"><span class="check"><input
 															type="radio" value="${bill.billNumber}"
-															class="checked" name="bNumber"></span> <a href="">${bill.billNumber }</a>
-														<span>Date:${bill.date }</span> <span
+															 name="bNumber"></span> <span style="margin-right:30px">Bill ID:${bill.billNumber }</span>
+															<fmt:formatDate value="${bill.date}" type="date"
+							                         	pattern="MM/dd/yyyy" var="theFormattedDate" />
+														<span>Date:${theFormattedDate}</span> 
+														<span
 														class="pull-right clickable panel-collapsed"><i
 															class="glyphicon glyphicon-chevron-down"></i></span></td>
 												</tr>
@@ -401,7 +407,12 @@
 																				
 																			</tr>
 																		</c:forEach>
-
+             															 <tr>
+                                                                           <td class="highrow"></td>
+                                                                           <td class="highrow"></td>
+                                                                           <td class="highrow">Total</td>
+                                                                           <td class="highrow">${bill.totalCharge }</td>
+                                                                      </tr>
 
 																	</tbody>
 																
@@ -454,13 +465,7 @@
 
 		<!--main content end-->
 		<!--footer start-->
-		<footer class="site-footer" style="position: absolute; left: 210px; top: 800px; width: 1000px">
-			<div class="text-center">
-				2014 - Alvarez.is <a href="todo_list.html#" class="go-top"> <i
-					class="fa fa-angle-up"></i>
-				</a>
-			</div>
-		</footer>
+		
 		<!--footer end-->
 	</section>
 
@@ -498,6 +503,16 @@
 		//custom select box
 
 		jQuery(function($) {
+			
+			   
+			   
+			   	 var radioInput=$("input[type='radio']");
+			   	 if(radioInput.size()>0)
+			     {
+			   		radioInput.first().prop('checked',true); 
+			   	 }
+			
+			
 			$('.panel-body').hide();
 			$('.panel-heading span.clickable').on(
 					"click",

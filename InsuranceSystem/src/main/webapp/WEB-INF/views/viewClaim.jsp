@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -200,12 +201,6 @@
               	  <p class="centered"><a href="profile.html"><img src="/InsuranceSystem/pages/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	 <h5 class="centered">${user }</h5>
                     
-                  <li class="mt">
-                      <a href="index.html">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
-                      </a>
-                  </li>
 
                   <li class="sub-menu">
                       <a  href="javascript:;" >
@@ -252,7 +247,7 @@
                   <li class="sub-menu">
                       <a href="javascript:;" class="active">
                           <i class="fa fa-th"></i>
-                          <span>Insurance</span>
+                          <span>Insurance Claim</span>
                       </a>
                       <ul class="sub">
 							<li><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
@@ -316,7 +311,9 @@
                               <c:forEach items="${pharClaims}" var="pc">                                                                                                                     
                               <tr>
                                   <td>${pc.claimNumber }</td>
-                                  <td class="hidden-phone">${pc.date }</td>
+                                  <fmt:formatDate value="${pc.date}" type="date"
+							                         	pattern="MM/dd/yyyy" var="theFormattedDate" />
+                                  <td class="hidden-phone">${theFormattedDate }</td>
                                   <td>${pc.ssn } </td>
                                   <td>${pc.totalCharge }</td>
                                   <td>${pc.totalCoverage }</td>
@@ -362,7 +359,9 @@
                               <c:forEach items="${hosClaims}" var="hc">                                                                                                                    
                               <tr>
                                   <td>${hc.claimNumber }</td>
-                                  <td class="hidden-phone">${hc.date }</td>
+                                  <fmt:formatDate value="${hc.date}" type="date"
+							                         	pattern="MM/dd/yyyy" var="theFormattedDate" />
+                                  <td class="hidden-phone">${theFormattedDate }</td>
                                   <td>${hc.ssn } </td>
                                   <td>${hc.totalCharge }</td>
                                   <td>${hc.totalCharge }</td>
@@ -430,7 +429,7 @@
     	  else
     		  {
     		  console.log('false');
-    		  bootbox.alert("Please a valid SSN!", function() {
+    		  bootbox.alert("Please input a valid SSN!", function() {
      			 
   			});
     		  return false;

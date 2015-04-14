@@ -31,6 +31,13 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+       .error{
+        color:#a94442;
+        padding-top:7px;
+
+       }
+    </style>
   </head>
 
   <body>
@@ -207,12 +214,7 @@
               	  <p class="centered"><a href="profile.html"><img src="/InsuranceSystem/pages/assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
               	 <h5 class="centered">${user }</h5>
                     
-                  <li class="mt">
-                      <a href="index.html">
-                          <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
-                      </a>
-                  </li>
+               
 
                   <li class="sub-menu">
                       <a  href="javascript:;" >
@@ -259,7 +261,7 @@
                   <li class="sub-menu">
                       <a href="javascript:;" class="active">
                           <i class="fa fa-book"></i>
-                          <span>Insurance</span>
+                          <span>Insurance Claim</span>
                       </a>
                       <ul class="sub">
 							<li class="active"><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
@@ -291,7 +293,7 @@
 									</div>
 									<button class="btn btn-theme" onclick="searchCustomer();">Submit</button>
 									</div>
-					
+					   <div><label class="error" Style="display:none">The customer does not exist!</label></div>
                       
                      
                   </div><!-- /content-panel -->
@@ -381,7 +383,7 @@
    
 <script type="text/javascript"> 
       
-
+   
 
     function searchCustomer(){
     	 
@@ -391,8 +393,14 @@
     	     url:"/InsuranceSystem/customer/findBySSN",
     	     data:'ssn='+$("input[name='ssn']").val(),
     	     success:function(response){
-    	    	 
+    	    	
     	    	 console.log(response);
+    	    	 if(response.id==null)
+    	    	 {
+    	    		 $(".error").css("display","inline");
+    	    	 }
+    	    	 else{
+    	    		 $(".error").css("display","none");
     	    	 $('#name').html(response.firstName+' '+response.lastName);
     	    	 $('#ssn').html(response.ssn);
     	    	 $('#dateOfBirth').html(unixToDate(response.dateOfBirth));
@@ -401,6 +409,7 @@
     	    	 $('#email').html(response.email);
     	    	 $('#phoneNumber').html(response.phoneNumber);
     	    	 $("#customerInfo").css("display", "block");
+    	    	 }
     	    	 
     	     },
     	     error: function(jqXHR, textStatus, errorThrown) {
