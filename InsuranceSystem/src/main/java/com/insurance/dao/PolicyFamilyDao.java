@@ -37,9 +37,9 @@ public class PolicyFamilyDao {
 		session.close();
 	}
 	
-	public void deleteMembers(int pid,int cid){
+	public void deleteMembers(int cid,int pid){
 		Session session = this.sessionFactory.openSession();
-		Query query = session.createQuery("delete PolicyFamilyDB where pid = :pid AND cid= :cid");
+		Query query = session.createQuery("delete PolicyFamilyDB where cid = :cid AND pid= :pid");
 		query.setParameter("pid", pid);
 		query.setParameter("cid", cid);
 		query.executeUpdate();

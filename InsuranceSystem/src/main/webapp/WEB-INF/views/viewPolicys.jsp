@@ -419,8 +419,8 @@ form {
            var con='';
            if(n2!=''){
         	   con='<label class="col-md-4 control-label" for="name">Member Name</label> ' +
-               '<input id="name2" name="name" type="text"  class="form-control input-md" style="width:150px;" disabled=true value='+n2+'> ';
-           
+               '<input id="name2" name="name" type="text"  class="form-control input-md" style="width:150px;" disabled=true value='+n2+'> ' +
+               '<br>';
            if(n3!=''){
             	 con=con+'<label class="col-md-4 control-label" for="name">Member Name</label> ' +
                  '<input id="name3" name="name" type="text"  class="form-control input-md" style="width:150px;" disabled=true value='+n3+'> ' +
