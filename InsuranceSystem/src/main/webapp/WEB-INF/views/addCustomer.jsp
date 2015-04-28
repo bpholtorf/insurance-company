@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -291,10 +292,12 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Date of Birth</label>
+									<label class="col-sm-2 control-label col-lg-2">Date of Birth</label>
 									<div class="col-lg-5">
-										<form:input class="form-control" id="datepicker" path="dateOfBirth" type="text"/>
-										<form:errors path="dateOfBirth" class="error"></form:errors>
+									<fmt:formatDate value="${birthDate}" type="date" pattern="MM/dd/yyyy" var="theFormattedDate" />
+										<form:input class="form-control" id="datepicker" path="dateOfBirth" type="text" value="${theFormattedDate }"/>
+											<label class="error" style="display:none" id="errorMessage1" >Please input a date!</label>
+											<form:errors path="dateOfBirth" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">

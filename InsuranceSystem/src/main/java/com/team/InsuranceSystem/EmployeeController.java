@@ -36,12 +36,16 @@ public class EmployeeController {
 		  String[] valuesNext = request.getParameterValues("next");
 		  model.addAttribute("id", valuesNext[0]);
 		  return "redirect:/insurancePolicy/nextEmployee/{id}";
+		  
 	  } else if (request.getParameter("submit") != null){
 		  String[] valuesSubmit = request.getParameterValues("submit");
 		  model.addAttribute("id", valuesSubmit[0]);
 		 return "redirect:/insurancePolicy/viewCoverages/{id}";
 	  }
-	  	 
+
+	   String[] valuesNext = request.getParameterValues("next");
+	   model.addAttribute("insuranceId", valuesNext[0]);
+	   model.addAttribute("birthDate", e.getDateOfBirth());
 	   return "addEmployee";
   }
   
