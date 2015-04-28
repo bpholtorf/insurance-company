@@ -290,7 +290,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Date of Birth</label>
+									<label class="col-sm-2 control-label col-lg-2">Date of Birth</label>
 									<div class="col-lg-5">
 									<fmt:formatDate value="${birthDate}" type="date" pattern="MM/dd/yyyy" var="theFormattedDate" />
 										<form:input class="form-control" id="datepicker" path="dateOfBirth" type="text" value="${theFormattedDate }"/>
