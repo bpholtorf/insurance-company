@@ -5,12 +5,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,11 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.insurance.data.CustomerDB;
 import com.insurance.data.InsurancePolicyDB;
 import com.insurance.data.InsurancePolicyDB2;
-import com.insurance.data.StaffDB;
 import com.insurance.service.InsurancePolicyService;
+
 
 @Controller
 public class InsurancePolicyController {
@@ -35,11 +34,30 @@ public class InsurancePolicyController {
 		System.out.println(result.getAllErrors());
 		return "addInsurancePolicy";
 	  }
+	  
 	 String policyNumber = insurancePolicyService.addInsurancePolicy(i);
 	 int id =  insurancePolicyService.findByPolicyNumber(policyNumber).getId();
+	 
+//	 if(i.getPlanType().contains("Employee")){
+//		 model.addAttribute("id",id);
+//		 return "redirect:/requestAddEmployee/{id}";
+//	 } else{
+//		 model.addAttribute("id",id);
+//		 return "redirect:/insurancePolicy/viewCoverages/{id}";
+//	 }
+
 	 model.addAttribute("id",id);
 	 return "redirect:/insurancePolicy/viewCoverages/{id}";
   }
+  
+  @RequestMapping(value="/insurancePolicy/nextEmployee/{id}",method=RequestMethod.GET)
+  public String addInsurancePolicy( @PathVariable("id") Integer id, Model model )
+  {
+		 model.addAttribute("id", id);
+		 return "redirect:/requestAddEmployee/{id}";
+  }
+  
+  
   
   @RequestMapping(value="/insurancePolicy/viewAll",method=RequestMethod.GET)
   public String findAll(Model model)
@@ -111,6 +129,7 @@ public class InsurancePolicyController {
   public Map<Integer,String> populatePayPeriods() {
          Map<Integer,String> payPeriods = new LinkedHashMap<Integer,String>();
          payPeriods.put(6, "6");
+         payPeriods.put(9, "9"); 
          payPeriods.put(12, "12"); 
          return payPeriods;
      }

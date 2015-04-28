@@ -238,7 +238,7 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<h3>
-					<i class="fa fa-angle-right"></i> Add a customer
+					<i class="fa fa-angle-right"></i> Add an employee
 				</h3>
 
 				<!-- INPUT MESSAGES -->
@@ -246,12 +246,10 @@
 					<div class="col-lg-12">
 						<div class="form-panel">
 							<h4 class="mb">
-								<i class="fa fa-angle-right"></i> Customer Information
+								<i class="fa fa-angle-right"></i> Employee Information
 							</h4>
-							<c:url var="addAction" value="/customer/add"></c:url>
-							<form:form action="${addAction}"
-								class="form-horizontal tasi-form" method="POST"
-								modelAttribute="customerDB">
+							<c:url var="addAction" value="/employee/addEmployee"></c:url>
+							<form:form action="${addAction}" class="form-horizontal tasi-form" method="POST" modelAttribute="employeeDB">
 								<div class="form-group">
 									<label class="col-sm-2 control-label col-lg-2">*Name</label>
 									<div class="col-lg-5 form-inline">
@@ -332,14 +330,15 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">Employer Name</label>
+									<label class="col-sm-2 control-label col-lg-2">*Employer Name</label>
 									<div class="col-lg-5">
-										<form:input type="text" class="form-control" path="employerInfo" />
+										<form:input type="text" class="form-control" path="employerInfo"  />
+										<form:errors path="employerInfo" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<button type="submit" class="btn btn-theme"
-										style="left: 300px; position: relative">Submit</button>
+									<form:button type="submit" name="next" value="${insuranceId}" class="btn btn-theme" style="left: 300px; position: relative">Add Another Employee</form:button>>
+									<form:button type="submit" name="submit" value="${insuranceId}" class="btn btn-theme" style="left: 300px; position: relative">Submit Policy</form:button>
 								</div>
 								<!-- /showback -->
 							</form:form>

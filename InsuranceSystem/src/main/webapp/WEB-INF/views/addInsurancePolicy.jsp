@@ -285,6 +285,7 @@
 									<div class="col-lg-5">
 										<form:select class="form-control" path="payPeriod">
 											<option>6</option>
+											<option>9</option>
 											<option>12</option>
 										</form:select>
 									</div>
