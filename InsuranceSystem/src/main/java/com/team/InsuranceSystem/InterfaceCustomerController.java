@@ -26,33 +26,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.insurance.data.CustomerDB;
-import com.insurance.data.CustomerDB2;
-import com.insurance.data.EmployeeDB;
-import com.insurance.data.StaffDB;
 import com.insurance.service.CustomerService;
-import com.insurance.service.EmployeeService;
-import com.insurance.util.Cryption;
 
 @Controller
 public class InterfaceCustomerController {
   @Autowired
   private CustomerService customerService;
   
-  
- 
-  
 
   @RequestMapping(value="/customer/verify/SSN",method=RequestMethod.GET)
   @ResponseBody
-  public String searchCustomer( @RequestParam("SSN") String ssn, Model model)
+  public String searchCustomer( @RequestParam("ssn") String ssn, Model model)
   {
-	  
-	  String pattern=ssn;
-	  boolean result=customerService.getCustomerSSN(pattern);
+	  boolean result=customerService.getCustomerSSN(ssn);
 	  model.addAttribute("ssn", ssn);
 	  model.addAttribute("result", result);
-	  return "/customer/verify/SSN/{ssn}/{result}";
+	  return ""+result;
   }
   
 }
