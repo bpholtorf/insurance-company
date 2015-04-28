@@ -3,13 +3,11 @@ package com.insurance.dao;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -130,7 +128,7 @@ public class CustomerDao {
 
 			List<CustomerDB> list = new ArrayList<CustomerDB>();
 			try {
-				String hqlString = "FROM CustomerDB where SSN=:SSN";
+				String hqlString = "FROM CustomerDB where SSN like :SSN";
 				Query query = session.createQuery(hqlString);
 				query.setString("SSN", keyword);
 				list = query.list();
@@ -185,5 +183,20 @@ public class CustomerDao {
 			} finally {
 				session.close();
 			}
+		}
+
+		public boolean getCustomerSSN(String keyword) {
+			Session session = sessionFactory.openSession();
+
+			List<CustomerDB> list = new ArrayList<CustomerDB>();
+			try {
+				String hqlString = "FROM CustomerDB where SSN=:SSN";
+				Query query = session.createQuery(hqlString);
+				query.setString("SSN", keyword);
+				list = query.list();
+			} finally {
+				session.close();
+			}
+			return list.size() > 0;
 		}
 }

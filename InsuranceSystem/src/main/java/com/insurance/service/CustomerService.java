@@ -1,7 +1,6 @@
 package com.insurance.service;
 
 import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +9,6 @@ import org.springframework.stereotype.Service;
 import com.insurance.dao.CustomerDao;
 import com.insurance.data.CustomerDB;
 import com.insurance.data.CustomerDB2;
-import com.insurance.data.StaffDB;
-
 @Service
 public class CustomerService {
 	
@@ -62,6 +59,10 @@ public class CustomerService {
 
 	public List<CustomerDB> searchBySSN(String keyword) {
 		return CustomerDao.searchBySSN(keyword);
+	}
+	
+	public boolean getCustomerSSN(String keyword) {
+		return CustomerDao.getCustomerSSN(keyword);
 	}
 	public List<CustomerDB> searchByDateofBirth(String keyword) throws ParseException {
 		return CustomerDao.searchByDateofBirth(keyword);

@@ -8,10 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.insurance.data.EmployeeDB;
 import com.insurance.data.InsurancePolicyDB;
 import com.insurance.data.StaffDB;
 import com.insurance.data.CustomerDB;
@@ -56,6 +58,13 @@ public class HomeController {
 		
 	}
 	
+	@RequestMapping(value="/requestAddEmployee/{id}",method=RequestMethod.GET)
+	public ModelAndView getAddEmployeeJsp(@PathVariable("id") Integer id, Model model)
+	{
+		EmployeeDB customer = new EmployeeDB();
+		model.addAttribute("insuranceId", id);
+		return new ModelAndView("addEmployee").addObject(customer); 
+	}
 
 	@RequestMapping(value="/requestAddInsurancePolicy",method=RequestMethod.GET)
 	public ModelAndView getAddInsurancePolicyJsp()

@@ -251,7 +251,7 @@ form {
 								<h4>
 									<i class="fa fa-angle-right"></i> Customer List
 									<div class="col-sm-3 col-md-4 pull-right" style="margin-top: -10px">
-											<form class="navbar-form" role="search" action="searchCustomer" onsubmit="return checkKeyword()">
+											<form class="navbar-form" role="search" action="searchCustomer">
 											
 												<div class="input-group" style="margin-top: -15px">
 												<select class="form-control" id="sel1" style="width: 40%; margin-right: 14px" name="type" onchange="myFunction()">
@@ -485,25 +485,7 @@ function myFunction(){
 	
 });
  
- function checkKeyword(){
-	  var keyword=$("input[name='keyword']").val();
-	  if($("#sel1").val()=='SSN'){
-	  if(keyword.length === 9 &&!isNaN(keyword))
-	   {
-		  console.log('true');
-		
-		  return true;
-		  
-	   }
-	  else
-		  {
-		  console.log('false');
-		  bootbox.alert("Please input a valid SSN!", function() {
-			 
-			});
-		  return false;
-		  }
-	  }
+ 
 	  
  }
 	</script>

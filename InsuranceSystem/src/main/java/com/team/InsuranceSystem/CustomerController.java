@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,14 +28,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.insurance.data.CustomerDB;
 import com.insurance.data.CustomerDB2;
+import com.insurance.data.EmployeeDB;
 import com.insurance.data.StaffDB;
 import com.insurance.service.CustomerService;
+import com.insurance.service.EmployeeService;
 import com.insurance.util.Cryption;
 
 @Controller
 public class CustomerController {
   @Autowired
   private CustomerService customerService;
+  @Autowired
+  private EmployeeService employeeService;
+  
+  
   @RequestMapping(value="/customer/add",method=RequestMethod.POST)
   public String addcustomer(@Valid CustomerDB c,BindingResult result, Model model )
   {
@@ -46,6 +53,7 @@ public class CustomerController {
 	  customerService.addCustomer(c); 
 	  return "redirect:/customer/viewAll";
   }
+  
   @RequestMapping(value="/customer/viewAll",method=RequestMethod.GET)
   public String findAll(Model model)
   {
@@ -120,7 +128,8 @@ public class CustomerController {
 
 			  
 	  if (type.equals("SSN")) {
-		  result=customerService.searchBySSN(keyword);
+		  String pattern=keyword+"%";
+		  result=customerService.searchBySSN(pattern);
 		  model.addAttribute("keyword",keyword);
 	  }else if (type.equals("Date of Birth")) {
 		  SimpleDateFormat dt=new SimpleDateFormat("MM/dd/yyyy");

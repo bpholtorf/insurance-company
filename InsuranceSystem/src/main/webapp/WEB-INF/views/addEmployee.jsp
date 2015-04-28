@@ -179,7 +179,8 @@
 					</p>
 					<h5 class="centered">${user }</h5>
 
-					
+
+
 					<li class="sub-menu"><a  href="javascript:;">
 							<i class="fa fa-desktop"></i> <span>Staff</span>
 					</a>
@@ -189,33 +190,20 @@
 
 						</ul></li>
 
-					<li class="sub-menu"><a href="javascript:;"> <i
+					<li class="sub-menu"><a class="active" href="javascript:;"> <i
 							class="fa fa-user"></i> <span>Customer</span>
 					</a>
 						<ul class="sub">
-							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
-							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
+							<li ><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
+							<li class="active"><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
 
 						</ul></li>
-						<li class="sub-menu">
-                      <a  href="javascript:;" >
-                          <i class="fa fa-cogs"></i>
-                          <span>Customer</span>
-                      </a>
-                      <ul class="sub">
-							<li><a href="<c:url value='/customer/viewAll' />">Customer List</a></li>
-							<li><a href="<c:url value='/requestAddCustomer' />">Add Customer</a></li>
-							<li ><a  href="<c:url value='/requestAddCustomer' />">Edit Customer</a></li>
-                          
-                      </ul>
-                  </li>
-
-					<li class="sub-menu"><a class="active" href="javascript:;"> <i
+					<li class="sub-menu"><a  href="javascript:;"> <i
 							class="fa fa-bars"></i> <span>Insurance Policy</span>
 					</a>
 						<ul class="sub">
 							<li ><a href="<c:url value='/insurancePolicy/viewAll' />">Insurance Policy List</a></li>
-							<li  class="active" ><a  href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
+							<li ><a href="<c:url value='/requestAddInsurancePolicy' />">Add Insurance Policy</a></li>
 
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;"> <i
@@ -235,6 +223,7 @@
 							<li><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
 						</ul>
                   </li>
+
 				</ul>
 				<!-- sidebar menu end-->
 			</div>
@@ -248,7 +237,7 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<h3>
-					<i class="fa fa-angle-right"></i> Add an Insurance Policy
+					<i class="fa fa-angle-right"></i> Add an employee
 				</h3>
 
 				<!-- INPUT MESSAGES -->
@@ -256,64 +245,97 @@
 					<div class="col-lg-12">
 						<div class="form-panel">
 							<h4 class="mb">
-								<i class="fa fa-angle-right"></i> Insurance Policy Information
+								<i class="fa fa-angle-right"></i> Employee Information
 							</h4>
-							<c:url var="addAction" value="/insurancePolicy/add"></c:url>
-							<form:form action="${addAction}"
-								class="form-horizontal tasi-form" method="POST"
-								modelAttribute="insurancePolicyDB">
+							<c:url var="addAction" value="/employee/addEmployee"></c:url>
+							<form:form action="${addAction}" class="form-horizontal tasi-form" method="POST" modelAttribute="employeeDB">
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Policy Name</label>
+									<label class="col-sm-2 control-label col-lg-2">*Name</label>
 									<div class="col-lg-5 form-inline">
-										<form:input type="text" class="form-control" path="policyName" placeholder="Policy Name" />
-										<form:errors path="policyName" class="error"></form:errors>
+										<form:input type="text" class="form-control" path="firstName" placeholder="First name" />
+										<form:errors path="firstName" class="error"></form:errors>
+										<br>
+										<form:input type="text" class="form-control" path="lastName" placeholder="Last name" />
+										<form:errors path="lastName" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Plan Type</label>
+									<label class="col-sm-2 control-label col-lg-2">*Sex</label>
 									<div class="col-lg-5">
-										<form:select class="form-control" path="planType">
-											<option>Individual</option>
-											<option>Family</option>
-											<option>Employee-Sponsored Family</option>
-											<option>Employee-Sponsored Individual</option>
+										<form:radiobutton path="gender" id="optionsRadios2" value="male" checked="checked" /> Male 
+									    <form:radiobutton path="gender" id="optionsRadios1" value="female"/> Female
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">*Address</label>
+									<div class="col-lg-5">
+										<form:input type="text" class="form-control" path="address" />
+										<form:errors path="lastName" class="error"></form:errors>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">*Phone
+										Number</label>
+									<div class="col-lg-5">
+										<form:input type="tel" class="form-control" path="phoneNumber" data-validate="required,number"  placeholder="0000000000"  />
+										<form:errors path="phoneNumber" class="error"></form:errors>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">*Email</label>
+									<div class="col-lg-5">
+										<form:input type="email" class="form-control" path="email" placeholder="contact@example.com" />
+										<form:errors path="email" class="error"></form:errors>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">*Date of Birth</label>
+									<div class="col-lg-5">
+										<form:input class="form-control" id="datepicker" path="dateOfBirth" type="text"/>
+										<form:errors path="dateOfBirth" class="error"></form:errors>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">*SSN</label>
+									<div class="col-lg-5">
+										<form:input type="text" class="form-control" path="SSN" placeholder="000000000" />
+										<form:errors path="SSN" class="error"></form:errors>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label col-lg-2">*Annual Income</label>
+									<div class="col-lg-5">
+										<form:select class="form-control" path="incomeStatus">
+											<option>Less than 10000</option>
+											<option>10000 - 19999</option>
+											<option>20000 - 29999</option>
+											<option>30000 - 39999</option>
+											<option>40000 - 49999</option>
+											<option>50000 - 59999</option>
+											<option>60000 - 69999</option>
+											<option>70000 - 79999</option>
+											<option>80000 - 89999</option>
+											<option>90000 - 99999</option>
+											<option>More than 100000</option>    
 										</form:select>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Pay Period (in months)</label>
+									<label class="col-sm-2 control-label col-lg-2">Sponsor Name</label>
 									<div class="col-lg-5">
-										<form:select class="form-control" path="payPeriod">
-											<option>6</option>
-											<option>9</option>
-											<option>12</option>
-										</form:select>
+										<form:input type="text" class="form-control" path="sponsorInfo" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Premium Percantage</label>
+									<label class="col-sm-2 control-label col-lg-2">Employer Name</label>
 									<div class="col-lg-5">
-										<form:input type="number"  step="0.01" min="0" class="form-control" path="premiumPercent" />
-										<form:errors path="premiumPercent" class="error"></form:errors>
+										<form:input type="text" class="form-control" path="employerInfo"  />
+										<form:errors path="employerInfo" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Max Pharmacy Payout</label>
-									<div class="col-lg-5">
-										<form:input type="number"  min="0" class="form-control" path="pamount" />
-										<form:errors path="pamount" class="error"></form:errors>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Max Hospital Payout</label>
-									<div class="col-lg-5">
-										<form:input type="number" min="0" class="form-control" path="hamount" />
-										<form:errors path="hamount" class="error"></form:errors>
-									</div>
-								</div>
-								<div class="form-group">
-									<button type="submit" class="btn btn-theme"
-										style="left: 300px; position: relative">Submit</button>
+									<form:button type="submit" name="next" value="${insuranceId}" class="btn btn-theme" style="left: 300px; position: relative">Add Another Employee</form:button>>
+									<form:button type="submit" name="submit" value="${insuranceId}" class="btn btn-theme" style="left: 300px; position: relative">Submit Policy</form:button>
 								</div>
 								<!-- /showback -->
 							</form:form>
@@ -323,6 +345,9 @@
 					<!-- /col-lg-12 -->
 				</div>
 				<!-- /row -->
+
+
+
 
 
 			</section>
