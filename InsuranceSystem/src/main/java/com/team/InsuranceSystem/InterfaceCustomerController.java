@@ -43,7 +43,7 @@ public class InterfaceCustomerController {
  
   
 
-  @RequestMapping(value="/customer/interface/SSN",method=RequestMethod.GET)
+  @RequestMapping(value="/customer/verify/SSN",method=RequestMethod.GET)
   @ResponseBody
   public String searchCustomer( @RequestParam("SSN") String ssn, Model model)
   {
@@ -52,7 +52,7 @@ public class InterfaceCustomerController {
 	  boolean result=customerService.getCustomerSSN(pattern);
 	  model.addAttribute("ssn", ssn);
 	  model.addAttribute("result", result);
-	  return "/customer/interface/SSN/{ssn}/{result}";
+	  return "/customer/verify/SSN/{ssn}/{result}";
   }
   
 }

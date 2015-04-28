@@ -38,13 +38,16 @@ public class InsurancePolicyController {
 	 String policyNumber = insurancePolicyService.addInsurancePolicy(i);
 	 int id =  insurancePolicyService.findByPolicyNumber(policyNumber).getId();
 	 
-	 if(i.getPlanType().contains("Employee")){
-		 model.addAttribute("id",id);
-		 return "redirect:/requestAddEmployee/{id}";
-	 } else{
-		 model.addAttribute("id",id);
-		 return "redirect:/insurancePolicy/viewCoverages/{id}";
-	 }
+//	 if(i.getPlanType().contains("Employee")){
+//		 model.addAttribute("id",id);
+//		 return "redirect:/requestAddEmployee/{id}";
+//	 } else{
+//		 model.addAttribute("id",id);
+//		 return "redirect:/insurancePolicy/viewCoverages/{id}";
+//	 }
+
+	 model.addAttribute("id",id);
+	 return "redirect:/insurancePolicy/viewCoverages/{id}";
   }
   
   @RequestMapping(value="/insurancePolicy/nextEmployee/{id}",method=RequestMethod.GET)
