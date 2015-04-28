@@ -121,7 +121,8 @@ public class InsurancePolicyController {
          Map<String,String> planTypes = new LinkedHashMap<String,String>();
          planTypes.put("Individual", "Individual");
          planTypes.put("Family", "Family"); 
-         planTypes.put("Employee-Sponsored", "Employee-Sponsored"); 
+         planTypes.put("Employee-sponsored-individual", "Employee-sponsored-individual"); 
+         planTypes.put("Employee-sponsored-family", "Employee-sponsored-family"); 
          return planTypes;
      }
   

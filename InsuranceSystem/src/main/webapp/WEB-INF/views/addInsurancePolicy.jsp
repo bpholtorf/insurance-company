@@ -275,8 +275,8 @@
 										<form:select class="form-control" path="planType">
 											<option>Individual</option>
 											<option>Family</option>
-											<option>Employee-Sponsored Family</option>
-											<option>Employee-Sponsored Individual</option>
+											<option>Employee-sponsored-individual</option>
+											<option>Employee-sponsored-family</option>
 										</form:select>
 									</div>
 								</div>
