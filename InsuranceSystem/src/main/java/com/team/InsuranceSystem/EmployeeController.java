@@ -23,30 +23,50 @@ public class EmployeeController {
   @RequestMapping(value="/employee/addEmployee",method=RequestMethod.POST)
   public String addEmployeeId(@Valid EmployeeDB e, BindingResult result, Model model, HttpServletRequest request)
   {
-	  if (result.hasErrors()) {
-		  String[] valuesNext = request.getParameterValues("next");
-		  model.addAttribute("insuranceId", valuesNext[0]);
+	  
+	  if(request.getParameter("submit") !=null){
+		  String[] valuesSubmit = request.getParameterValues("submit");
+		  model.addAttribute("id", valuesSubmit[0]);
+		  return "redirect:/insurancePolicy/viewCoverages/{id}";
+	  }
+	  
+	  if (result.hasErrors()){
+		  String[] values;
+		  if(request.getParameter("next") != null){
+			  values = request.getParameterValues("next");
+		  } else if (request.getParameter("submitAdd") != null){
+
+			  values = request.getParameterValues("submitAdd");
+			  model.addAttribute("id", values[0]);
+		  } else{
+
+			  values = request.getParameterValues("submit");
+			  model.addAttribute("id", values[0]);
+		  }
+		  model.addAttribute("insuranceId", values[0]);
 		  model.addAttribute("birthDate", e.getDateOfBirth());
 		  return "addEmployee";
 	  }
 	  
-	  employeeService.addEmployee(e);
+	  
 	  
 	  if(request.getParameter("next") != null){
+		  employeeService.addEmployee(e);
 		  String[] valuesNext = request.getParameterValues("next");
 		  model.addAttribute("id", valuesNext[0]);
 		  return "redirect:/insurancePolicy/nextEmployee/{id}";
 		  
-	  } else if (request.getParameter("submit") != null){
+	  } else if (request.getParameter("submitAdd") != null){
+		  employeeService.addEmployee(e);
+		  String[] valuesSubmitAdd = request.getParameterValues("submitAdd");
+		  model.addAttribute("id", valuesSubmitAdd[0]);
+		 return "redirect:/insurancePolicy/viewCoverages/{id}";
+	  } else {
 		  String[] valuesSubmit = request.getParameterValues("submit");
 		  model.addAttribute("id", valuesSubmit[0]);
-		 return "redirect:/insurancePolicy/viewCoverages/{id}";
+		  return "redirect:/insurancePolicy/viewCoverages/{id}";
 	  }
-
-	   String[] valuesNext = request.getParameterValues("next");
-	   model.addAttribute("insuranceId", valuesNext[0]);
-	   model.addAttribute("birthDate", e.getDateOfBirth());
-	   return "addEmployee";
+	  
   }
   
 }

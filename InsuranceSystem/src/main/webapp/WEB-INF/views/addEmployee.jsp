@@ -232,8 +232,9 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<form:button type="submit" name="next" value="${insuranceId}" class="btn btn-theme" style="left: 300px; position: relative">Add Another Employee</form:button>>
-									<form:button type="submit" name="submit" value="${insuranceId}" class="btn btn-theme" style="left: 300px; position: relative">Submit Policy</form:button>
+									<form:button type="submit" name="next" value="${insuranceId}" class="btn btn-theme" style="left: 300px; position: relative">Add Another Employee</form:button>
+									<form:button type="submit" name="submitAdd" value="${insuranceId}" class="btn btn-theme" style="left: 300px; position: relative">Add Employee and Submit Policy</form:button>
+									<form:button type="submit" name="submit" value="${insuranceId}" class="btn btn-theme" style="left: 300px; position: relative">Submit Policy without Adding Employee</form:button>
 								</div>
 								<!-- /showback -->
 							</form:form>
