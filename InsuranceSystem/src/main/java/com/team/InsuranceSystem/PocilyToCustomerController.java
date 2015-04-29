@@ -303,10 +303,13 @@ List<PolicyToCustomerDB> list=pcService.getAll();
 			  }
 		 
 	  }else{
-		  
-		  for(int i=0;i<list.size();i++){
-			  int cid=list.get(i).getCid();
-			  if(customerService.getCustomerById(cid).getSSN().equals(keyword)){
+		  System.out.println(keyword);
+		  String pattern=keyword+"%";
+		  List<CustomerDB> resultBefore=customerService.searchBySSN(pattern);
+		  for(int i=0;i<resultBefore.size();i++){
+			  int cid=resultBefore.get(i).getId();
+//			  if(customerService.getCustomerById(cid).getSSN().equals(keyword))
+			  
 			  CustomerPolicy p=new CustomerPolicy(cid,list.get(i).getPid(),
 					      list.get(i).getPolicyNumber(),
 					      policyService.getPolicyById(list.get(i).getPid()).getPlanType(),
@@ -317,7 +320,7 @@ List<PolicyToCustomerDB> list=pcService.getAll();
 						  list.get(i).getDateTo(),
 						  customerService.getCustomerById(cid).getFirstName()+" "+customerService.getCustomerById(cid).getLastName(),customerService.getCustomerById(cid).getSSN());
 				  result.add(p);
-			  }  
+			  
 			  }
 		  
 		  model.addAttribute("keyword",keyword);
