@@ -37,9 +37,9 @@ public class InsurancePolicyDao {
 		String post = insurancePolicy.getPlanType();
 		if(post.equals("Family") || post.equals("Individual")){
 			post = post.substring(0, 3);
-		} else if(post.equals("Employee-Sponsored Family")){
+		} else if(post.equals("Employee-sponsored-family")){
 			post = "Emp-Fam";
-		}else if(post.equals("Employee-Sponsored Individual")){
+		}else if(post.equals("Employee-sponsored-individual")){
 			post = "Emp-Ind";
 		}
 		String pre = insurancePolicy.getPolicyName().substring(0, 3);
