@@ -26,7 +26,7 @@
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 
-		<property name="url" value="jdbc:mysql://localhost:8889/insuranceSystem" />
+		<property name="url" value="jdbc:mysql://localhost/insuranceSystem" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 	</bean>
