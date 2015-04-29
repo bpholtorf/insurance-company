@@ -1,5 +1,8 @@
 package com.insurance.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.insurance.data.DiagnosticDB;
+import com.insurance.data.StaffDB;
 
 
 
@@ -56,5 +60,16 @@ public class DiagnosticDao {
 			}
 			
 	   }
+     
+     public List<DiagnosticDB> findDiagnostic(){
+    	 Session session = sessionFactory.openSession();
+ 		List<DiagnosticDB> list;
+ 		try {
+ 			list = session.createQuery("from DiagnosticDB").list();
+ 		} finally {
+ 			session.close();
+ 		}
+ 		return list;
+     }
 
 }

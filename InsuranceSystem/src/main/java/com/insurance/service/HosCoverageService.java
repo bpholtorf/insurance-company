@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.insurance.dao.HosCoverageDao;
 import com.insurance.dao.PolicyCoverageDao;
+import com.insurance.data.HosCoverageDB;
 
 @Service
 public class HosCoverageService {
@@ -19,5 +20,14 @@ public class HosCoverageService {
   public double getDuc(String policyType, String itemName, String operatorTitle)
   {
 	  return hDao.getDuc(policyType, itemName, operatorTitle);
+  }
+  public void addHosCoverage(HosCoverageDB hs){
+	  hDao.addHosCoverage(hs);
+  }
+  public void deleteHosCoverage(String name){
+	  hDao.deleteHosCoverage(name);
+  }
+  public void updateHosCoverage(HosCoverageDB hs,String name){
+	  hDao.updateHosCoverage(hs,name);
   }
 }

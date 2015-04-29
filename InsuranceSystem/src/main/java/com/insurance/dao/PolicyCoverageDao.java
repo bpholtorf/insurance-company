@@ -72,4 +72,12 @@ public class PolicyCoverageDao {
 		session.close();
 		
 	}
+	
+	public void deleteCoverage(String itemName){
+		Session session = this.sessionFactory.openSession();
+		Query query = session.createQuery("delete PolicyCoverageDB itemName = :itemName");
+		query.setParameter("itemName", itemName);
+		query.executeUpdate();
+		session.close();
+	}
 }

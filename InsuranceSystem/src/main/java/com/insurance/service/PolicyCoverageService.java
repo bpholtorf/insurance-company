@@ -52,5 +52,9 @@ public class PolicyCoverageService {
 		pcDao.addPolicyCoverage(pid, itemName);
 		
 	}
+	
+	public void deleteCoverage(String itemName){
+		pcDao.deleteCoverage(itemName);
+	}
 
 }
