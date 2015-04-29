@@ -107,6 +107,7 @@
                       <ul class="sub">
 							<li><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
 							<li class="active"><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+							 <li><a href="<c:url value='/drug/view' />">View Drug</a></li>
 						</ul>
                   </li>
 
@@ -139,12 +140,13 @@
 							<div class="panel panel-default height">
 								<div class="panel-heading">Claim Information</div>
 								<div class="panel-body">
-									<strong>Claim ID:</strong> ${bill.claimNumber}<br> <strong>Insured:</strong>
-									${cus.firstName } ${cus.lastName }<br> <strong>Insured
-										ID:</strong> ${cus.id }<br> <strong>SSN:</strong> ${cus.SSN }<br>
-										<fmt:formatDate value="${bill.date}" type="date"
-								pattern="MM/dd/yyyy" var="theFormattedDate" />
-									<strong>Incurred:</strong> ${theFormattedDate}<br>
+									<strong>Claim ID:</strong> ${bill.claimNumber}<br> 
+									<strong>Insured Name:</strong>${cus.firstName } ${cus.lastName }<br> 
+									<strong>Insured ID:</strong> ${cus.id }<br> 
+									<strong>Insured SSN:</strong> ${cus.SSN }<br>
+									<strong>Patient Name:</strong>${memberName }<br>
+										<fmt:formatDate value="${bill.date}" type="date" pattern="MM/dd/yyyy" var="theFormattedDate" />
+									<strong>Incurred Date:</strong> ${theFormattedDate}<br>
 								</div>
 							</div>
 						</div>

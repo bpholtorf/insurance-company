@@ -1,7 +1,7 @@
 package com.insurance.data;
 
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 
@@ -14,7 +14,7 @@ public class PharBillDB{
 	
     private Date date;
 	
-    private int ssn;
+    private String ssn;
 	
 	private int status;
 	
@@ -35,7 +35,7 @@ public class PharBillDB{
 	public void setTotalCoverage(double totalCoverage) {
 		this.totalCoverage = totalCoverage;
 	}
-	public PharBillDB(String billNumber, String claimNumber, Date date, int ssn,
+	public PharBillDB(String billNumber, String claimNumber, Date date, String ssn,
 			int status,
 			double totalCharge,double customerPay, String billType,double totalCoverage) {
 		super();
@@ -51,7 +51,7 @@ public class PharBillDB{
 		this.totalCoverage=totalCoverage;
 		
 	}
-	public PharBillDB(String billNumber, String claimNumber, Date date, int ssn,
+	public PharBillDB(String billNumber, String claimNumber, Date date, String ssn,
 			int status, String billType) {
 		super();
 		this.billNumber = billNumber;
@@ -61,7 +61,7 @@ public class PharBillDB{
 		this.status = status;
 		this.billType=billType;
 	}
-	public PharBillDB(String billNumber, String claimNumber, Date date, int ssn,
+	public PharBillDB(String billNumber, String claimNumber, Date date, String ssn,
 			int status, List<BillInfoDB> infoDBs,
 			 double totalCharge,double customerPay, String billType, double totalCoverage) {
 		super();
@@ -121,10 +121,10 @@ public class PharBillDB{
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public int getSsn() {
+	public String getSsn() {
 		return ssn;
 	}
-	public void setSsn(int ssn) {
+	public void setSsn(String ssn) {
 		this.ssn = ssn;
 	}
 	public double getTotalCharge() {

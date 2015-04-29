@@ -27,7 +27,8 @@ public class BillService {
 	private HosBillInfoDao hInfoDao;
 	@Autowired
 	private BillDao billDao;
-  public List<PharBillDB> findPharBillBySSN(int ssn,int status)
+	
+  public List<PharBillDB> findPharBillBySSN(String ssn,int status)
   {
 	  List<BillHeaderDB> billDBs=billDao.getBills(ssn, status);
 	  List<PharBillDB> billDB2s=new ArrayList<PharBillDB>();
@@ -57,7 +58,7 @@ public class BillService {
 	 
 	  return billDB2s;
   }
-  public List<HosBillDB> findHosBillBySSN(int ssn,int status)
+  public List<HosBillDB> findHosBillBySSN(String ssn,int status)
   {
 	  List<BillHeaderDB> billDBs=billDao.getBills(ssn, status);
 	  List<HosBillDB> billDB2s=new ArrayList<HosBillDB>();	 	  
@@ -90,6 +91,9 @@ public class BillService {
   public PharBillDB findBillByBillNum(String billNumber)
   {
 	  BillHeaderDB b=billDao.getBillByBillNumber(billNumber);
+	  if (b!=null) {
+		
+	
 	  PharBillDB billDB2=new PharBillDB(b.getBillNumber(), 
 			                      b.getClaimNumber(),
 			                      b.getDate(), 
@@ -101,10 +105,16 @@ public class BillService {
 			                      b.getBillType(),
 			                      b.getTotalCoverage());
 	  return billDB2;
+	  }
+	  else {
+		return null;
+	}
   }
   public HosBillDB getHosBill(String billNumber)
   {
 	  BillHeaderDB b=billDao.getBillByBillNumber(billNumber);
+	  if(b!=null)
+	  {
 	  HosBillDB bill=new HosBillDB(b.getBillNumber(), 
 			                       b.getClaimNumber(), 
 			                       b.getDate(), 
@@ -117,6 +127,9 @@ public class BillService {
 			                       b.getTotalCoverage());
 	  
 	return bill;
+	  }
+	  else
+		  return null;
 	  
   }
   public void update(BillHeaderDB db)
@@ -174,5 +187,68 @@ public class BillService {
 		 
 		  return billDB2s;
    }
- 
+public void save(BillHeaderDB header) {
+	billDao.save(header);
+	
+}
+public List<PharBillDB> searchPharBillBySSN(String ssn,int status)
+{
+	  List<BillHeaderDB> billDBs=billDao.searchBills(ssn, status);
+	  List<PharBillDB> billDB2s=new ArrayList<PharBillDB>();
+	  for(int i=0;i<billDBs.size();i++)
+	  {
+		    
+			if (!billDBs.get(i).getBillType().equals(BillType.pharmacy.toString())) {
+				billDBs.remove(i);
+				--i;
+			}
+		  }
+	  for (BillHeaderDB b:billDBs) {
+		billDB2s.add(new PharBillDB(b.getBillNumber(), 
+				                    b.getClaimNumber(), 
+				                    b.getDate(), 
+				                    b.getSsn(), 
+				                    b.getStatus(),
+				                    b.getTotalCharge(),
+				                    b.getCustomerPay(),				                    
+				                    b.getBillType(),
+				                    b.getTotalCoverage()));
+	}
+	  for (PharBillDB b:billDB2s) {
+		List<BillInfoDB> bInfoDBs=bInfoDao.findBillInfoBillNum(b.getBillNumber());
+		b.setInfoDBs(bInfoDBs);
+	}
+	 
+	  return billDB2s;
+}
+public List<HosBillDB> searchHosBillBySSN(String ssn,int status)
+{
+	  List<BillHeaderDB> billDBs=billDao.searchBills(ssn, status);
+	  List<HosBillDB> billDB2s=new ArrayList<HosBillDB>();	 	  
+	  for(int i=0;i<billDBs.size();i++)
+	  {
+		    
+			if (!billDBs.get(i).getBillType().equals(BillType.hospital.toString())) {
+				billDBs.remove(i);
+				--i;
+			}
+		  }
+	  for (BillHeaderDB b:billDBs) {
+		billDB2s.add(new HosBillDB(b.getBillNumber(), 
+				b.getClaimNumber(), 
+				b.getDate(), 
+				b.getSsn(), 
+				b.getStatus(),
+				b.getTotalCharge(),
+				b.getCustomerPay(),
+				b.getBillType(),
+				b.getTotalCoverage()));
+	}
+	  for (HosBillDB b:billDB2s) {
+		List<HosBillInfoDB> bInfoDBs=hInfoDao.findBillInfoBillNum(b.getBillNumber());
+		b.setInfoDBs(bInfoDBs);
+	}
+	 
+	  return billDB2s;
+}
 }

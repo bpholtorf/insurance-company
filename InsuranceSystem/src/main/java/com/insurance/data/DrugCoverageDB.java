@@ -9,6 +9,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "drug_coverage")
 public class DrugCoverageDB {
+	public DrugCoverageDB() {
+		super();
+	}
+
+	public DrugCoverageDB(String drugId, String drugName) {
+		super();
+		this.drugId = drugId;
+		this.drugName = drugName;
+	}
+
 	@Id
 	@Column(name = "drug_id")
 	

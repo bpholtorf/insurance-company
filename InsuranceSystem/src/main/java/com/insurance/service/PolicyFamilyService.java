@@ -37,4 +37,13 @@ public class PolicyFamilyService {
 	public void deleteMembers(int cid,int pid){
 		pfDao.deleteMembers(cid, pid);
 	}
+	public String getMemberSSN(String memberName,int cid,int pid)
+	{
+		return pfDao.getMemberSSN(memberName, pid, cid);
+	}
+
+	public PolicyFamilyDB getBySSN(String ssn) {
+		return pfDao.getCidBySSN(ssn);
+	}
+	
 }

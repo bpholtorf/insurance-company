@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.insurance.data.BillInfoDB;
 import com.insurance.data.HosBillInfoDB;
 
 @Repository
@@ -39,5 +40,11 @@ public class HosBillInfoDao {
 		   session.update(hDb);
 		   session.flush();
 		   session.close();
+	}
+	public void save(HosBillInfoDB billItem) {
+		Session session = sessionFactory.openSession();
+		   session.save(billItem);
+		   session.flush();
+		session.close();
 	}
 }

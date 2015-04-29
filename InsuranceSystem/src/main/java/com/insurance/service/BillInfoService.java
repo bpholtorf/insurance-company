@@ -28,4 +28,12 @@ public class BillInfoService {
   {
 	  hInfoDao.update(hDb);
   }
+  public void savePha(BillInfoDB bDb)
+  {
+	  billInfoDao.save(bDb);
+  }
+public void saveHos(HosBillInfoDB billInfoDB) {
+	hInfoDao.save(billInfoDB);
+	
+}
 }

@@ -104,6 +104,7 @@
                       <ul class="sub">
 							<li class="active"><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
 							<li><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+							 <li><a href="<c:url value='/drug/view' />">View Drug</a></li>
 						</ul>
                   </li>
 
@@ -139,7 +140,11 @@
                             <strong>Claim ID:</strong> ${bill.claimNumber}<br>
                             <strong>Insured Name:</strong> ${cus.firstName } ${cus.lastName }<br>
                             <strong>Insured ID:</strong> ${cus.id }<br>
-                            <strong>SSN:</strong> ${cus.SSN }<br>
+                             <strong>Insured SSN:</strong> ${cus.SSN }<br>
+                            
+                            <strong>Patient Name:</strong>${memberName }<br>
+                            
+                            
                               <fmt:formatDate value="${bill.date}" type="date"
 								pattern="MM/dd/yyyy" var="theFormattedDate" />
                             <strong>Incurred Date:</strong> ${theFormattedDate}<br>
@@ -228,9 +233,9 @@
             </div>
         </div> 
     </div>
-    <div>
+   <!--  <div>
       <a class="btn btn-primary" style="margin-left:280px" onclick="sendReport();">Send Report to Pharmacy</a>
-    </div>
+    </div>--> 
 </div>
 </section>
 </section>
@@ -285,26 +290,22 @@
    <script type="text/javascript">
     function sendReport()
     {
-    	//var data=;
-    	var data=JSON.stringify(eval('('+'${dataJson}'+')'));
+    	var data=${dataJson} ;
+    	//var data= eval('{' + data + '}');
     	console.log(typeof(data));
         console.log(data);
-        var myEscapedJSONString = data.replace(/\\n/g, "\\n")
-        .replace(/\\'/g, "\\'")
-        .replace(/\\"/g, '\\"')
-        .replace(/\\&/g, "\\&")
-        .replace(/\\r/g, "\\r")
-        .replace(/\\t/g, "\\t")
-        .replace(/\\b/g, "\\b")
-        .replace(/\\f/g, "\\f");
-        var jsonOb=JSON.parse(data);
+        var last=JSON.stringify(data); 
+        
+       // var jsonOb=JSON.parse(data);
           	$.ajax({
     		  type: 'POST',
-    		  url: "http://172.31.199.107:8080/Pharmacy/interface/bill",
-    		  data: myEscapedJSONString,
+    		 // url: "/InsuranceSystem/bill/sendPharBill",
+    		  url: 'http://172.31.199.107:8080/Pharmacy/interface/bill',
+    		  data: last,
+    		  //dataType:'json',
     		  
     		  success: function(response){
-    			  
+    			  console.log(response);
     		  },
     		  error: function(jqXHR, textStatus, errorThrown) {
      	    	 
@@ -313,6 +314,7 @@
     		  
     		});
     }
+    
    </script>
 </body>
 </html>
