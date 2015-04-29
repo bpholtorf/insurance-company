@@ -1,10 +1,10 @@
 package com.insurance.data;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class HosBillDB {
-   public HosBillDB(String billNumber, String claimNumber, Date date, int ssn,
+   public HosBillDB(String billNumber, String claimNumber, Date date, String ssn,
 			int status, double totalCharge, String billType) {
 		super();
 		this.billNumber = billNumber;
@@ -21,7 +21,7 @@ private String billNumber;
 	
     private Date date;
 	
-    private int ssn;
+    private String ssn;
 	
 	private int status;
 	
@@ -52,10 +52,10 @@ private String billNumber;
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public int getSsn() {
+	public String getSsn() {
 		return ssn;
 	}
-	public void setSsn(int ssn) {
+	public void setSsn(String ssn) {
 		this.ssn = ssn;
 	}
 	public int getStatus() {
@@ -67,7 +67,7 @@ private String billNumber;
 	public List<HosBillInfoDB> getInfoDBs() {
 		return infoDBs;
 	}
-	public HosBillDB(String billNumber, String claimNumber, Date date, int ssn,
+	public HosBillDB(String billNumber, String claimNumber, Date date, String ssn,
 			int status, List<HosBillInfoDB> infoDBs, double totalCharge,
 			double customerPay, String billType, double totalCoverage) {
 		super();
@@ -82,7 +82,7 @@ private String billNumber;
 		this.billType = billType;
 		this.totalCoverage = totalCoverage;
 	}
-	public HosBillDB(String billNumber, String claimNumber, Date date, int ssn,
+	public HosBillDB(String billNumber, String claimNumber, Date date, String ssn,
 			int status, double totalCharge, double customerPay,
 			String billType, double totalCoverage) {
 		super();

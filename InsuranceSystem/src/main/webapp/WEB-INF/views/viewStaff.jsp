@@ -231,6 +231,7 @@ form {
                       <ul class="sub">
 							<li ><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
 							<li><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+							 <li><a href="<c:url value='/drug/view' />">View Drug</a></li>
 						</ul>
                   </li>
 

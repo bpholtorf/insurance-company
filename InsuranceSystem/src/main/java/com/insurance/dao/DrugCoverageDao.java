@@ -34,5 +34,35 @@ public class DrugCoverageDao {
 		}
 		return !(list.size()==0);
 	}
+	public List<DrugCoverageDB> findAll()
+	{
+		Session session = sessionFactory.openSession();
+		List<DrugCoverageDB> list=new ArrayList<DrugCoverageDB>();
+		try {
+			
+			Query query=session.createQuery("from DrugCoverageDB");
+		    
+		    list=query.list();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	public void save(DrugCoverageDB drugCoverageDB) {
+		Session session = sessionFactory.openSession();
+		   session.save(drugCoverageDB);
+		   session.flush();
+		   session.close();
+		
+		
+	}
+	public void delete(String drugId) {
+		Session session=sessionFactory.openSession();
+		Query query = session.createQuery("delete DrugCoverageDB where drugId = :drugId");
+		query.setParameter("drugId", drugId);
+		query.executeUpdate();
+		session.close();
+		
+	}
 
 }

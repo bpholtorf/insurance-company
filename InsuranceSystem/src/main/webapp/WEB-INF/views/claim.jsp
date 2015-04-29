@@ -131,6 +131,7 @@
                                 </span> <span class="message"> Please, answer asap. </span>
                             </a></li>
                             <li><a href="index.html#">See all messages</a></li>
+                             <li><a href="<c:url value='/drug/view' />">View Drug</a></li>
                         </ul></li>
                     <!-- inbox dropdown end -->
                 </ul>
@@ -242,7 +243,8 @@
                         <div class="panel-body">
                             <strong>Claim ID:</strong> ${bill.claimNumber}<br>
                             <strong>Insured Name:</strong> ${cus.firstName } ${cus.lastName }<br>          
-                            <strong>SSN:</strong> ${cus.SSN }<br>
+                            <strong>Insured SSN:</strong> ${cus.SSN }<br>
+                            <strong>Patient Name:</strong>${patientName }<br>
                              <fmt:formatDate value="${bill.date}" type="date"
 								pattern="MM/dd/yyyy" var="theFormattedDate" />
                       

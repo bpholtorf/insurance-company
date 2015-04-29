@@ -1,5 +1,6 @@
 package com.insurance.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -44,6 +45,44 @@ public class PolicyFamilyDao {
 		query.setParameter("cid", cid);
 		query.executeUpdate();
 		session.close();
+	}
+
+	public String getMemberSSN(String memberName,int pid,int cid) {
+		Session session = sessionFactory.openSession();
+		List<PolicyFamilyDB> list=new ArrayList<PolicyFamilyDB>();
+		try {
+			Query query = session.createQuery("from PolicyFamilyDB where pid = :pid AND cid= :cid and memberName= :memberName");
+			query.setParameter("pid", pid);
+			query.setParameter("cid", cid);
+			query.setParameter("memberName", memberName);
+			list=query.list();
+		} finally {
+			session.close();
+		}
+		if (list.size()>0) {
+			return list.get(0).getMemberSSN();
+		}
+		else {
+			return null;
+		}
+		
+	}
+
+	public PolicyFamilyDB getCidBySSN(String ssn) {
+		Session session = sessionFactory.openSession();
+		List<PolicyFamilyDB> list=new ArrayList<PolicyFamilyDB>();
+		try {
+			Query query = session.createQuery("from PolicyFamilyDB where memberSSN= :memberSSN and memberName= :memberName");
+			query.setParameter("memberSSN", ssn);
+		
+			list=query.list();
+		} finally {
+			session.close();
+		}
+		
+			return list.get(0);
+		
+		
 	}
 	
 

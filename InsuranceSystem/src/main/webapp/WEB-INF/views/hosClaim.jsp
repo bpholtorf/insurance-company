@@ -210,6 +210,7 @@
                       <ul class="sub">
 							<li><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
 							<li class="active"><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+							 <li><a href="<c:url value='/drug/view' />">View Drug</a></li>
 						</ul>
                   </li>
 
@@ -244,8 +245,8 @@
 								<div class="panel-body">
 									<strong>Claim ID:</strong> ${bill.claimNumber}<br> <strong>Insured Name:</strong>
 									${cus.firstName } ${cus.lastName }<br> 
-									 <strong>SSN:</strong> ${cus.SSN }<br>
-									 
+									 <strong>Insured SSN:</strong> ${cus.SSN }<br>
+									 <strong>Patient Name:</strong>${patientName }<br>
 									<fmt:formatDate value="${bill.date}" type="date"
 								pattern="MM/dd/yyyy" var="theFormattedDate" />
                       

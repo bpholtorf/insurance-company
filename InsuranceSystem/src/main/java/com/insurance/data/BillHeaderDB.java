@@ -1,7 +1,7 @@
 package com.insurance.data;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -19,7 +19,7 @@ public class BillHeaderDB implements Serializable {
 	@Column(name="date")
     private Date date;
 	@Column(name="ssn")
-    private int ssn;
+    private String ssn;
 	@Column(name="status")
 	private int status;
 	
@@ -85,10 +85,10 @@ public class BillHeaderDB implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public int getSsn() {
+	public String getSsn() {
 		return ssn;
 	}
-	public void setSsn(int ssn) {
+	public void setSsn(String ssn) {
 		this.ssn = ssn;
 	}
 	

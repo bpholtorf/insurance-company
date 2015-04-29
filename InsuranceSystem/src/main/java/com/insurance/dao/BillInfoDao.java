@@ -45,4 +45,12 @@ public class BillInfoDao {
 		   session.close();
 		
 	}
+
+	public void save(BillInfoDB bDb) {
+		Session session = sessionFactory.openSession();
+		   session.save(bDb);
+		   session.flush();
+		   session.close();
+		
+	}
 }
