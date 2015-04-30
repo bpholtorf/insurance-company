@@ -29,6 +29,14 @@
 form {
 	display: inline;
 }
+
+.errLabel{
+	text-align: center;
+	background-color: #A94442;
+	color: white;
+	float:right;
+	width: 100%;
+}
 </style>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -221,6 +229,13 @@ form {
 												</tr>
 											</thead>
 											<tbody>
+											<c:choose>
+												<c:when test="${!empty errMessage }">
+													<tr>
+														<label class="errLabel">Cannot delete a customer that has an insurance policy.</label>
+													</tr>
+												</c:when>
+											</c:choose>
 												<c:forEach items="${customers }" var="customer">
 													<tr>
 														<td>${customer.id }</td>
@@ -376,8 +391,7 @@ function myFunction(){
 });
  
  
-	  
- }
+	 
 	</script>
 
 </body>

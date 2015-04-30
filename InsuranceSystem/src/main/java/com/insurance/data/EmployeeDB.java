@@ -59,7 +59,6 @@ public class EmployeeDB implements Serializable{
 	private String sponsorInfo;
 	
 	@Column(name="employerInfo")
-	@NotEmpty(message="Please input an employer")
 	private String employerInfo;
 	
 	@Column(name="gender")

@@ -225,10 +225,9 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="col-sm-2 control-label col-lg-2">*Employer Name</label>
+									<label class="col-sm-2 control-label col-lg-2">Employer Name</label>
 									<div class="col-lg-5">
 										<form:input type="text" class="form-control" path="employerInfo"  />
-										<form:errors path="employerInfo" class="error"></form:errors>
 									</div>
 								</div>
 								<div class="form-group">
