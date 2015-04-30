@@ -25,7 +25,11 @@
 	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+<<<<<<< HEAD
 		<property name="url" value="jdbc:mysql://localhost:3306/insuranceSystem" />
+=======
+		<property name="url" value="jdbc:mysql://localhost:8889/insuranceSystem" />
+>>>>>>> origin/master
 
 		<property name="username" value="root" />
 		<property name="password" value="root" />
