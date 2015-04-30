@@ -63,14 +63,22 @@ public class EMRInterface {
 				DiagnosticDB diagnostic=generateDiagnostic(name,Double.parseDouble(cost));
 				if(actionName.equals("add")){
 					diagnosticService.addDiagnostic(diagnostic);
-					HosCoverageDB hs1=generateHospitalCoverage(name,"Individual",200,"NULL");
-					HosCoverageDB hs2=generateHospitalCoverage(name,"Family",400,"NULL");
-					HosCoverageDB hs3=generateHospitalCoverage(name,"Employee-sponsored-individual",200,"NULL");
-					HosCoverageDB hs4=generateHospitalCoverage(name,"Employee-sponsored-family",200,"NULL");
+					HosCoverageDB hs1=generateHospitalCoverage(name,"Individual",200,"PHYSICIAN");
+					HosCoverageDB hs2=generateHospitalCoverage(name,"Family",400,"PHYSICIAN");
+					HosCoverageDB hs3=generateHospitalCoverage(name,"Employee-sponsored-individual",200,"PHYSICIAN");
+					HosCoverageDB hs4=generateHospitalCoverage(name,"Employee-sponsored-family",200,"PHYSICIAN");
+					HosCoverageDB hs5=generateHospitalCoverage(name,"Individual",200,"MEDICAL_STAFF");
+					HosCoverageDB hs6=generateHospitalCoverage(name,"Family",400,"MEDICAL_STAFF");
+					HosCoverageDB hs7=generateHospitalCoverage(name,"Employee-sponsored-individual",200,"MEDICAL_STAFF");
+					HosCoverageDB hs8=generateHospitalCoverage(name,"Employee-sponsored-family",200,"MEDICAL_STAFF");
 					hosCoverageService.addHosCoverage(hs1);
 					hosCoverageService.addHosCoverage(hs2);
 					hosCoverageService.addHosCoverage(hs3);
 					hosCoverageService.addHosCoverage(hs4);
+					hosCoverageService.addHosCoverage(hs5);
+					hosCoverageService.addHosCoverage(hs6);
+					hosCoverageService.addHosCoverage(hs7);
+					hosCoverageService.addHosCoverage(hs8);
 				}
 				if(actionName.equals("update")){
 					diagnosticService.updateDiagnostic(diagnostic);
@@ -79,10 +87,18 @@ public class EMRInterface {
 					HosCoverageDB hs2=generateHospitalCoverage(nameBefore,"Family",400,"NULL");
 					HosCoverageDB hs3=generateHospitalCoverage(nameBefore,"Employee-sponsored-individual",200,"NULL");
 					HosCoverageDB hs4=generateHospitalCoverage(nameBefore,"Employee-sponsored-family",200,"NULL");
+					HosCoverageDB hs5=generateHospitalCoverage(name,"Individual",200,"MEDICAL_STAFF");
+					HosCoverageDB hs6=generateHospitalCoverage(name,"Family",400,"MEDICAL_STAFF");
+					HosCoverageDB hs7=generateHospitalCoverage(name,"Employee-sponsored-individual",200,"MEDICAL_STAFF");
+					HosCoverageDB hs8=generateHospitalCoverage(name,"Employee-sponsored-family",200,"MEDICAL_STAFF");
 					hosCoverageService.updateHosCoverage(hs1,name);
 					hosCoverageService.updateHosCoverage(hs2,name);
 					hosCoverageService.updateHosCoverage(hs3,name);
 					hosCoverageService.updateHosCoverage(hs4,name);
+					hosCoverageService.updateHosCoverage(hs5,name);
+					hosCoverageService.updateHosCoverage(hs6,name);
+					hosCoverageService.updateHosCoverage(hs7,name);
+					hosCoverageService.updateHosCoverage(hs8,name);
 					}
 				}
 				if(actionName.equals("delete")){
@@ -103,10 +119,10 @@ public class EMRInterface {
 				SurgeryDB surgery=generateSurgery(name,Double.parseDouble(cost));
 				if(actionName.equals("add")){
 					surgeryService.addSurgery(surgery);
-					HosCoverageDB hs1=generateHospitalCoverage(name,"Individual",200,"NULL");
-					HosCoverageDB hs2=generateHospitalCoverage(name,"Family",400,"NULL");
-					HosCoverageDB hs3=generateHospitalCoverage(name,"Employee-sponsored-individual",200,"NULL");
-					HosCoverageDB hs4=generateHospitalCoverage(name,"Employee-sponsored-family",200,"NULL");
+					HosCoverageDB hs1=generateHospitalCoverage(name,"Individual",200,"PHYSICIAN");
+					HosCoverageDB hs2=generateHospitalCoverage(name,"Family",400,"PHYSICIAN");
+					HosCoverageDB hs3=generateHospitalCoverage(name,"Employee-sponsored-individual",200,"PHYSICIAN");
+					HosCoverageDB hs4=generateHospitalCoverage(name,"Employee-sponsored-family",200,"PHYSICIAN");
 					hosCoverageService.addHosCoverage(hs1);
 					hosCoverageService.addHosCoverage(hs2);
 					hosCoverageService.addHosCoverage(hs3);
@@ -116,10 +132,10 @@ public class EMRInterface {
 				if(actionName.equals("update")){
 					surgeryService.updateSurgery(surgery);
 					if(!name.equals(nameBefore)){
-						HosCoverageDB hs1=generateHospitalCoverage(nameBefore,"Individual",200,"NULL");
-						HosCoverageDB hs2=generateHospitalCoverage(nameBefore,"Family",400,"NULL");
-						HosCoverageDB hs3=generateHospitalCoverage(nameBefore,"Employee-sponsored-individual",200,"NULL");
-						HosCoverageDB hs4=generateHospitalCoverage(nameBefore,"Employee-sponsored-family",200,"NULL");
+						HosCoverageDB hs1=generateHospitalCoverage(nameBefore,"Individual",200,"PHYSICIAN");
+						HosCoverageDB hs2=generateHospitalCoverage(nameBefore,"Family",400,"PHYSICIAN");
+						HosCoverageDB hs3=generateHospitalCoverage(nameBefore,"Employee-sponsored-individual",200,"PHYSICIAN");
+						HosCoverageDB hs4=generateHospitalCoverage(nameBefore,"Employee-sponsored-family",200,"PHYSICIAN");
 						hosCoverageService.updateHosCoverage(hs1,name);
 						hosCoverageService.updateHosCoverage(hs2,name);
 						hosCoverageService.updateHosCoverage(hs3,name);

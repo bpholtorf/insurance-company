@@ -277,6 +277,7 @@ form {
             	var n4='';
             	if(response.length==2){
             		n1=response[1];
+            		console.log(n1);
             	}
             	if(response.length==3){
             		n1=response[1];
@@ -303,16 +304,16 @@ form {
            var con='';
            if(n2!=''){
         	   con='<label class="col-md-4 control-label" for="name">Member Name</label> ' +
-               '<input id="name2" name="name" type="text"  class="form-control input-md" style="width:150px;" disabled=true value='+n2+'> ' +
+               '<input id="name2" name="name" type="text"  class="form-control input-md" style="width:150px;" disabled=true value="'+n2+'"> ' +
                '<br>';
            if(n3!=''){
             	 con=con+'<label class="col-md-4 control-label" for="name">Member Name</label> ' +
-                 '<input id="name3" name="name" type="text"  class="form-control input-md" style="width:150px;" disabled=true value='+n3+'> ' +
+                 '<input id="name3" name="name" type="text"  class="form-control input-md" style="width:150px;" disabled=true value="'+n3+'"> ' +
                  '<br>';
 
                  if(n4!=''){
                 	 con=con+'<label class="col-md-4 control-label" for="name">Member Name</label> ' +
-                     '<input id="name4" name="name" type="text"  class="form-control input-md" style="width:150px;" disabled=true value='+n4+'> ' +
+                     '<input id="name4" name="name" type="text"  class="form-control input-md" style="width:150px;" disabled=true value="'+n4+'"> ' +
                      '<br>';
         	   
            }
@@ -324,7 +325,7 @@ form {
                         '<form class="form-horizontal"> ' +
                         '<div class="form-group"> ' +
                         '<label class="col-md-4 control-label" for="name">Member Name</label> ' +
-                        '<input id="name1" name="name" type="text"  class="form-control input-md" style="width:150px" disabled=true value='+n1+'> ' +
+                        '<input id="name1" name="name" type="text"  class="form-control input-md" style="width:150px" disabled=true value="'+n1+'"> ' +
                         '<br>'+
                         con+
                         '</div> ' +

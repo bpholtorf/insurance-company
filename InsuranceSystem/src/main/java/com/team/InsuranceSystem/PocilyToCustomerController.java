@@ -182,7 +182,8 @@ public class PocilyToCustomerController {
 	  double premium=0;
 	  double pAmount=policyService.getPolicyById(pid).getPamount();
 	  double hAmount=policyService.getPolicyById(pid).getHamount();
-	  int pp=period/12;
+	  double period1=period;
+	  double pp=period1/12.0;
 	  if(income.equals("Less than 10000")){
 		  premium=percent*10000*pp;
 	  }
@@ -387,6 +388,7 @@ List<PolicyToCustomerDB> list=pcService.getAll();
 	  String names = null;
 	  List<PolicyFamilyDB> list=pfService.getMembersForOne(Integer.parseInt(cid), Integer.parseInt(pid));
 	  for(int i=0;i<list.size();i++){
+		  System.out.println(list.get(i).getMemberName());
 		  names=names+"&"+list.get(i).getMemberName();
 	  }
 	  String[] arr=names.split("&");

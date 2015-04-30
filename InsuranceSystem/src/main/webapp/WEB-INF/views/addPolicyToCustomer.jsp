@@ -195,6 +195,12 @@
                                   <c:when test="${policyInfo.check == 'unadded'  && policyInfo.planType=='Individual' }">
                                    <td><a href="viewPolicys?policyId=${policyInfo.id }&name1=&name2=&name3=&name4=&ssn1=&ssn2=&ssn3=&ssn4=" class="btn btn-info"  style="font-size:12px;height:25px" id="addPolicy">Add</a></td>
                                   </c:when>
+                                  <c:when test="${policyInfo.check == 'unadded'  && policyInfo.planType=='Employee-sponsored-individual' }">
+                                   <td><a href="viewPolicys?policyId=${policyInfo.id }&name1=&name2=&name3=&name4=&ssn1=&ssn2=&ssn3=&ssn4=" class="btn btn-info"  style="font-size:12px;height:25px" id="addPolicy">Add</a></td>
+                                  </c:when>
+                                  <c:when test="${policyInfo.check == 'unadded'  && policyInfo.planType=='Employee-sponsored-family' }">
+                                   <td><a href="viewPolicys?policyId=${policyInfo.id }&name1=&name2=&name3=&name4=&ssn1=&ssn2=&ssn3=&ssn4=" class="btn btn-info"  style="font-size:12px;height:25px" id="addPolicy">Add</a></td>
+                                  </c:when>
                                    <c:when test="${policyInfo.check == 'unadded'  && policyInfo.planType=='Family' }">
                                    <td><a href="viewPolicys" class="btn btn-theme"  style="font-size:12px;height:25px" id="addPolicy">Add</a></td>
                                   </c:when>
