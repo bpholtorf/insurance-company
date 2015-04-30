@@ -160,8 +160,6 @@
                                   <th class="numeric">Id</th>
                                   <th class="numeric">Item Name</th>
                                   <th class="numeric">Policy Type</th>
-                                  <th class="numeric">Deductible</th>
-                                  <th class="numeric">Operator Title</th>
                                   <th></th>
                               </tr>
                               </thead>
@@ -173,8 +171,6 @@
                                   <td class="numeric" >${coverageInfo.id }</td>
                                   <td class="numeric" >${coverageInfo.itemName }</td>
                                   <td class="numeric" >${coverageInfo.policyType }</td>
-                                  <td class="numeric" >${coverageInfo.deductible}</td>
-                                  <td class="numeric" >${coverageInfo.operatorTitle }</td>
                                   <c:choose>
                                   <c:when test="${coverageInfo.check == 'added' }">
                                    		<td><a href="deleteCoverage/${coverageInfo.itemName}" title="Remove Coverage" class="btn btn-danger">Remove</a></td>
