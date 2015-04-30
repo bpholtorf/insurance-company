@@ -356,7 +356,8 @@ form {
 	function deleteDrug(id)
 	{
 		bootbox.confirm("Are you sure?", function(result) {
-	    	if(result)
+	    if(result)
+	    {
 		 $.ajax({
     		 type:"get",
     	     url:"/InsuranceSystem/drug/delete",
@@ -375,6 +376,7 @@ form {
     	    	  console.log('####'+textStatus, errorThrown);
     	    	}
     	 });
+	    }
 		});
     	 
 	};

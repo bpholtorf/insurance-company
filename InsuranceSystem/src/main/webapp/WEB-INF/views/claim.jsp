@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Insurance System</title>
+    <title>Simple Invoice Template | PrepBootstrap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
    <link rel="stylesheet" type="text/css" href="/InsuranceSystem/pages/assets/css/bootstrap.css" />
@@ -12,33 +12,26 @@
      <link href="/InsuranceSystem/pages/assets/css/style.css" rel="stylesheet">
     <link href="/InsuranceSystem/pages/assets/css/style-responsive.css" rel="stylesheet">
     
- </head>  
    
+   
+</head>
 <body>
-
-	<section id="container">
-		<!-- **********************************************************************************************************************************************************
-      TOP BAR CONTENT & NOTIFICATIONS
-      *********************************************************************************************************************************************************** -->
-		
-<!--header start-->
-		<header class="header black-bg">
-			<div class="sidebar-toggle-box">
-				<div class="fa fa-bars tooltips" data-placement="right"
-					data-original-title="Toggle Navigation"></div>
-			</div>
-			<!--logo start-->
-			<a href="index.html" class="logo"><b>Insurance System</b></a>
-			<!--logo end-->
-			<div class="nav notify-row" id="top_menu">
-			</div>
-			<div class="top-menu">
-				<ul class="nav pull-right top-menu">
-					<li><a class="logout" href="/InsuranceSystem">Logout</a></li>
-				</ul>
-			</div>
-		</header>
-		<!--header end-->
+<header class="header black-bg">
+            <div class="sidebar-toggle-box">
+                <div class="fa fa-bars tooltips" data-placement="right"
+                    data-original-title="Toggle Navigation"></div>
+            </div>
+            <!--logo start-->
+            <a href="index.html" class="logo"><b>INSURANCE SYSTEM</b></a>
+            <!--logo end-->
+           
+            <div class="top-menu">
+                <ul class="nav pull-right top-menu">
+                    <li><a class="logout" href="/InsuranceSystem">Logout</a></li>
+                </ul>
+            </div>
+        </header>
+        <!--header end-->
 
         <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
@@ -104,6 +97,7 @@
                       <ul class="sub">
 							<li><a href="<c:url value='/requestAddClaim' />">Add Claim from Customer</a></li>
 							<li class="active"><a href="<c:url value='/claim/viewAll' />">View Claim</a></li>
+						    <li><a href="<c:url value='/drug/view' />">View Drug</a></li>
 						</ul>
                   </li>
 
@@ -138,7 +132,8 @@
                         <div class="panel-body">
                             <strong>Claim ID:</strong> ${bill.claimNumber}<br>
                             <strong>Insured Name:</strong> ${cus.firstName } ${cus.lastName }<br>          
-                            <strong>SSN:</strong> ${cus.SSN }<br>
+                            <strong>Insured SSN:</strong> ${cus.SSN }<br>
+                            <strong>Patient Name:</strong>${patientName }<br>
                              <fmt:formatDate value="${bill.date}" type="date"
 								pattern="MM/dd/yyyy" var="theFormattedDate" />
                       

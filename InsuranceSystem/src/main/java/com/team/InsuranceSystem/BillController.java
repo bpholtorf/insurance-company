@@ -294,8 +294,8 @@ public class BillController {
 			
 			try {  
 			   // String strURL="http://localhost:8080/InsuranceSystem/bill/sendPharBill";
-			    //String strURL="http://138.49.101.81/Administrative/bill/calcBill";
-				String strURL="http://172.31.156.156:8080/admin/bill/calcBill";
+			    String strURL="http://138.49.101.81/Administrative/bill/calcBill";
+				//String strURL="http://172.31.156.156:8080/admin/bill/calcBill";
 			    HosBillDB billDB=bService.getHosBill(billId);
 			    JSONObject jsonObject=new JSONObject();
 			    jsonObject.put("transcriptionId", billId);
