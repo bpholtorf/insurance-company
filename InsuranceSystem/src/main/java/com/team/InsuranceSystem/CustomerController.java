@@ -128,7 +128,7 @@ public class CustomerController {
 
 			  
 	  if (type.equals("SSN")) {
-		  String pattern=keyword+"%";
+		  String pattern="%"+keyword+"%";
 		  result=customerService.searchBySSN(pattern);
 		  model.addAttribute("keyword",keyword);
 	  }else if (type.equals("Date of Birth")) {

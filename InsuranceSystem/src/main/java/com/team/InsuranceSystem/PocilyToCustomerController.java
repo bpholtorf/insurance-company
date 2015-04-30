@@ -304,7 +304,7 @@ List<PolicyToCustomerDB> list=pcService.getAll();
 		 
 	  }else{
 		  System.out.println(keyword);
-		  String pattern=keyword+"%";
+		  String pattern="%"+keyword+"%";
 		  List<CustomerDB> resultBefore=customerService.searchBySSN(pattern);
 		  for(int i=0;i<resultBefore.size();i++){
 			  int cid=resultBefore.get(i).getId();
