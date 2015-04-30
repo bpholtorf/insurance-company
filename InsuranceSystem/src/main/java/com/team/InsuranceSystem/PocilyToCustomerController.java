@@ -340,7 +340,6 @@ List<PolicyToCustomerDB> list=pcService.getAll();
   {
 	  if(pcService.getOneAll(Integer.parseInt(cid)).size()==1){
 		 if(policyService.getPolicyById(Integer.parseInt(pid)).getPlanType().equals("Family")){
-			 System.out.println("^^^^^^^^^^^^^^^");
 			 pfService.deleteMembers(Integer.parseInt(cid), Integer.parseInt(pid));
 		 }
 		  
@@ -350,7 +349,6 @@ List<PolicyToCustomerDB> list=pcService.getAll();
 		  model.addAttribute("customerPolicys",pcService.getOneAll(Integer.parseInt(cid)));
 	  }else{
 		  if(policyService.getPolicyById(Integer.parseInt(pid)).getPlanType().equals("Family")){
-			  System.out.println("TTTTTTTTTTTTT");
 				 pfService.deleteMembers(Integer.parseInt(cid), Integer.parseInt(pid));
 			 }
 	  pcService.deletePolicyToCustomer(Integer.parseInt(pid), Integer.parseInt(cid));

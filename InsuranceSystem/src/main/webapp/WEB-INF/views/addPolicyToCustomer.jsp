@@ -198,9 +198,9 @@
                                    <c:when test="${policyInfo.check == 'unadded'  && policyInfo.planType=='Family' }">
                                    <td><a href="viewPolicys" class="btn btn-theme"  style="font-size:12px;height:25px" id="addPolicy">Add</a></td>
                                   </c:when>
-                                   <c:when test="${policyInfo.check == 'unadded'  && policyInfo.planType=='Employ-sponsored-family' }">
+                                  <%--  <c:when test="${policyInfo.check == 'unadded'  && policyInfo.planType=='Employ-sponsored-family' }">
                                    <td><a href="viewPolicys" class="btn btn-theme"  style="font-size:12px;height:25px" id="addPolicy">Add</a></td>
-                                  </c:when>
+                                  </c:when> --%>
                                  
                                   </c:choose>
                               </tr>
