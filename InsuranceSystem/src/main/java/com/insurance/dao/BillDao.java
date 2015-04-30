@@ -48,14 +48,14 @@ public class BillDao {
 		Session session = sessionFactory.openSession();
 		List<BillHeaderDB> list=new ArrayList<BillHeaderDB>();
 		try {
+			String pattern="%"+ssn+"%";
 			
-			String hqlString="from BillHeaderDB where ssn like:ssn and status=:status";
+			String hqlString="from BillHeaderDB where ssn like :ssn and status>="+1;
 			Query query=session.createQuery(hqlString);
-							
-				query.setParameter("ssn", "%"+ssn+"%");
-				query.setParameter("status", status);
-			
+			query.setParameter("ssn", pattern);
 			list=query.list();
+			
+			
 		} finally {
 			session.close();
 		}

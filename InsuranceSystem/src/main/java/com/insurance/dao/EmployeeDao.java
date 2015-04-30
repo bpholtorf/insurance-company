@@ -37,12 +37,11 @@ public class EmployeeDao {
 		Query query=session.createSQLQuery("insert into Customer(firstName,lastName,SSN,address,phoneNumber,email,gender,dateOfBirth,incomeStatus, employerInfo, sponsorInfo) value('"+
 				                        customer.getFirstName()+"','"+customer.getLastName()+"','"+
 		                                  customer.getSSN()+"','"+customer.getAddress()+"','"+customer.getPhoneNumber()+"','"+
-				                        customer.getEmail()+"','"+customer.getGender()+"','"+date+"','"+customer.getIncomeStatus()+
-				                        customer.getEmployerInfo()+"','"+ customer.getSponsorInfo()+"','"+"')");
+				                        customer.getEmail()+"','"+customer.getGender()+"','"+date+"','"+customer.getIncomeStatus()+"','" +
+				                        customer.getEmployerInfo()+"','"+ customer.getSponsorInfo()+"')");
 		query.executeUpdate();
 		session.close();
 	}
-	
 	
 	
 

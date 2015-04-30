@@ -61,11 +61,21 @@ public class CustomerController {
 	  model.addAttribute("customers", customerService.findAll());
 	 return "viewCustomer";
   }
+  
+  @RequestMapping(value="/customer/{errMessage}",method=RequestMethod.GET)
+  public String findAllError(Model model, @PathVariable("errMessage") String error)
+  {
+	  model.addAttribute("customers", customerService.findAll());
+	  model.addAttribute("errMessage", error);
+	 return "viewCustomer";
+  }
+  
   @RequestMapping("/customer/delete/{id}")
-  public String deleteCustomer(@PathVariable("id") Integer id, ModelMap map)
+  public String deleteCustomer(@PathVariable("id") Integer id, ModelMap model)
   {
 	  if(!customerService.deleteCustomer(id)){
-		  map.addAttribute("errorMsg","Cannot delete a customer that has an insurance policy."); 
+		  model.addAttribute("errMessage","ViewAll-Error");
+		  return "redirect:/customer/{errMessage}"; 
 	  }
 	  return "redirect:/customer/viewAll";
   }
