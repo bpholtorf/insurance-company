@@ -353,7 +353,7 @@
 					async : false,
 				}).responseText;
 
-				if (planType.toUpperCase() ==="family".toUpperCase()||planType.toUpperCase() ==="Employee-sponsored-family".toUpperCase()) {
+				if (planType.toUpperCase() ==="family".toUpperCase()) {
 					var family = getFamily(cid, pid);
 					var obj = eval('{' + family + '}');
 					var key, count = 0;
