@@ -216,7 +216,7 @@
 											<option>70000 - 79999</option>
 											<option>80000 - 89999</option>
 											<option>90000 - 99999</option>
-											<option>More than 100000</option>    
+											<option>100000 or More</option>    
 										</form:select>
 									</div>
 								</div>

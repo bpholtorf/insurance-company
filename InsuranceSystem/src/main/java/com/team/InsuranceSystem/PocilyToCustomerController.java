@@ -210,10 +210,10 @@ public class PocilyToCustomerController {
 	  if(income.equals("80000 - 89999")){
 		  premium=percent*85000*pp;
 	  }
-	  if(income.equals("90000 - 100000")){
+	  if(income.equals("90000 - 99999")){
 		  premium=percent*95000*pp;
 	  }
-	  if(income.equals("More than 100000")){
+	  if(income.equals("100000 or More")){
 		  premium=percent*100000*pp;
 	  }
 	  

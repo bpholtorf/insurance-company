@@ -171,7 +171,7 @@ public class CustomerController {
          incomeStatuses.put("70000 - 79999", "70000 - 79999");
          incomeStatuses.put("80000 - 89999", "80000 - 89999"); 
          incomeStatuses.put("90000 - 99999", "90000 - 99999");  
-         incomeStatuses.put("More than 100000", "More than 100000");    
+         incomeStatuses.put("100000 or More", "100000 or More");    
          return incomeStatuses;
      }
   
