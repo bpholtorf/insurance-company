@@ -72,7 +72,7 @@ public class PolicyFamilyDao {
 		Session session = sessionFactory.openSession();
 		List<PolicyFamilyDB> list=new ArrayList<PolicyFamilyDB>();
 		try {
-			Query query = session.createQuery("from PolicyFamilyDB where memberSSN= :memberSSN and memberName= :memberName");
+			Query query = session.createQuery("from PolicyFamilyDB where memberSSN= :memberSSN");
 			query.setParameter("memberSSN", ssn);
 		
 			list=query.list();

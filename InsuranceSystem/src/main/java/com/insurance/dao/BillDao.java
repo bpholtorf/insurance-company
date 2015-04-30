@@ -49,12 +49,11 @@ public class BillDao {
 		List<BillHeaderDB> list=new ArrayList<BillHeaderDB>();
 		try {
 			
-			//String hqlString="from BillHeaderDB where ssn like :ssn and status=1";
-			String hqlString="from BillHeaderDB where ssn like :ssn ";
+			String hqlString="from BillHeaderDB where ssn like:ssn and status=:status";
 			Query query=session.createQuery(hqlString);
 							
-				query.setParameter("ssn", ssn);
-				//query.setParameter("status", status);
+				query.setParameter("ssn", "%"+ssn+"%");
+				query.setParameter("status", status);
 			
 			list=query.list();
 		} finally {

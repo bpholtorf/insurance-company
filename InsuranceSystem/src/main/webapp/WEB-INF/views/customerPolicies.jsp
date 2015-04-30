@@ -131,6 +131,167 @@
           	<c:url var="updateAction" value="/claim/addClaim" ></c:url>
 				<form action="${updateAction }" method="GET">
 				<input type="hidden" name="cid" value="${cid }">
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+				<input type="hidden" name="memberName" value="${c.firstName } ${c.lastName}">
+				<c:forEach items="${policy }" var="policy">
+					<div class="row">
+						<div class="col-md-12 mt">
+							<div class="content-panel">
+
+								<h4 class="accordion" id="accordion2">
+									<input type="radio" value="${policy.pid}" name="pid">
+									
+									${policy.policyNumber}
+								</h4>
+								<hr>
+								<table class="table">
+									<tbody>
+										<tr>
+											<td>Policy Number:</td>
+											<td>${policy.policyNumber}</td>
+											<td>Date From:</td>
+											<fmt:formatDate value="${policy.dateFrom }" type="date"
+												pattern="MM/dd/yyyy" var="theFormattedDate" />
+											<td>${theFormattedDate}</td>
+										</tr>
+										<tr>
+											<td>Date To:</td>
+											<fmt:formatDate value="${policy.dateTo }" type="date"
+												pattern="MM/dd/yyyy" var="theFormattedDate2" />
+											<td>${theFormattedDate2}</td>
+											<td>Premium:</td>
+											<td>${policy.premium }</td>
+										</tr>
+										<tr>
+											<td>Pharmacy Amount Left:</td>
+											<td>${policy.pamountLeft }</td>
+
+											<td>Hosipital Amount Left:</td>
+											<td>${policy.hamountLeft }</td>
+										</tr>
+
+
+									</tbody>
+								</table>
+							</div>
+							<! --/content-panel -->
+						</div>
+						<!-- /col-md-12 -->
+					</div>
+				</c:forEach>
+				<a class="btn btn-primary"
+					style="margin-left: 460px; margin-top: 20px"
+					onClick="postRequest()">Next</a>
+				   </form>
+			</section>
+			<! --/wrapper -->
+		</section>
+		<!-- /MAIN CONTENT -->
+		<script src="/InsuranceSystem/pages/assets/js/jquery.js"></script>
+		<script src="/InsuranceSystem/pages/assets/js/bootstrap.min.js"></script>
+		<script class="include" type="text/javascript"
+			src="/InsuranceSystem/pages/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+		<script src="/InsuranceSystem/pages/assets/js/jquery.scrollTo.min.js"></script>
+		<script src="/InsuranceSystem/pages/assets/js/jquery.nicescroll.js"
+			type="text/javascript"></script>
+		<script src="/InsuranceSystem/pages/assets/js/bootbox.js"></script>
+
+		<!--common script for all pages-->
+		<script src="/InsuranceSystem/pages/assets/js/common-scripts.js"></script>
+
+		<!--script for this page-->
+
+		<script>
+			$(document).ready(function() {
+				$("td").css("border-top", "0px");
+
+				var radioInput = $("input[type='radio']");
+				if (radioInput.size() > 0) {
+					radioInput.first().prop('checked', true);
+				}
+
+			});
+			$(':checkbox').change(function() {
+				$(':checkbox').prop('checked', false);
+				$(this).prop('checked', true);
+
+			});
+			function getFamily(cid, pid) {
+				var family = $.ajax({
+					url : "/InsuranceSystem/claim/getFamily",
+					async : false,
+					data : 'pid=' + pid + '&cid=' + cid,
+				}).responseText;
+
+				return family;
+			}
+			function postRequest() {
+				
+				var pid = $('input[name="pid"]:checked').val();
+				var cid = ${cid};
+				
+				var planType = $.ajax({
+					url : "/InsuranceSystem/claim/getPolicyByPid",
+					data : 'pid=' + pid,
+					async : false,
+				}).responseText;
+
+				if (planType.toUpperCase() ==="family".toUpperCase()||planType.toUpperCase() ==="Employee-sponsored-family".toUpperCase()) {
+					var family = getFamily(cid, pid);
+					var obj = eval('{' + family + '}');
+					var key, count = 0;
+					
+					var html = '<div class="row">  '
+						+ '<div class="col-md-12"> '
+						+ '<form class="form-horizontal" id="myForm2"> '
+						+ '<div class="form-group"> '
+						+ '<div class="col-md-4"> ';
+						
+				   for (var i=0;i<obj.length;i++)
+						{
+					   if(i==0)
+						  {
+						   html+='<div class="radio"> <label for="awesomeness-1"> '
+								+ '<input type="radio" checked = "true" name="awesomeness" id="awesomeness-1" value="'+obj[i]+'"> '+obj[i]+' </label> '
+								+ '</div> ';
+						  }
+					   else{
+						html+='<div class="radio"> <label for="awesomeness-1"> '
+						+ '<input type="radio" name="awesomeness" id="awesomeness-1" value="'+obj[i]+'"> '+obj[i]+' </label> '
+						+ '</div> ';
+					   }
+						}
+				   
+				   html+= '</div> </div>'
+						+ '</form> </div>  </div>';
+				   bootbox.dialog({
+						title : "Choose a family member.",
+						message : html,
+						buttons : {
+							success : {
+								label : "Save",
+								className : "btn-success",
+								callback : function() {
+									
+									var memberName=$('input[name="awesomeness"]:checked').val();
+									$('input[name="memberName"]').val(memberName);
+									console.log("input memberName:"+memberName)
+									$('#myForm').submit();
+								}
+							}
+						}
+					});
+				  
+				} 
+				else
+					$('#myForm').submit();
+          
+			}
+		</script>
+=======
+>>>>>>> Stashed changes
 				 <c:forEach items="${policy }" var="policy">
 				 <div class="row">
 	                  <div class="col-md-12 mt">
@@ -212,5 +373,9 @@
 	});
  
 	</script>
+<<<<<<< Updated upstream
+=======
+>>>>>>> origin/master
+>>>>>>> Stashed changes
 </body>
 </html>
