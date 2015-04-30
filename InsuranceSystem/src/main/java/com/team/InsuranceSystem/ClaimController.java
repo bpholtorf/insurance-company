@@ -215,7 +215,8 @@ public class ClaimController {
 		HosBillDB db = bService.getHosBill(bNumber);
 		PolicyToCustomerDB db2 = pc.getById(pid, cid);
 		List<HosBillInfoDB> infoDBs = db.getInfoDBs();
-
+        PolicyDB policyDB=pService.getPolicyById(pid);
+        String planType=policyDB.getPlanType();
 		double hamountLeft = db2.getHamountLeft();
 		double totalCoverage = 0;
 		for (int i = 0; i < infoDBs.size(); i++) {
@@ -227,7 +228,7 @@ public class ClaimController {
 				infoDBs.get(i).setCovered(false);
 			} else {
 				double duc = hosCovService.getDuc(
-						PolicyType.Individual.toString(), hDb.getItemName(),
+						planType, hDb.getItemName(),
 						hDb.getOperatorTitle());
 				double itemCoverAmount = 0;
 				hDb.setCovered(true);
