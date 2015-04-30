@@ -52,6 +52,9 @@ public class CustomerService {
 	public CustomerDB findById(Integer id) {
 		return CustomerDao.findById(id);
 	}
+	public CustomerDB findBySSN(String ssn){
+		return CustomerDao.findBySSN(ssn);
+	}
 
 	public void updateCustomer(CustomerDB2 customer) {
 		CustomerDao.updateCustomer(customer);

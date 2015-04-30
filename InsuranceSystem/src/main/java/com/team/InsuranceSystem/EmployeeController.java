@@ -70,7 +70,7 @@ public class EmployeeController {
 		  
 		  String[] valuesNext = request.getParameterValues("next");
 		  int pid=Integer.parseInt(valuesNext[0]);
-		  int cid=e.getId();
+		  int cid=customerService.findBySSN(e.getSSN()).getId();
 		  
 		  int period=policyService.getPolicyById(pid).getPayPeriod();
 		  String policyNum=policyService.getPolicyById(pid).getPolicyNumber();
@@ -111,7 +111,7 @@ public class EmployeeController {
 		  
 		  String[] valuesSubmitAdd = request.getParameterValues("submitAdd");
 		  int pid=Integer.parseInt(valuesSubmitAdd[0]);
-		  int cid=e.getId();
+		  int cid= customerService.findBySSN(e.getSSN()).getId();
 		  
 		  int period=policyService.getPolicyById(pid).getPayPeriod();
 		  String policyNum=policyService.getPolicyById(pid).getPolicyNumber();

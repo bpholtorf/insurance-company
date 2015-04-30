@@ -121,6 +121,22 @@ public class CustomerDao {
 			}
 			return list.get(0);
 		}
+		public CustomerDB findBySSN(String ssn) {
+			// TODO Auto-generated method stub
+			
+			Session session = sessionFactory.openSession();
+			
+			List<CustomerDB> list=new ArrayList<CustomerDB>();
+			try {
+				String hqlString="FROM CustomerDB where SSN=:SSN";
+				Query query=session.createQuery(hqlString);
+				query.setString("SSN", ssn);
+				list = query.list();
+			} finally {
+				session.close();
+			}
+			return list.get(0);
+		}
 		
 
 		public List<CustomerDB> searchBySSN(String keyword) {
