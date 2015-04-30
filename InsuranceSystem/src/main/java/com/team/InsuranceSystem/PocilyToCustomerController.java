@@ -191,7 +191,9 @@ public class PocilyToCustomerController {
 		  premium=percent*15000*pp;
 	  }
 	  if(income.equals("20000 - 29999")){
+		  System.out.println("policy to customer:"+pp);
 		  premium=percent*25000*pp;
+		  System.out.println("premium:"+premium);
 	  }
 	  if(income.equals("30000 - 39999")){
 		  premium=percent*35000*pp;
