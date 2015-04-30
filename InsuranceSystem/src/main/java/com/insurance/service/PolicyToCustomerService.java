@@ -46,6 +46,7 @@ public class PolicyToCustomerService {
 		return list1;
 	}
 	
+	
 	public PolicyToCustomerDB getOnePolicy(int pid,int cid){
 		List<PolicyToCustomerDB> list=pcDao.listPolicyToCustomer();
 

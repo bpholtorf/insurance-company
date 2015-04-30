@@ -306,7 +306,10 @@ List<PolicyToCustomerDB> list=pcService.getAll();
 		  System.out.println(keyword);
 		  String pattern="%"+keyword+"%";
 		  List<CustomerDB> resultBefore=customerService.searchBySSN(pattern);
+		  
 		  for(int i=0;i<resultBefore.size();i++){
+			  List<PolicyToCustomerDB> listP=pcService.getOneAll(resultBefore.get(i).getId());
+			  for(int j=0;j<listP.size();j++){
 			  int cid=resultBefore.get(i).getId();
 //			  if(customerService.getCustomerById(cid).getSSN().equals(keyword))
 			  
@@ -320,6 +323,7 @@ List<PolicyToCustomerDB> list=pcService.getAll();
 						  list.get(i).getDateTo(),
 						  customerService.getCustomerById(cid).getFirstName()+" "+customerService.getCustomerById(cid).getLastName(),customerService.getCustomerById(cid).getSSN());
 				  result.add(p);
+			  }
 			  
 			  }
 		  
