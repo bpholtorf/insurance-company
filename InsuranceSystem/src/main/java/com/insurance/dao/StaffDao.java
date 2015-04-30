@@ -165,9 +165,10 @@ public class StaffDao {
 
 			List<StaffDB> list = new ArrayList<StaffDB>();
 			try {
-				String hqlString = "FROM StaffDB where SSN=:SSN";
+			    String pattern="%"+keyword+"%";
+				String hqlString = "FROM StaffDB where SSN like:SSN";
 				Query query = session.createQuery(hqlString);
-				query.setString("SSN", keyword);
+				query.setString("SSN", pattern);
 				list = query.list();
 				return list;
 			} finally {

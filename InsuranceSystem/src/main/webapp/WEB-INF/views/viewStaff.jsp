@@ -278,7 +278,7 @@ form {
 	function checkKeyword(){
 		  var keyword=$("input[name='keyword']").val();
 		  if($("#sel1").val()=='SSN'){
-		  if(keyword.length === 9 &&!isNaN(keyword))
+		  if(!isNaN(keyword))
 		   {
 			  console.log('true');
 			
@@ -288,7 +288,7 @@ form {
 		  else
 			  {
 			  console.log('false');
-			  bootbox.alert("Please input a valid SSN!", function() {
+			  bootbox.alert("Please input numbers only!", function() {
 				 
 				});
 			  return false;
